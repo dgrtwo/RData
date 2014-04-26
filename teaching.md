@@ -20,7 +20,9 @@ This class is a graduate level introduction to genomic technologies and the most
 
 ### Data Analysis on Coursera
 
-This class was an 8 week introduction to Data Analysis, starting from very basic concepts of what type of data analyis questions you can ask, to how to get data and do a basic analysis. This course ran twice in January 2013 and October 2013 and enrolled 185,000+ students with 6,000+ completers. More students completed the class than all the masters degrees in statistics handed out across all departments of statistics and biostatistics in the United States in that same time frame. All the content from this class has been folded into our [Data Science Specialization](?) but you can still find the old videos from the course on [Youtube](?) and the lecture notes on [Github](?)
+This class was an 8 week introduction to Data Analysis, starting from very basic concepts of what type of data analyis questions you can ask, to how to get data and do a basic analysis. This course ran twice in January 2013 and October 2013 and enrolled 185,000+ students with 6,000+ completers. More students completed the class than all the masters degrees in statistics handed out across all departments of statistics and biostatistics in the United States in that same time frame. All the content from this class has been folded into our [Data Science Specialization](?) but you can still find the old videos from the course on [Youtube](https://www.youtube.com/user/jtleek2007) and the lecture notes on [Github](https://github.com/jtleek/dataanalysis).
 
-### Data Analysis on Coursera
+### Data Science Specialization on Coursera
+
+With [Roger Peng](http://www.biostat.jhsph.edu/~rpeng/), [Brian Caffo](http://www.bcaffo.com), [Nick Carchedi](http://nickcarchedi.com/) we created 
 
