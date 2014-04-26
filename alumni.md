@@ -7,7 +7,7 @@ title: Alumni
 <div style="float: left; margin-right:15px">
     <img src="../images/hilary.jpg"/>
 </div>
-[Hilary Parker](https://twitter.com/hspter) (Ph.D. 2013) is now a Data Analyst at [Etsy](https://www.etsy.com/). She built [frozen sva]() and wrote this blog post that was syndicated in New York Magazine!
+[Hilary Parker](https://twitter.com/hspter) (Ph.D. 2013) is now a Data Analyst at [Etsy](https://www.etsy.com/). She built [frozen sva](?) and wrote this [blog post](?) that was syndicated in [New York Magazine](?)!
 </br> </br> </br> </br> </br> 
 
 ---
