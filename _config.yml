@@ -6,14 +6,14 @@ pygments:         true
 permalink:        pretty
 
 # Setup
-title:            Hyde
-tagline:          'A Jekyll theme'
-description:      'A brazen two-column <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
-url:              http://hyde.getpoole.com
+title:            Leek
+tagline:          'Data Analysis'
+description:      'Find me online <a href="http://twitter.com/jtleek">@jtleek</a>, <a href="http://twitter.com/simplystats">@simplystats</a>, <a href="http://simplystatistics.org">Simply Statistics</a>, and <a href="https://github.com/jtleek">Github</a>.'
+url:              http://jtleek.github.io
 
 author:
-  name:           'Mark Otto'
-  url:            https://twitter.com/mdo
+  name:           'Jeff Leek'
+  url:            https://twitter.com/jtleek
 
 paginate:         5
 
@@ -21,4 +21,4 @@ paginate:         5
 version:          2.0.0
 
 github:
-  repo:           https://github.com/poole/hyde
+  repo:           https://github.com/jtleek/jtleek.github.io
