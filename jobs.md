@@ -7,7 +7,7 @@ title: Jobs
 
 If you are a current Hopkins student and are interested in working with me come
 by my office any time the door is open and I'll be happy to talk about open projects. 
-I am always excited to talk to students about new projects, it is the [best part of the job]
+I am always excited to talk to students about new projects, it is the [best part of the job](http://simplystatistics.org/2012/10/26/i-love-those-first-discussions-about-a-new-research/)
 . I will be extra pumped to talk to you if:
 
 1. You have read my [papers](/papers). 
@@ -20,6 +20,8 @@ Here are some general things I've been thinking about with lots of sub-ideas to 
 * RNA-seq analysis with [Rafa](http://rafalab.dfci.harvard.edu/) and [Andrew] (you'd need to know some R/Bioconductor)
 * Scalable RNA-seq with [Abhi](https://twitter.com/AbhiNellore) and [Ben](http://www.langmead-lab.org/)
 * Evidence based data analysis with [Roger](http://www.biostat.jhsph.edu/~rpeng/) and [Brian](http://www.bcaffo.com)
+
+If these projects don't seem that interesting to you, I'm also happy to help introduce you to other folks in genomics who might have projects you are more interested in. 
 
 ### For prospective students at Johns Hopkins
 

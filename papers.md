@@ -8,7 +8,7 @@ More info on my [Google Scholar profile](http://scholar.google.com/citations?use
 
 ## Preprints
 
-* Frazee AC, Pertea G, Jaffe AE, Langmead B, Salzberg SL, Leek JT (2014) _Flexible isoform-level differential expression analysis with Ballgown_ bioRxiv doi: 10.1101/003665 [[link]](http://biorxiv.org/content/early/2014/03/30/003665) [[[software]]](https://github.com/alyssafrazee/ballgown) [[analysis code]](https://github.com/alyssafrazee/ballgown_code) [[geuvadis data]](https://www.dropbox.com/s/kp5th9hgkq8ckom/geuvadisbg.rda)
+* Frazee AC, Pertea G, Jaffe AE, Langmead B, Salzberg SL, Leek JT (2014) _Flexible isoform-level differential expression analysis with Ballgown_ bioRxiv doi: 10.1101/003665 [[link]](http://biorxiv.org/content/early/2014/03/30/003665) [[software]](https://github.com/alyssafrazee/ballgown) [[analysis code]](https://github.com/alyssafrazee/ballgown_code) [[geuvadis data]](https://www.dropbox.com/s/kp5th9hgkq8ckom/geuvadisbg.rda)
 * Fisher A, Anderson GB, Leek JT (2014) _A randomized trial in a massive online open course shows people don't know what a statistically significant relationship looks like, but they can learn_  arXiv:1404.5358 [[link]](http://arxiv.org/abs/1404.5358) [[p-value shiny app]](http://glimmer.rstudio.com/afisher/EDA/)
 * Parker HS, Bravo HC, Leek JT (2013) _Removing batch effects for prediction problems with frozen surrogate variable analysis_  arXiv:1301.3947 [[link]](http://arxiv.org/abs/1301.3947) [[code]](http://bioconductor.org/packages/release/bioc/html/sva.html)
 
@@ -32,11 +32,11 @@ More info on my [Google Scholar profile](http://scholar.google.com/citations?use
 
 * Corrada Bravo H, Pihur V, McCall M, Irizarry RA, Leek JT (2012). _Gene expression anti-profiles as a basis for accurate universal cancer signatures_ BMC Bioinformatics 13:272 [[link]](http://www.biomedcentral.com/1471-2105/13/272) [data](http://bioconductor.org/packages/release/data/experiment/html/antiProfilesData.html) [[code]](http://bioconductor.org/packages/release/bioc/html/antiProfiles.html)
 * Leek JT, Rasgon JL, Taub MA. (2012) _A statistical approach to selecting and confirming validation targets in -omics experiments_ BMC Bioinformatics 13:150 [[link]](http://www.biomedcentral.com/1471-2105/13/150) [[software]](http://biostat.jhsph.edu/~jleek/validate/)
-* Leek JT, Peng RD, and Anderson RR. (2012) "Personalized medicine: Keep a way open for tailored treatments" Nature 484: 318. [submitted version] [[link]] [on the blog]
-* Parker HS and Leek JT. (2012) "The practical effect of batch on genomic prediction" SAGMB 11: 3 [[preprint]] [[link]] [data]
-* Jaffe AE, Murakami P, Lee H, Leek JT, Fallin MD, Feinberg AP, Irizarry RA. (2012) "Bump hunting to identify differentially methylated regions in epigenetic epidemiology studies" International Journal of Epidemiology 41:200-209. [[link]]
-* Leek JT, Johnson WE, Parker HS, Jaffe AE, and Storey JD. (2012) "The sva package for removing batch effects and other unwanted variation in high-throughput experiments." Bioinformatics DOI:10.1093/bioinformatics/bts034 [pdf] [supplemental materials] [[software]]
-* Jaffe AE, Feinberg AP, Irizarry IR, and Leek JT.(2011) "Significance analysis and statistical dissection of variably methylated regions" Biostatistics 13: 166-178 [[link]] [pdf]
+* Leek JT, Peng RD, and Anderson RR. (2012) _Personalized medicine: Keep a way open for tailored treatments_ Nature 484: 318. [[submitted version]](https://docs.google.com/document/d/17FHbaabQGAFqlZcaoz7OJXBRLv4AZtlgiva0LLMIDNk/edit) [[link]](http://www.nature.com/nature/journal/v484/n7394/full/484318a.html) [[on the blog]](http://simplystatistics.org/2012/03/20/laws-of-nature-and-the-law-of-patents-supreme-court/)
+* Parker HS and Leek JT. (2012) _The practical effect of batch on genomic prediction_ SAGMB 11: 3 [[preprint]](http://biostat.jhsph.edu/~jleek/papers/practicalbatch_sagmb.pdf) [[link]](http://www.degruyter.com/view/j/sagmb.2012.11.issue-3/1544-6115.1766/1544-6115.1766.xml) [[data]](http://biostat.jhsph.edu/~hiparker/PracticalBatch/)
+* Jaffe AE, Murakami P, Lee H, Leek JT, Fallin MD, Feinberg AP, Irizarry RA. (2012) _Bump hunting to identify differentially methylated regions in epigenetic epidemiology studies_ International Journal of Epidemiology 41:200-209. [[link]](http://ije.oxfordjournals.org/content/41/1/200.short)
+* Leek JT, Johnson WE, Parker HS, Jaffe AE, and Storey JD. (2012) _The sva package for removing batch effects and other unwanted variation in high-throughput experiments._ Bioinformatics DOI:10.1093/bioinformatics/bts034 [[link]](http://bioinformatics.oxfordjournals.org/content/28/6/882.long) [[software]](http://bioconductor.org/packages/release/bioc/html/sva.html)
+* Jaffe AE, Feinberg AP, Irizarry IR, and Leek JT.(2011) "Significance analysis and statistical dissection of variably methylated regions" Biostatistics 13: 166-178 [[link]]() [[pdf]]() [[code]]()
 
 ### 2011 
 

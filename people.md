@@ -11,9 +11,8 @@ title: People
 [Alyssa Frazee](http://alyssafrazee.com/) is a Ph.D. student in Biostatistics at the Johns Hopkins Bloomberg School of Public Health. She built [derfinder](https://github.com/alyssafrazee/derfinder), [ballgown](https://github.com/alyssafrazee/ballgown) and [RSkittleBrewer](https://github.com/alyssafrazee/RSkittleBrewer) writes an [awesome blog](http://alyssafrazee.com/) which has appeared on the front page of Hacker News.   
 
 </br>
+
 ---
-
-
 
 <div style="float: left; margin-right:15px">
     <img src="../images/leo.png"/>
@@ -21,6 +20,7 @@ title: People
 [Leonardo Collado Torres](http://www.biostat.jhsph.edu/~lcollado/) is a Ph.D. student in Biostatistics at the Johns Hopkins Bloomberg School of Public Health. He built the new [derfinder](https://github.com/lcolladotor/derfinder) and [derfinderReport](https://github.com/lcolladotor/derfinderReport). He also writes a [fantastic blog](http://lcolladotor.github.io/).
 
 </br>
+
 ---
 
 
@@ -30,7 +30,18 @@ title: People
 [Prasad Patil](http://www.biostat.jhsph.edu/~prpatil/) is a Ph.D. student in Biostatistics at the Johns Hopkins Bloomberg School of Public Health. He created [healthvis](http://healthvis.wordpress.com/) and is creating cross-platform, cheap genomic signatures for cancer, lupus, and other diseases. 
 
 </br> 
+
 ----
+
+
+<div style="float: left; margin-right:15px">
+    <img src="../images/nick.jpeg"/>
+</div>
+[Nick Carchedi](http://nickcarchedi.com/) is a masters student in Biostatistics at the Johns Hopkins Bloomberg School of Public Health. He built [swirl](http://swirlstats.com/) and helped build the [Data Science Specialization](https://www.coursera.org/specialization/jhudatascience/1).
+
+</br>
+
+---
 
 ## Postdocs
 
@@ -40,7 +51,8 @@ title: People
 
 [Abhi Nellore](https://twitter.com/AbhiNellore) is a postdoc in Biostatistics and Computer Science. He is co-advised with [Ben Langmead](http://www.langmead-lab.org/) and is developing tools for scalable RNA-seq analysis. 
 
-</br>
+</br></br>
+
 ---
 
 ## Faculty
