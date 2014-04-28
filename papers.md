@@ -26,7 +26,7 @@ More info on my [Google Scholar profile](http://scholar.google.com/citations?use
 * Marchionni L, Afsari B, Geman D, Leek JT (2013) _A simple and reproducible breast cancer prognostic test_ BMC Genomics 14 (1) 336[[link]](http://www.biomedcentral.com/1471-2164/14/336?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+Bmc%2FGenomics%2FLatestArticles+(BMC+Genomics+-+Latest+articles)) [data and code](http://astor.som.jhmi.edu/~marchion//breastTSP.html)
 * Leek JT, Salzberg SL (2013) _Sequestration: inadvertently killing biomedical research to score political points_ Genome Biology 14 (3), 109 [[link]](http://www.biomedcentral.com/content/pdf/gb-2013-14-3-109.pdf)
 * Pirooznia M, Seifuddin F, Goes FS, Leek JT, Zandi PP (2013) _SVAw - a web-based application tool for automated surrogate variable analysis of gene expression studies_ Source Code for Biology and Medicine 2013, 8:8 [[link]](http://www.biomedcentral.com/content/pdf/1751-0473-8-8.pdf) [[web app]](http://psychiatry.igm.jhmi.edu/sva/)
-
+* Boca SM, Corrada Bravo H, Brian Caffo, Leek JT, and Parmigiani G. (2010) _A decision-theory approach to interpretable set analysis for high-dimensional data._ Biometrics 69(3) 614-623. [[pdf]](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3927844/) [[preprint]](http://biostats.bepress.com/jhubiostat/paper211/)
 
 ### 2012 
 
@@ -36,32 +36,31 @@ More info on my [Google Scholar profile](http://scholar.google.com/citations?use
 * Parker HS and Leek JT. (2012) _The practical effect of batch on genomic prediction_ SAGMB 11: 3 [[preprint]](http://biostat.jhsph.edu/~jleek/papers/practicalbatch_sagmb.pdf) [[link]](http://www.degruyter.com/view/j/sagmb.2012.11.issue-3/1544-6115.1766/1544-6115.1766.xml) [[data]](http://biostat.jhsph.edu/~hiparker/PracticalBatch/)
 * Jaffe AE, Murakami P, Lee H, Leek JT, Fallin MD, Feinberg AP, Irizarry RA. (2012) _Bump hunting to identify differentially methylated regions in epigenetic epidemiology studies_ International Journal of Epidemiology 41:200-209. [[link]](http://ije.oxfordjournals.org/content/41/1/200.short)
 * Leek JT, Johnson WE, Parker HS, Jaffe AE, and Storey JD. (2012) _The sva package for removing batch effects and other unwanted variation in high-throughput experiments._ Bioinformatics DOI:10.1093/bioinformatics/bts034 [[link]](http://bioinformatics.oxfordjournals.org/content/28/6/882.long) [[software]](http://bioconductor.org/packages/release/bioc/html/sva.html)
-* Jaffe AE, Feinberg AP, Irizarry IR, and Leek JT.(2011) "Significance analysis and statistical dissection of variably methylated regions" Biostatistics 13: 166-178 [[link]]() [[pdf]]() [[code]]()
+* Jaffe AE, Feinberg AP, Irizarry IR, and Leek JT.(2011) _Significance analysis and statistical dissection of variably methylated regions_ Biostatistics 13: 166-178 [[link]](http://biostatistics.oxfordjournals.org/content/13/1/166.short) [[pdf]](http://biostat.jhsph.edu/~jleek/papers/jaffe-vmrs.pdf) [[code]](http://www.biostat.jhsph.edu/~ajaffe/code/vmrFinder.R)
 
 ### 2011 
 
-* Frazee AC, Langmead B, and Leek JT. (2011) "ReCount: A multi-experiment resource of analysis-ready RNA-seq gene count datasets" BMC Bioinformatics 12:449 [[link]] [data]
-* Leek JT, Taub MA, Pineda FJ. (2011) "Cooperation between referees and authors increases peer review accuracy" PLoS One 6:e26895 [[link]] [data]
-* Colantuoni C, Lipska BK, Hyde TM, Tao R, Leek JT , Colantuoni EA, Elkahlhoun AG, Herman MM, Weinberger DR, Kleinman JE.(2011) "Temporal dynamics and genetic control of transcription in the human prefrontal cortex" Nature 478: 519-523. [pdf] [data]
-* Desai KH, Tan CS, Leek JT , Maier RV, Tompkins RG, Storey JD, and IHGRI.(2011) "Dissecting inflammatory complications in critically injured patients by within-patient gene expression changes: A longitudinal clinical genomics study" PLoS Medicine 8:e1001093 [[link]] [data]
-* Hansen KD, Wu Z, Irizarry RI, and Leek JT. (2011) Sequencing technology does not eliminate biological variability. Nature Biotechnology, 29:572â€“573 [pdf]
-* Leek JT. , Storey JD (2011) "The joint null criterion for multiple hypothesis tests." Statistical Applications in Genetics and Molecular Biology 10:28 [pdf] [[link]] [code]
-* Woo S, Leek JT , Storey JD (2011) "A computationally efficient modular optimal discovery procedure." Bioinformatics 27:509-515 [[link]] [pdf]
-* Leek JT. (2011) "Asymptotic conditional singular value decomposition for high-dimensional genomic data." Biometrics 67:344-352 [pdf] [code]
+* Frazee AC, Langmead B, and Leek JT. (2011) _ReCount: A multi-experiment resource of analysis-ready RNA-seq gene count datasets_ BMC Bioinformatics 12:449 [[link]](http://www.biomedcentral.com/1471-2105/12/449) [[data]](http://bowtie-bio.sourceforge.net/recount/)
+* Leek JT, Taub MA, Pineda FJ. (2011) _Cooperation between referees and authors increases peer review accuracy_ PLoS One 6:e26895 [[link]](http://www.plosone.org/article/info:doi/10.1371/journal.pone.0026895) [[data]](http://biostat.jhsph.edu/~jleek/peerreview/)
+* Colantuoni C, Lipska BK, Hyde TM, Tao R, Leek JT , Colantuoni EA, Elkahlhoun AG, Herman MM, Weinberger DR, Kleinman JE.(2011) _Temporal dynamics and genetic control of transcription in the human prefrontal cortex_ Nature 478: 519-523. [[pdf]](http://biostat.jhsph.edu/~jleek/papers/carlosbrain.pdf) [[data]](http://braincloud.jhmi.edu/)
+* Desai KH, Tan CS, Leek JT , Maier RV, Tompkins RG, Storey JD, and IHGRI.(2011) _Dissecting inflammatory complications in critically injured patients by within-patient gene expression changes: A longitudinal clinical genomics study_ PLoS Medicine 8:e1001093 [[link]](http://www.plosmedicine.org/article/info%3Adoi%2F10.1371%2Fjournal.pmed.1001093) [[data]](http://genomine.org/trauma/)
+* Hansen KD, Wu Z, Irizarry RI, and Leek JT. (2011) _Sequencing technology does not eliminate biological variability._ Nature Biotechnology, 29:572â€“573 [[pdf]](http://biostat.jhsph.edu/~jleek/papers/seqvar.pdf)
+* Leek JT, Storey JD (2011) _The joint null criterion for multiple hypothesis tests._ Statistical Applications in Genetics and Molecular Biology 10:28 [[pdf]](http://biostat.jhsph.edu/~jleek/papers/jointnull.pdf) [[code]](http://www.bioconductor.org/packages/devel/bioc/html/dks.html)
+* Woo S, Leek JT, Storey JD (2011) _A computationally efficient modular optimal discovery procedure._ Bioinformatics 27:509-515 [[link]](http://bioinformatics.oxfordjournals.org/content/27/4/509) [[pdf]](http://biostat.jhsph.edu/~jleek/papers/odp-computation.pdf)
+* Leek JT. (2011) _Asymptotic conditional singular value decomposition for high-dimensional genomic data._ Biometrics 67:344-352 [[pdf]](http://biostat.jhsph.edu/~jleek/papers/acsvd.pdf) [[code]](http://biostat.jhsph.edu/~jleek/code/dimensionfunc.R)
 
 ### 2010 
 
-* Leek JT , Scharpf RB, Corrada Bravo H*, Simcha D*, Langmead B, Johnson WE, Geman D, Baggerly K, Irizarry RA (2010), "Tackling the widespread and critical impact of batch effects in high-throughput data." Nature Reviews Genetics 11:733-739 [[link]] [pdf] [data]
-* Langmead B, Hansen KD*, Leek JT+ (2010), "Cloud-scale RNA-sequencing differential expression analysis with Myrna." Genome Biology 11:R83. [[link]] [pdf]
-* Boca SM*, Corrada Bravo H*, Brian Caffo, Leek JT+, and Parmigiani G. (2010) "A decision-theory approach to interpretable set analysis for high-dimensional data." JHU Biostat Working Paper 211. [[link]]
-* Lu R, Markowetz F, Unwin RD, Leek JT , Airoldi EM, MacArthur BD, Lachmann A, Rozov R, Ma'ayan A, Boyer LA, Troyanskaya OG, Whetton AD, and Lemischka IR. (2010) "Systems-level dynamic analyses of fate change in murine embryonic stem cells." Nature 462: 358:362. [pdf]
+* Leek JT , Scharpf RB, Corrada Bravo H, Simcha D, Langmead B, Johnson WE, Geman D, Baggerly K, Irizarry RA (2010), _Tackling the widespread and critical impact of batch effects in high-throughput data._ Nature Reviews Genetics 11:733-739 [[link]](http://www.nature.com/nrg/journal/v11/n10/abs/nrg2825.html) [[pdf]](http://biostat.jhsph.edu/~jleek/papers/batch-review.pdf) [[data]](http://rafalab.jhsph.edu/batch/)
+* Langmead B, Hansen KD, Leek JT (2010), _Cloud-scale RNA-sequencing differential expression analysis with Myrna._ Genome Biology 11:R83. [[link]](http://genomebiology.com/2010/11/8/R83/abstract) [[pdf]](http://biostat.jhsph.edu/~jleek/papers/myrna.pdf) [[code]](http://bowtie-bio.sourceforge.net/myrna/index.shtml)
+* Lu R, Markowetz F, Unwin RD, Leek JT , Airoldi EM, MacArthur BD, Lachmann A, Rozov R, Ma'ayan A, Boyer LA, Troyanskaya OG, Whetton AD, and Lemischka IR. (2010) _Systems-level dynamic analyses of fate change in murine embryonic stem cells._ Nature 462: 358:362. [[pdf]](http://biostat.jhsph.edu/~jleek/papers/systems.pdf)
 
 ### 2009 and Earlier 
 
-* Leek JT. (2009) "The tspair package for finding top scoring pair classifiers in R." Bioinformatics 25:1203-1204. [pdf] [[software]]
-* Leek JT and Storey JD. (2008) "A general framework for multiple testing dependence." Proceedings of the National Academy of Sciences , 105: 18718-18723. [pdf] [[software]]
-* Leek JT and Storey JD. (2007) "Capturing heterogeneity in gene expression studies by `Surrogate Variable Analysis'." PLoS Genetics, 3: e161. [pdf] [[software]]
-* Akey JM, Biswas S, Leek JT, and Storey JD. (2007) "On the design and analysis of expression studies in human populations." Nature Genetics, 39: 807-808. [pdf]
-* Storey JD, Dai JY, and Leek JT. (2006), "The optimal discovery procedure for large-scale significance testing, with applications to comparative microarray experiments." Biostatistics, 8: 414-432. [pdf] [[software]]
-* Leek JT, Monsen E, Dabney AR, and Storey JD. (2006), "EDGE: Extraction and analysis of differential gene expression." Bioinformatics, 22: 507-508. [pdf] [[software]]
-*Storey JD, Xiao W, Leek JT, Tompkins RG, and Davis RW. (2005), "Significance analysis of timecourse microarray experiments." Proceedings of the National Academy of Sciences, 102: 12837-12842. [pdf] [[software]]
+* Leek JT. (2009) _The tspair package for finding top scoring pair classifiers in R._ Bioinformatics 25:1203-1204. [[pdf]](http://biostat.jhsph.edu/~jleek/papers/tspair.pdf) [[software]](http://www.bioconductor.org/packages/2.5/bioc/html/tspair.html)
+* Leek JT and Storey JD. (2008) _A general framework for multiple testing dependence._ Proceedings of the National Academy of Sciences , 105: 18718-18723. [[pdf]](http://biostat.jhsph.edu/~jleek/papers/framework.pdf) [[software]](http://bioconductor.org/packages/release/bioc/html/sva.html)
+* Leek JT and Storey JD. (2007) _Capturing heterogeneity in gene expression studies by `Surrogate Variable Analysis'._ PLoS Genetics, 3: e161. [[link]](http://www.plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.0030161) [[software]](http://bioconductor.org/packages/release/bioc/html/sva.html)
+* Akey JM, Biswas S, Leek JT, and Storey JD. (2007) _On the design and analysis of expression studies in human populations._ Nature Genetics, 39: 807-808. [[pdf]](http://biostat.jhsph.edu/~jleek/papers/design.pdf)
+* Storey JD, Dai JY, and Leek JT. (2006), _The optimal discovery procedure for large-scale significance testing, with applications to comparative microarray experiments._ Biostatistics, 8: 414-432. [[pdf]](http://biostat.jhsph.edu/~jleek/papers/odp.pdf) [[software]](http://www.genomine.org/edge/)
+* Leek JT, Monsen E, Dabney AR, and Storey JD. (2006), _EDGE: Extraction and analysis of differential gene expression._ Bioinformatics, 22: 507-508. [[pdf]](http://biostat.jhsph.edu/~jleek/papers/edge.pdf) [[software]](http://www.genomine.org/edge/)
+* Storey JD, Xiao W, Leek JT, Tompkins RG, and Davis RW. (2005), _Significance analysis of timecourse microarray experiments._ Proceedings of the National Academy of Sciences, 102: 12837-12842. [[pdf]](http://biostat.jhsph.edu/~jleek/papers/time.pdf) [[software]](http://www.genomine.org/edge/)
