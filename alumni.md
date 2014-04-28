@@ -27,5 +27,5 @@ title: Alumni
 <div style="float: left; margin-right:15px">
     <img src="../images/simina.jpg"/>
 </div>
-[Simina Boca](http://scholar.google.com/citations?user=6wieRCYAAAAJ&hl=en) (Ph.D. 2011, co-advised with Giovanni Parmigiani) is now Assistant Professor at Georgetown University School of Medicine, Department of Oncology, Innovation Center for Biomedical Informatics. She created methods for [posterior estimation of gene-set level false discovery rates](http://onlinelibrary.wiley.com/doi/10.1111/biom.12060/abstract).
+[Simina Boca](http://scholar.google.com/citations?user=6wieRCYAAAAJ&hl=en) (Ph.D. 2011, co-advised with Giovanni Parmigiani) is now Assistant Professor at Georgetown University Medical Center, Innovation Center for Biomedical Informatics and Department of Oncology. She created methods for [posterior estimation of gene-set level false discovery rates](http://onlinelibrary.wiley.com/doi/10.1111/biom.12060/abstract).
 
