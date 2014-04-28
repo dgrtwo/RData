@@ -6,13 +6,13 @@ title: Papers
 More info on my [Google Scholar profile](http://scholar.google.com/citations?user=HI-I6C0AAAAJ&hl=en&oi=ao)
 
 
-## Preprints
+### Preprints
 
 * Frazee AC, Pertea G, Jaffe AE, Langmead B, Salzberg SL, Leek JT (2014) _Flexible isoform-level differential expression analysis with Ballgown_ bioRxiv doi: 10.1101/003665 [[link]](http://biorxiv.org/content/early/2014/03/30/003665) [[software]](https://github.com/alyssafrazee/ballgown) [[analysis code]](https://github.com/alyssafrazee/ballgown_code) [[geuvadis data]](https://www.dropbox.com/s/kp5th9hgkq8ckom/geuvadisbg.rda)
 * Fisher A, Anderson GB, Leek JT (2014) _A randomized trial in a massive online open course shows people don't know what a statistically significant relationship looks like, but they can learn_  arXiv:1404.5358 [[link]](http://arxiv.org/abs/1404.5358) [[p-value shiny app]](http://glimmer.rstudio.com/afisher/EDA/)
 * Parker HS, Bravo HC, Leek JT (2013) _Removing batch effects for prediction problems with frozen surrogate variable analysis_  arXiv:1301.3947 [[link]](http://arxiv.org/abs/1301.3947) [[code]](http://bioconductor.org/packages/release/bioc/html/sva.html)
 
-## 2014
+### 2014
 
 * Hayes LN, Severance EG, Leek JT, Gressitt KL, Rohleder C, Coughlin JM, Leweke FM, Yolken RH, Sawa A. (2014) _Inflammatory molecular signature associated with infectious agents in psychosis_. Scizhophrenia Bulletin doi: 10.1093/schbul/sbu052 [[link]](http://schizophreniabulletin.oxfordjournals.org/content/early/2014/04/16/schbul.sbu052.full)
 * Frazee AC, Sabunciyan S, Hansen KD, Irizarry RA, Leek JT (2014) _Differential expression analysis of RNA-seq data at single-base resolution_ Biostatistics 10.1093/biostatistics/kxt053 [[link]](http://biostatistics.oxfordjournals.org/content/early/2014/01/06/biostatistics.kxt053.short)[[software]](https://github.com/alyssafrazee/derfinder) [[newer software]](https://github.com/lcolladotor/derfinder)
@@ -20,13 +20,13 @@ More info on my [Google Scholar profile](http://scholar.google.com/citations?use
 * Jager LR, Leek JT (2014) _Rejoinder: An estimate of the science-wise false discovery rate and application to the top medical literature_ Biostatistics 15(1) 39-45 [[link]](http://biostatistics.oxfordjournals.org/content/15/1/39)
 
 
-## 2013
+### 2013
 
 * Jaffe AE, Storey JD, Ji H, Leek JT (2013) _Gene set bagging for estimating the probability a statistically significant result will replicate_ BMC Bioinformatics 14 (1), 360 [[link]](http://www.biomedcentral.com/1471-2105/14/360/) [code](https://github.com/andrewejaffe/GeneSetBagging)
 * Marchionni L, Afsari B, Geman D, Leek JT (2013) _A simple and reproducible breast cancer prognostic test_ BMC Genomics 14 (1) 336[[link]](http://www.biomedcentral.com/1471-2164/14/336?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+Bmc%2FGenomics%2FLatestArticles+(BMC+Genomics+-+Latest+articles)) [data and code](http://astor.som.jhmi.edu/~marchion//breastTSP.html)
 * Leek JT, Salzberg SL (2013) _Sequestration: inadvertently killing biomedical research to score political points_ Genome Biology 14 (3), 109 [[link]](http://www.biomedcentral.com/content/pdf/gb-2013-14-3-109.pdf)
 * Pirooznia M, Seifuddin F, Goes FS, Leek JT, Zandi PP (2013) _SVAw - a web-based application tool for automated surrogate variable analysis of gene expression studies_ Source Code for Biology and Medicine 2013, 8:8 [[link]](http://www.biomedcentral.com/content/pdf/1751-0473-8-8.pdf) [[web app]](http://psychiatry.igm.jhmi.edu/sva/)
-* Boca SM, Corrada Bravo H, Brian Caffo, Leek JT, and Parmigiani G. (2010) _A decision-theory approach to interpretable set analysis for high-dimensional data._ Biometrics 69(3) 614-623. [[pdf]](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3927844/) [[preprint]](http://biostats.bepress.com/jhubiostat/paper211/)
+* Boca SM, Corrada Bravo H, Caffo B, Leek JT, and Parmigiani G. (2013) _A decision-theory approach to interpretable set analysis for high-dimensional data._ Biometrics 69(3) 614-623. [[pdf]](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3927844/) [[preprint]](http://biostats.bepress.com/jhubiostat/paper211/)
 
 ### 2012 
 
