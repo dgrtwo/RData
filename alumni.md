@@ -5,7 +5,7 @@ title: Alumni
 
 
 <div style="float: left; margin-right:15px">
-    <img src="../images/hilary.jpg"/>
+    <img src="../images/hilary.png"/>
 </div>
 [Hilary Parker](https://twitter.com/hspter) (Ph.D. 2013) is now a Data Analyst at [Etsy](https://www.etsy.com/). She built [frozen sva](?) and wrote this [blog post](http://hilaryparker.com/2013/01/30/hilary-the-most-poisoned-baby-name-in-us-history/) that was syndicated in [New York Magazine](http://nymag.com/thecut/2013/01/hillary-most-poisoned-baby-name-in-us-history.html)!
 </br> </br> </br> </br> </br> 
