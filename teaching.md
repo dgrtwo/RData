@@ -25,6 +25,7 @@ This class was an 8 week introduction to Data Analysis, starting from very basic
 ### Data Science Specialization on Coursera
 
 With [Roger Peng](http://www.biostat.jhsph.edu/~rpeng/), [Brian Caffo](http://www.bcaffo.com), [Nick Carchedi](http://nickcarchedi.com/) and [Sean Kross](https://twitter.com/seankross) we created a 9 course specialization in data science. Some cool things about the program are:
+
 * Every class runs every month. 
 * The [course material](https://github.com/DataScienceSpecialization/) is all open source and on Github. 
 * It is designed from the ground up to cover modern version control, R programming, statistics, machine learning, and data products. 
