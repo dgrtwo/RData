@@ -9,7 +9,7 @@ permalink:        pretty
 title:            R Data
 tagline:          'David Robinson and Neo Christopher Chung'
 description:      'Data Analysis and Visualization Using R'
-url:              http://dgrtwo.github.io/
+baseurl:          /RData
 
 author:
   name:           'David Robinson'
@@ -21,4 +21,4 @@ paginate:         5
 version:          2.0.0
 
 github:
-  repo:           https://github.com/jtleek/jtleek.github.io
+  repo:           https://github.com/dgrtwo/RData

@@ -7,7 +7,7 @@
 
     <ul class="sidebar-nav">
       <li class="sidebar-nav-item{% if page.title == "Home" %} active{% endif %}">
-        <a href="/">Home</a>
+        <a href="{{ site.baseurl }}/">Home</a>
       </li>
 
       {% comment %}
@@ -20,7 +20,7 @@
         {% if node.title != null %}
           {% if node.layout == "page" %}
             <li class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}">
-              <a href="{{ node.url }}">{{ node.title }}</a>
+              <a href="{{ site.baseurl }}{{ node.url }}">{{ node.title }}</a>
             </li>
           {% endif %}
         {% endif %}
@@ -32,7 +32,7 @@
         {% if node.title != null %}
           {% if node.layout == "lesson" %}
             <li class="sidebar-nav-item lesson{% if page.url == node.url %} active{% endif %}">
-              <a href="{{ node.url }}">{{ node.title }}</a>
+              <a href="{{ site.baseurl }}{{ node.url }}">{{ node.title }}</a>
             </li>
           {% endif %}
         {% endif %}
