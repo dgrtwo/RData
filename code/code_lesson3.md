@@ -64,18 +64,29 @@ mtcars$am
 {% highlight r %}
 
 library(ggplot2)
-
-ggplot(mtcars, aes(x = factor(am), y = mpg)) + geom_boxplot()
 {% endhighlight %}
 
-![center](/../figs/code_lesson3/segment_11.png) 
+
+
+{% highlight text %}
+## Loading required package: methods
+{% endhighlight %}
+
+
 
 {% highlight r %}
 
 ggplot(mtcars, aes(x = factor(am), y = mpg)) + geom_boxplot()
 {% endhighlight %}
 
-![center](/../figs/code_lesson3/segment_12.png) 
+![center](/RData/code/../figs/code_lesson3/segment_11.png) 
+
+{% highlight r %}
+
+ggplot(mtcars, aes(x = factor(am), y = mpg)) + geom_boxplot()
+{% endhighlight %}
+
+![center](/RData/code/../figs/code_lesson3/segment_12.png) 
 
 {% highlight r %}
 
@@ -163,7 +174,7 @@ Segment 2: Correlation
 ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
 {% endhighlight %}
 
-![center](/../figs/code_lesson3/segment_2.png) 
+![center](/RData/code/../figs/code_lesson3/segment_2.png) 
 
 {% highlight r %}
 
@@ -456,7 +467,7 @@ predict(fit, newcar)
 ggplot(mtcars, aes(wt, mpg)) + geom_point() + geom_smooth(method = "lm")
 {% endhighlight %}
 
-![center](/../figs/code_lesson3/segment_3.png) 
+![center](/RData/code/../figs/code_lesson3/segment_3.png) 
 
 
 Segment 4: Multiple Linear Regression
@@ -467,7 +478,7 @@ Segment 4: Multiple Linear Regression
 ggplot(mtcars, aes(x = wt, y = mpg, col = cyl, size = disp)) + geom_point()
 {% endhighlight %}
 
-![center](/../figs/code_lesson3/segment_4.png) 
+![center](/RData/code/../figs/code_lesson3/segment_4.png) 
 
 {% highlight r %}
 

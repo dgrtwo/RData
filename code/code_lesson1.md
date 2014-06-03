@@ -1041,7 +1041,7 @@ class(mtcars)
 
 {% highlight r %}
 
-`?`(mtcars)
+# ? mtcars
 
 head(mtcars)
 {% endhighlight %}

@@ -14,12 +14,12 @@ KnitPost <- function(input, outfile, base.url="/") {
     opts_chunk$set(fig.path = fig.path)
     opts_chunk$set(fig.cap = "center")
     render_jekyll()
-    knit(input, outfile)
+    knit(input, outfile, envir = parent.frame())
 }
 
 setwd("_R")
 
-for (infile in list.files(".", pattern="*.Rmd")) {
+for (infile in list.files(".", pattern="*.Rmd$")) {
     pattern = "_\\/^\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\-"
     folder = ifelse(grepl(pattern, infile), "../posts", "../code")
 
@@ -28,6 +28,6 @@ for (infile in list.files(".", pattern="*.Rmd")) {
     # knit only if the input file is the last one modified
     if (!file.exists(outfile) |
         file.info(infile)$mtime > file.info(outfile)$mtime) {
-        KnitPost(infile, outfile)
+        KnitPost(infile, outfile, base.url="/RData/code/")
     }
 }

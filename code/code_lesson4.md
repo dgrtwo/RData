@@ -70,14 +70,14 @@ data(mtcars)
 ggplot(mtcars, aes(wt, mpg)) + geom_point()
 {% endhighlight %}
 
-![center](/../figs/code_lesson4/segment_11.png) 
+![center](/RData/code/../figs/code_lesson4/segment_11.png) 
 
 {% highlight r %}
 
 print(ggplot(mtcars, aes(wt, mpg)) + geom_point())
 {% endhighlight %}
 
-![center](/../figs/code_lesson4/segment_12.png) 
+![center](/RData/code/../figs/code_lesson4/segment_12.png) 
 
 
 Segment 2: Reading Data
@@ -882,7 +882,7 @@ library(ggplot2)
 ggplot(salaries, aes(yearID, salary)) + geom_point()
 {% endhighlight %}
 
-![center](/../figs/code_lesson4/segment_41.png) 
+![center](/RData/code/../figs/code_lesson4/segment_41.png) 
 
 {% highlight r %}
 
@@ -931,14 +931,14 @@ summarized.year
 ggplot(summarized.year, aes(yearID, Average)) + geom_line()
 {% endhighlight %}
 
-![center](/../figs/code_lesson4/segment_42.png) 
+![center](/RData/code/../figs/code_lesson4/segment_42.png) 
 
 {% highlight r %}
 
 ggplot(summarized.year.lg, aes(yearID, Average, color = lgID)) + geom_line()
 {% endhighlight %}
 
-![center](/../figs/code_lesson4/segment_43.png) 
+![center](/RData/code/../figs/code_lesson4/segment_43.png) 
 
 
 Segment 5: Merging Data
@@ -1534,7 +1534,7 @@ summarized.batters = merged.all[, list(Total.HR = sum(HR), Total.R = sum(R),
 ggplot(summarized.batters, aes(Total.H, Total.R)) + geom_point()
 {% endhighlight %}
 
-![center](/../figs/code_lesson4/segment_61.png) 
+![center](/RData/code/../figs/code_lesson4/segment_61.png) 
 
 {% highlight r %}
 
@@ -1586,5 +1586,5 @@ ggplot(summarized.batters, aes(BattingAverage)) + geom_histogram()
 ## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
 {% endhighlight %}
 
-![center](/../figs/code_lesson4/segment_62.png) 
+![center](/RData/code/../figs/code_lesson4/segment_62.png) 
 
