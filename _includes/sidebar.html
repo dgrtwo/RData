@@ -28,15 +28,17 @@
       
       <hr/>
 
-      {% for node in pages_list %}
-        {% if node.title != null %}
-          {% if node.layout == "lesson" %}
+{% for i in (1..4) %}
+{% for node in site.pages %}
+{% if node.layout == 'lesson'%}
+{% if node.index == i %}
             <li class="sidebar-nav-item lesson{% if page.url == node.url %} active{% endif %}">
               <a href="{{ site.baseurl }}{{ node.url }}">{{ node.title }}</a>
             </li>
-          {% endif %}
-        {% endif %}
-      {% endfor %}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endfor %}
 
     </ul>
 

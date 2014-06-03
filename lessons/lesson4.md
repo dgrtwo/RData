@@ -1,7 +1,7 @@
 ---
 layout: lesson
 title: Lesson 4- Exploratory Data Analysis with data.table
-id: lesson1
+index: 4
 ---
 
 * Segment 1
