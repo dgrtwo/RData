@@ -6,14 +6,14 @@ pygments:         true
 permalink:        pretty
 
 # Setup
-title:            jtleek
-tagline:          'Leek Group'
-description:      'Find me online <a href="http://twitter.com/jtleek">@jtleek</a>, <a href="http://twitter.com/simplystats">@simplystats</a>, <a href="http://simplystatistics.org">Simply Statistics</a>, and <a href="https://github.com/jtleek">Github</a>.'
-url:              http://jtleek.github.io
+title:            R Data
+tagline:          'David Robinson and Neo Christopher Chung'
+description:      'Data Analysis and Visualization Using R'
+url:              http://dgrtwo.github.io/
 
 author:
-  name:           'Jeff Leek'
-  url:            https://twitter.com/jtleek
+  name:           'David Robinson'
+  url:            http://dgrtwo.github.io/
 
 paginate:         5
 

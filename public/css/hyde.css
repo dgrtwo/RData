@@ -65,7 +65,7 @@ html {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 18rem;
+    width: 18.5rem;
     text-align: left;
   }
 }
@@ -97,6 +97,10 @@ a.sidebar-nav-item:focus {
 }
 .sidebar-nav-item.active {
   font-weight: bold;
+}
+
+.sidebar-nav-item.lesson {
+  font-size: 10pt;
 }
 
 /* Sticky sidebar

@@ -1,0 +1,164 @@
+---
+layout: default
+---
+
+Lesson 2: Visualizing Data Using ggplot2
+============
+
+Segment 1: Introduction
+------------
+
+`r opts_chunk$set(cache=TRUE, cache.path="lesson2_cache/")`
+
+```{r segment_1}
+library("ggplot2")
+
+data("diamonds")
+
+head(diamonds)
+```
+
+Segment 2: Introduction to ggplot2
+------------
+
+```{r segment_2, dependson="segment_1"}
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point()
+
+ggplot(diamonds, aes(x=carat, y=price, color=clarity)) + geom_point()
+
+ggplot(diamonds, aes(x=carat, y=price, color=color)) + geom_point()
+
+ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point()
+
+ggplot(diamonds, aes(x=carat, y=price, color=clarity, size=cut)) + geom_point()
+
+ggplot(diamonds, aes(x=carat, y=price, color=clarity, shape=cut)) + geom_point()
+
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + geom_smooth()
+
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + geom_smooth(se=FALSE)
+
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + geom_smooth(se=FALSE, method="lm")
+
+ggplot(diamonds, aes(x=carat, y=price, color=clarity)) + geom_point() + geom_smooth(se=FALSE)
+
+ggplot(diamonds, aes(x=carat, y=price, color=clarity)) + geom_smooth(se=FALSE)
+```
+
+Segment 3: Facetting and Additional Options
+-------------
+
+```{r segment_3, dependson="segment_1"}
+ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + facet_wrap(~ clarity)
+
+ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + facet_grid(color ~ clarity)
+
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + ggtitle("My scatter plot")
+
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + ggtitle("My scatter plot") + xlab("Weight (carats)")
+
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + ggtitle("My scatter plot") + xlab("Weight (carats)")
+
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + ggtitle("My scatter plot") + xlab("Weight (carats)") + xlim(0, 2)
+
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + ggtitle("My scatter plot") + xlab("Weight (carats)") + scale_y_log10()
+```
+
+Segment 4: Histograms and Density Plots
+-------------
+
+```{r segment_4, dependson="segment_1"}
+ggplot(diamonds, aes(x=price)) + geom_histogram()
+
+ggplot(diamonds, aes(x=price)) + geom_histogram(binwidth=2000)
+
+ggplot(diamonds, aes(x=price)) + geom_histogram(binwidth=200)
+
+ggplot(diamonds, aes(x=price)) + geom_histogram(binwidth=200) + facet_wrap(~ clarity)
+
+ggplot(diamonds, aes(x=price)) + geom_histogram(binwidth=200) + facet_wrap(~ clarity, scale="free_y")
+
+ggplot(diamonds, aes(x=price, fill=clarity)) + geom_histogram()
+
+ggplot(diamonds, aes(x=price, fill=cut)) + geom_histogram()
+
+ggplot(diamonds, aes(x=price)) + geom_density()
+
+ggplot(diamonds, aes(x=price, color=cut)) + geom_density()
+```
+
+Segment 5: Boxplots and Violin Plots
+-----------
+
+```{r segment_5, dependson="segment_1"}
+ggplot(diamonds, aes(x=color, y=price)) + geom_boxplot()
+
+ggplot(diamonds, aes(x=color, y=price)) + geom_boxplot() + scale_y_log10()
+
+ggplot(diamonds, aes(x=color, y=price)) + geom_violin() + scale_y_log10()
+
+ggplot(diamonds, aes(x=color, y=price)) + geom_violin() + scale_y_log10() + facet_wrap(~ clarity)
+```
+
+Segment 6: Input: Getting Data into the Right Format
+-----------
+
+```{r segment_6, dependson="segment_1"}
+x = rnorm(1000)
+x
+
+qplot(x)
+
+qplot(x, binwidth=1)
+
+qplot(x, binwidth=1) + xlab("Random Variable")
+
+qplot(x, binwidth=1, xlab="Random Variable")
+
+y = rnorm(1000)
+
+qplot(x, y)
+
+qplot(x, y) + geom_smooth()
+
+data("WorldPhones")
+head(WorldPhones)
+# help(WorldPhones)
+
+library(reshape2)
+
+WorldPhones.m = melt(WorldPhones)
+
+head(WorldPhones.m)
+
+colnames(WorldPhones.m) = c("Year", "Continent", "Phones")
+
+head(WorldPhones.m)
+
+ggplot(WorldPhones.m, aes(x=Year, y=Phones, color=Continent)) + geom_point()
+
+ggplot(WorldPhones.m, aes(x=Year, y=Phones, color=Continent)) + geom_line()
+
+ggplot(WorldPhones.m, aes(x=Year, y=Phones, color=Continent)) + geom_line() + scale_y_log10()
+```
+
+Segment 7: Output: Saving Your Plots
+-------------
+
+```{r segment_7, dependson="segment_1"}
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point()
+
+p = ggplot(diamonds, aes(x=carat, y=price)) + geom_point()
+
+ggsave(filename="diamonds.png", p)
+
+ggsave(filename="diamonds.pdf", p)
+
+ggsave(filename="diamonds.jpeg", p)
+
+# help(ggsave)
+
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point()
+
+ggsave("diamonds.png")
+```

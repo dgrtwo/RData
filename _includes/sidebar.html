@@ -25,6 +25,18 @@
           {% endif %}
         {% endif %}
       {% endfor %}
+      
+      <hr/>
+
+      {% for node in pages_list %}
+        {% if node.title != null %}
+          {% if node.layout == "lesson" %}
+            <li class="sidebar-nav-item lesson{% if page.url == node.url %} active{% endif %}">
+              <a href="{{ node.url }}">{{ node.title }}</a>
+            </li>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
 
     </ul>
 
