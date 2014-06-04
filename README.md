@@ -3,8 +3,6 @@ layout: page
 title: About
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut varius, risus nec viverra pretium, erat massa congue libero, sit amet varius quam nibh at tellus. Vivamus a sapien sit amet velit pretium molestie. Nulla at mauris nec urna tincidunt egestas at id massa. Praesent varius velit urna. Sed sit amet dignissim purus. Phasellus vestibulum pellentesque sem sit amet eleifend. Sed tristique velit vel urna rhoncus, eget fermentum ante tempus. Ut placerat laoreet orci eget rhoncus. Pellentesque semper laoreet ipsum, eu suscipit libero gravida nec. Praesent sollicitudin elit et tincidunt tristique. Aenean ultricies, nisl vitae blandit egestas, magna urna blandit ligula, ut fermentum dolor neque eu augue. Quisque euismod posuere lacus condimentum tristique.
-
 Licensing
 ----------
 
