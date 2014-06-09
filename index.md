@@ -6,7 +6,7 @@ title: Data Analysis and Visualization Using R
 Data Analysis and Visualization Using R
 ============
 
-This is a course that combines video and interactive elements to teach the statistical programming language R.
+This is a course that combines video, HTML and interactive elements to teach the statistical programming language R.
 
 {% for lesson in site.data.outline %}
 {% capture lessonnumber %}{{ forloop.index }}{% endcapture %}
