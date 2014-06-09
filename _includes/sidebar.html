@@ -28,16 +28,25 @@
       
       <hr/>
 
-{% for i in (1..4) %}
-{% for node in site.pages %}
-{% if node.layout == 'lesson'%}
-{% if node.index == i %}
-            <li class="sidebar-nav-item lesson{% if page.url == node.url %} active{% endif %}">
-              <a href="{{ site.baseurl }}{{ node.url }}">{{ node.title }}</a>
-            </li>
-{% endif %}
-{% endif %}
-{% endfor %}
+{% assign lessonindex = page.lesson | minus:1 %}
+{% assign segmentindex = page.segment | minus:1 %}
+
+{% assign lessonnum = page.lesson | times:1 %}
+{% assign segmentnum = page.segment | times:1 %}
+
+{% for lesson in site.data.outline %}
+    <li class="sidebar-nav-item lesson{% if lessonnum == forloop.index %} active{% endif %}">
+        <a href="{{ site.baseurl }}/lessons/lesson{{ forloop.index }}">{{ forloop.index }}. {{ lesson.title }}</a>
+        {% if lessonnum == forloop.index %}
+        <ul>
+            {% for segment in site.data.outline[lessonindex].segments %}
+                <li><a href="{{ site.baseurl }}/lessons/lesson{{ page.lesson }}/segment{{ forloop.index }}">
+                    {{ lessonnum }}.{{ forloop.index}} {{ segment }}
+                </a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </li>
 {% endfor %}
 
     </ul>

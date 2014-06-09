@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+{% assign lessonindex = page.lesson | minus:1 %}
+{% assign segmentindex = page.segment | minus:1 %}
+{% assign segment = site.data.outline[lessonindex].segments[segmentindex] %}
+
+<div class="page">
+
+  <h1 class="page-title">{{ page.lesson }}.{{ page.segment}} {{ segment }}</h1>
+
+<a href="..">Back to Lesson {{ page.lesson }}</a>
+
+</div>

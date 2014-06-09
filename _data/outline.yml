@@ -1,0 +1,34 @@
+- title: Variables and Data Structures
+  segments:
+    - Fundamentals
+    - Variables
+    - Vectors
+    - Matrix
+    - Lists and Data Frames
+    - Logical Vectors and Operators
+
+- title: Visualizing Data Using ggplot2
+  segments:
+    - Introduction
+    - Scatter Plots
+    - Faceting and Additional Options
+    - Histograms and Density Plots
+    - Boxplots and Violin Plots
+    - Input- Getting Data into the Right Format
+    - Output- Saving Your Plots
+
+- title: Statistical Testing and Prediction
+  segments:
+    - Comparing Two Samples
+    - Correlation
+    - Linear Regression
+    - Multiple Linear Regression
+
+- title: Exploratory Data Analysis with data.table
+  segments:
+    - R Scripts
+    - Reading Data
+    - Introduction to data.table
+    - Summarizing Data Within Groups
+    - Merging Data
+    - Exploratory Data Analysis

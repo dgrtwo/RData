@@ -8,12 +8,11 @@ Data Analysis and Visualization Using R
 
 This is a course that combines video and interactive elements to teach the statistical programming language R.
 
-{% for i in (1..4) %}
-{% for page in site.pages %}
-{% if page.layout == 'lesson'%}
-{% if page.index == i %}
-* [{{ page.title }}]({{ site.baseurl }}{{ page.url }})
-{% endif %}
-{% endif %}
+{% for lesson in site.data.outline %}
+{% capture lessonnumber %}{{ forloop.index }}{% endcapture %}
+* [Lesson {{ lessonnumber }}: {{ lesson.title }}](lessons/lesson{{ lessonnumber}})
+{% for segment in lesson.segments %}
+{% capture segmentnumber %}{{ forloop.index }}{% endcapture %}
+ * [{{ lessonnumber }}.{{ segmentnumber }} {{ segment }}](lessons/lesson{{ lessonnumber}}/segment{{ segmentnumber }})
 {% endfor %}
 {% endfor %}
