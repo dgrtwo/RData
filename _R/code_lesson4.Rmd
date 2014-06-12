@@ -7,6 +7,8 @@ Lesson 4: Exploratory Data Analysis With data.table
 
 `r opts_chunk$set(cache=TRUE, cache.path="lesson4_cache/")`
 
+<a name="segment1"></a>
+
 Segment 1: R Scripts
 -----------
 
@@ -27,6 +29,8 @@ ggplot(mtcars, aes(wt, mpg)) + geom_point()
 print(ggplot(mtcars, aes(wt, mpg)) + geom_point())
 ```
 
+<a name="segment2"></a>
+
 Segment 2: Reading Data
 --------------
 
@@ -44,6 +48,8 @@ head(salaries)
 
 # help(read.csv)
 ```
+
+<a name="segment3"></a>
 
 Segment 3: Introduction to data.table
 -------------
@@ -82,6 +88,8 @@ salaries[order(yearID, salary), ]
 salaries.filtered = salaries[lgID == "AL" & yearID >= 1990, ]
 salaries.filtered.sorted = salaries.filtered[order(salary), ]
 ```
+
+<a name="segment4"></a>
 
 Segment 4: Summarizing Data Within Groups
 --------------
@@ -128,6 +136,8 @@ ggplot(summarized.year, aes(yearID, Average)) + geom_line()
 ggplot(summarized.year.lg, aes(yearID, Average, color=lgID)) + geom_line()
 ```
 
+<a name="segment5"></a>
+
 Segment 5: Merging Data
 -------------
 
@@ -158,6 +168,8 @@ merged.batting
 merged.all = merge(merged.batting, master, by="playerID")
 merged.all
 ```
+
+<a name="segment6"></a>
 
 Segment 6: Exploratory Data Analysis
 -------------

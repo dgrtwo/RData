@@ -7,6 +7,8 @@ Lesson 3: Statistical Testing and Prediction
 
 `r opts_chunk$set(cache=TRUE, cache.path="lesson3_cache/")`
 
+<a name="segment1"></a>
+
 Segment 1: Comparing Two Samples
 --------------
 
@@ -40,6 +42,8 @@ tt$conf.int[1]
 tt$conf.int[2]
 ```
 
+<a name="segment2"></a>
+
 Segment 2: Correlation
 --------------
 
@@ -59,6 +63,8 @@ ct$estimate
 
 ct$conf.int
 ```
+
+<a name="segment3"></a>
 
 Segment 3: Linear Regression
 -----------------
@@ -89,6 +95,8 @@ predict(fit, newcar)
 
 ggplot(mtcars, aes(wt, mpg)) + geom_point() + geom_smooth(method="lm")
 ```
+
+<a name="segment4"></a>
 
 Segment 4: Multiple Linear Regression
 -----------------

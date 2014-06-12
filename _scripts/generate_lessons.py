@@ -27,6 +27,13 @@ segment: %d
 ---
 """
 
+QUIZ_HEADER = """---
+layout: quiz
+lesson: %d
+segment: %d
+---
+"""
+
 
 with open(OUTLINE_FILE) as outline_inf:
     lessons = yaml.load(outline_inf)
@@ -48,3 +55,12 @@ with open(OUTLINE_FILE) as outline_inf:
             with open(segment_file, "w") as segment_outf:
                 content = SEGMENT_HEADER % (lesson_number, segment_number)
                 segment_outf.write(content)
+
+            # write quiz files
+            quiz_dir = os.path.join("quizzes", "lesson%d" % lesson_number)
+            quiz_file = os.path.join(quiz_dir, "segment%d.md" % segment_number)
+            quiz_content = QUIZ_HEADER % (lesson_number, segment_number)
+            if not os.path.exists(quiz_dir):
+                os.makedirs(quiz_dir)
+            with open(quiz_file, "w") as outf:
+                outf.write(quiz_content)

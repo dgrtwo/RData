@@ -5,7 +5,7 @@ layout: default
 Lesson 1: Variables and Data Structures
 ==================
 
-
+<a name="segment1"></a>
 
 Segment 1: Fundamentals
 ------------
@@ -30,6 +30,7 @@ rm(list = ls())
 ls()
 {% endhighlight %}
 
+<a name="segment2"></a>
 
 Segment 2: Variables
 ------------
@@ -142,6 +143,7 @@ log(x)
 ## [1] 2.303
 {% endhighlight %}
 
+<a name="segment3"></a>
 
 Segment 3: Vectors
 -----------
@@ -582,6 +584,7 @@ names(v2)
 ## [1] "Cat" "Dog" "Rat"
 {% endhighlight %}
 
+<a name="segment4"></a>
 
 Segment 4: Matrix
 ---------------
@@ -903,6 +906,7 @@ m2 = matrix(21:32, nrow = 3)
 m3 = m %*% m2
 {% endhighlight %}
 
+<a name="segment5"></a>
 
 Segment 5: Lists and Data Frames
 -------------
@@ -1177,6 +1181,7 @@ mtcars[1:3, ]
 ## Datsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
 {% endhighlight %}
 
+<a name="segment6"></a>
 
 Segment 6: Logical Vectors and Operators
 -------------

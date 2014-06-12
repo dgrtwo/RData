@@ -1,34 +1,57 @@
 - title: Variables and Data Structures
   segments:
-    - Fundamentals
-    - Variables
-    - Vectors
-    - Matrix
-    - Lists and Data Frames
-    - Logical Vectors and Operators
+    - title: Fundamentals
+      video: dQw4w9WgXcQ
+    - title: Variables
+      video: dQw4w9WgXcQ
+    - title: Vectors
+      video: dQw4w9WgXcQ
+    - title: Matrix
+      video: dQw4w9WgXcQ
+    - title: Lists and Data Frames
+      video: dQw4w9WgXcQ
+    - title: Logical Vectors and Operators
+      video: dQw4w9WgXcQ
 
 - title: Visualizing Data Using ggplot2
   segments:
-    - Introduction
-    - Scatter Plots
-    - Faceting and Additional Options
-    - Histograms and Density Plots
-    - Boxplots and Violin Plots
-    - Input- Getting Data into the Right Format
-    - Output- Saving Your Plots
+    - title: Introduction
+      video: dQw4w9WgXcQ
+    - title: Scatter Plots
+      video: dQw4w9WgXcQ
+    - title: Faceting and Additional Options
+      video: dQw4w9WgXcQ
+    - title: Histograms and Density Plots
+      video: dQw4w9WgXcQ
+    - title: Boxplots and Violin Plots
+      video: dQw4w9WgXcQ
+    - title: Input- Getting Data into the Right Format
+      video: dQw4w9WgXcQ
+    - title: Output- Saving Your Plots
+      video: dQw4w9WgXcQ
 
 - title: Statistical Testing and Prediction
   segments:
-    - Comparing Two Samples
-    - Correlation
-    - Linear Regression
-    - Multiple Linear Regression
+    - title: Comparing Two Samples
+      video: dQw4w9WgXcQ
+    - title: Correlation
+      video: dQw4w9WgXcQ
+    - title: Linear Regression
+      video: dQw4w9WgXcQ
+    - title: Multiple Linear Regression
+      video: dQw4w9WgXcQ
 
 - title: Exploratory Data Analysis with data.table
   segments:
-    - R Scripts
-    - Reading Data
-    - Introduction to data.table
-    - Summarizing Data Within Groups
-    - Merging Data
-    - Exploratory Data Analysis
+    - title: R Scripts
+      video: dQw4w9WgXcQ
+    - title: Reading Data
+      video: dQw4w9WgXcQ
+    - title: Introduction to data.table
+      video: dQw4w9WgXcQ
+    - title: Summarizing Data Within Groups
+      video: dQw4w9WgXcQ
+    - title: Merging Data
+      video: dQw4w9WgXcQ
+    - title: Exploratory Data Analysis
+      video: dQw4w9WgXcQ

@@ -41,7 +41,7 @@
         <ul>
             {% for segment in site.data.outline[lessonindex].segments %}
                 <li><a href="{{ site.baseurl }}/lessons/lesson{{ page.lesson }}/segment{{ forloop.index }}">
-                    {{ lessonnum }}.{{ forloop.index}} {{ segment }}
+                    {{ lessonnum }}.{{ forloop.index}} {{ segment.title }}
                 </a></li>
             {% endfor %}
         </ul>

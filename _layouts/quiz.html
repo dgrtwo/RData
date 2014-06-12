@@ -1,0 +1,42 @@
+---
+layout: default
+---
+
+<script type="text/javascript" src="{{ site.baseurl }}/public/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() { 
+	
+	$("span.answer").hide();
+	
+	$('<a class="reveal">Reveal Answer &gt;&gt;</a> ').insertBefore('.answer');
+
+	$("a.reveal").click(function(){
+		$(this).parents("p").children("span.answer").fadeIn(2500);
+		$(this).parents("p").children("a.reveal").fadeOut(600);
+	});
+
+}); 
+</script>
+
+{% assign lessonindex = page.lesson | minus:1 %}
+{% assign segmentindex = page.segment | minus:1 %}
+{% assign lessonnumber = page.lesson | times:1 %}
+{% assign segmentnumber = page.segment | times:1 %}
+
+{% assign lesson = site.data.outline[lessonindex] %}
+{% assign segment = lesson.segments[segmentindex] %}
+{% assign quiz = site.data.quizzes[lessonnumber].segments[segmentnumber] %}
+
+<div class="page">
+
+  <h1 class="page-title">{{ page.lesson }}.{{ page.segment}} {{ segment.title }}</h1>
+
+{% for q in quiz.Questions %}
+    <p>{{ q.Output }}</p>
+    <p><span class="answer">{{ q.CorrectAnswer }}</span></p>
+    <hr/>
+{% endfor %}
+
+{% include segmentnav.html %}
+
+</div>

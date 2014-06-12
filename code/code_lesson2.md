@@ -5,6 +5,8 @@ layout: default
 Lesson 2: Visualizing Data Using ggplot2
 ============
 
+<a name="segment1"></a>
+
 Segment 1: Introduction
 ------------
 
@@ -43,7 +45,9 @@ head(diamonds)
 {% endhighlight %}
 
 
-Segment 2: Introduction to ggplot2
+<a name="segment2"></a>
+
+Segment 2: Scatter Plots
 ------------
 
 
@@ -150,8 +154,9 @@ ggplot(diamonds, aes(x = carat, y = price, color = clarity)) + geom_smooth(se = 
 
 ![center](/RData/code/../figs/code_lesson2/segment_211.png) 
 
+<a name="segment3"></a>
 
-Segment 3: Facetting and Additional Options
+Segment 3: Faceting and Additional Options
 -------------
 
 
@@ -214,6 +219,8 @@ ggplot(diamonds, aes(x = carat, y = price)) + geom_point() + ggtitle("My scatter
 
 ![center](/RData/code/../figs/code_lesson2/segment_37.png) 
 
+
+<a name="segment4"></a>
 
 Segment 4: Histograms and Density Plots
 -------------
@@ -300,6 +307,7 @@ ggplot(diamonds, aes(x = price, color = cut)) + geom_density()
 
 ![center](/RData/code/../figs/code_lesson2/segment_49.png) 
 
+<a name="segment5"></a>
 
 Segment 5: Boxplots and Violin Plots
 -----------
@@ -333,6 +341,7 @@ ggplot(diamonds, aes(x = color, y = price)) + geom_violin() + scale_y_log10() +
 
 ![center](/RData/code/../figs/code_lesson2/segment_54.png) 
 
+<a name="segment6"></a>
 
 Segment 6: Input: Getting Data into the Right Format
 -----------
@@ -660,6 +669,7 @@ ggplot(WorldPhones.m, aes(x = Year, y = Phones, color = Continent)) + geom_line(
 
 ![center](/RData/code/../figs/code_lesson2/segment_69.png) 
 
+<a name="segment7"></a>
 
 Segment 7: Output: Saving Your Plots
 -------------

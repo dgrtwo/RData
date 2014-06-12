@@ -5,7 +5,7 @@ layout: default
 Lesson 3: Statistical Testing and Prediction
 ===============
 
-
+<a name="segment1"></a>
 
 Segment 1: Comparing Two Samples
 --------------
@@ -165,6 +165,7 @@ tt$conf.int[2]
 ## [1] -3.21
 {% endhighlight %}
 
+<a name="segment2"></a>
 
 Segment 2: Correlation
 --------------
@@ -270,6 +271,7 @@ ct$conf.int
 ## [1] 0.95
 {% endhighlight %}
 
+<a name="segment3"></a>
 
 Segment 3: Linear Regression
 -----------------
@@ -469,6 +471,7 @@ ggplot(mtcars, aes(wt, mpg)) + geom_point() + geom_smooth(method = "lm")
 
 ![center](/RData/code/../figs/code_lesson3/segment_3.png) 
 
+<a name="segment4"></a>
 
 Segment 4: Multiple Linear Regression
 -----------------

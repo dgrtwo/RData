@@ -13,7 +13,7 @@ layout: default
   <ul>
   {% for segment in lesson.segments %}
     <li><a href="segment{{ forloop.index }}">
-        {{ page.lesson }}.{{ forloop.index }} {{ segment }}
+        {{ page.lesson }}.{{ forloop.index }} {{ segment.title }}
     </a></li>
   {% endfor %}
   </ul>

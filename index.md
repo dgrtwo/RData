@@ -13,6 +13,6 @@ This is a course that combines video, HTML and interactive elements to teach the
 * [Lesson {{ lessonnumber }}: {{ lesson.title }}](lessons/lesson{{ lessonnumber}})
 {% for segment in lesson.segments %}
 {% capture segmentnumber %}{{ forloop.index }}{% endcapture %}
- * [{{ lessonnumber }}.{{ segmentnumber }} {{ segment }}](lessons/lesson{{ lessonnumber}}/segment{{ segmentnumber }})
+ * [{{ lessonnumber }}.{{ segmentnumber }} {{ segment.title }}](lessons/lesson{{ lessonnumber}}/segment{{ segmentnumber }})
 {% endfor %}
 {% endfor %}

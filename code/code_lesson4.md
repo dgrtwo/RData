@@ -6,6 +6,7 @@ Lesson 4: Exploratory Data Analysis With data.table
 ===========
 
 
+<a name="segment1"></a>
 
 Segment 1: R Scripts
 -----------
@@ -79,6 +80,7 @@ print(ggplot(mtcars, aes(wt, mpg)) + geom_point())
 
 ![center](/RData/code/../figs/code_lesson4/segment_12.png) 
 
+<a name="segment2"></a>
 
 Segment 2: Reading Data
 --------------
@@ -133,6 +135,7 @@ head(salaries)
 # help(read.csv)
 {% endhighlight %}
 
+<a name="segment3"></a>
 
 Segment 3: Introduction to data.table
 -------------
@@ -421,6 +424,7 @@ salaries.filtered = salaries[lgID == "AL" & yearID >= 1990, ]
 salaries.filtered.sorted = salaries.filtered[order(salary), ]
 {% endhighlight %}
 
+<a name="segment4"></a>
 
 Segment 4: Summarizing Data Within Groups
 --------------
@@ -941,6 +945,8 @@ ggplot(summarized.year.lg, aes(yearID, Average, color = lgID)) + geom_line()
 ![center](/RData/code/../figs/code_lesson4/segment_43.png) 
 
 
+<a name="segment5"></a>
+
 Segment 5: Merging Data
 -------------
 
@@ -1280,6 +1286,7 @@ merged.all
 ## 97889: 1916-07-12 zwild101 zwilldu01
 {% endhighlight %}
 
+<a name="segment6"></a>
 
 Segment 6: Exploratory Data Analysis
 -------------

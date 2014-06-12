@@ -1,0 +1,375 @@
+meta:
+  Class: Data Analysis and Visualization Using R
+  Author: David Robinson
+  Type: Standard
+  Organization: Princeton University
+  Version: 1.0
+
+2:
+  initLesson: library(ggplot2)
+  segments:
+    2:
+      Questions:
+          - Class: cmd_question
+            Output: Create a scatter plot of the diamonds dataset with depth on the x axis and price on the y axis.
+            CorrectAnswer: ggplot(diamonds, aes(x=depth, y=price)) + geom_point()
+            AnswerTests: expr_uses_func("geom_point"); aes_matches(x="depth", y="price")
+            Hint: This will involve a call to ggplot and to geom_point()
+
+          - Class: cmd_question
+            Output: Create a scatter plot of the diamonds dataset with depth on the x axis, price on the y axis, and coloring points based on their cut.
+            CorrectAnswer: ggplot(diamonds, aes(x=depth, y=price, color=cut)) + geom_point()
+            AnswerTests: expr_uses_func("geom_point"); aes_matches(x="depth", y="price", colour="cut")
+            Hint: This is similar to the last quiz, but with different contents of aes()
+          
+          - Class: cmd_question
+            Output: Create a scatter plot of the diamonds dataset with depth on the x axis, price on the y axis, and coloring points based on their cut, but this time add smoothing curves to show the trend.
+            CorrectAnswer: ggplot(diamonds, aes(x=depth, y=price, color=cut)) + geom_point() + geom_smooth()
+            AnswerTests: expr_uses_func("geom_point"); expr_uses_func("geom_smooth"); aes_matches(x="depth", y="price", colour="cut")
+            Hint: This is similar to the last quiz, but you add another layer. Recall that layers look like geom_...().
+          
+          - Class: text
+            Output: The Orange data.frame is a dataset that comes built into R, which describes the height of five orange trees over time. It has three columns "Tree" (a factor describing which of five trees is being measured), "age" (the age in days at the point of measurement), and "circumference" (the circumference of the tree trunk in millimeters).
+          
+          - Class: cmd_question
+            Output: Load the Orange dataset into memory.
+            CorrectAnswer: data("Orange")
+            AnswerTests: any_of_exprs("data('Orange')", 'data("Orange")', 'data(Orange)')
+            Hint: Use the "data" function
+          
+          - Class: cmd_question
+            Output: View the Orange dataset like a spreadsheet.
+            CorrectAnswer: View(Orange)
+            AnswerTests: omnitest(correctExpr='View(Orange)')
+            Hint: Use the "View" function
+          
+          - Class: cmd_question
+            Output: Create a scatter plot of the Orange dataset with age on the x-axis and circumference on the y-axis
+            CorrectAnswer: ggplot(Orange, aes(x=age, y=circumference)) + geom_point()
+            AnswerTests: expr_uses_func("geom_point"); aes_matches(x="age", y="circumference")
+            Hint: Use a ggplot call and geom_point, but don't forget to change the first argument of ggplot from "diamonds" to "orange"
+          
+          - Class: cmd_question
+            Output: Create a scatter plot of the Orange dataset with age on the x-axis and circumference on the y-axis, with each point colored according to which tree it represents
+            CorrectAnswer: ggplot(Orange, aes(x=age, y=circumference, color=Tree)) + geom_point()
+            AnswerTests: expr_uses_func("geom_point"); aes_matches(x="age", y="circumference", colour="Tree")
+            Hint: Similar to the last answer, but add a value to the "aes" call.
+          
+          - Class: cmd_question
+            Output: Create a scatter plot of the Orange dataset with age on the x-axis and circumference on the y-axis, with each point colored according to which tree it represents, and a best fit straight line (not curve!) for each
+            CorrectAnswer: ggplot(Orange, aes(x=age, y=circumference, color=Tree)) + geom_point() + geom_smooth(method="lm")
+            AnswerTests: expr_uses_func("geom_point"); expr_uses_func("geom_smooth"); aes_matches(x="age", y="circumference", colour="Tree");
+            Hint: You'll have to specify the "method" option for geom_smooth
+
+    3:
+      Questions:
+          - Class: cmd_question
+            Output: Create a scatter plot of the diamonds dataset with price on the x axis and depth on the y axis, and divide it into facets based on the diamond's cut
+            CorrectAnswer: ggplot(diamonds, aes(x=price, y=depth)) + geom_point() + facet_wrap(~ cut)
+            AnswerTests: expr_uses_func("geom_point"); expr_uses_func("facet_wrap"); aes_matches(x="price", y="depth");
+            Hint: Add a facet_wrap option
+          
+          - Class: cmd_question
+            Output: Create a scatter plot of the diamonds dataset with depth on the x axis and price on the y axis, and divide it into a facetted grid. Let rows in the grid represent different cuts, and let each column represent a different color
+            CorrectAnswer: ggplot(diamonds, aes(x=depth, y=price)) + geom_point() + facet_grid(cut ~ color)
+            AnswerTests: expr_uses_func("geom_point"); expr_uses_func("facet_grid"); aes_matches(x="price", y="depth");
+            Hint: Add a facet_grid option, with row ~ column inside.
+          
+          - Class: cmd_question
+            Output: Create a scatter plot of the diamonds dataset with depth on the x axis and price on the y axis. Give it a title of "My Graph", and limit the y axis from 0 to 10000.
+            CorrectAnswer: ggplot(diamonds, aes(x=depth, y=price)) + geom_point() + ggtitle("My Graph") + ylim(0, 10000)
+            AnswerTests: omnitest(correctExpr='ggplot(diamonds, aes(x=depth, y=price)) + geom_point() + ggtitle("My Graph") + ylim(0, 10000)')
+            Hint: Extra options get added on to the end of ggplot just like layers.
+          
+          
+          - Class: text
+            Output: The Orange data.frame is a dataset that comes built into R, which describes the height of five orange trees over time. It has three columns "Tree" (a factor describing which of five trees is being measured), "age" (the age in days at the point of measurement), and "circumference" (the circumference of the tree trunk in millimeters).
+          
+          - Class: cmd_question
+            Output: Load the Orange dataset into memory.
+            CorrectAnswer: data("Orange")
+            AnswerTests: any_of_exprs("data('Orange')", 'data("Orange")', 'data(Orange)')
+            Hint: Use the "data" function
+          
+          - Class: cmd_question
+            Output: View the Orange dataset like a spreadsheet.
+            CorrectAnswer: View(Orange)
+            AnswerTests: omnitest(correctExpr='View(Orange)')
+            Hint: Use the "View" function
+          
+          - Class: cmd_question
+            Output: Create a scatter plot of the Orange dataset with age on the x-axis and circumference on the y-axis, faceted into five sub-plots based on the tree being measured
+            CorrectAnswer: ggplot(Orange, aes(x=age, y=circumference)) + geom_point() + facet_wrap(~ Tree)
+            AnswerTests: omnitest(correctExpr='ggplot(Orange, aes(x=age, y=circumference)) + geom_point() + facet_wrap(~ Tree)')
+            Hint: Make sure you change the dataset from "diamonds" to "Orange"
+
+    4:
+      Questions:     
+          - Class: cmd_question
+            Output: Construct a histogram of the weight (carat) of each diamond in the "diamonds" dataset.
+            CorrectAnswer: ggplot(diamonds, aes(x=carat)) + geom_histogram()
+            AnswerTests: omnitest(correctExpr='ggplot(diamonds, aes(x=carat)) + geom_histogram()')
+            Hint: Use the geom_histogram() layer, and make sure you set the x aesthetic correctly in aes.
+          
+          - Class: cmd_question
+            Output: Construct a histogram of the weight (carat) of each diamond, but set the binwidth to .5.
+            CorrectAnswer: ggplot(diamonds, aes(x=carat)) + geom_histogram(binwidth=.5)
+            AnswerTests: omnitest(correctExpr='ggplot(diamonds, aes(x=carat)) + geom_histogram(binwidth=.5)')
+            Hint: Set the binwidth aesthetic in the geom_histogram layer.
+          
+          - Class: cmd_question
+            Output: Construct a density plot of the weight (carat) of each diamond
+            CorrectAnswer: ggplot(diamonds, aes(x=carat)) + geom_density()
+            AnswerTests: omnitest(correctExpr='ggplot(diamonds, aes(x=carat)) + geom_density()')
+            Hint: This is similar to the last two questions, but using a different geom_...() layer.
+          
+    5:
+      Questions:
+          - Class: text
+            Output: The iris dataset contains measurements on 150 flowers of three different species. 
+          
+          - Class: cmd_question
+            Output: Load the iris dataset.
+            CorrectAnswer: data("iris")
+            AnswerTests: any_of_exprs("data('iris')", 'data("iris")', 'data(iris)')
+            Hint: Use the "data" function
+          
+          - Class: cmd_question
+            Output: View the iris dataset like a spreadsheet.
+            CorrectAnswer: View(iris)
+            AnswerTests: omnitest(correctExpr='View(iris)')
+            Hint: Use the "View" function
+          
+          - Class: cmd_question
+            Output: Use a boxplot to compare the Petal.Length between different species of flowers in the iris dataset
+            CorrectAnswer: ggplot(iris, aes(x=Species, y=Petal.Length)) + geom_boxplot()
+            AnswerTests: omnitest(correctExpr='ggplot(iris, aes(x=Species, y=Petal.Length)) + geom_boxplot()')
+            Hint: Make sure that you specify the x aesthetic as the categories you're comparing, and the y aesthetic as the value to be compared. Check that your column names are spelled correctly using the spreadsheet view of the iris data.
+          
+          - Class: mult_question
+            Output: According to your boxplot, which species of flower has the longest petals?
+            AnswerChoices: setosa;versicolor;virginica
+            CorrectAnswer: virginica
+            AnswerTests: omnitest(correctVal="virginica")
+            Hint: A box that is higher on the boxplot indicates longer petals.
+          
+          - Class: cmd_question
+            Output: Use a violin plot to compare the Petal.Length between different species of flowers in the iris dataset
+            CorrectAnswer: ggplot(iris, aes(Species, y=Petal.Length)) + geom_violin()
+            AnswerTests: omnitest(correctExpr='ggplot(iris, aes(Species, y=Petal.Length)) + geom_violin()')
+            Hint: This is the same command as the last one, except change the geom_boxplot() layer to something else.
+          
+    6:
+      Questions:
+          - Class: mult_question
+            Output: How does the qplot function differ from ggplot?
+            AnswerChoices: It creates only histograms;It creates only scatterplots;It creates quantile-quantile plots;It creates plots from variables that are not already in a data frame
+            CorrectAnswer: It creates plots from variables that are not already in a data frame
+            AnswerTests: omnitest(correctVal="It creates plots from variables that are not already in a data frame")
+            Hint: Look at the two examples in the video and code that use qplot
+          
+          - Class: cmd_question
+            Output: Use the qplot function (not ggplot) to create a scatterplot showing the relationship between the carat (x-axis) and price (y-axis) columns in the diamonds dataset
+            CorrectAnswer: qplot(diamonds$carat, diamonds$price)
+            AnswerTests: omnitest(correctExpr='qplot(diamonds$carat, diamonds$price)')
+            Hint: You can extract these columns with diamonds$carat and diamonds$price, respectively
+          
+          - Class: cmd_question
+            Output: Load the reshape2 package.
+            CorrectAnswer: library("reshape2")
+            AnswerTests: omnitest(correctExpr='library("reshape2")')
+            Hint: Use the library function
+          
+          - Class: text
+            Output: The french_fries dataset is provided with the reshape2 package as an example. It contains sensory measurements testing the effect of three different fryer oils on how fries tasted.
+          
+          - Class: cmd_question
+            Output: Load the french_fries dataset.
+            CorrectAnswer: data("french_fries")
+            AnswerTests: any_of_exprs("data('french_fries')", 'data("french_fries")', 'data(french_fries)')
+            Hint: Use the data function
+          
+          - Class: cmd_question
+            Output: View the french_fries dataset like a spreadsheet.
+            CorrectAnswer: View(french_fries)
+            AnswerTests: omnitest(correctExpr='View(french_fries)')
+            Hint: Use the View function.
+          
+          - Class: text
+            Output: Each subject in the french_fries dataset was queried about five flavors ("potato", "buttery", "grassy", "rancid", "painty"). Currently, each flavor the subjects were asked about is a separate column.
+          
+          - Class: cmd_question
+            Output: Create a boxplot comparing the "buttery" rating between each of the three oils (oil is denoted by the "treatment" column).
+            CorrectAnswer: ggplot(french_fries, aes(treatment, buttery)) + geom_boxplot()
+            AnswerTests: omnitest(correctExpr='ggplot(french_fries, aes(treatment, buttery)) + geom_boxplot()')
+            Hint: Use the geom_boxplot() layer, and remember to set "treatment" (the oil) as the x aesthetic.
+          
+          - Class: cmd_question
+            Output: Use reshape2's "melt" function create a new dataset, "french_fries.m", such that each tasting of each flavor has a separate row. There should be one column called "variable" containing the flavor name ("potato", "buttery", etc) and one column called value containing the numeric rating.
+            CorrectAnswer: french_fries.m = melt(french_fries, id=c("time", "treatment", "subject", "rep"))
+            AnswerTests: omnitest(correctExpr='french_fries.m = melt(french_fries, id=c("time", "treatment", "subject", "rep"))')
+            Hint: The hard part is getting the "id" argument to melt right. Each column that is not a flavor should be provided as an id since you want to keep it as a column in the melted dataset.
+          
+          - Class: cmd_question
+            Output: Use french_fries.m to a boxplot comparing the taste rating between each of the three treatments (oils), but divide it into faceted subplots based on which flavor (buttery, potato) is being tested.
+            CorrectAnswer: ggplot(french_fries.m, aes(treatment, value)) + geom_boxplot() + facet_wrap(~ variable)
+            AnswerTests: omnitest(correctExpr='ggplot(french_fries.m, aes(x=treatment, y=value)) + geom_boxplot() + facet_wrap(~ variable)')
+            Hint: Note that you'll be using the "variable" and "value" columns of the melted dataset rather than columns like "potato" or "buttery". Note that this kind of plot was not possible before the data was melted.
+          
+    7:
+      Questions:
+          - Class: text
+            Output: The iris dataset contains measurements on 150 flowers of three different species. 
+          
+          - Class: cmd_question
+            Output: Load the iris dataset.
+            CorrectAnswer: data("iris")
+            AnswerTests: any_of_exprs("data('iris')", 'data("iris")', 'data(iris)')
+            Hint: Use the "data" function
+          
+          - Class: cmd_question
+            Output: View the iris dataset like a spreadsheet.
+            CorrectAnswer: View(iris)
+            AnswerTests: omnitest(correctExpr='View(iris)')
+            Hint: Use the "View" function
+          
+          - Class: cmd_question
+            Output: Use ggplot to create a scatter plot comparing the Petal.Length (x-axis) and Petal.Width (y-axis) of the flowers in the iris data. Save this scatter plot to a variable called p.
+            CorrectAnswer: p = ggplot(iris, aes(Petal.Length, Petal.Width)) + geom_point()
+            AnswerTests: exists("p"); all(class(p) == c("gg", "ggplot"))
+            Hint: Remember to put "p =" at the start of your expression.
+          
+          - Class: cmd_question
+            Output: Save the plot you just created to the file "petalsize.jpeg"
+            CorrectAnswer: ggsave(p, filename="petalsize.jpeg")
+            AnswerTests: omnitest(correctExpr='ggsave(p, filename="petalsize.jpeg")')
+            Hint: Use the ggsave function.
+          
+
+3:
+  initLesson: library(ggplot2)
+  segments:
+    1:
+      Questions:
+          - Class: text
+            Output: The CO2 data.frame is a dataset built into R showing the results of an experiment on the cold tolerance of grass. Grass samples from two regions (Quebec and Mississippi) were grown in either a chilled or nonchilled environment, and their CO2 uptake rate was tested.
+          
+          - Class: cmd_question
+            Output: Load the CO2 dataset.
+            CorrectAnswer: data("CO2")
+            AnswerTests: any_of_exprs("data('CO2')", 'data("CO2")', 'data(CO2)')
+            Hint: Use the "data" function.
+          
+          - Class: cmd_question
+            Output: View the CO2 dataset like a spreadsheet.
+            CorrectAnswer: View(CO2)
+            AnswerTests: omnitest(correctExpr='View(CO2)')
+            Hint: Use the "data" function.
+          
+          - Class: cmd_question
+            Output: Create a boxplot comparing the CO2 uptake between the two treatments of grass- "chilled" and "nonchilled"
+            CorrectAnswer: ggplot(CO2, aes(x=Treatment, y=uptake)) + geom_boxplot()
+            AnswerTests: expr_uses_func("geom_boxplot"); aes_matches(x="Treatment", y="uptake")
+            Hint: Your x aesthetic should be the grouping variable, and your y aesthetic should be the value you are comparing. Don't forget to use geom_boxplot.
+          
+          - Class: cmd_question
+            Output: Perform a t-test to test for a difference in CO2 uptake between the two treatments of grass- "chilled" and "nonchilled"
+            CorrectAnswer: t.test(CO2$uptake ~ CO2$Type)
+            AnswerTests: omnitest(correctExpr='t.test(CO2$uptake ~ CO2$Type)')
+            Hint: Use the t.test function, and give it a formula of the form "value ~ variable", where variable describes the groups to be compared
+          
+          - Class: exact_question
+            Output: What is the p-value computed by this t-test?
+            CorrectAnswer: 0.003107
+            AnswerTests: omnitest(correctVal="0.003107")
+            Hint: Write this as a number, not an R expression. You can find it in the output of the test.
+          
+          - Class: mult_question
+            Output: Based on this test, and using a p-value threshold of .05, was there a significant difference between the CO2 uptake of chilled grass and nonchilled grass?
+            AnswerChoices: Yes;No
+            CorrectAnswer: Yes
+            AnswerTests: omnitest(correctVal="Yes")
+            Hint: Scientists often declare p-values that are smaller than a threshold such as .05 to be significant.
+          
+          - Class: cmd_question
+            Output: Create a boxplot comparing the CO2 uptake between the two types of grass- "Quebec" and "Mississippi"
+            CorrectAnswer: ggplot(CO2, aes(x=Type, y=uptake)) + geom_boxplot()
+            AnswerTests: expr_uses_func("geom_boxplot"); aes_matches(x="Type", y="uptake")
+            Hint: Your x aesthetic should be the grouping variable, and your y aesthetic should be the value you are comparing. Don't forget to use geom_boxplot.
+          
+          - Class: cmd_question
+            Output: Perform a t-test to test for a difference in CO2 uptake between the two types of grass- "Quebec" and "Mississippi". Save it as a variable called tt.
+            CorrectAnswer: tt = t.test(CO2$uptake ~ CO2$Type)
+            AnswerTests: any_of_exprs('tt = t.test(CO2$uptake ~ CO2$Type)', 'tt <- t.test(CO2$uptake ~ CO2$Type)')
+            Hint: Remember to save your result as a variable called tt. Use the t.test function, and give it a formula of the form "value ~ variable", where variable describes the groups to be compared
+          
+          - Class: cmd_question
+            Output: Extract the computed p-value from your tt variable.
+            CorrectAnswer: tt$p.value
+            AnswerTests: omnitest(correctExpr='tt$p.value')
+            Hint: Use a dollar sign, like "tt$...". In RStudio you can hit the "Tab" key after typing tt$ to see the values that can be extracted.
+          
+          - Class: cmd_question
+            Output: Extract the computed 95% confidence interval from your tt variable.
+            CorrectAnswer: tt$p.value
+            AnswerTests: omnitest(correctExpr='tt$conf.int')
+            Hint: Use a dollar sign, like "tt$...". In RStudio you can hit the "Tab" key after typing tt$ to see the values that can be extracted.
+          
+          - Class: exact_question
+            Output: What is the upper bound of the t-test's confidence interval?
+            CorrectAnswer: 11.336682
+            AnswerTests: omnitest(correctVal="11.336682")
+            Hint: Type this as a number, not an R expression.
+          
+          - Class: exact_question
+            Output: What is the upper bound of the t-test's confidence interval?
+            CorrectAnswer: 11.336682
+            AnswerTests: omnitest(correctVal="11.336682")
+            Hint: Type this as a number, not an R expression.
+
+    2:
+      Questions:
+          - Class: text
+            Output: The iris dataset contains measurements on 150 flowers of three different species. 
+  
+          - Class: cmd_question
+            Output: Load the iris dataset.
+            CorrectAnswer: data("iris")
+            AnswerTests: any_of_exprs("data('iris')", 'data("iris")', 'data(iris)')
+            Hint: Use the "data" function
+  
+          - Class: cmd_question
+            Output: View the iris dataset like a spreadsheet.
+            CorrectAnswer: View(iris)
+            AnswerTests: omnitest(correctExpr='View(iris)')
+            Hint: Use the "View" function
+  
+          - Class: cmd_question
+            Output: Use ggplot2 to create a scatter plot to compare the Petal.Length (x-axis) and Petal.Width
+            CorrectAnswer: ggplot(iris, aes(x=Petal.Length, y=Petal.Width)) + geom_point()
+            AnswerTests: expr_uses_func("geom_point"); aes_matches(x="Petal.Length", y="Petal.Width")
+            Hint: Use a geom_point() layer, and make sure you set your aesthetics correctly
+  
+          - Class: cmd_question
+            Output: Test for a correlation between Petal.Length and Petal.Width in the iris dataset, saving the result to a variable called ct
+            CorrectAnswer: cor.test(iris$Petal.Length, iris$Petal.Width)
+            AnswerTests: any_of_exprs('ct = cor.test(iris$Petal.Length, iris$Petal.Width)', 'ct <- cor.test(iris$Petal.Length, iris$Petal.Width)')
+            Hint: You can extract each column from iris using $, and use the cor.test function to find the correlation. Make sure you save it to a variable
+  
+          - Class: cmd_question
+            Output: Extract the estimate of the correlation from your "ct" object
+            CorrectAnswer: ct$estimate
+            AnswerTests: omnitest(correctExpr='ct$estimate')
+            Hint: You can use ct$... to extract a value from the correlation object. If you type ct$ and then hit Tab, RStudio will suggest your options.
+  
+          - Class: cmd_question
+            Output: Extract the p-value for correlation from your "ct" object
+            CorrectAnswer: ct$p.value
+            AnswerTests: omnitest(correctExpr='ct$p.value')
+            Hint: You can use ct$... to extract a value from the correlation object. If you type ct$ and then hit Tab, RStudio will suggest your options.
+  
+          - Class: cmd_question
+            Output: Extract a 95% confidence interval for the correlation coefficient from your "ct" object
+            CorrectAnswer: ct$conf.int
+            AnswerTests: omnitest(correctExpr='ct$conf.int')
+            Hint: You can use ct$... to extract a value from the correlation object. If you type ct$ and then hit Tab, RStudio will suggest your options.
