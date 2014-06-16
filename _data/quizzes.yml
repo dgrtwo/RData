@@ -5,6 +5,174 @@ meta:
   Organization: Princeton University
   Version: 1.0
 
+1:
+  initLesson: x = 4
+  segments:
+    1:
+      Questions:
+          - Class: cmd_question
+            Output: List all the variables currently present in your workspace.
+            CorrectAnswer: ls()
+            AnswerTests: omnitest(correctExpr='ls()')
+            Hint: Use the "ls" function
+
+          - Class: cmd_question
+            Output: Remove the variable called "x" from your workspace.
+            CorrectAnswer: rm("x")
+            AnswerTests: omnitest(correctExpr='rm("x")')
+            Hint: Use the "rm" function
+    2:
+      Questions:
+          - Class: mult_question
+            Output: Which of the following is *not* a permitted variable name in R?
+            AnswerChoices: someVariable;some-variable;some.variable;some_variable
+            CorrectAnswer: some-variable
+            AnswerTests: omnitest(correctVal="some-variable")
+            Hint: Variable names in R can contain uppercase or lowercase letters, digits (except at the start of the variable), periods, or underscores
+  
+          - Class: cmd_question
+            Output: Create a variable called mynum with the value 200.
+            CorrectAnswer: mynum = 200
+            AnswerTests: omnitest(correctExpr='mynum = 200')
+            Hint: Use the assignment operator, "="
+  
+          - Class: cmd_question
+            Output: Create a character variable called mychar that contains the words "hello world"
+            CorrectAnswer: mychar = "hello world"
+            AnswerTests: any_of_exprs('mychar = "hello world"', "mychar = 'hello world'")
+            Hint: Use the assignment operator, "=", and don't forget to surround the words with quotes
+  
+          - Class: cmd_question
+            Output: Add 20 to your "mynum" variable and save it to a new variable, "mynum2"
+            CorrectAnswer: mynum2 = mynum + 20
+            AnswerTests: omnitest(correctExpr='mynum2 = mynum + 20')
+            Hint: Use the assignment operator, "=", and on the right hand side put the expression you want to calculate
+  
+          - Class: cmd_question
+            Output: Use R to calculate 300 divided by 90 (you do not have to save it to a variable)
+            CorrectAnswer: 300 / 90
+            AnswerTests: omnitest(correctExpr='300 / 90')
+            Hint: Use "/" for division
+  
+          - Class: cmd_question
+            Output: Use R to calculate 8 to the power of 4 (you do not have to save it to a variable)
+            CorrectAnswer: 8^4
+            AnswerTests: omnitest(correctExpr='8^4')
+            Hint: Use "^" for exponentiation
+  
+          - Class: cmd_question
+            Output: Use the "log" function to compute the natural logarithm of 15
+            CorrectAnswer: log(15)
+            AnswerTests: omnitest(correctExpr='log(15)')
+            Hint: To call a function (e.g. func), you put the name of the function then parentheses containing the value you are performing it on, (e.g. func(x))
+  
+          - Class: cmd_question
+            Output: The function "cos" computes the trigonometric cosine of a number. Use this function to compute the cosine of 15.
+            CorrectAnswer: log(15)
+            AnswerTests: omnitest(correctExpr='cos(15)')
+            Hint: To call a function (e.g. "func"), you put the name of the function then parentheses containing the value you are performing it on, (e.g. "func(x)")
+    2:
+      Questions:
+          - Class: cmd_question
+            Output: Create a vector called "v1" containing four values, in this order- 2, 9, 3, 4.5.
+            CorrectAnswer: v1 = c(2, 9, 3, 4.5)
+            AnswerTests: omnitest(correctExpr='v1 = c(2, 9, 3, 4.5)')
+            Hint: Use the "c" function to construct a vector, and make sure you assign it to "v1"
+  
+          - Class: cmd_question
+            Output: Find the length of v1
+            CorrectAnswer: length(v1)
+            AnswerTests: omnitest(correctExpr='length(v1)')
+            Hint: Use the "length" function
+  
+          - Class: cmd_question
+            Output: Create a vector called "v2" containing four values, in this order- 15, 4, 8, 10
+            CorrectAnswer: v2 = c(15, 4, 8, 10)
+            AnswerTests: omnitest(correctExpr='v2 = c(15, 4, 8, 10)')
+            Hint: Use the "c" function to construct a vector, and make sure you assign it to "v2"
+  
+          - Class: cmd_question
+            Output: Combine the v1 and v2 vectors into one vector of length 8, assigning the result to v3
+            CorrectAnswer: v3 = c(v1, v2)
+            AnswerTests: omnitest(correctExpr='v3 = c(v1, v2)')
+            Hint: Use the "c" function to combine vectors
+  
+          - Class: cmd_question
+            Output: Find the mean of v3
+            CorrectAnswer: mean(v3)
+            AnswerTests: omnitest(correctExpr='mean(v3)')
+            Hint: Use the "mean" function
+  
+          - Class: cmd_question
+            Output: Extract the third value from v3
+            CorrectAnswer: v3[3]
+            AnswerTests: omnitest(correctExpr='v3[3]')
+            Hint: Use square brackets to extract a value from a vector
+    4:
+      Questions:
+          - Class: cmd_question
+            Output: Earlier you created two numeric vectors, v1 and v2, each of length 4. Combine them together to make a matrix with 4 rows and two columns, saving it to a variable "m"
+            CorrectAnswer: m = cbind(v1, v2)
+            AnswerTests: omnitest(correctExpr='m = cbind(v1, v2)')
+            Hint: Use the "cbind" function
+  
+          - Class: cmd_question
+            Output: Add a row to the end of your matrix m, with the values 8 and 12, saving it to the variable m2
+            CorrectAnswer: m2 = rbind(m, c(8, 12))
+            AnswerTests: omnitest(correctExpr='m2 = rbind(m, c(8, 12))')
+            Hint: Use the "rbind" function
+  
+          - Class: cmd_question
+            Output: Extract the first two rows of m2
+            CorrectAnswer: m2[1:2, ]
+            AnswerTests: omnitest(correctExpr='m2[1:2, ]')
+            Hint: Use square brackets and a comma, putting the indices you want to extract in front of the comma
+  
+          - Class: cmd_question
+            Output: Extract the second column of m2
+            CorrectAnswer: m2[, 2]
+            AnswerTests: omnitest(correctExpr='m2[, 2]')
+            Hint: Use square brackets and a comma, putting the indices you want to extract after the comma
+    5:
+      Questions:  
+          - Class: mult_question
+            Output: How does a list differ from a vector?
+            AnswerChoices: A list can be of any length, while a vector has a maximum size;A vector can be of any length, while a list has a maximum size;A list can contain values of different data types;A vector can contain values of different data types
+            CorrectAnswer: A list can contain values of different data types
+            AnswerTests: omnitest(correctVal="A list can contain values of different data types")
+            Hint: TODO
+  
+          - Class: cmd_question
+            Output: Create a list, called "list1", containing three values- the first one the vector c(1, 3, 4), the second one the character vector "test", and the third one the number 4.
+            CorrectAnswer: list1 = list(c(1, 3, 4), "test", 4)
+            AnswerTests: omnitest(correctExpr='list1 = list(c(1, 3, 4), "test", 4)')
+            Hint: Use the "list" function to construct a list
+  
+          - Class: cmd_question
+            Output: Extract the third value from the list list1
+            CorrectAnswer: list1[[3]]
+            AnswerTests: omnitest(correctExpr='list1[[3]]')
+            Hint: Use double square brackets ([[3]]), not single
+  
+          - Class: cmd_question
+            Output: Create a list, called "list2",  containing three values- the first one the vector c(1, 3, 4), the second one the character vector "test", and the third one the number 4, but this time give each of the items names- "a", "b", "c".
+            CorrectAnswer: list2 = list(c(1, 3, 4), "test", 4)
+            AnswerTests: omnitest(correctExpr='list1 = list(a=c(1, 3, 4), b="test", c=4)')
+            Hint: Provide the names using "a=..." etc when you are constructing the list
+  
+          - Class: cmd_question
+            Output: Extract the value named "c" from list2 using its name
+            CorrectAnswer: list2$c
+            AnswerTests: omnitest(correctExpr='list2$c')
+            Hint: Use the dollar sign to extract the value from list2
+    6:
+      Questions:
+          - Class: cmd_question
+            Output: In an earlier quiz you created a vector v1 of length 4. Compare each value in the vector to see if it is greater than 4.
+            CorrectAnswer: 
+            AnswerTests: omnitest(correctExpr='')
+            Hint: You can compare all the values in a vector to a value at the same time using the greater than (">") operator
+  
 2:
   initLesson: library(ggplot2)
   segments:
@@ -373,3 +541,5 @@ meta:
             CorrectAnswer: ct$conf.int
             AnswerTests: omnitest(correctExpr='ct$conf.int')
             Hint: You can use ct$... to extract a value from the correlation object. If you type ct$ and then hit Tab, RStudio will suggest your options.
+
+
