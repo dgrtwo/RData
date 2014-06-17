@@ -1,0 +1,18 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Visualizing
+    Data Using ggplot2, Lesson: Histograms and Density Plots, Organization: Princeton
+    University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/dQw4w9WgXcQ'}
+- {AnswerTests: 'omnitest(correctExpr=''ggplot(diamonds, aes(x=carat)) + geom_histogram()'')',
+  Class: cmd_question, CorrectAnswer: 'ggplot(diamonds, aes(x=carat)) + geom_histogram()',
+  Hint: 'Use the geom_histogram() layer, and make sure you set the x aesthetic correctly
+    in aes.', Output: Construct a histogram of the weight (carat) of each diamond
+    in the "diamonds" dataset.}
+- {AnswerTests: 'omnitest(correctExpr=''ggplot(diamonds, aes(x=carat)) + geom_histogram(binwidth=.5)'')',
+  Class: cmd_question, CorrectAnswer: 'ggplot(diamonds, aes(x=carat)) + geom_histogram(binwidth=.5)',
+  Hint: Set the binwidth aesthetic in the geom_histogram layer., Output: 'Construct
+    a histogram of the weight (carat) of each diamond, but set the binwidth to .5.'}
+- {AnswerTests: 'omnitest(correctExpr=''ggplot(diamonds, aes(x=carat)) + geom_density()'')',
+  Class: cmd_question, CorrectAnswer: 'ggplot(diamonds, aes(x=carat)) + geom_density()',
+  Hint: 'This is similar to the last two questions, but using a different geom_...()
+    layer.', Output: Construct a density plot of the weight (carat) of each diamond}

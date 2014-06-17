@@ -1,0 +1,20 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Visualizing
+    Data Using ggplot2, Lesson: Output- Saving Your Plots, Organization: Princeton
+    University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/dQw4w9WgXcQ'}
+- {Class: text, Output: The iris dataset contains measurements on 150 flowers of three
+    different species.}
+- {AnswerTests: 'any_of_exprs("data(''iris'')", ''data("iris")'', ''data(iris)'')',
+  Class: cmd_question, CorrectAnswer: data("iris"), Hint: Use the "data" function,
+  Output: Load the iris dataset.}
+- {AnswerTests: omnitest(correctExpr='View(iris)'), Class: cmd_question, CorrectAnswer: View(iris),
+  Hint: Use the "View" function, Output: View the iris dataset like a spreadsheet.}
+- {AnswerTests: 'exists("p"); all(class(p) == c("gg", "ggplot"))', Class: cmd_question,
+  CorrectAnswer: 'p = ggplot(iris, aes(Petal.Length, Petal.Width)) + geom_point()',
+  Hint: Remember to put "p =" at the start of your expression., Output: Use ggplot
+    to create a scatter plot comparing the Petal.Length (x-axis) and Petal.Width (y-axis)
+    of the flowers in the iris data. Save this scatter plot to a variable called p.}
+- {AnswerTests: 'omnitest(correctExpr=''ggsave(p, filename="petalsize.jpeg")'')',
+  Class: cmd_question, CorrectAnswer: 'ggsave(p, filename="petalsize.jpeg")', Hint: Use
+    the ggsave function., Output: Save the plot you just created to the file "petalsize.jpeg"}

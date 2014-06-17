@@ -1,0 +1,40 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Visualizing
+    Data Using ggplot2, Lesson: Faceting and Additional Options, Organization: Princeton
+    University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/dQw4w9WgXcQ'}
+- {AnswerTests: 'expr_uses_func("geom_point"); expr_uses_func("facet_wrap"); aes_matches(x="price",
+    y="depth");', Class: cmd_question, CorrectAnswer: 'ggplot(diamonds, aes(x=price,
+    y=depth)) + geom_point() + facet_wrap(~ cut)', Hint: Add a facet_wrap option,
+  Output: 'Create a scatter plot of the diamonds dataset with price on the x axis
+    and depth on the y axis, and divide it into facets based on the diamond''s cut'}
+- {AnswerTests: 'expr_uses_func("geom_point"); expr_uses_func("facet_grid"); aes_matches(x="price",
+    y="depth");', Class: cmd_question, CorrectAnswer: 'ggplot(diamonds, aes(x=depth,
+    y=price)) + geom_point() + facet_grid(cut ~ color)', Hint: 'Add a facet_grid option,
+    with row ~ column inside.', Output: 'Create a scatter plot of the diamonds dataset
+    with depth on the x axis and price on the y axis, and divide it into a facetted
+    grid. Let rows in the grid represent different cuts, and let each column represent
+    a different color'}
+- {AnswerTests: 'omnitest(correctExpr=''ggplot(diamonds, aes(x=depth, y=price)) +
+    geom_point() + ggtitle("My Graph") + ylim(0, 10000)'')', Class: cmd_question,
+  CorrectAnswer: 'ggplot(diamonds, aes(x=depth, y=price)) + geom_point() + ggtitle("My
+    Graph") + ylim(0, 10000)', Hint: Extra options get added on to the end of ggplot
+    just like layers., Output: 'Create a scatter plot of the diamonds dataset with
+    depth on the x axis and price on the y axis. Give it a title of "My Graph", and
+    limit the y axis from 0 to 10000.'}
+- {Class: text, Output: 'The Orange data.frame is a dataset that comes built into
+    R, which describes the height of five orange trees over time. It has three columns
+    "Tree" (a factor describing which of five trees is being measured), "age" (the
+    age in days at the point of measurement), and "circumference" (the circumference
+    of the tree trunk in millimeters).'}
+- {AnswerTests: 'any_of_exprs("data(''Orange'')", ''data("Orange")'', ''data(Orange)'')',
+  Class: cmd_question, CorrectAnswer: data("Orange"), Hint: Use the "data" function,
+  Output: Load the Orange dataset into memory.}
+- {AnswerTests: omnitest(correctExpr='View(Orange)'), Class: cmd_question, CorrectAnswer: View(Orange),
+  Hint: Use the "View" function, Output: View the Orange dataset like a spreadsheet.}
+- {AnswerTests: 'omnitest(correctExpr=''ggplot(Orange, aes(x=age, y=circumference))
+    + geom_point() + facet_wrap(~ Tree)'')', Class: cmd_question, CorrectAnswer: 'ggplot(Orange,
+    aes(x=age, y=circumference)) + geom_point() + facet_wrap(~ Tree)', Hint: Make
+    sure you change the dataset from "diamonds" to "Orange", Output: 'Create a scatter
+    plot of the Orange dataset with age on the x-axis and circumference on the y-axis,
+    faceted into five sub-plots based on the tree being measured'}
