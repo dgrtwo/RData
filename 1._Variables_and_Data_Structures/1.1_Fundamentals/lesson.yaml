@@ -1,0 +1,10 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: 1.
+    Variables and Data Structures, Lesson: 1.1 Fundamentals, Organization: Princeton
+    University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/dQw4w9WgXcQ'}
+- {AnswerTests: omnitest(correctExpr='ls()'), Class: cmd_question, CorrectAnswer: ls(),
+  Hint: Use the "ls" function, Output: List all the variables currently present in
+    your workspace.}
+- {AnswerTests: omnitest(correctExpr='rm(x)'), Class: cmd_question, CorrectAnswer: rm(x),
+  Hint: Use the "rm" function, Output: Remove the variable called "x" from your workspace.}

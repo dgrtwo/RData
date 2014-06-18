@@ -1,0 +1,16 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: 4.
+    Exploratory Data Analysis with data.table, Lesson: 4.1 R Scripts, Organization: Princeton
+    University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/dQw4w9WgXcQ'}
+- {AnswerTests: omnitest(correctExpr='print(x)'), Class: cmd_question, CorrectAnswer: print(x),
+  Hint: Use the print function, Output: 'Suppose you were writing an R script and
+    had a variable called "x". What line of code would you use to display that variable
+    from within the script?'}
+- {AnswerTests: 'omnitest(correctExpr=''print(ggplot(diamonds, aes(x=carat, y=price))
+    + geom_point())'')', Class: cmd_question, CorrectAnswer: 'print(ggplot(diamonds,
+    aes(x=carat, y=price)) + geom_point())', Hint: Use the print function around the
+    line of code used to plot., Output: 'Suppose you were writing an R script and
+    made a ggplot2 plot, using the line ggplot(diamonds, aes(x=carat, y=price)) +
+    geom_point(). What line of code would you use to display that plot from within
+    the script?'}

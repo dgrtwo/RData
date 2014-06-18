@@ -1,0 +1,14 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: 4.
+    Exploratory Data Analysis with data.table, Lesson: 4.2 Reading Data, Organization: Princeton
+    University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/dQw4w9WgXcQ'}
+- {Class: text, Output: 'In the videos we downloaded and learned to work with the
+    Batting, Salary and Master files from the Lahman dataset. Now we''re going to
+    analyze the Pitching dataset, which contains the performance of each baseball
+    pitcher in each year'}
+- {AnswerTests: 'omnitest(correctExpr=''salaries = read.csv("http://dgrtwo.github.io/pages/lahman/Pitching.csv")',
+  Class: cmd_question, CorrectAnswer: 'pitching = read.csv("http://dgrtwo.github.io/pages/lahman/Pitching.csv")',
+  Hint: 'Use the read.csv function, giving the link directly to it.', Output: 'Read
+    in the Pitching dataset and save it to a variable called "pitching". Read it from
+    the following link- http://dgrtwo.github.io/pages/lahman/Pitching.csv'}
