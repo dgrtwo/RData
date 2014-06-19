@@ -3,15 +3,15 @@
 {% assign numsegments = lesson.segments | size %}
 
 <ul class="button-group round">
-    <a href="../segment{{ prevsegment }}">
+    {% if prevsegment > 0 %}<a href="../segment{{ prevsegment }}">{% endif %}
         <button type="button" class="button small secondary{% if prevsegment < 1 %} disabled{% endif %}">Previous</button>
-    </a>
+    {% if prevsegment > 0 %}</a>{% endif %}
 
     <a href="{{ site.baseurl }}/lessons/lesson{{ page.lesson }}"><button type="button" class="button small secondary">
         Back to Lesson {{ page.lesson }}
     </button></a>
 
-    <a href="../segment{{ nextsegment }}">
+    {% if nextsegment <= numsegments %}<a href="../segment{{ nextsegment }}">{% endif %}
         <button type="button" class="button small secondary{% if nextsegment > numsegments %} disabled{% endif %}">Next</button>
-    </a>
+    {% if nextsegment <= numsegments %}</a>{% endif %}
 </a>

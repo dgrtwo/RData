@@ -18,8 +18,8 @@ meta:
 
           - Class: cmd_question
             Output: Remove the variable called "x" from your workspace.
-            CorrectAnswer: rm("x")
-            AnswerTests: omnitest(correctExpr='rm("x")')
+            CorrectAnswer: rm(x)
+            AnswerTests: omnitest(correctExpr='rm(x)')
             Hint: Use the "rm" function
     2:
       Questions:
@@ -542,4 +542,123 @@ meta:
             AnswerTests: omnitest(correctExpr='ct$conf.int')
             Hint: You can use ct$... to extract a value from the correlation object. If you type ct$ and then hit Tab, RStudio will suggest your options.
 
+4:
+  segments:
+    1:
+      initLesson: x = 4; library(ggplot2); data("diamonds")
+      Questions:
+          - Class: cmd_question
+            Output: Suppose you were writing an R script and had a variable called "x". What line of code would you use to display that variable from within the script?
+            CorrectAnswer: print(x)
+            AnswerTests: omnitest(correctExpr='print(x)')
+            Hint: Use the print function
+  
+          - Class: cmd_question
+            Output: Suppose you were writing an R script and made a ggplot2 plot, using the line ggplot(diamonds, aes(x=carat, y=price)) + geom_point(). What line of code would you use to display that plot from within the script?
+            CorrectAnswer: print(ggplot(diamonds, aes(x=carat, y=price)) + geom_point())
+            AnswerTests: omnitest(correctExpr='print(ggplot(diamonds, aes(x=carat, y=price)) + geom_point())')
+            Hint: Use the print function around the line of code used to plot.
+
+    2:
+      Questions:
+          - Class: text
+            Output: In the videos we downloaded and learned to work with the Batting, Salary and Master files from the Lahman dataset. Now we're going to analyze the Pitching dataset, which contains the performance of each baseball pitcher in each year
+  
+          - Class: cmd_question
+            Output: Read in the Pitching dataset and save it to a variable called "pitching". Read it from the following link- http://dgrtwo.github.io/pages/lahman/Pitching.csv
+            CorrectAnswer: pitching = read.csv("http://dgrtwo.github.io/pages/lahman/Pitching.csv")
+            AnswerTests: omnitest(correctExpr='salaries = read.csv("http://dgrtwo.github.io/pages/lahman/Pitching.csv")')
+            Hint: Use the read.csv function, giving the link directly to it.
+  
+    3:
+      Questions:
+          - Class: cmd_question
+            Output: Load the data.table library.
+            CorrectAnswer: library("data.table")
+            AnswerTests: any_of_exprs("library(data.table)")
+            Hint: Use the "library" function
+  
+          - Class: cmd_question
+            Output: Turn the variable "pitching" into a data.table (also called "pitching")
+            CorrectAnswer: pitching = as.data.table(pitching)
+            AnswerTests: omnitest(correctExpr='pitching = as.data.table(pitching)')
+            Hint: Use the "as.data.table" function
+  
+          - Class: cmd_question
+            Output: Show the first five rows of the "pitching" data.table
+            CorrectAnswer: pitching[1:5, ]
+            AnswerTests: any_of_exprs("pitching[1:5, ]", "head(pitching, 6)")
+            Hint: This is the same way you would extract the first five rows of a data.frame, using square brackets and a comma
+  
+          - Class: cmd_question
+            Output: Extract the "playerID" column of the "pitching" data.table
+            CorrectAnswer: pitching$playerID
+            AnswerTests: any_of_exprs("pitching$playerID", "pitching[, playerID]")
+            Hint: You can do this the same way as you would in a data.frame or list, using a $
+  
+          - Class: cmd_question
+            Output: Filter the "pitching" data.table to include only rows where the teamID is "OAK" 
+            CorrectAnswer: pitching[teamID == "OAK", ]
+            AnswerTests: omnitest(correctExpr='pitching[teamID == "OAK", ]')
+            Hint: You can add a condition to filter by using square brackets, by adding the condition before the comma. Make sure you use == rather than =.
+  
+          - Class: cmd_question
+            Output: Filter the "pitching" data.table to include only rows where the column G (that's the number of games the pitcher played) is greater than or equal to 10.
+            CorrectAnswer: pitching[G >= 10, ]
+            AnswerTests: omnitest(correctExpr='pitching[G >= 10, ]')
+            Hint: You can add a condition to filter by using square brackets, by adding the condition before the comma.
+  
+  
+          - Class: mult_question
+            Output: How many rows are in this filtered dataset (with ten or more games)?
+            AnswerChoices: 5;29620;29624;42583
+            CorrectAnswer: 29624
+            AnswerTests: omnitest(correctVal="29624")
+            Hint: Look at the right side of the output from the last problem- the numbers that are each followed by a colon are the row numbers. Check for the largest row number.
+  
+          - Class: mult_question
+            Output: Sort the pitching data.table in ascending order by year.
+            AnswerChoices: pitching[order(yearID), ]
+            CorrectAnswer: 29624
+            AnswerTests: omnitest(correctVal="29624")
+            Hint: Use the "order" function, and remember that the name of the column is "yearID".
+
+    4:
+      Questions:
+          - Class: text
+            Output: The pitching data.table contains one row for each combination of pitcher and year combination. Suppose we instead want to create a data.table with one row for each player, summarizing that player's performance across his career.
+  
+          - Class: mult_question
+            Output: Which column in the pitching data.table uniquely identifies each individual player?
+            AnswerChoices: player;playerID;name;lgID
+            CorrectAnswer: playerID
+            AnswerTests: omnitest(correctVal="playerID")
+            Hint: Look at the pitching data table, either by printing it or by doing View(pitching). The column contains part of the player's last name.
+  
+          - Class: text
+            Output: The G column represents the number of games each pitcher played in. The BB column represents the number of walks each pitcher allowed (BB stands for "base on balls")
+  
+          - Class: cmd_question
+            Output: Summarize the pitching dataset based on each player, to find the total number of games (the sum of the G column) each player played in his career
+            CorrectAnswer: pitching[, sum(G), by="playerID"]
+            AnswerTests: any_of_exprs('pitching[, sum(G), by="playerID"]', 'pitching[, sum(G), by=playerID]')
+            Hint: You are summarizing by the playerID, and computing the sum(G) within each of those subsets. See the examples in the lesson's code.
+  
+          - Class: cmd_question
+            Output: Summarize the pitching dataset based on each player, this time calculating two new columns- one called totalG containing total number of games (the sum of the G column), and one called totalBB containing the total number of walks the pitcher had allowed (the sum of the BB column). Save the result as a variable called "pitchers"
+            CorrectAnswer: pitchers = pitching[, list(totalG=sum(G), totalBB=sum(BB)), by="playerID"]
+            AnswerTests: omnitest(correctExpr='pitchers = pitching[, list(totalG=sum(G), totalBB=sum(BB)), by="playerID"]')
+            Hint: You are summarizing by the playerID. Use list()… between the two parentheses to compute multiple columns, making sure you are naming each as requested. Make sure you save it to a variable called "pitchers"
+  
+          - Class: cmd_question
+            Output: Sort the "pitchers" data.table based on the total number of games each pitcher played
+            CorrectAnswer: pitchers[order(G), ]
+            AnswerTests: omnitest(correctExpr='pitchers[order(G), ]')
+            Hint: Use the "order" function with the pitchers data.table, ordering the column G
+  
+          - Class: cmd_question
+            Output: Summarize the pitching dataset, this time based on each team, calculating two columns- totalBB (the sum of the BB column). Save the result as a variable called "summarized.teams"
+            CorrectAnswer: summarized.teams = pitching[, list(totalBB=sum(G)), by="teamID"]
+            AnswerTests: omnitest(correctExpr='summarized.teams = pitching[, list(totalBB=sum(G)), by="teamID"]')
+            Hint: You are summarizing by the teamID. Use list()… between the two parentheses to compute a named column, making sure you are naming it as requested. Make sure you save it to a variable called "summarized.teams"
 
