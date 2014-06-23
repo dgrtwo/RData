@@ -1,57 +1,57 @@
 - title: Variables and Data Structures
   segments:
     - title: Fundamentals
-      video: dQw4w9WgXcQ
+      video: MS4qy3u6cYo
     - title: Variables
-      video: dQw4w9WgXcQ
+      video: DG7YNf8kb3w
     - title: Vectors
-      video: dQw4w9WgXcQ
+      video: QygSZw77Hs8
     - title: Matrix
-      video: dQw4w9WgXcQ
+      video: UakyyZSyuZU
     - title: Lists and Data Frames
-      video: dQw4w9WgXcQ
+      video: U6vbR4el3kQ
     - title: Logical Vectors and Operators
-      video: dQw4w9WgXcQ
+      video: GQb735O2qjc
 
 - title: Visualizing Data Using ggplot2
   segments:
     - title: Introduction
-      video: dQw4w9WgXcQ
+      video: VtYdgClOAkI
     - title: Scatter Plots
-      video: dQw4w9WgXcQ
+      video: MawfQdv0MJ4
     - title: Faceting and Additional Options
-      video: dQw4w9WgXcQ
+      video: _DYKzD2Yc4I
     - title: Histograms and Density Plots
-      video: dQw4w9WgXcQ
+      video: p6SxhZmF9MY
     - title: Boxplots and Violin Plots
-      video: dQw4w9WgXcQ
+      video: hJfq-ILlG0U
     - title: Input- Getting Data into the Right Format
-      video: dQw4w9WgXcQ
+      video: UFoUm1AyT78
     - title: Output- Saving Your Plots
-      video: dQw4w9WgXcQ
+      video: 6N7ux02dmzc
 
 - title: Statistical Testing and Prediction
   segments:
     - title: Comparing Two Samples
-      video: dQw4w9WgXcQ
+      video: 7tPHIJ0PQyc
     - title: Correlation
-      video: dQw4w9WgXcQ
+      video: wYiQx9MYuOc
     - title: Linear Regression
-      video: dQw4w9WgXcQ
+      video: YhsNiqvu0Vs
     - title: Multiple Linear Regression
-      video: dQw4w9WgXcQ
+      video: Ysjz0DIkNXc
 
 - title: Exploratory Data Analysis with data.table
   segments:
     - title: R Scripts
-      video: dQw4w9WgXcQ
+      video: z6j1jBnbVkU
     - title: Reading Data
-      video: dQw4w9WgXcQ
+      video: IvPM5C0gCUg
     - title: Introduction to data.table
-      video: dQw4w9WgXcQ
+      video: teB2QldDlGk
     - title: Summarizing Data Within Groups
-      video: dQw4w9WgXcQ
+      video: AmE4LXPQErM
     - title: Merging Data
-      video: dQw4w9WgXcQ
+      video: NiTSG641C1w
     - title: Exploratory Data Analysis
-      video: dQw4w9WgXcQ
+      video: CFF9upFAJVg
