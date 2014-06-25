@@ -26,6 +26,11 @@ This course is divided into four lessons, each of which are divided into 4-8 seg
 
 You do not necessarily need to take all four lessons in the suggested order. If you have taken a course on R before, and feel comfortable with concepts such as vectors, data frames, lists, and matrices, you may be able to skip some or all of [Lesson 1](../lessons/lesson1). If you aren't familiar with the ggplot2 package, you'll need to take [Lesson 2](../lessons/lesson2) before Lessons [3](../lessons/lesson3) and [4](../lessons/lesson4), which both assume you're comfortable with it.
 
+About Us
+----------
+
+Lessons 2-4, along with the site and quizzes, were developed by [David Robinson](http://dgrtwo.github.io/), a PhD student in [Quantitative and Computational Biology](http://www.princeton.edu/qcbgrad/) at Princeton. Lesson 1's videos were written and recorded by [Neo Christopher Chung](http://www.princeton.edu/~nc/index.html). Videos were filmed and edited by the [Princeton Broadcast Center](http://www.princeton.edu/bc/) in conjunction with the [McGraw Center for Teaching and Learning](http://www.princeton.edu/mcgraw/).
+
 <a href="" name="licensing"></a>
 Licensing
 ----------
