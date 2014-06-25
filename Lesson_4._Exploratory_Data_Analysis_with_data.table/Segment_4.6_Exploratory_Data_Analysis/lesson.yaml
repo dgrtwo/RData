@@ -1,0 +1,83 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
+    4. Exploratory Data Analysis with data.table, Lesson: Segment 4.6 Exploratory
+    Data Analysis, Organization: Princeton University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/CFF9upFAJVg'}
+- {Class: video, Output: 'Would you like to view the transcript of the code used in
+    this video segment?', VideoLink: 'http://dgrtwo.github.io/RData/code/code_lesson4/#segment6'}
+- {AnswerTests: omnitest(correctExpr='View(merged)'), Class: cmd_question, CorrectAnswer: View(merged),
+  Hint: Use the "View" function, Output: View the "merged" data.table (created in
+    Quiz 4.5) like a spreadsheet. It contains the pitching dataset with salary information
+    added.}
+- {Class: text, Output: 'Let''s say want to predict a pitcher''s salary based on his
+    performance. First, you might want to get a sense of the distribution of salaries.'}
+- {AnswerTests: expr_uses_func("geom_histogram") && aes_matches(x="salary"), Class: cmd_question,
+  CorrectAnswer: 'ggplot(merged, aes(salary)) + geom_histogram()', Hint: 'Set the
+    x aesthetic to salary, and add a geom_histogram layer', Output: Use ggplot2 on
+    the "merged" dataset to create a histogram of pitchers' salaries.}
+- {AnswerTests: expr_uses_func("geom_histogram") && expr_uses_func("scale_x_log10")
+    && aes_matches(x="salary"), Class: cmd_question, CorrectAnswer: 'ggplot(merged,
+    aes(salary)) + geom_histogram() + scale_x_log10()', Hint: Add a scale_x_log10()
+    option to the last plot, Output: 'The salary distribution is heavily skewed, which
+    will be a problem for some of our graphs and tests. Try plotting the x-axis on
+    a log scale instead.'}
+- {Class: text, Output: 'Since the log data is closer to symmetrical (which works
+    better for statistical tests and graphs), we know we''ll want to work on the log
+    scale from now on.'}
+- {AnswerTests: 'expr_uses_func("geom_point") && expr_uses_func("scale_y_log10") &&
+    expr_uses_func("geom_smooth") && aes_matches(x="yearID", y="salary")', Class: cmd_question,
+  CorrectAnswer: 'ggplot(merged, aes(yearID, salary)) + geom_point() + geom_smooth()
+    + scale_y_log10()', Hint: 'Set the x aesthetic to "yearID", and the y aesthetic
+    to "salary". Don''t forget to put the y-axis on a log scale and to add the smoothing
+    curve with geom_smooth.', Output: 'Examine whether salaries change over time by
+    creating a scatterplot with year on the x-axis and salary on the y-axis. Add a
+    smoothing curve, and make the y-axis on a log scale'}
+- {AnswerTests: expr_uses_func("cor.test") && expr_uses_func("log") && abs(e$val$estimate
+    - 0.4411355) < 1e-4, Class: cmd_question, CorrectAnswer: 'cor.test(merged$yearID,
+    log(merged$salary))', Hint: 'Use the "cor.test" function, and remember to use
+    log(merged$salary) rather than merged$salary by itself', Output: Perform a statistical
+    test for a correlation between year and log(salary).}
+- {AnswerTests: 'expr_uses_func("geom_boxplot") && expr_uses_func("scale_y_log10")
+    && aes_matches(x="lgID", y="salary")', Class: cmd_question, CorrectAnswer: 'ggplot(merged,
+    aes(lgID, salary)) + geom_boxplot() + scale_y_log10()', Hint: 'Recall that in
+    a boxplot the value you are comparing goes on the y axis, and the categories you''re
+    comparing go on the x-axis. Don''t forget to put the y-axis on a log scale.',
+  Output: 'Examine whether the league (American, AL, versus National, NL) has an effect
+    on salary, by creating a boxplot comparing salary between leagues. Put the y-axis
+    on a log scale.'}
+- {AnswerTests: expr_uses_func("t.test") && abs(e$val$p.value - 0.1823332) < 1e-3,
+  Class: cmd_question, CorrectAnswer: 't.test(log(salary) ~ lgID, data=merged)', Hint: 'Use
+    the "t.test" function, and don''t forget to test log(salary) rather than salary
+    by itself.', Output: Perform a t-test to test whether there is a statistically
+    significant difference in log(salary) between the two leagues.}
+- {AnswerTests: 'expr_uses_func("lm") && expr_creates_var("fit") && length(fit$coefficients)
+    == 2 && abs(fit$coefficients[2] - 0.07390187) < 1e-4', Class: cmd_question, CorrectAnswer: 'fit
+    = lm(log(salary) ~ yearID, data=merged)', Hint: 'Use the "lm" function; don''t
+    forget to save it to a variable called "fit", and to predict log(salary) rather
+    than salary by itself.', Output: Perform a linear regression to predict log(salary)
+    based on year. Save it to a variable called "fit"}
+- {AnswerTests: omnitest(correctExpr='summary(fit)'), Class: cmd_question, CorrectAnswer: summary(fit),
+  Hint: Use the summary function, Output: Display a summary of the linear fit}
+- {AnswerChoices: Yes;No, AnswerTests: omnitest(correctVal="Yes"), Class: mult_question,
+  CorrectAnswer: true, Hint: 'Look for the row in the coefficients table that starts
+    with "yearID", then compare the p-value in that row to .05.', Output: 'Based on
+    the reported p-value, does including a player''s year significantly improve your
+    prediction of a player''s salary?'}
+- {Class: text, Output: 'ERA, for "Earned Run Average," is one of the most popular
+    statistics used to measure pitcher''s performance. It is a measure of how many
+    runs a pitcher lets the other team score per game (adjusted for how long the pitcher
+    played). Thus, a *lower* ERA is better.'}
+- {AnswerTests: 'expr_uses_func("lm") && expr_creates_var("mfit") && length(mfit$coefficients)
+    == 3 && abs(mfit$coefficients[3] - (-0.03594432)) < 1e-4', Class: cmd_question,
+  CorrectAnswer: 'mfit = lm(log(salary) ~ yearID + ERA, data=merged)', Hint: 'Use
+    the "lm" function; don''t forget to save it to a variable called "mfit", and to
+    predict log(salary) rather than salary by itself.', Output: Perform a multiple
+    linear regression to predict log(salary) based on both year and ERA. Save it to
+    a variable called "mfit"}
+- {AnswerTests: omnitest(correctExpr='summary(mfit)'), Class: cmd_question, CorrectAnswer: summary(mfit),
+  Hint: Use the summary function, Output: Display a summary of the multiple regression}
+- {AnswerChoices: Yes;No, AnswerTests: omnitest(correctVal="Yes"), Class: mult_question,
+  CorrectAnswer: true, Hint: 'Look for the row in the coefficients table that starts
+    with "ERA", then compare the p-value in that row to .05.', Output: 'Based on the
+    reported p-value, does including a player''s ERA significantly improve your prediction
+    of a player''s salary?'}

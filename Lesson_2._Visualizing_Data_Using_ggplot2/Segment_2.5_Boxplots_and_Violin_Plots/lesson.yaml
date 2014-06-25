@@ -1,0 +1,30 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
+    2. Visualizing Data Using ggplot2, Lesson: Segment 2.5 Boxplots and Violin Plots,
+  Organization: Princeton University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/hJfq-ILlG0U'}
+- {Class: video, Output: 'Would you like to view the transcript of the code used in
+    this video segment?', VideoLink: 'http://dgrtwo.github.io/RData/code/code_lesson2/#segment5'}
+- {Class: text, Output: The iris dataset contains measurements on 150 flowers of three
+    different species.}
+- {AnswerTests: 'any_of_exprs("data(''iris'')", ''data("iris")'', ''data(iris)'')',
+  Class: cmd_question, CorrectAnswer: data("iris"), Hint: Use the "data" function,
+  Output: Load the iris dataset.}
+- {AnswerTests: omnitest(correctExpr='View(iris)'), Class: cmd_question, CorrectAnswer: View(iris),
+  Hint: Use the "View" function, Output: View the iris dataset like a spreadsheet.}
+- {AnswerTests: 'expr_uses_func("geom_boxplot") && aes_matches(x="Species", y="Petal.Length")',
+  Class: cmd_question, CorrectAnswer: 'ggplot(iris, aes(x=Species, y=Petal.Length))
+    + geom_boxplot()', Hint: 'Make sure that you specify the x aesthetic as the categories
+    you''re comparing, and the y aesthetic as the value to be compared. Check that
+    your column names are spelled correctly using the spreadsheet view of the iris
+    data.', Output: Use a boxplot to compare the Petal.Length between different species
+    of flowers in the iris dataset}
+- {AnswerChoices: setosa;versicolor;virginica, AnswerTests: omnitest(correctVal="virginica"),
+  Class: mult_question, CorrectAnswer: virginica, Hint: A box that is higher on the
+    boxplot indicates longer petals., Output: 'According to your boxplot, which species
+    of flower has the longest petals?'}
+- {AnswerTests: 'expr_uses_func("geom_violin") && aes_matches(x="Species", y="Petal.Length")',
+  Class: cmd_question, CorrectAnswer: 'ggplot(iris, aes(Species, y=Petal.Length))
+    + geom_violin()', Hint: 'This is the same command as the last one, except change
+    the geom_boxplot() layer to something else.', Output: Use a violin plot to compare
+    the Petal.Length between different species of flowers in the iris dataset}

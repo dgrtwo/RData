@@ -1,0 +1,42 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
+    4. Exploratory Data Analysis with data.table, Lesson: Segment 4.5 Merging Data,
+  Organization: Princeton University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/NiTSG641C1w'}
+- {Class: video, Output: 'Would you like to view the transcript of the code used in
+    this video segment?', VideoLink: 'http://dgrtwo.github.io/RData/code/code_lesson4/#segment5'}
+- {AnswerTests: omnitest(correctExpr='View(pitching)'), Class: cmd_question, CorrectAnswer: View(pitching),
+  Hint: Use the "View" function, Output: View the pitching data.table (created in
+    Quiz 4.3) like a spreadsheet}
+- {AnswerTests: expr_creates_var("salaries") && (nrow(salaries) == 23956), Class: cmd_question,
+  CorrectAnswer: 'salaries = read.csv("http://dgrtwo.github.io/pages/lahman/Salaries.csv")',
+  Hint: 'Use the read.csv function, giving the link directly to the function. Don''t
+    forget to save it into a variable called "salaries"', Output: 'Read in the Salaries
+    CSV dataset directly from the following link and save it to a variable called
+    "salaries"- http://dgrtwo.github.io/pages/lahman/Salaries.csv'}
+- {AnswerTests: expr_creates_var("salaries") && is.data.table(salaries) && (nrow(salaries)
+    == 23956), Class: cmd_question, CorrectAnswer: salaries = as.data.table(salaries),
+  Hint: Use the as.data.table function. Don't forget to assign it into the variable
+    "salaries" (thus replacing the previous version), Output: Turn the salaries data.frame
+    into a data.table (called "salaries")}
+- {AnswerTests: omnitest(correctExpr='View(salaries)'), Class: cmd_question, CorrectAnswer: View(salaries),
+  Hint: Use the "View" function, Output: View the salaries data.table like a spreadsheet}
+- {AnswerTests: '(length(e$val) == 4) && all(sort(e$val) == c("lgID", "playerID",
+    "teamID", "yearID"))', Class: text_question, CorrectAnswer: 'playerID,yearID,teamID,lgID',
+  Hint: Compare the spreadsheet-like views of the two data.tables, Output: 'What column
+    or columns are shared between the pitching and salaries data.tables? (Separate
+    columns names with ",")'}
+- {AnswerTests: 'expr_creates_var("merged") && dt_matches(nr=10731, nc=31) && ("salary"
+    %in% colnames(merged))', Class: cmd_question, CorrectAnswer: 'merged = merge(pitching,
+    salaries, by=c("lgID", "playerID", "teamID", "yearID"))', Hint: 'Use the "merge"
+    function, providing a vector of the shared column names to the "by=" argument',
+  Output: 'Merge the pitching and salaries data.tables, saving them into a data.table
+    called "merged", using all the columns that are shared between the tables'}
+- {AnswerTests: 'expr_creates_var("merged.all") && dt_matches(nr=42583, nc=31) &&
+    ("salary" %in% colnames(merged.all)) && (sum(is.na(merged.all$salary)) == 31852)',
+  Class: cmd_question, CorrectAnswer: 'merged.all = merge(pitching, salaries, by=c("lgID",
+    "playerID", "teamID", "yearID"), all.x=TRUE)', Hint: Set the "all.x" option to
+    the "merge" function. (See the lecture code or try "help(merge)" for more)., Output: 'Merge
+    the pitching and salaries data.tables, but this time keep all rows of the pitching
+    data.table, including those that don''t have salary information. Save this into
+    a variable called "merged.all"'}

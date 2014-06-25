@@ -1,0 +1,38 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
+    1. Variables and Data Structures, Lesson: Segment 1.2 Variables, Organization: Princeton
+    University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/DG7YNf8kb3w'}
+- {Class: video, Output: 'Would you like to view the transcript of the code used in
+    this video segment?', VideoLink: 'http://dgrtwo.github.io/RData/code/code_lesson1/#segment2'}
+- {AnswerChoices: someVariable;some-variable;some.variable;some_variable, AnswerTests: omnitest(correctVal="some-variable"),
+  Class: mult_question, CorrectAnswer: some-variable, Hint: 'Variable names in R can
+    contain uppercase or lowercase letters, digits (except at the start of the variable),
+    periods, or underscores', Output: 'Which of the following is *not* a permitted
+    variable name in R?'}
+- {AnswerTests: 'any_of_exprs(''mynum = 200'', ''mynum <- 200'')', Class: cmd_question,
+  CorrectAnswer: mynum = 200, Hint: 'Use the assignment operator, "="', Output: Create
+    a variable called mynum with the value 200.}
+- {AnswerTests: expr_creates_var("mychar") && (mychar == "hello world"), Class: cmd_question,
+  CorrectAnswer: mychar = "hello world", Hint: 'Use the assignment operator, "=",
+    and don''t forget to surround the words with quotes', Output: Create a character
+    variable called mychar that contains the words "hello world"}
+- {AnswerTests: 'any_of_exprs(''mynum2 = mynum + 20'', ''mynum2 <- mynum + 20'')',
+  Class: cmd_question, CorrectAnswer: mynum2 = mynum + 20, Hint: 'Use the assignment
+    operator, "=", and on the right hand side put the expression you want to calculate',
+  Output: 'Add 20 to your "mynum" variable and save it to a new variable, "mynum2"'}
+- {AnswerTests: omnitest(correctExpr='300 / 90'), Class: cmd_question, CorrectAnswer: 300
+    / 90, Hint: Use "/" for division, Output: Use R to calculate 300 divided by 90
+    (you do not have to save it to a variable)}
+- {AnswerTests: omnitest(correctExpr='8^4'), Class: cmd_question, CorrectAnswer: 8^4,
+  Hint: Use "^" for exponentiation, Output: Use R to calculate 8 to the power of 4
+    (you do not have to save it to a variable)}
+- {AnswerTests: omnitest(correctExpr='log(15)'), Class: cmd_question, CorrectAnswer: log(15),
+  Hint: 'To call a function (e.g. func), you put the name of the function then parentheses
+    containing the value you are performing it on, (e.g. func(x))', Output: Use the
+    "log" function to compute the natural logarithm of 15}
+- {AnswerTests: omnitest(correctExpr='cos(15)'), Class: cmd_question, CorrectAnswer: cos(15),
+  Hint: 'To call a function (e.g. "func"), you put the name of the function then parentheses
+    containing the value you are performing it on, (e.g. "func(x)")', Output: The
+    function "cos" computes the trigonometric cosine of a number. Use this function
+    to compute the cosine of 15.}

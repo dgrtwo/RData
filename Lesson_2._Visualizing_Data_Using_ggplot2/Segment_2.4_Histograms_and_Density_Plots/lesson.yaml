@@ -1,0 +1,25 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
+    2. Visualizing Data Using ggplot2, Lesson: Segment 2.4 Histograms and Density
+    Plots, Organization: Princeton University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/p6SxhZmF9MY'}
+- {Class: video, Output: 'Would you like to view the transcript of the code used in
+    this video segment?', VideoLink: 'http://dgrtwo.github.io/RData/code/code_lesson2/#segment4'}
+- {AnswerTests: expr_uses_func("geom_histogram") && aes_matches(x="carat"), Class: cmd_question,
+  CorrectAnswer: 'ggplot(diamonds, aes(x=carat)) + geom_histogram()', Hint: 'Use the
+    geom_histogram() layer, and make sure you set the x aesthetic correctly in aes.',
+  Output: Construct a histogram of the weight (carat) of each diamond in the "diamonds"
+    dataset.}
+- {AnswerTests: expr_uses_func("geom_histogram") && aes_matches(x="carat"), Class: cmd_question,
+  CorrectAnswer: 'ggplot(diamonds, aes(x=carat)) + geom_histogram(binwidth=.5)', Hint: Set
+    the binwidth option in the geom_histogram layer., Output: 'Construct a histogram
+    of the weight (carat) of each diamond, but set the binwidth to .5.'}
+- {AnswerTests: expr_uses_func("geom_density") && aes_matches(x="carat"), Class: cmd_question,
+  CorrectAnswer: 'ggplot(diamonds, aes(x=carat)) + geom_density()', Hint: 'This is
+    similar to the last two questions, but using a different geom_...() layer.', Output: Construct
+    a density plot of the weight (carat) of each diamond}
+- {AnswerTests: 'expr_uses_func("geom_density") && aes_matches(x="carat", colour="clarity")',
+  Class: cmd_question, CorrectAnswer: 'ggplot(diamonds, aes(x=carat, color=clarity))
+    + geom_density()', Hint: Add a "color=" aesthetic to the last answer, Output: 'Construct
+    a density plot of the weight (carat) of each diamond, showing a separate density
+    for each "clarity" rating'}

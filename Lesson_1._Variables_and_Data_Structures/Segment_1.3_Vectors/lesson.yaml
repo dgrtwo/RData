@@ -1,0 +1,26 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
+    1. Variables and Data Structures, Lesson: Segment 1.3 Vectors, Organization: Princeton
+    University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/QygSZw77Hs8'}
+- {Class: video, Output: 'Would you like to view the transcript of the code used in
+    this video segment?', VideoLink: 'http://dgrtwo.github.io/RData/code/code_lesson1/#segment3'}
+- {AnswerTests: 'any_of_exprs("v1 = c(2, 9, 3, 4.5)", "v1 <- c(2, 9, 3, 4.5)")', Class: cmd_question,
+  CorrectAnswer: 'v1 = c(2, 9, 3, 4.5)', Hint: 'Use the "c" function to construct
+    a vector, and make sure you assign it to "v1"', Output: 'Create a vector called
+    "v1" containing four values, in this order- 2, 9, 3, 4.5.'}
+- {AnswerTests: omnitest(correctExpr='length(v1)'), Class: cmd_question, CorrectAnswer: length(v1),
+  Hint: Use the "length" function, Output: Find the length of v1}
+- {AnswerTests: 'any_of_exprs("v2 = c(15, 4, 8, 10)", "v2 <- c(15, 4, 8, 10)")', Class: cmd_question,
+  CorrectAnswer: 'v2 = c(15, 4, 8, 10)', Hint: 'Use the "c" function to construct
+    a vector, and make sure you assign it to "v2"', Output: 'Create a vector called
+    "v2" containing four values, in this order- 15, 4, 8, 10'}
+- {AnswerTests: 'any_of_exprs("v3 = c(v1, v2)", "v3 <- c(v1, v2)")', Class: cmd_question,
+  CorrectAnswer: 'v3 = c(v1, v2)', Hint: Use the "c" function to combine vectors,
+  Output: 'Combine the v1 and v2 vectors into one vector of length 8, assigning the
+    result to v3'}
+- {AnswerTests: omnitest(correctExpr='mean(v3)'), Class: cmd_question, CorrectAnswer: mean(v3),
+  Hint: Use the "mean" function, Output: Find the mean of v3}
+- {AnswerTests: 'omnitest(correctExpr=''v3[3]'')', Class: cmd_question, CorrectAnswer: 'v3[3]',
+  Hint: Use square brackets to extract a value from a vector, Output: Extract the
+    third value from v3}

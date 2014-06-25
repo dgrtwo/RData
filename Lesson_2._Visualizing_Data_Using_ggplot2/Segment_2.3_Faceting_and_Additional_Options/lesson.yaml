@@ -1,0 +1,32 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
+    2. Visualizing Data Using ggplot2, Lesson: Segment 2.3 Faceting and Additional
+    Options, Organization: Princeton University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/_DYKzD2Yc4I'}
+- {Class: video, Output: 'Would you like to view the transcript of the code used in
+    this video segment?', VideoLink: 'http://dgrtwo.github.io/RData/code/code_lesson2/#segment3'}
+- {AnswerTests: 'expr_uses_func("geom_point"); expr_uses_func("facet_wrap"); aes_matches(x="z",
+    y="price");', Class: cmd_question, CorrectAnswer: 'ggplot(diamonds, aes(x=z, y=price))
+    + geom_point() + facet_wrap(~ cut)', Hint: Add a facet_wrap option, Output: 'Create
+    a scatter plot of the diamonds dataset with z on the x axis and price on the y
+    axis, and divide it into facets based on the diamond''s cut'}
+- {AnswerTests: 'expr_uses_func("geom_point"); expr_uses_func("facet_grid"); aes_matches(x="z",
+    y="price");', Class: cmd_question, CorrectAnswer: 'ggplot(diamonds, aes(x=z, y=price))
+    + geom_point() + facet_grid(cut ~ color)', Hint: 'Add a facet_grid option, with
+    row ~ column inside.', Output: 'Create a scatter plot of the diamonds dataset
+    with z on the x axis and price on the y axis, and divide it into a facetted grid.
+    Let rows in the grid represent different cuts, and let each column represent a
+    different color'}
+- {AnswerTests: 'expr_uses_func("geom_point") && aes_matches(x="z", y="price") &&
+    expr_uses_func("ggtitle") && expr_uses_func("ylim")', Class: cmd_question, CorrectAnswer: 'ggplot(diamonds,
+    aes(x=z, y=price)) + geom_point() + ggtitle("My Graph") + ylim(0, 10000)', Hint: Extra
+    options get added on to the end of a ggplot call just like layers., Output: 'Create
+    a scatter plot of the diamonds dataset with z on the x axis and price on the y
+    axis. Give it a title of "My Graph", and limit the y axis from 0 to 10000.'}
+- {AnswerTests: 'expr_uses_func("geom_point") && aes_matches(x="age", y="circumference")
+    && expr_uses_func("facet_wrap")', Class: cmd_question, CorrectAnswer: 'ggplot(Orange,
+    aes(x=age, y=circumference)) + geom_point() + facet_wrap(~ Tree)', Hint: Make
+    sure you change the dataset from "diamonds" to "Orange", Output: 'Create a scatter
+    plot of the Orange dataset (which you first saw in Quiz 1.2) with age on the x-axis
+    and circumference on the y-axis, faceted into five sub-plots based on the tree
+    being measured'}

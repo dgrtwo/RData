@@ -1,0 +1,15 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
+    2. Visualizing Data Using ggplot2, Lesson: Segment 2.1 Introduction, Organization: Princeton
+    University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/VtYdgClOAkI'}
+- {Class: video, Output: 'Would you like to view the transcript of the code used in
+    this video segment?', VideoLink: 'http://dgrtwo.github.io/RData/code/code_lesson2/#segment1'}
+- {AnswerTests: 'any_of_exprs(''library("ggplot2")'', ''library(ggplot2)'', "library(''ggplot2'')")',
+  Class: cmd_question, CorrectAnswer: library("ggplot2"), Hint: Use the library function,
+  Output: Load the ggplot2 third-party package.}
+- {AnswerTests: 'any_of_exprs("data(''diamonds'')", ''data("diamonds")'', ''data(diamonds)'')',
+  Class: cmd_question, CorrectAnswer: data("diamonds"), Hint: Use the "data" function,
+  Output: Load the diamonds dataset into memory.}
+- {AnswerTests: any_of_exprs("View(diamonds)"), Class: cmd_question, CorrectAnswer: View(diamonds),
+  Hint: Use the "View" function, Output: View the diamonds dataset like a spreadsheet.}

@@ -1,0 +1,58 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
+    3. Statistical Testing and Prediction, Lesson: Segment 3.4 Multiple Linear Regression,
+  Organization: Princeton University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/Ysjz0DIkNXc'}
+- {Class: video, Output: 'Would you like to view the transcript of the code used in
+    this video segment?', VideoLink: 'http://dgrtwo.github.io/RData/code/code_lesson3/#segment4'}
+- {AnswerTests: omnitest(correctExpr='View(CO2)'), Class: cmd_question, CorrectAnswer: View(CO2),
+  Hint: Use the "View" function, Output: View the CO2 dataset (last seen in Quiz 3.3)
+    like a spreadsheet.}
+- {AnswerTests: 'expr_uses_func("geom_point"); expr_uses_func("scale_x_log10"); aes_matches(x="conc",
+    y="uptake", colour="Type")', Class: cmd_question, CorrectAnswer: 'ggplot(CO2,
+    aes(x=conc, y=uptake, color=Type)) + geom_point() + scale_x_log10()', Hint: Don't
+    forget to add the color=Type aesthetic and the scale_x_log10() layer., Output: 'Use
+    ggplot2 to create a scatter plot with conc on the x-axis, uptake on the y-axis,
+    where each point is colored according to its Type ("Quebec" vs "Mississippi").
+    Put the x-axis on a log scale.'}
+- {AnswerChoices: Mississippi;Quebec, AnswerTests: omnitest(correctVal="Quebec"),
+  Class: mult_question, CorrectAnswer: Quebec, Hint: 'See which colored points are,
+    on average, higher on the graph', Output: 'Based on this graph, does the Quebec
+    or Mississippi grass, on average, have a higher CO2 uptake for a given concentration?'}
+- {AnswerTests: 'expr_creates_var("mfit") && class(mfit) == "lm" && length(mfit$coefficients)
+    == 3 && abs(mfit$coefficients[3] - (-12.65952)) < 1e-3', Class: cmd_question,
+  CorrectAnswer: 'mfit = lm(uptake ~ log(conc) + Type, data=CO2)', Hint: 'The formula
+    given to lm should have two values on the right side- "log(conc)", and "Type".
+    Don''t forget to save it to a variable called "mfit"', Output: Perform a multiple
+    linear regression explaining CO2 uptake by both the log of the concentration and
+    the Type variable. Save it to a variable called "mfit"}
+- {AnswerTests: omnitest(correctExpr='summary(mfit)'), Class: cmd_question, CorrectAnswer: summary(mfit),
+  Hint: Use the "summary" function, Output: View a summary of this multiple linear
+    regression}
+- {AnswerTests: 'expr_uses_func("geom_point"); expr_uses_func("scale_x_log10"); aes_matches(x="conc",
+    y="uptake", colour="Type", shape="Treatment")', Class: cmd_question, CorrectAnswer: 'ggplot(CO2,
+    aes(x=conc, y=uptake, color=Type, shape=Treatment)) + geom_point() + scale_x_log10()',
+  Hint: Don't forget to add the pch=Treatment aesthetic and the scale_x_log10() layer.,
+  Output: 'Use ggplot2 to create a scatter plot with conc on the x-axis, uptake on
+    the y-axis, where each point is colored according to its Type ("Quebec" vs "Mississippi")
+    and the shape of each point (the "pch" or "shape" aesthetic) is determined by
+    the Treatment ("chilled" vs "nonchilled"). Put the x-axis on a log scale.'}
+- {AnswerTests: 'expr_creates_var("mfit2") && class(mfit2) == "lm" && length(mfit2$coefficients)
+    == 4 && abs(mfit2$coefficients[4] - (-6.859524)) < 1e-3', Class: cmd_question,
+  CorrectAnswer: 'mfit2 = lm(uptake ~ log(conc) + Type + Treatment, data=CO2)', Hint: 'The
+    formula given to lm should have three values on the right side- "log(conc)", "Type"
+    and "Treatment". Don''t forget to save it to a variable called "mfit2"', Output: Perform
+    a multiple linear regression explaining CO2 uptake by the log of the concentration
+    and the Type and Treatment variables. Save it to a variable called "mfit2"}
+- {AnswerTests: omnitest(correctExpr='summary(mfit2)'), Class: cmd_question, CorrectAnswer: summary(mfit2),
+  Hint: Use the "summary" function, Output: View a summary of this multiple linear
+    regression}
+- {AnswerTests: omnitest(correctVal="1.11e-08"), Class: exact_question, CorrectAnswer: 1.11e-08,
+  Hint: This can be found in the row of the coefficients table starting with "Treatmentchilled"-
+    this means the effect of a plant being chilled as opposed to being nonchilled.,
+  Output: 'What is the p-value of the "Treatment" variable in this regression?'}
+- {AnswerChoices: Quebec+chilled;Quebec+nonchilled;Mississippi+chilled;Mississippi+nonchilled,
+  AnswerTests: omnitest(correctVal="Mississippi+chilled"), Class: mult_question, CorrectAnswer: Mississippi+chilled,
+  Hint: 'See which combination of color and shape are, on average, lowest on the graph',
+  Output: 'Based on this graph, what combination of treatment and type leads to the
+    lowest CO2 uptake?'}

@@ -1,0 +1,53 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
+    3. Statistical Testing and Prediction, Lesson: Segment 3.3 Linear Regression,
+  Organization: Princeton University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/YhsNiqvu0Vs'}
+- {Class: video, Output: 'Would you like to view the transcript of the code used in
+    this video segment?', VideoLink: 'http://dgrtwo.github.io/RData/code/code_lesson3/#segment3'}
+- {AnswerTests: omnitest(correctExpr='View(CO2)'), Class: cmd_question, CorrectAnswer: View(CO2),
+  Hint: Use the "View" function, Output: View the CO2 dataset (seen in Quiz 3.1) like
+    a spreadsheet.}
+- {AnswerTests: 'expr_uses_func("geom_point"); aes_matches(x="conc", y="uptake")',
+  Class: cmd_question, CorrectAnswer: 'ggplot(CO2, aes(x=conc, y=uptake)) + geom_point()',
+  Hint: 'Use the geom_point() layer, and choose the aesthetics x=conc, y=uptake.',
+  Output: 'Use ggplot2 to create a scatter plot with the concentration of CO2 ("conc"
+    in the data.frame) on the x-axis, and the plant''s CO2 uptake ("uptake" in the
+    data frame) on the y axis'}
+- {AnswerTests: 'expr_creates_var("fit") && class(fit) == "lm" && length(fit$coefficients)
+    == 2 && abs(fit$coefficients[2] - 0.01773059) < 1e-5', Class: cmd_question, CorrectAnswer: 'fit
+    = lm(uptake ~ conc, data=CO2)', Hint: Use lm with the formula uptake ~ conc. Don't
+    forget to provide "data=CO2" and to save your result in the variable "fit", Output: 'Perform
+    a linear regression on the dataset, predicting uptake using CO2 concentration.
+    Save it to a variable called "fit"'}
+- {AnswerTests: omnitest(correctExpr='summary(fit)'), Class: cmd_question, CorrectAnswer: summary(fit),
+  Hint: Use the summary function, Output: Display a summary of the linear fit}
+- {AnswerTests: omnitest(correctVal="0.017731"), Class: exact_question, CorrectAnswer: 0.017731,
+  Hint: 'Give this as a number, not an R expression. You can find this value in the
+    second row of the "coefficients" table of the summary output.', Output: 'What
+    is the estimate of the slope of the uptake/conc linear relationship?'}
+- {AnswerTests: omnitest(correctVal="2.91e-06"), Class: exact_question, CorrectAnswer: 2.91e-06,
+  Hint: 'Give this as a number, not an R expression. You can find this value in the
+    second row of the "coefficients" table of the summary output.', Output: 'What
+    is the p-value of the uptake/conc linear relationship?'}
+- {AnswerTests: 'expr_uses_func("geom_point"); expr_uses_func("scale_x_log10"); aes_matches(x="conc",
+    y="uptake")', Class: cmd_question, CorrectAnswer: 'ggplot(CO2, aes(x=conc, y=uptake))
+    + geom_point() + scale_x_log10()', Hint: Add the scale_x_log10() layer, Output: 'You
+    may have noticed in the plot that the concentration ~ uptake relationship is not
+    perfectly linear. Try making another scatter plot, but this time put concentration
+    (x-axis) on a log scale.'}
+- {AnswerTests: 'expr_creates_var("lfit") && class(lfit) == "lm" && length(lfit$coefficients)
+    == 2 && abs(lfit$coefficients[2] - 8.484) < 1e-2', Class: cmd_question, CorrectAnswer: 'lfit
+    = lm(uptake ~ log(conc), data=CO2)', Hint: 'Perform the same linear fit as before,
+    but this time use the formula "uptake ~ log(conc)".', Output: 'While the relationship
+    is still not perfectly linear, it does look closer. Try performing another linear
+    regression, only this time predict uptake based on "log(conc)" instead of "conc".
+    Save it to the variable lfit.'}
+- {AnswerTests: omnitest(correctExpr='summary(lfit)'), Class: cmd_question, CorrectAnswer: summary(lfit),
+  Hint: Use the "summary" function, Output: View a summary of the fit of uptake to
+    log(conc).}
+- {AnswerChoices: More significant;Less significant, AnswerTests: omnitest(correctVal="More
+    significant"), Class: mult_question, CorrectAnswer: More significant, Hint: Compare
+    the p-values between the two fits- the smaller p-value is more significant., Output: 'Did
+    the linear relationship become more significant when concentration was placed
+    on a log scale, or less significant?'}

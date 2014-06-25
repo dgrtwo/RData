@@ -1,0 +1,63 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
+    3. Statistical Testing and Prediction, Lesson: Segment 3.1 Comparing Two Samples,
+  Organization: Princeton University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/7tPHIJ0PQyc'}
+- {Class: video, Output: 'Would you like to view the transcript of the code used in
+    this video segment?', VideoLink: 'http://dgrtwo.github.io/RData/code/code_lesson3/#segment1'}
+- {Class: text, Output: 'The CO2 data.frame is a dataset built into R showing the
+    results of an experiment on the cold tolerance of grass. Grass samples from two
+    regions (Quebec and Mississippi) were grown in either a chilled or nonchilled
+    environment, and their CO2 uptake rate was tested.'}
+- {AnswerTests: 'any_of_exprs("data(''CO2'')", ''data("CO2")'', ''data(CO2)'')', Class: cmd_question,
+  CorrectAnswer: data("CO2"), Hint: Use the "data" function., Output: Load the CO2
+    dataset.}
+- {AnswerTests: omnitest(correctExpr='View(CO2)'), Class: cmd_question, CorrectAnswer: View(CO2),
+  Hint: Use the "data" function., Output: View the CO2 dataset like a spreadsheet.}
+- {AnswerTests: 'expr_uses_func("geom_boxplot"); aes_matches(x="Treatment", y="uptake")',
+  Class: cmd_question, CorrectAnswer: 'ggplot(CO2, aes(x=Treatment, y=uptake)) + geom_boxplot()',
+  Hint: 'Your x aesthetic should be the grouping variable, and your y aesthetic should
+    be the value you are comparing. Don''t forget to use geom_boxplot.', Output: Use
+    ggplot2 to create a boxplot comparing the CO2 uptake between the two treatments
+    of grass- "chilled" and "nonchilled"}
+- {AnswerTests: 'any_of_exprs(''t.test(CO2$uptake ~ CO2$Treatment)'', ''t.test(uptake
+    ~ Treatment, data=CO2)'')', Class: cmd_question, CorrectAnswer: t.test(CO2$uptake
+    ~ CO2$Treatment), Hint: 'Use the t.test function, and give it a formula of the
+    form "value ~ variable", where variable describes the groups to be compared',
+  Output: Perform a t-test to test for a difference in CO2 uptake between the two
+    treatments of grass- "chilled" and "nonchilled"}
+- {AnswerTests: omnitest(correctVal="0.003107"), Class: exact_question, CorrectAnswer: 0.003107,
+  Hint: 'Write this as a number, not an R expression. You can find it in the output
+    of the test.', Output: 'What is the p-value computed by this t-test?'}
+- {AnswerChoices: Yes;No, AnswerTests: omnitest(correctVal="Yes"), Class: mult_question,
+  CorrectAnswer: true, Hint: Scientists often declare p-values that are smaller than
+    a threshold such as .05 to be significant., Output: 'Based on this test, and using
+    a p-value threshold of .05, was there a significant difference between the CO2
+    uptake of chilled grass and nonchilled grass?'}
+- {AnswerTests: 'expr_uses_func("geom_boxplot"); aes_matches(x="Type", y="uptake")',
+  Class: cmd_question, CorrectAnswer: 'ggplot(CO2, aes(x=Type, y=uptake)) + geom_boxplot()',
+  Hint: 'Your x aesthetic should be the grouping variable, and your y aesthetic should
+    be the value you are comparing. Don''t forget to use geom_boxplot.', Output: Create
+    a boxplot comparing the CO2 uptake between the two types of grass- "Quebec" and
+    "Mississippi"}
+- {AnswerTests: expr_creates_var("tt") && expr_uses_func("t.test") && (abs(tt$statistic
+    - 6.596901) < 1e-4), Class: cmd_question, CorrectAnswer: tt = t.test(CO2$uptake
+    ~ CO2$Type), Hint: 'Remember to save your result as a variable called tt. Use
+    the t.test function, and give it a formula of the form "value ~ variable", where
+    variable describes the groups to be compared', Output: Perform a t-test to test
+    for a difference in CO2 uptake between the two types of grass- "Quebec" and "Mississippi".
+    Save it as a variable called tt.}
+- {AnswerTests: omnitest(correctExpr='tt$p.value'), Class: cmd_question, CorrectAnswer: tt$p.value,
+  Hint: 'Use a dollar sign, like "tt$...". In RStudio you can hit the "Tab" key after
+    typing tt$ to see the values that can be extracted.', Output: Extract the computed
+    p-value from your tt variable.}
+- {AnswerTests: omnitest(correctExpr='tt$conf.int'), Class: cmd_question, CorrectAnswer: tt$p.value,
+  Hint: 'Use a dollar sign, like "tt$...". In RStudio you can hit the "Tab" key after
+    typing tt$ to see the values that can be extracted.', Output: Extract the computed
+    95% confidence interval from your tt variable.}
+- {AnswerTests: omnitest(correctVal="16.479572"), Class: exact_question, CorrectAnswer: 16.479572,
+  Hint: 'Type this as a number, not an R expression.', Output: 'What is the upper
+    bound of the t-test''s confidence interval?'}
+- {AnswerTests: omnitest(correctVal="8.839475"), Class: exact_question, CorrectAnswer: 8.839475,
+  Hint: 'Type this as a number, not an R expression.', Output: 'What is the lower
+    bound of the t-test''s confidence interval?'}

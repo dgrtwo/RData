@@ -1,0 +1,49 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
+    4. Exploratory Data Analysis with data.table, Lesson: Segment 4.4 Summarizing
+    Data Within Groups, Organization: Princeton University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/AmE4LXPQErM'}
+- {Class: video, Output: 'Would you like to view the transcript of the code used in
+    this video segment?', VideoLink: 'http://dgrtwo.github.io/RData/code/code_lesson4/#segment4'}
+- {Class: text, Output: 'The pitching data.table (created in Quiz 3.3) contains one
+    row for each combination of pitcher and year combination. Suppose we instead want
+    to create a data.table with one row for each player, summarizing that player''s
+    performance across his career.'}
+- {AnswerChoices: player;playerID;name;lgID, AnswerTests: omnitest(correctVal="playerID"),
+  Class: mult_question, CorrectAnswer: playerID, Hint: 'Look at the pitching data
+    table, either by printing it or by doing View(pitching). The column contains part
+    of the player''s last name.', Output: 'Which column in the pitching data.table
+    uniquely identifies each individual player?'}
+- {Class: text, Output: The G column represents the number of games each pitcher played
+    in. The BB column represents the number of walks each pitcher allowed (BB stands
+    for "base on balls")}
+- {AnswerTests: 'dt_matches(nr=8810, nc=2, col.names=c("playerID", "V1"))', Class: cmd_question,
+  CorrectAnswer: 'pitching[, sum(G), by="playerID"]', Hint: 'You are summarizing by
+    the playerID, and computing the sum(G) within each of those subsets. See the examples
+    in the lesson''s code.', Output: 'Summarize the pitching dataset based on each
+    player, to find the total number of games (the sum of the G column) each player
+    played in his career'}
+- {AnswerTests: 'expr_creates_var("pitchers"); dt_matches(nr=8810, nc=3, col.names=c("playerID",
+    "totalG", "totalBB"))', Class: cmd_question, CorrectAnswer: 'pitchers = pitching[,
+    list(totalG=sum(G), totalBB=sum(BB)), by="playerID"]', Hint: "You are summarizing\
+    \ by the playerID. Use list()\u2026 between the two parentheses to compute multiple\
+    \ columns, making sure you are naming each as requested. Make sure you save it\
+    \ to a variable called \"pitchers\"", Output: 'Summarize the pitching dataset
+    based on each player, this time calculating two new columns- one called totalG
+    containing total number of games (the sum of the G column), and one called totalBB
+    containing the total number of walks the pitcher had allowed (the sum of the BB
+    column). Save the result as a variable called "pitchers"'}
+- {AnswerTests: 'any_of_exprs(''pitchers[order(totalG), ]'', ''pitchers[order(totalG)]'')',
+  Class: cmd_question, CorrectAnswer: 'pitchers[order(totalG), ]', Hint: 'Use the
+    "order" function with the pitchers data.table you just created, ordering the column
+    totalG', Output: Sort the "pitchers" data.table based on the total number of games
+    each pitcher played}
+- {AnswerTests: 'expr_creates_var("summarized.teams"); dt_matches(nr=149, nc=3, col.names=c("teamID",
+    "totalG", "totalBB"))', Class: cmd_question, CorrectAnswer: 'summarized.teams
+    = pitching[, list(totalG=sum(G), totalBB=sum(BB)), by="teamID"]', Hint: "You are\
+    \ summarizing by the teamID. Use list()\u2026 between the two parentheses to compute\
+    \ a named column, making sure you are naming it as requested. Make sure you save\
+    \ it to a variable called \"summarized.teams\"", Output: 'Summarize the pitching
+    dataset, this time based on each team, calculating two columns- totalG (total
+    games) and totalBB (the sum of the BB column). Save the result as a variable called
+    "summarized.teams"'}

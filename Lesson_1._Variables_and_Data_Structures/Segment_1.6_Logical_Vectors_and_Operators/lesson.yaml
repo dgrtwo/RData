@@ -1,0 +1,32 @@
+- {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
+    1. Variables and Data Structures, Lesson: Segment 1.6 Logical Vectors and Operators,
+  Organization: Princeton University, Type: Standard, Version: 1.0}
+- {Class: video, Output: 'Would you like to re-watch the video for this segment?',
+  VideoLink: 'http://youtu.be/GQb735O2qjc'}
+- {Class: video, Output: 'Would you like to view the transcript of the code used in
+    this video segment?', VideoLink: 'http://dgrtwo.github.io/RData/code/code_lesson1/#segment6'}
+- {AnswerTests: omnitest(correctExpr='v3 > 5'), Class: cmd_question, CorrectAnswer: v3
+    > 5, Hint: You can compare all the values in a vector to a value at the same time
+    using the greater than (">") operator, Output: In an earlier quiz you created
+    a vector v3 of length 8. Compare each value in that vector to see if it is greater
+    than 5 (you should end up with a vector of TRUE and FALSE).}
+- {AnswerTests: 'omnitest(correctExpr=''v3[v3 > 5]'')', Class: cmd_question, CorrectAnswer: 'v3[v3
+    > 5]', Hint: 'Put your comparison of each value to 5 ("v3 > 5") inside square
+    brackets after "v3", the same way you would extract a single value', Output: Extract
+    a subset of the vector v3 that includes only the values greater than 5}
+- {AnswerTests: class(e$val) == "logical" && val_has_length(150) && sum(e$val) ==
+    42, Class: cmd_question, CorrectAnswer: iris$Petal.Length > 5, Hint: Extract the
+    Petal.Length column using $ and compare it to 5 the same way you compared v3,
+  Output: Compare each value in the "Petal.Length" of the (built-in) "iris" dataset
+    to see which are greater than 5}
+- {AnswerTests: class(e$val) == "data.frame" && nrow(e$val) == 42 && all(e$val$Petal.Length
+    > 5), Class: cmd_question, CorrectAnswer: 'iris[iris$Petal.Length > 5, ]', Hint: 'Place
+    the expression you set up in the last question before a comma within square brackets,
+    just as you would for extracting a row or range of rows', Output: Extract the
+    subset of rows from iris where Petal.Length is greater than 5}
+- {AnswerTests: nrow(e$val) == 1 && all(e$val$Petal.Length > 5) && all(e$val$Species
+    == "versicolor"), Class: cmd_question, CorrectAnswer: 'iris[iris$Petal.Length
+    > 5 & iris$Species == "versicolor", ]', Hint: 'Place the expression you set up
+    in the last question before a comma within square brackets, just as you would
+    for extracting a row or range of rows', Output: Extract the subset of rows from
+    iris where Petal.Length is greater than 5 and the Species is "versicolor"}
