@@ -6,21 +6,16 @@ meta:
   Version: 1.0
 
 1:
-  initLesson: x = 4
   segments:
     1:
+      initLesson: x = 4
       Questions:
           - Class: cmd_question
-            Output: List all the variables currently present in your workspace.
+            Output: Run a command that lists all the variables currently present in your workspace.
             CorrectAnswer: ls()
             AnswerTests: omnitest(correctExpr='ls()')
             Hint: Use the "ls" function
 
-          - Class: cmd_question
-            Output: Remove the variable called "x" from your workspace.
-            CorrectAnswer: rm(x)
-            AnswerTests: omnitest(correctExpr='rm(x)')
-            Hint: Use the "rm" function
     2:
       Questions:
           - Class: mult_question
@@ -33,19 +28,19 @@ meta:
           - Class: cmd_question
             Output: Create a variable called mynum with the value 200.
             CorrectAnswer: mynum = 200
-            AnswerTests: omnitest(correctExpr='mynum = 200')
+            AnswerTests: any_of_exprs('mynum = 200', 'mynum <- 200')
             Hint: Use the assignment operator, "="
   
           - Class: cmd_question
             Output: Create a character variable called mychar that contains the words "hello world"
             CorrectAnswer: mychar = "hello world"
-            AnswerTests: any_of_exprs('mychar = "hello world"', "mychar = 'hello world'")
+            AnswerTests: expr_creates_var("mychar") && (mychar == "hello world")
             Hint: Use the assignment operator, "=", and don't forget to surround the words with quotes
   
           - Class: cmd_question
             Output: Add 20 to your "mynum" variable and save it to a new variable, "mynum2"
             CorrectAnswer: mynum2 = mynum + 20
-            AnswerTests: omnitest(correctExpr='mynum2 = mynum + 20')
+            AnswerTests: any_of_exprs('mynum2 = mynum + 20', 'mynum2 <- mynum + 20')
             Hint: Use the assignment operator, "=", and on the right hand side put the expression you want to calculate
   
           - Class: cmd_question
@@ -68,132 +63,223 @@ meta:
   
           - Class: cmd_question
             Output: The function "cos" computes the trigonometric cosine of a number. Use this function to compute the cosine of 15.
-            CorrectAnswer: log(15)
+            CorrectAnswer: cos(15)
             AnswerTests: omnitest(correctExpr='cos(15)')
             Hint: To call a function (e.g. "func"), you put the name of the function then parentheses containing the value you are performing it on, (e.g. "func(x)")
-    2:
+    3:
       Questions:
           - Class: cmd_question
             Output: Create a vector called "v1" containing four values, in this order- 2, 9, 3, 4.5.
             CorrectAnswer: v1 = c(2, 9, 3, 4.5)
-            AnswerTests: omnitest(correctExpr='v1 = c(2, 9, 3, 4.5)')
+            AnswerTests: any_of_exprs("v1 = c(2, 9, 3, 4.5)", "v1 <- c(2, 9, 3, 4.5)")
             Hint: Use the "c" function to construct a vector, and make sure you assign it to "v1"
-  
+            
           - Class: cmd_question
             Output: Find the length of v1
             CorrectAnswer: length(v1)
             AnswerTests: omnitest(correctExpr='length(v1)')
             Hint: Use the "length" function
-  
+            
           - Class: cmd_question
             Output: Create a vector called "v2" containing four values, in this order- 15, 4, 8, 10
             CorrectAnswer: v2 = c(15, 4, 8, 10)
-            AnswerTests: omnitest(correctExpr='v2 = c(15, 4, 8, 10)')
+            AnswerTests: any_of_exprs("v2 = c(15, 4, 8, 10)", "v2 <- c(15, 4, 8, 10)")
             Hint: Use the "c" function to construct a vector, and make sure you assign it to "v2"
-  
+            
           - Class: cmd_question
             Output: Combine the v1 and v2 vectors into one vector of length 8, assigning the result to v3
             CorrectAnswer: v3 = c(v1, v2)
-            AnswerTests: omnitest(correctExpr='v3 = c(v1, v2)')
+            AnswerTests: any_of_exprs("v3 = c(v1, v2)", "v3 <- c(v1, v2)")
             Hint: Use the "c" function to combine vectors
-  
+            
           - Class: cmd_question
             Output: Find the mean of v3
             CorrectAnswer: mean(v3)
             AnswerTests: omnitest(correctExpr='mean(v3)')
             Hint: Use the "mean" function
-  
+            
           - Class: cmd_question
             Output: Extract the third value from v3
             CorrectAnswer: v3[3]
             AnswerTests: omnitest(correctExpr='v3[3]')
             Hint: Use square brackets to extract a value from a vector
+
     4:
+      initLesson: v1 = c(2, 9, 3, 4.5); v2 = c(15, 4, 8, 10)
       Questions:
           - Class: cmd_question
-            Output: Earlier you created two numeric vectors, v1 and v2, each of length 4. Combine them together to make a matrix with 4 rows and two columns, saving it to a variable "m"
+            Output: In Quiz 1.3 you created two numeric vectors, v1 and v2, each of length 4. Combine them together to make a matrix with 4 rows and two columns, saving it to a variable "m"
             CorrectAnswer: m = cbind(v1, v2)
-            AnswerTests: omnitest(correctExpr='m = cbind(v1, v2)')
+            AnswerTests: any_of_exprs('m = cbind(v1, v2)', 'm <- cbind(v1, v2)')
             Hint: Use the "cbind" function
-  
+            
           - Class: cmd_question
             Output: Add a row to the end of your matrix m, with the values 8 and 12, saving it to the variable m2
             CorrectAnswer: m2 = rbind(m, c(8, 12))
-            AnswerTests: omnitest(correctExpr='m2 = rbind(m, c(8, 12))')
+            AnswerTests: any_of_exprs('m2 = rbind(m, c(8, 12))', 'm2 <- rbind(m, c(8, 12))')
             Hint: Use the "rbind" function
-  
+            
           - Class: cmd_question
             Output: Extract the first two rows of m2
             CorrectAnswer: m2[1:2, ]
             AnswerTests: omnitest(correctExpr='m2[1:2, ]')
             Hint: Use square brackets and a comma, putting the indices you want to extract in front of the comma
-  
+            
           - Class: cmd_question
             Output: Extract the second column of m2
             CorrectAnswer: m2[, 2]
             AnswerTests: omnitest(correctExpr='m2[, 2]')
             Hint: Use square brackets and a comma, putting the indices you want to extract after the comma
+
     5:
-      Questions:  
+      Questions:
           - Class: mult_question
             Output: How does a list differ from a vector?
             AnswerChoices: A list can be of any length, while a vector has a maximum size;A vector can be of any length, while a list has a maximum size;A list can contain values of different data types;A vector can contain values of different data types
             CorrectAnswer: A list can contain values of different data types
             AnswerTests: omnitest(correctVal="A list can contain values of different data types")
-            Hint: TODO
-  
+            Hint: Look at the examples of lists created in the lesson
+
           - Class: cmd_question
             Output: Create a list, called "list1", containing three values- the first one the vector c(1, 3, 4), the second one the character vector "test", and the third one the number 4.
             CorrectAnswer: list1 = list(c(1, 3, 4), "test", 4)
-            AnswerTests: omnitest(correctExpr='list1 = list(c(1, 3, 4), "test", 4)')
+            AnswerTests: any_of_exprs('list1 = list(c(1, 3, 4), "test", 4)', 'list1 <- list(c(1, 3, 4), "test", 4)')
             Hint: Use the "list" function to construct a list
-  
+            
           - Class: cmd_question
             Output: Extract the third value from the list list1
             CorrectAnswer: list1[[3]]
             AnswerTests: omnitest(correctExpr='list1[[3]]')
-            Hint: Use double square brackets ([[3]]), not single
-  
+            Hint: Use double square brackets ("[[3]]"), not single
+            
           - Class: cmd_question
             Output: Create a list, called "list2",  containing three values- the first one the vector c(1, 3, 4), the second one the character vector "test", and the third one the number 4, but this time give each of the items names- "a", "b", "c".
             CorrectAnswer: list2 = list(c(1, 3, 4), "test", 4)
-            AnswerTests: omnitest(correctExpr='list1 = list(a=c(1, 3, 4), b="test", c=4)')
+            AnswerTests: any_of_exprs('list2 = list(a=c(1, 3, 4), b="test", c=4)', 'list2 <- list(a=c(1, 3, 4), b="test", c=4)')
             Hint: Provide the names using "a=..." etc when you are constructing the list
-  
+            
           - Class: cmd_question
             Output: Extract the value named "c" from list2 using its name
             CorrectAnswer: list2$c
-            AnswerTests: omnitest(correctExpr='list2$c')
+            AnswerTests: any_of_exprs('list2$c', 'list2[["c"]]')
             Hint: Use the dollar sign to extract the value from list2
+          
+          
+          - Class: text
+            Output: The "iris" data.frame comes built into R and contains measurements on 150 flowers of three different species.
+          
+          - Class: cmd_question
+            Output: Load the iris dataset into your workspace
+            CorrectAnswer: data("iris")
+            AnswerTests: any_of_exprs("data(iris)", 'data("iris")', "data('iris')")
+            Hint: Use the "data" function (just like was done for the "mtcars" dataset in the video)
+          
+          - Class: cmd_question
+            Output: View the iris dataset like a spreadsheet
+            CorrectAnswer: View(iris)
+            AnswerTests: omnitest(correctExpr='View(iris)')
+            Hint: Use the "View" function
+          
+          - Class: mult_question
+            Output: How many columns does the iris dataset have?
+            AnswerChoices: 150;4;5;6
+            CorrectAnswer: 5
+            AnswerTests: omnitest(correctVal="5")
+            Hint: Count the columns in the view (not including the row.names); or you can do "ncol(iris)" in R
+          
+          - Class: cmd_question
+            Output: Extract the "Species" column from the Iris dataset
+            CorrectAnswer: iris$Species
+            AnswerTests: any_of_exprs("iris$Species", "iris[, 'Species']", 'iris[, "Species"]')
+            Hint: Use a $ after "iris" to extract a single column
+          
+          - Class: cmd_question
+            Output: Extract the third row from the Iris dataset
+            CorrectAnswer: iris[3, ]
+            AnswerTests: any_of_exprs("iris[3, ]")
+            Hint: Place the desired index before a comma within square brackets to extract a row from a data.frame
+          
+          - Class: cmd_question
+            Output: Extract the first 5 rows from the Iris dataset
+            CorrectAnswer: iris[1:5, ]
+            AnswerTests: class(e$val) == "data.frame" & nrow(e$val) == 5 & e$val$Petal.Length == iris[1:5, "Petal.Length"]
+            Hint: Give a range of indices (separated by a colon) before the comma to subset a range of rows from a data.frame
+          
     6:
+      initLesson: v1 = c(2, 9, 3, 4.5); v2 = c(15, 4, 8, 10); v3 = c(v1, v2);
       Questions:
           - Class: cmd_question
-            Output: In an earlier quiz you created a vector v1 of length 4. Compare each value in the vector to see if it is greater than 4.
-            CorrectAnswer: 
-            AnswerTests: omnitest(correctExpr='')
+            Output: In an earlier quiz you created a vector v3 of length 8. Compare each value in that vector to see if it is greater than 5 (you should end up with a vector of TRUE and FALSE).
+            CorrectAnswer: v3 > 5
+            AnswerTests: omnitest(correctExpr='v3 > 5')
             Hint: You can compare all the values in a vector to a value at the same time using the greater than (">") operator
-  
+          
+          - Class: cmd_question
+            Output: Extract a subset of the vector v3 that includes only the values greater than 5
+            CorrectAnswer: v3[v3 > 5]
+            AnswerTests: omnitest(correctExpr='v3[v3 > 5]')
+            Hint: Put your comparison of each value to 5 ("v3 > 5") inside square brackets after "v3", the same way you would extract a single value 
+          
+          - Class: cmd_question
+            Output: Compare each value in the "Petal.Length" of the (built-in) "iris" dataset to see which are greater than 5
+            CorrectAnswer: iris$Petal.Length > 5
+            AnswerTests: class(e$val) == "logical" && val_has_length(150) && sum(e$val) == 42
+            Hint: Extract the Petal.Length column using $ and compare it to 5 the same way you compared v3
+          
+          - Class: cmd_question
+            Output: Extract the subset of rows from iris where Petal.Length is greater than 5
+            CorrectAnswer: iris[iris$Petal.Length > 5, ]
+            AnswerTests: class(e$val) == "data.frame" && nrow(e$val) == 42 && all(e$val$Petal.Length > 5)
+            Hint: Place the expression you set up in the last question before a comma within square brackets, just as you would for extracting a row or range of rows
+          
+          - Class: cmd_question
+            Output: Extract the subset of rows from iris where Petal.Length is greater than 5 and the Species is "versicolor"
+            CorrectAnswer: iris[iris$Petal.Length > 5 & iris$Species == "versicolor", ]
+            AnswerTests: nrow(e$val) == 1 && all(e$val$Petal.Length > 5) && all(e$val$Species == "versicolor")
+            Hint: Place the expression you set up in the last question before a comma within square brackets, just as you would for extracting a row or range of rows
+
 2:
   initLesson: library(ggplot2)
   segments:
+
+    1:
+      Questions:
+          - Class: cmd_question
+            Output: Load the ggplot2 third-party package.
+            CorrectAnswer: library("ggplot2")
+            AnswerTests: any_of_exprs('library("ggplot2")', 'library(ggplot2)', "library('ggplot2')")
+            Hint: Use the library function
+
+          - Class: cmd_question
+            Output: Load the diamonds dataset into memory.
+            CorrectAnswer: data("diamonds")
+            AnswerTests: any_of_exprs("data('diamonds')", 'data("diamonds")', 'data(diamonds)')
+            Hint: Use the "data" function
+
+          - Class: cmd_question
+            Output: View the diamonds dataset like a spreadsheet.
+            CorrectAnswer: View(diamonds)
+            AnswerTests: any_of_exprs("View(diamonds)")
+            Hint: Use the "View" function
+
     2:
       Questions:
           - Class: cmd_question
-            Output: Create a scatter plot of the diamonds dataset with depth on the x axis and price on the y axis.
-            CorrectAnswer: ggplot(diamonds, aes(x=depth, y=price)) + geom_point()
-            AnswerTests: expr_uses_func("geom_point"); aes_matches(x="depth", y="price")
+            Output: The column "z" in the diamonds dataset represents a diamond's depth in millimeters. Create a scatter plot of the diamonds dataset with z on the x axis and price on the y axis.
+            CorrectAnswer: ggplot(diamonds, aes(x=z, y=price)) + geom_point()
+            AnswerTests: expr_uses_func("geom_point") && aes_matches(x="z", y="price")
             Hint: This will involve a call to ggplot and to geom_point()
 
           - Class: cmd_question
-            Output: Create a scatter plot of the diamonds dataset with depth on the x axis, price on the y axis, and coloring points based on their cut.
-            CorrectAnswer: ggplot(diamonds, aes(x=depth, y=price, color=cut)) + geom_point()
-            AnswerTests: expr_uses_func("geom_point"); aes_matches(x="depth", y="price", colour="cut")
+            Output: Create a scatter plot of the diamonds dataset with z on the x axis, price on the y axis, and coloring points based on their cut.
+            CorrectAnswer: ggplot(diamonds, aes(x=z, y=price, color=cut)) + geom_point()
+            AnswerTests: expr_uses_func("geom_point") && aes_matches(x="z", y="price", colour="cut")
             Hint: This is similar to the last quiz, but with different contents of aes()
           
           - Class: cmd_question
-            Output: Create a scatter plot of the diamonds dataset with depth on the x axis, price on the y axis, and coloring points based on their cut, but this time add smoothing curves to show the trend.
-            CorrectAnswer: ggplot(diamonds, aes(x=depth, y=price, color=cut)) + geom_point() + geom_smooth()
-            AnswerTests: expr_uses_func("geom_point"); expr_uses_func("geom_smooth"); aes_matches(x="depth", y="price", colour="cut")
+            Output: Create a scatter plot of the diamonds dataset with z on the x axis, price on the y axis, and coloring points based on their cut, but this time add smoothing curves to show the trend.
+            CorrectAnswer: ggplot(diamonds, aes(x=z, y=price, color=cut)) + geom_point() + geom_smooth()
+            AnswerTests: expr_uses_func("geom_point") && expr_uses_func("geom_smooth") && aes_matches(x="z", y="price", colour="cut")
             Hint: This is similar to the last quiz, but you add another layer. Recall that layers look like geom_...().
           
           - Class: text
@@ -232,76 +318,66 @@ meta:
     3:
       Questions:
           - Class: cmd_question
-            Output: Create a scatter plot of the diamonds dataset with price on the x axis and depth on the y axis, and divide it into facets based on the diamond's cut
-            CorrectAnswer: ggplot(diamonds, aes(x=price, y=depth)) + geom_point() + facet_wrap(~ cut)
-            AnswerTests: expr_uses_func("geom_point"); expr_uses_func("facet_wrap"); aes_matches(x="price", y="depth");
+            Output: Create a scatter plot of the diamonds dataset with z on the x axis and price on the y axis, and divide it into facets based on the diamond's cut
+            CorrectAnswer: ggplot(diamonds, aes(x=z, y=price)) + geom_point() + facet_wrap(~ cut)
+            AnswerTests: expr_uses_func("geom_point"); expr_uses_func("facet_wrap"); aes_matches(x="z", y="price");
             Hint: Add a facet_wrap option
           
           - Class: cmd_question
-            Output: Create a scatter plot of the diamonds dataset with depth on the x axis and price on the y axis, and divide it into a facetted grid. Let rows in the grid represent different cuts, and let each column represent a different color
-            CorrectAnswer: ggplot(diamonds, aes(x=depth, y=price)) + geom_point() + facet_grid(cut ~ color)
-            AnswerTests: expr_uses_func("geom_point"); expr_uses_func("facet_grid"); aes_matches(x="price", y="depth");
+            Output: Create a scatter plot of the diamonds dataset with z on the x axis and price on the y axis, and divide it into a facetted grid. Let rows in the grid represent different cuts, and let each column represent a different color
+            CorrectAnswer: ggplot(diamonds, aes(x=z, y=price)) + geom_point() + facet_grid(cut ~ color)
+            AnswerTests: expr_uses_func("geom_point"); expr_uses_func("facet_grid"); aes_matches(x="z", y="price");
             Hint: Add a facet_grid option, with row ~ column inside.
-          
+
           - Class: cmd_question
-            Output: Create a scatter plot of the diamonds dataset with depth on the x axis and price on the y axis. Give it a title of "My Graph", and limit the y axis from 0 to 10000.
-            CorrectAnswer: ggplot(diamonds, aes(x=depth, y=price)) + geom_point() + ggtitle("My Graph") + ylim(0, 10000)
-            AnswerTests: omnitest(correctExpr='ggplot(diamonds, aes(x=depth, y=price)) + geom_point() + ggtitle("My Graph") + ylim(0, 10000)')
-            Hint: Extra options get added on to the end of ggplot just like layers.
-          
-          
-          - Class: text
-            Output: The Orange data.frame is a dataset that comes built into R, which describes the height of five orange trees over time. It has three columns "Tree" (a factor describing which of five trees is being measured), "age" (the age in days at the point of measurement), and "circumference" (the circumference of the tree trunk in millimeters).
-          
+            Output: Create a scatter plot of the diamonds dataset with z on the x axis and price on the y axis. Give it a title of "My Graph", and limit the y axis from 0 to 10000.
+            CorrectAnswer: ggplot(diamonds, aes(x=z, y=price)) + geom_point() + ggtitle("My Graph") + ylim(0, 10000)
+            AnswerTests: expr_uses_func("geom_point") && aes_matches(x="z", y="price") && expr_uses_func("ggtitle") && expr_uses_func("ylim")
+            Hint: Extra options get added on to the end of a ggplot call just like layers.
+
           - Class: cmd_question
-            Output: Load the Orange dataset into memory.
-            CorrectAnswer: data("Orange")
-            AnswerTests: any_of_exprs("data('Orange')", 'data("Orange")', 'data(Orange)')
-            Hint: Use the "data" function
-          
-          - Class: cmd_question
-            Output: View the Orange dataset like a spreadsheet.
-            CorrectAnswer: View(Orange)
-            AnswerTests: omnitest(correctExpr='View(Orange)')
-            Hint: Use the "View" function
-          
-          - Class: cmd_question
-            Output: Create a scatter plot of the Orange dataset with age on the x-axis and circumference on the y-axis, faceted into five sub-plots based on the tree being measured
+            Output: Create a scatter plot of the Orange dataset (which you first saw in Quiz 1.2) with age on the x-axis and circumference on the y-axis, faceted into five sub-plots based on the tree being measured
             CorrectAnswer: ggplot(Orange, aes(x=age, y=circumference)) + geom_point() + facet_wrap(~ Tree)
-            AnswerTests: omnitest(correctExpr='ggplot(Orange, aes(x=age, y=circumference)) + geom_point() + facet_wrap(~ Tree)')
+            AnswerTests: expr_uses_func("geom_point") && aes_matches(x="age", y="circumference") && expr_uses_func("facet_wrap")
             Hint: Make sure you change the dataset from "diamonds" to "Orange"
 
     4:
-      Questions:     
+      Questions:
           - Class: cmd_question
             Output: Construct a histogram of the weight (carat) of each diamond in the "diamonds" dataset.
             CorrectAnswer: ggplot(diamonds, aes(x=carat)) + geom_histogram()
-            AnswerTests: omnitest(correctExpr='ggplot(diamonds, aes(x=carat)) + geom_histogram()')
+            AnswerTests: expr_uses_func("geom_histogram") && aes_matches(x="carat")
             Hint: Use the geom_histogram() layer, and make sure you set the x aesthetic correctly in aes.
           
           - Class: cmd_question
             Output: Construct a histogram of the weight (carat) of each diamond, but set the binwidth to .5.
             CorrectAnswer: ggplot(diamonds, aes(x=carat)) + geom_histogram(binwidth=.5)
-            AnswerTests: omnitest(correctExpr='ggplot(diamonds, aes(x=carat)) + geom_histogram(binwidth=.5)')
-            Hint: Set the binwidth aesthetic in the geom_histogram layer.
+            AnswerTests: expr_uses_func("geom_histogram") && aes_matches(x="carat")
+            Hint: Set the binwidth option in the geom_histogram layer.
           
           - Class: cmd_question
             Output: Construct a density plot of the weight (carat) of each diamond
             CorrectAnswer: ggplot(diamonds, aes(x=carat)) + geom_density()
-            AnswerTests: omnitest(correctExpr='ggplot(diamonds, aes(x=carat)) + geom_density()')
+            AnswerTests: expr_uses_func("geom_density") && aes_matches(x="carat")
             Hint: This is similar to the last two questions, but using a different geom_...() layer.
-          
+
+          - Class: cmd_question
+            Output: Construct a density plot of the weight (carat) of each diamond, showing a separate density for each "clarity" rating
+            CorrectAnswer: ggplot(diamonds, aes(x=carat, color=clarity)) + geom_density()
+            AnswerTests: expr_uses_func("geom_density") && aes_matches(x="carat", colour="clarity")
+            Hint: Add a "color=" aesthetic to the last answer
+
     5:
       Questions:
           - Class: text
             Output: The iris dataset contains measurements on 150 flowers of three different species. 
-          
+
           - Class: cmd_question
             Output: Load the iris dataset.
             CorrectAnswer: data("iris")
             AnswerTests: any_of_exprs("data('iris')", 'data("iris")', 'data(iris)')
             Hint: Use the "data" function
-          
+
           - Class: cmd_question
             Output: View the iris dataset like a spreadsheet.
             CorrectAnswer: View(iris)
@@ -311,7 +387,7 @@ meta:
           - Class: cmd_question
             Output: Use a boxplot to compare the Petal.Length between different species of flowers in the iris dataset
             CorrectAnswer: ggplot(iris, aes(x=Species, y=Petal.Length)) + geom_boxplot()
-            AnswerTests: omnitest(correctExpr='ggplot(iris, aes(x=Species, y=Petal.Length)) + geom_boxplot()')
+            AnswerTests: expr_uses_func("geom_boxplot") && aes_matches(x="Species", y="Petal.Length")
             Hint: Make sure that you specify the x aesthetic as the categories you're comparing, and the y aesthetic as the value to be compared. Check that your column names are spelled correctly using the spreadsheet view of the iris data.
           
           - Class: mult_question
@@ -324,7 +400,7 @@ meta:
           - Class: cmd_question
             Output: Use a violin plot to compare the Petal.Length between different species of flowers in the iris dataset
             CorrectAnswer: ggplot(iris, aes(Species, y=Petal.Length)) + geom_violin()
-            AnswerTests: omnitest(correctExpr='ggplot(iris, aes(Species, y=Petal.Length)) + geom_violin()')
+            AnswerTests: expr_uses_func("geom_violin") && aes_matches(x="Species", y="Petal.Length")
             Hint: This is the same command as the last one, except change the geom_boxplot() layer to something else.
           
     6:
@@ -345,7 +421,7 @@ meta:
           - Class: cmd_question
             Output: Load the reshape2 package.
             CorrectAnswer: library("reshape2")
-            AnswerTests: omnitest(correctExpr='library("reshape2")')
+            AnswerTests: any_of_exprs('library("reshape2")', 'library(reshape2)', "library('reshape2')")
             Hint: Use the library function
           
           - Class: text
@@ -369,34 +445,26 @@ meta:
           - Class: cmd_question
             Output: Create a boxplot comparing the "buttery" rating between each of the three oils (oil is denoted by the "treatment" column).
             CorrectAnswer: ggplot(french_fries, aes(treatment, buttery)) + geom_boxplot()
-            AnswerTests: omnitest(correctExpr='ggplot(french_fries, aes(treatment, buttery)) + geom_boxplot()')
+            AnswerTests: expr_uses_func("geom_boxplot") && aes_matches(x="treatment", y="buttery")
             Hint: Use the geom_boxplot() layer, and remember to set "treatment" (the oil) as the x aesthetic.
-          
+
           - Class: cmd_question
             Output: Use reshape2's "melt" function create a new dataset, "french_fries.m", such that each tasting of each flavor has a separate row. There should be one column called "variable" containing the flavor name ("potato", "buttery", etc) and one column called value containing the numeric rating.
             CorrectAnswer: french_fries.m = melt(french_fries, id=c("time", "treatment", "subject", "rep"))
-            AnswerTests: omnitest(correctExpr='french_fries.m = melt(french_fries, id=c("time", "treatment", "subject", "rep"))')
+            AnswerTests: any_of_exprs('french_fries.m = melt(french_fries, id=c("time", "treatment", "subject", "rep"))', 'french_fries.m <- melt(french_fries, id=c("time", "treatment", "subject", "rep"))')
             Hint: The hard part is getting the "id" argument to melt right. Each column that is not a flavor should be provided as an id since you want to keep it as a column in the melted dataset.
           
           - Class: cmd_question
-            Output: Use french_fries.m to a boxplot comparing the taste rating between each of the three treatments (oils), but divide it into faceted subplots based on which flavor (buttery, potato) is being tested.
+            Output: Use french_fries.m to create a boxplot comparing the taste rating between each of the three treatments (oils), but divide it into faceted subplots based on which flavor (buttery, potato) is being tested.
             CorrectAnswer: ggplot(french_fries.m, aes(treatment, value)) + geom_boxplot() + facet_wrap(~ variable)
-            AnswerTests: omnitest(correctExpr='ggplot(french_fries.m, aes(x=treatment, y=value)) + geom_boxplot() + facet_wrap(~ variable)')
+            AnswerTests: expr_uses_func("geom_boxplot") && aes_matches(x="treatment", y="value") && expr_uses_func("facet_wrap")
             Hint: Note that you'll be using the "variable" and "value" columns of the melted dataset rather than columns like "potato" or "buttery". Note that this kind of plot was not possible before the data was melted.
           
     7:
+      initLesson: data(iris)
       Questions:
-          - Class: text
-            Output: The iris dataset contains measurements on 150 flowers of three different species. 
-          
           - Class: cmd_question
-            Output: Load the iris dataset.
-            CorrectAnswer: data("iris")
-            AnswerTests: any_of_exprs("data('iris')", 'data("iris")', 'data(iris)')
-            Hint: Use the "data" function
-          
-          - Class: cmd_question
-            Output: View the iris dataset like a spreadsheet.
+            Output: View the iris dataset (first seen in Quiz 1.5) like a spreadsheet.
             CorrectAnswer: View(iris)
             AnswerTests: omnitest(correctExpr='View(iris)')
             Hint: Use the "View" function
@@ -404,15 +472,15 @@ meta:
           - Class: cmd_question
             Output: Use ggplot to create a scatter plot comparing the Petal.Length (x-axis) and Petal.Width (y-axis) of the flowers in the iris data. Save this scatter plot to a variable called p.
             CorrectAnswer: p = ggplot(iris, aes(Petal.Length, Petal.Width)) + geom_point()
-            AnswerTests: exists("p"); all(class(p) == c("gg", "ggplot"))
+            AnswerTests: exists("p") && all(class(p) == c("gg", "ggplot"))
             Hint: Remember to put "p =" at the start of your expression.
           
           - Class: cmd_question
             Output: Save the plot you just created to the file "petalsize.jpeg"
             CorrectAnswer: ggsave(p, filename="petalsize.jpeg")
-            AnswerTests: omnitest(correctExpr='ggsave(p, filename="petalsize.jpeg")')
+            AnswerTests: any_of_exprs('ggsave(p, filename="petalsize.jpeg")', 'ggsave(filename="petalsize.jpeg")')
             Hint: Use the ggsave function.
-          
+
 
 3:
   initLesson: library(ggplot2)
@@ -435,15 +503,15 @@ meta:
             Hint: Use the "data" function.
           
           - Class: cmd_question
-            Output: Create a boxplot comparing the CO2 uptake between the two treatments of grass- "chilled" and "nonchilled"
+            Output: Use ggplot2 to create a boxplot comparing the CO2 uptake between the two treatments of grass- "chilled" and "nonchilled"
             CorrectAnswer: ggplot(CO2, aes(x=Treatment, y=uptake)) + geom_boxplot()
             AnswerTests: expr_uses_func("geom_boxplot"); aes_matches(x="Treatment", y="uptake")
             Hint: Your x aesthetic should be the grouping variable, and your y aesthetic should be the value you are comparing. Don't forget to use geom_boxplot.
           
           - Class: cmd_question
             Output: Perform a t-test to test for a difference in CO2 uptake between the two treatments of grass- "chilled" and "nonchilled"
-            CorrectAnswer: t.test(CO2$uptake ~ CO2$Type)
-            AnswerTests: omnitest(correctExpr='t.test(CO2$uptake ~ CO2$Type)')
+            CorrectAnswer: t.test(CO2$uptake ~ CO2$Treatment)
+            AnswerTests: any_of_exprs('t.test(CO2$uptake ~ CO2$Treatment)', 't.test(uptake ~ Treatment, data=CO2)')
             Hint: Use the t.test function, and give it a formula of the form "value ~ variable", where variable describes the groups to be compared
           
           - Class: exact_question
@@ -468,7 +536,7 @@ meta:
           - Class: cmd_question
             Output: Perform a t-test to test for a difference in CO2 uptake between the two types of grass- "Quebec" and "Mississippi". Save it as a variable called tt.
             CorrectAnswer: tt = t.test(CO2$uptake ~ CO2$Type)
-            AnswerTests: any_of_exprs('tt = t.test(CO2$uptake ~ CO2$Type)', 'tt <- t.test(CO2$uptake ~ CO2$Type)')
+            AnswerTests: expr_creates_var("tt") && expr_uses_func("t.test") && (abs(tt$statistic - 6.596901) < 1e-4)
             Hint: Remember to save your result as a variable called tt. Use the t.test function, and give it a formula of the form "value ~ variable", where variable describes the groups to be compared
           
           - Class: cmd_question
@@ -485,14 +553,14 @@ meta:
           
           - Class: exact_question
             Output: What is the upper bound of the t-test's confidence interval?
-            CorrectAnswer: 11.336682
-            AnswerTests: omnitest(correctVal="11.336682")
+            CorrectAnswer: 16.479572
+            AnswerTests: omnitest(correctVal="16.479572")
             Hint: Type this as a number, not an R expression.
           
           - Class: exact_question
-            Output: What is the upper bound of the t-test's confidence interval?
-            CorrectAnswer: 11.336682
-            AnswerTests: omnitest(correctVal="11.336682")
+            Output: What is the lower bound of the t-test's confidence interval?
+            CorrectAnswer: 8.839475
+            AnswerTests: omnitest(correctVal="8.839475")
             Hint: Type this as a number, not an R expression.
 
     2:
@@ -513,7 +581,7 @@ meta:
             Hint: Use the "View" function
   
           - Class: cmd_question
-            Output: Use ggplot2 to create a scatter plot to compare the Petal.Length (x-axis) and Petal.Width
+            Output: Use ggplot2 to create a scatter plot to compare the Petal.Length (x-axis) and Petal.Width (y-axis)
             CorrectAnswer: ggplot(iris, aes(x=Petal.Length, y=Petal.Width)) + geom_point()
             AnswerTests: expr_uses_func("geom_point"); aes_matches(x="Petal.Length", y="Petal.Width")
             Hint: Use a geom_point() layer, and make sure you set your aesthetics correctly
@@ -542,13 +610,143 @@ meta:
             AnswerTests: omnitest(correctExpr='ct$conf.int')
             Hint: You can use ct$... to extract a value from the correlation object. If you type ct$ and then hit Tab, RStudio will suggest your options.
 
+    3:
+      initLesson: data("CO2")
+      Questions:  
+          - Class: cmd_question
+            Output: View the CO2 dataset (seen in Quiz 3.1) like a spreadsheet.
+            CorrectAnswer: View(CO2)
+            AnswerTests: omnitest(correctExpr='View(CO2)')
+            Hint: Use the "View" function
+  
+          - Class: cmd_question
+            Output: Use ggplot2 to create a scatter plot with the concentration of CO2 ("conc" in the data.frame) on the x-axis, and the plant's CO2 uptake ("uptake" in the data frame) on the y axis
+            CorrectAnswer: ggplot(CO2, aes(x=conc, y=uptake)) + geom_point()
+            AnswerTests: expr_uses_func("geom_point"); aes_matches(x="conc", y="uptake")
+            Hint: Use the geom_point() layer, and choose the aesthetics x=conc, y=uptake.
+  
+          - Class: cmd_question
+            Output: Perform a linear regression on the dataset, predicting uptake using CO2 concentration. Save it to a variable called "fit"
+            CorrectAnswer: fit = lm(uptake ~ conc, data=CO2)
+            AnswerTests: expr_creates_var("fit") && class(fit) == "lm" && length(fit$coefficients) == 2 && abs(fit$coefficients[2] - 0.01773059) < 1e-5
+            Hint: Use lm with the formula uptake ~ conc. Don't forget to provide "data=CO2" and to save your result in the variable "fit"
+  
+          - Class: cmd_question
+            Output: Display a summary of the linear fit
+            CorrectAnswer: summary(fit)
+            AnswerTests: omnitest(correctExpr='summary(fit)')
+            Hint: Use the summary function
+
+          - Class: exact_question
+            Output: What is the estimate of the slope of the uptake/conc linear relationship?
+            CorrectAnswer: 0.017731
+            AnswerTests: omnitest(correctVal="0.017731")
+            Hint: Give this as a number, not an R expression. You can find this value in the second row of the "coefficients" table of the summary output.
+  
+          - Class: exact_question
+            Output: What is the p-value of the uptake/conc linear relationship?
+            CorrectAnswer: 2.91e-06
+            AnswerTests: omnitest(correctVal="2.91e-06")
+            Hint: Give this as a number, not an R expression. You can find this value in the second row of the "coefficients" table of the summary output.
+  
+          - Class: cmd_question
+            Output: You may have noticed in the plot that the concentration ~ uptake relationship is not perfectly linear. Try making another scatter plot, but this time put concentration (x-axis) on a log scale.
+            CorrectAnswer: ggplot(CO2, aes(x=conc, y=uptake)) + geom_point() + scale_x_log10()
+            AnswerTests: expr_uses_func("geom_point"); expr_uses_func("scale_x_log10"); aes_matches(x="conc", y="uptake")
+            Hint: Add the scale_x_log10() layer
+  
+          - Class: cmd_question
+            Output: While the relationship is still not perfectly linear, it does look closer. Try performing another linear regression, only this time predict uptake based on "log(conc)" instead of "conc". Save it to the variable lfit.
+            CorrectAnswer: lfit = lm(uptake ~ log(conc), data=CO2)
+            AnswerTests: expr_creates_var("lfit") && class(lfit) == "lm" && length(lfit$coefficients) == 2 && abs(lfit$coefficients[2] - 8.484) < 1e-2
+            Hint: Perform the same linear fit as before, but this time use the formula "uptake ~ log(conc)".
+
+          - Class: cmd_question
+            Output: View a summary of the fit of uptake to log(conc).
+            CorrectAnswer: summary(lfit)
+            AnswerTests: omnitest(correctExpr='summary(lfit)')
+            Hint: Use the "summary" function
+  
+          - Class: mult_question
+            Output: Did the linear relationship become more significant when concentration was placed on a log scale, or less significant?
+            AnswerChoices: More significant;Less significant
+            CorrectAnswer: More significant
+            AnswerTests: omnitest(correctVal="More significant")
+            Hint: Compare the p-values between the two fits- the smaller p-value is more significant.
+
+    4:
+      Questions:  
+          - Class: cmd_question
+            Output: View the CO2 dataset (last seen in Quiz 3.3) like a spreadsheet.
+            CorrectAnswer: View(CO2)
+            AnswerTests: omnitest(correctExpr='View(CO2)')
+            Hint: Use the "View" function
+  
+          - Class: cmd_question
+            Output: Use ggplot2 to create a scatter plot with conc on the x-axis, uptake on the y-axis, where each point is colored according to its Type ("Quebec" vs "Mississippi"). Put the x-axis on a log scale.
+            CorrectAnswer: ggplot(CO2, aes(x=conc, y=uptake, color=Type)) + geom_point() + scale_x_log10()
+            AnswerTests: expr_uses_func("geom_point"); expr_uses_func("scale_x_log10"); aes_matches(x="conc", y="uptake", colour="Type")
+            Hint: Don't forget to add the color=Type aesthetic and the scale_x_log10() layer.
+  
+          - Class: mult_question
+            Output: Based on this graph, does the Quebec or Mississippi grass, on average, have a higher CO2 uptake for a given concentration?
+            AnswerChoices: Mississippi;Quebec
+            CorrectAnswer: Quebec
+            AnswerTests: omnitest(correctVal="Quebec")
+            Hint: See which colored points are, on average, higher on the graph
+  
+          - Class: cmd_question
+            Output: Perform a multiple linear regression explaining CO2 uptake by both the log of the concentration and the Type variable. Save it to a variable called "mfit"
+            CorrectAnswer: mfit = lm(uptake ~ log(conc) + Type, data=CO2)
+            AnswerTests: expr_creates_var("mfit") && class(mfit) == "lm" && length(mfit$coefficients) == 3 && abs(mfit$coefficients[3] - (-12.65952)) < 1e-3
+            Hint: The formula given to lm should have two values on the right side- "log(conc)", and "Type". Don't forget to save it to a variable called "mfit"
+  
+          - Class: cmd_question
+            Output: View a summary of this multiple linear regression
+            CorrectAnswer: summary(mfit)
+            AnswerTests: omnitest(correctExpr='summary(mfit)')
+            Hint: Use the "summary" function
+  
+          - Class: cmd_question
+            Output: Use ggplot2 to create a scatter plot with conc on the x-axis, uptake on the y-axis, where each point is colored according to its Type ("Quebec" vs "Mississippi") and the shape of each point (the "pch" or "shape" aesthetic) is determined by the Treatment ("chilled" vs "nonchilled"). Put the x-axis on a log scale.
+            CorrectAnswer: ggplot(CO2, aes(x=conc, y=uptake, color=Type, shape=Treatment)) + geom_point() + scale_x_log10()
+            AnswerTests: expr_uses_func("geom_point"); expr_uses_func("scale_x_log10"); aes_matches(x="conc", y="uptake", colour="Type", shape="Treatment")
+            Hint: Don't forget to add the pch=Treatment aesthetic and the scale_x_log10() layer.
+  
+          - Class: cmd_question
+            Output: Perform a multiple linear regression explaining CO2 uptake by the log of the concentration and the Type and Treatment variables. Save it to a variable called "mfit2"
+            CorrectAnswer: mfit2 = lm(uptake ~ log(conc) + Type + Treatment, data=CO2)
+            AnswerTests: expr_creates_var("mfit2") && class(mfit2) == "lm" && length(mfit2$coefficients) == 4 && abs(mfit2$coefficients[4] - (-6.859524)) < 1e-3
+            Hint: The formula given to lm should have three values on the right side- "log(conc)", "Type" and "Treatment". Don't forget to save it to a variable called "mfit2"
+  
+          - Class: cmd_question
+            Output: View a summary of this multiple linear regression
+            CorrectAnswer: summary(mfit2)
+            AnswerTests: omnitest(correctExpr='summary(mfit2)')
+            Hint: Use the "summary" function
+
+          - Class: exact_question
+            Output: What is the p-value of the "Treatment" variable in this regression?
+            CorrectAnswer: 1.11e-08
+            AnswerTests: omnitest(correctVal="1.11e-08")
+            Hint: This can be found in the row of the coefficients table starting with "Treatmentchilled"- this means the effect of a plant being chilled as opposed to being nonchilled.
+  
+          - Class: mult_question
+            Output: Based on this graph, what combination of treatment and type leads to the lowest CO2 uptake?
+            AnswerChoices: Quebec+chilled;Quebec+nonchilled;Mississippi+chilled;Mississippi+nonchilled
+            CorrectAnswer: Mississippi+chilled
+            AnswerTests: omnitest(correctVal="Mississippi+chilled")
+            Hint: See which combination of color and shape are, on average, lowest on the graph
+
+
 4:
+  initLesson: library("ggplot2")
   segments:
     1:
-      initLesson: x = 4; library(ggplot2); data("diamonds")
+      initLesson: x = 4; data("diamonds")
       Questions:
           - Class: cmd_question
-            Output: Suppose you were writing an R script and had a variable called "x". What line of code would you use to display that variable from within the script?
+            Output: Suppose you were writing an R script and had a variable called "x". What line of code would you use to display that variable from *within* the script?
             CorrectAnswer: print(x)
             AnswerTests: omnitest(correctExpr='print(x)')
             Hint: Use the print function
@@ -562,32 +760,33 @@ meta:
     2:
       Questions:
           - Class: text
-            Output: In the videos we downloaded and learned to work with the Batting, Salary and Master files from the Lahman dataset. Now we're going to analyze the Pitching dataset, which contains the performance of each baseball pitcher in each year
+            Output: In the videos we downloaded and learned to work with the Batting, Salary and Master files from the Lahman dataset. Now we're going to analyze the Pitching dataset, which contains the performance of each baseball pitcher in each year. (In baseball, a pitcher starts each play by throwing the ball for a batter to hit).
   
           - Class: cmd_question
-            Output: Read in the Pitching dataset and save it to a variable called "pitching". Read it from the following link- http://dgrtwo.github.io/pages/lahman/Pitching.csv
+            Output: Read in the Pitching CSV dataset directly from the following link and save it to a variable called "pitching"- http://dgrtwo.github.io/pages/lahman/Pitching.csv 
             CorrectAnswer: pitching = read.csv("http://dgrtwo.github.io/pages/lahman/Pitching.csv")
-            AnswerTests: omnitest(correctExpr='salaries = read.csv("http://dgrtwo.github.io/pages/lahman/Pitching.csv")')
+            AnswerTests: expr_creates_var("pitching") && class(pitching) == "data.frame" && nrow(pitching) == 42583 && ncol(pitching) == 30
             Hint: Use the read.csv function, giving the link directly to it.
   
     3:
+      initLesson: if (!exists("pitching")) { pitching = read.csv("http://dgrtwo.github.io/pages/lahman/Pitching.csv") }
       Questions:
           - Class: cmd_question
-            Output: Load the data.table library.
+            Output: Load the data.table package.
             CorrectAnswer: library("data.table")
-            AnswerTests: any_of_exprs("library(data.table)")
+            AnswerTests: any_of_exprs("library(data.table)", "library('data.table')", 'library("data.table")')
             Hint: Use the "library" function
   
           - Class: cmd_question
-            Output: Turn the variable "pitching" into a data.table (also called "pitching")
+            Output: Turn the variable "pitching" (downloaded in Quiz 2.2) into a data.table (also called "pitching")
             CorrectAnswer: pitching = as.data.table(pitching)
-            AnswerTests: omnitest(correctExpr='pitching = as.data.table(pitching)')
+            AnswerTests: any_of_exprs('pitching = as.data.table(pitching)', 'pitching <- as.data.table(pitching)')
             Hint: Use the "as.data.table" function
   
           - Class: cmd_question
             Output: Show the first five rows of the "pitching" data.table
             CorrectAnswer: pitching[1:5, ]
-            AnswerTests: any_of_exprs("pitching[1:5, ]", "head(pitching, 6)")
+            AnswerTests: any_of_exprs("pitching[1:5, ]", "head(pitching, 5)", "pitching[1:5]")
             Hint: This is the same way you would extract the first five rows of a data.frame, using square brackets and a comma
   
           - Class: cmd_question
@@ -599,34 +798,33 @@ meta:
           - Class: cmd_question
             Output: Filter the "pitching" data.table to include only rows where the teamID is "OAK" 
             CorrectAnswer: pitching[teamID == "OAK", ]
-            AnswerTests: omnitest(correctExpr='pitching[teamID == "OAK", ]')
+            AnswerTests: is.data.table(e$val) && nrow(e$val) == 860 && all(e$val$teamID == "OAK")
             Hint: You can add a condition to filter by using square brackets, by adding the condition before the comma. Make sure you use == rather than =.
   
           - Class: cmd_question
             Output: Filter the "pitching" data.table to include only rows where the column G (that's the number of games the pitcher played) is greater than or equal to 10.
             CorrectAnswer: pitching[G >= 10, ]
-            AnswerTests: omnitest(correctExpr='pitching[G >= 10, ]')
+            AnswerTests: is.data.table(e$val) && nrow(e$val) == 29624 && all(e$val$G >= 10)
             Hint: You can add a condition to filter by using square brackets, by adding the condition before the comma.
   
-  
           - Class: mult_question
-            Output: How many rows are in this filtered dataset (with ten or more games)?
+            Output: How many rows are in this filtered dataset (those that have 10 or more games)?
             AnswerChoices: 5;29620;29624;42583
             CorrectAnswer: 29624
             AnswerTests: omnitest(correctVal="29624")
             Hint: Look at the right side of the output from the last problem- the numbers that are each followed by a colon are the row numbers. Check for the largest row number.
   
-          - Class: mult_question
-            Output: Sort the pitching data.table in ascending order by year.
-            AnswerChoices: pitching[order(yearID), ]
-            CorrectAnswer: 29624
-            AnswerTests: omnitest(correctVal="29624")
+          - Class: cmd_question
+            Output: Sort the pitching data.table in ascending order by year (you don't need to save the result to a variable).
+            CorrectAnswer: pitching[order(yearID), ]
+            AnswerTests: any_of_exprs("pitching[order(yearID), ]", "pitching[order(yearID)]")
             Hint: Use the "order" function, and remember that the name of the column is "yearID".
 
     4:
+      initLesson: library(data.table); if (!exists("pitching")) { pitching = as.data.table(read.csv("http://dgrtwo.github.io/pages/lahman/Pitching.csv")) } else { pitching = as.data.table(pitching) }
       Questions:
           - Class: text
-            Output: The pitching data.table contains one row for each combination of pitcher and year combination. Suppose we instead want to create a data.table with one row for each player, summarizing that player's performance across his career.
+            Output: The pitching data.table (created in Quiz 3.3) contains one row for each combination of pitcher and year combination. Suppose we instead want to create a data.table with one row for each player, summarizing that player's performance across his career.
   
           - Class: mult_question
             Output: Which column in the pitching data.table uniquely identifies each individual player?
@@ -641,24 +839,162 @@ meta:
           - Class: cmd_question
             Output: Summarize the pitching dataset based on each player, to find the total number of games (the sum of the G column) each player played in his career
             CorrectAnswer: pitching[, sum(G), by="playerID"]
-            AnswerTests: any_of_exprs('pitching[, sum(G), by="playerID"]', 'pitching[, sum(G), by=playerID]')
+            AnswerTests: dt_matches(nr=8810, nc=2, col.names=c("playerID", "V1"))
             Hint: You are summarizing by the playerID, and computing the sum(G) within each of those subsets. See the examples in the lesson's code.
   
           - Class: cmd_question
             Output: Summarize the pitching dataset based on each player, this time calculating two new columns- one called totalG containing total number of games (the sum of the G column), and one called totalBB containing the total number of walks the pitcher had allowed (the sum of the BB column). Save the result as a variable called "pitchers"
             CorrectAnswer: pitchers = pitching[, list(totalG=sum(G), totalBB=sum(BB)), by="playerID"]
-            AnswerTests: omnitest(correctExpr='pitchers = pitching[, list(totalG=sum(G), totalBB=sum(BB)), by="playerID"]')
+            AnswerTests: expr_creates_var("pitchers"); dt_matches(nr=8810, nc=3, col.names=c("playerID", "totalG", "totalBB"))
             Hint: You are summarizing by the playerID. Use list()… between the two parentheses to compute multiple columns, making sure you are naming each as requested. Make sure you save it to a variable called "pitchers"
   
           - Class: cmd_question
             Output: Sort the "pitchers" data.table based on the total number of games each pitcher played
-            CorrectAnswer: pitchers[order(G), ]
-            AnswerTests: omnitest(correctExpr='pitchers[order(G), ]')
-            Hint: Use the "order" function with the pitchers data.table, ordering the column G
-  
+            CorrectAnswer: pitchers[order(totalG), ]
+            AnswerTests: any_of_exprs('pitchers[order(totalG), ]', 'pitchers[order(totalG)]')
+            Hint: Use the "order" function with the pitchers data.table you just created, ordering the column totalG
+
           - Class: cmd_question
-            Output: Summarize the pitching dataset, this time based on each team, calculating two columns- totalBB (the sum of the BB column). Save the result as a variable called "summarized.teams"
-            CorrectAnswer: summarized.teams = pitching[, list(totalBB=sum(G)), by="teamID"]
-            AnswerTests: omnitest(correctExpr='summarized.teams = pitching[, list(totalBB=sum(G)), by="teamID"]')
+            Output: Summarize the pitching dataset, this time based on each team, calculating two columns- totalG (total games) and totalBB (the sum of the BB column). Save the result as a variable called "summarized.teams"
+            CorrectAnswer: summarized.teams = pitching[, list(totalG=sum(G), totalBB=sum(BB)), by="teamID"]
+            AnswerTests: expr_creates_var("summarized.teams"); dt_matches(nr=149, nc=3, col.names=c("teamID", "totalG", "totalBB"))
             Hint: You are summarizing by the teamID. Use list()… between the two parentheses to compute a named column, making sure you are naming it as requested. Make sure you save it to a variable called "summarized.teams"
 
+    5:
+      initLesson: library(data.table); if (!exists("pitching")) { pitching = as.data.table(read.csv("http://dgrtwo.github.io/pages/lahman/Pitching.csv")) } else { pitching = as.data.table(pitching) }
+      Questions:
+          - Class: cmd_question
+            Output: View the pitching data.table (created in Quiz 4.3) like a spreadsheet
+            CorrectAnswer: View(pitching)
+            AnswerTests: omnitest(correctExpr='View(pitching)')
+            Hint: Use the "View" function
+  
+          - Class: cmd_question
+            Output: Read in the Salaries CSV dataset directly from the following link and save it to a variable called "salaries"- http://dgrtwo.github.io/pages/lahman/Salaries.csv 
+            CorrectAnswer: salaries = read.csv("http://dgrtwo.github.io/pages/lahman/Salaries.csv")
+            AnswerTests: expr_creates_var("salaries") && (nrow(salaries) == 23956)
+            Hint: Use the read.csv function, giving the link directly to the function. Don't forget to save it into a variable called "salaries"
+  
+          - Class: cmd_question
+            Output: Turn the salaries data.frame into a data.table (called "salaries")
+            CorrectAnswer: salaries = as.data.table(salaries)
+            AnswerTests: expr_creates_var("salaries") && is.data.table(salaries) && (nrow(salaries) == 23956)
+            Hint: Use the as.data.table function. Don't forget to assign it into the variable "salaries" (thus replacing the previous version)
+  
+          - Class: cmd_question
+            Output: View the salaries data.table like a spreadsheet
+            CorrectAnswer: View(salaries)
+            AnswerTests: omnitest(correctExpr='View(salaries)')
+            Hint: Use the "View" function
+  
+          - Class: text_question
+            Output: What column or columns are shared between the pitching and salaries data.tables? (Separate columns names with ",")
+            CorrectAnswer: playerID,yearID,teamID,lgID
+            AnswerTests: (length(e$val) == 4) && all(sort(e$val) == c("lgID", "playerID", "teamID", "yearID"))
+            Hint: Compare the spreadsheet-like views of the two data.tables
+  
+          - Class: cmd_question
+            Output: Merge the pitching and salaries data.tables, saving them into a data.table called "merged", using all the columns that are shared between the tables
+            CorrectAnswer: merged = merge(pitching, salaries, by=c("lgID", "playerID", "teamID", "yearID"))
+            AnswerTests: expr_creates_var("merged") && dt_matches(nr=10731, nc=31) && ("salary" %in% colnames(merged))
+            Hint: Use the "merge" function, providing a vector of the shared column names to the "by=" argument
+  
+          - Class: cmd_question
+            Output: Merge the pitching and salaries data.tables, but this time keep all rows of the pitching data.table, including those that don't have salary information. Save this into a variable called "merged.all"
+            CorrectAnswer: merged.all = merge(pitching, salaries, by=c("lgID", "playerID", "teamID", "yearID"), all.x=TRUE)
+            AnswerTests: expr_creates_var("merged.all") && dt_matches(nr=42583, nc=31) && ("salary" %in% colnames(merged.all)) && (sum(is.na(merged.all$salary)) == 31852)
+            Hint: Set the "all.x" option to the "merge" function. (See the lecture code or try "help(merge)" for more).
+
+    6:
+      initLesson: library(data.table); if (!exists("pitching")) { pitching = as.data.table(read.csv("http://dgrtwo.github.io/pages/lahman/Pitching.csv")) } else { pitching = as.data.table(pitching) };
+                  if (!exists("salaries")) { salaries = as.data.table(read.csv("http://dgrtwo.github.io/pages/lahman/Salaries.csv")) } else { salaries = as.data.table(salaries) };
+                  merged = merge(pitching, salaries, by=c("lgID", "playerID", "teamID", "yearID"))
+      Questions:
+          - Class: cmd_question
+            Output: View the "merged" data.table (created in Quiz 4.5) like a spreadsheet. It contains the pitching dataset with salary information added.
+            CorrectAnswer: View(merged)
+            AnswerTests: omnitest(correctExpr='View(merged)')
+            Hint: Use the "View" function
+  
+          - Class: text
+            Output: Let's say want to predict a pitcher's salary based on his performance. First, you might want to get a sense of the distribution of salaries.
+  
+          - Class: cmd_question
+            Output: Use ggplot2 on the "merged" dataset to create a histogram of pitchers' salaries.
+            CorrectAnswer: ggplot(merged, aes(salary)) + geom_histogram()
+            AnswerTests: expr_uses_func("geom_histogram") && aes_matches(x="salary")
+            Hint: Set the x aesthetic to salary, and add a geom_histogram layer
+   
+          - Class: cmd_question
+            Output: The salary distribution is heavily skewed, which will be a problem for some of our graphs and tests. Try plotting the x-axis on a log scale instead.
+            CorrectAnswer: ggplot(merged, aes(salary)) + geom_histogram() + scale_x_log10()
+            AnswerTests: expr_uses_func("geom_histogram") && expr_uses_func("scale_x_log10") && aes_matches(x="salary")
+            Hint: Add a scale_x_log10() option to the last plot
+  
+          - Class: text
+            Output: Since the log data is closer to symmetrical (which works better for statistical tests and graphs), we know we'll want to work on the log scale from now on.
+  
+          - Class: cmd_question
+            Output: Examine whether salaries change over time by creating a scatterplot with year on the x-axis and salary on the y-axis. Add a smoothing curve, and make the y-axis on a log scale
+            CorrectAnswer: ggplot(merged, aes(yearID, salary)) + geom_point() + geom_smooth() + scale_y_log10()
+            AnswerTests: expr_uses_func("geom_point") && expr_uses_func("scale_y_log10") && expr_uses_func("geom_smooth") && aes_matches(x="yearID", y="salary")
+            Hint: Set the x aesthetic to "yearID", and the y aesthetic to "salary". Don't forget to put the y-axis on a log scale and to add the smoothing curve with geom_smooth.
+  
+          - Class: cmd_question
+            Output: Perform a statistical test for a correlation between year and log(salary).
+            CorrectAnswer: cor.test(merged$yearID, log(merged$salary))
+            AnswerTests: expr_uses_func("cor.test") && expr_uses_func("log") && abs(e$val$estimate - 0.4411355) < 1e-4
+            Hint: Use the "cor.test" function, and remember to use log(merged$salary) rather than merged$salary by itself
+  
+          - Class: cmd_question
+            Output: Examine whether the league (American, AL, versus National, NL) has an effect on salary, by creating a boxplot comparing salary between leagues. Put the y-axis on a log scale.
+            CorrectAnswer: ggplot(merged, aes(lgID, salary)) + geom_boxplot() + scale_y_log10()
+            AnswerTests: expr_uses_func("geom_boxplot") && expr_uses_func("scale_y_log10") && aes_matches(x="lgID", y="salary")
+            Hint: Recall that in a boxplot the value you are comparing goes on the y axis, and the categories you're comparing go on the x-axis. Don't forget to put the y-axis on a log scale.
+  
+          - Class: cmd_question
+            Output: Perform a t-test to test whether there is a statistically significant difference in log(salary) between the two leagues.
+            CorrectAnswer: t.test(log(salary) ~ lgID, data=merged)
+            AnswerTests: expr_uses_func("t.test") && abs(e$val$p.value - 0.1823332) < 1e-3
+            Hint: Use the "t.test" function, and don't forget to test log(salary) rather than salary by itself.
+  
+          - Class: cmd_question
+            Output: Perform a linear regression to predict log(salary) based on year. Save it to a variable called "fit"
+            CorrectAnswer: fit = lm(log(salary) ~ yearID, data=merged)
+            AnswerTests: expr_uses_func("lm") && expr_creates_var("fit") && length(fit$coefficients) == 2 && abs(fit$coefficients[2] - 0.07390187) < 1e-4
+            Hint: Use the "lm" function; don't forget to save it to a variable called "fit", and to predict log(salary) rather than salary by itself.
+  
+          - Class: cmd_question
+            Output: Display a summary of the linear fit
+            CorrectAnswer: summary(fit)
+            AnswerTests: omnitest(correctExpr='summary(fit)')
+            Hint: Use the summary function
+  
+          - Class: mult_question
+            Output: Based on the reported p-value, does including a player's year significantly improve your prediction of a player's salary?
+            AnswerChoices: Yes;No
+            CorrectAnswer: Yes
+            AnswerTests: omnitest(correctVal="Yes")
+            Hint: Look for the row in the coefficients table that starts with "yearID", then compare the p-value in that row to .05.
+  
+          - Class: text
+            Output: ERA, for "Earned Run Average," is one of the most popular statistics used to measure pitcher's performance. It is a measure of how many runs a pitcher lets the other team score per game (adjusted for how long the pitcher played). Thus, a *lower* ERA is better.
+  
+          - Class: cmd_question
+            Output: Perform a multiple linear regression to predict log(salary) based on both year and ERA. Save it to a variable called "mfit"
+            CorrectAnswer: mfit = lm(log(salary) ~ yearID + ERA, data=merged)
+            AnswerTests: expr_uses_func("lm") && expr_creates_var("mfit") && length(mfit$coefficients) == 3 && abs(mfit$coefficients[3] - (-0.03594432)) < 1e-4
+            Hint: Use the "lm" function; don't forget to save it to a variable called "mfit", and to predict log(salary) rather than salary by itself.
+  
+          - Class: cmd_question
+            Output: Display a summary of the multiple regression
+            CorrectAnswer: summary(mfit)
+            AnswerTests: omnitest(correctExpr='summary(mfit)')
+            Hint: Use the summary function
+  
+          - Class: mult_question
+            Output: Based on the reported p-value, does including a player's ERA significantly improve your prediction of a player's salary?
+            AnswerChoices: Yes;No
+            CorrectAnswer: Yes
+            AnswerTests: omnitest(correctVal="Yes")
+            Hint: Look for the row in the coefficients table that starts with "ERA", then compare the p-value in that row to .05.

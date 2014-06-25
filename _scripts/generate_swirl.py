@@ -11,6 +11,8 @@ import shutil
 
 import yaml
 
+COURSE_SITE = "http://dgrtwo.github.io/RData/"
+
 OUTFOLDER = os.path.join("..", "RData-quizzes")
 
 DATA_DIR = "_data"
@@ -32,9 +34,9 @@ with open(OUTLINE_FILE) as outline_inf, open(QUIZ_FILE) as quiz_inf:
         for segment_number, segment in enumerate(lesson["segments"]):            
             segment_number += 1
 
-            meta["Course"] = "%d. %s" % (lesson_number, lesson["title"])
-            meta["Lesson"] = "%d.%d %s" % (lesson_number, segment_number,
-                                            segment["title"])
+            meta["Course"] = "Lesson %d. %s" % (lesson_number, lesson["title"])
+            meta["Lesson"] = "Segment %d.%d %s" % (lesson_number,
+                                            segment_number, segment["title"])
 
             try:
                 les = quizzes[lesson_number]
@@ -42,6 +44,16 @@ with open(OUTLINE_FILE) as outline_inf, open(QUIZ_FILE) as quiz_inf:
                 questions = seg["Questions"]
             except KeyError:
                 continue
+
+            code_link = COURSE_SITE + "code/code_lesson%d/#segment%d" % (
+                                            lesson_number, segment_number)
+
+            code_q = {"Class": "video", "Output":
+                      "Would you like to view the transcript of the code " +
+                      "used in this video segment?",
+                      "VideoLink": code_link}
+
+            questions = [code_q] + questions
 
             if "video" in segment:
                 vq = {"Class": "video", "Output":
@@ -62,5 +74,7 @@ with open(OUTLINE_FILE) as outline_inf, open(QUIZ_FILE) as quiz_inf:
 
             initLesson = "\n".join((les.get("initLesson", ""),
                                     seg.get("initLesson", "")))
+            initLesson = initLesson.replace(";", "\n")
+
             with open(os.path.join(outdir, "initLesson.R"), "w") as outf:
                 outf.write(initLesson)
