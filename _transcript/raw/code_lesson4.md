@@ -5,15 +5,7 @@ layout: default
 Lesson 4: Exploratory Data Analysis With data.table
 ===========
 
-```{r setup, echo=FALSE}
-library(knitr)
-opts_chunk$set(cache=TRUE, cache.path="lesson4/cache/", fig.path="lesson4/figures/")
 
-if (!include.code) {
-    opts_chunk$set(cache=FALSE, eval=FALSE, echo=FALSE)
-}
-rm(include.code)
-```
 
 <a name="segment1"></a>
 
@@ -28,63 +20,43 @@ One of the essential functions of computers is to take repetitive, dull tasks an
 
 So far we've been working in the interactive R terminal. This is useful for writing a line of code quickly and seeing the result.
 
-```{r}
-3 + 5
-```
+
 
 But most of your analyses will take multiple lines of code and they'll have to be run all in the same order, and it's impractical to have to type them all in sequence in an interactive window. So let's instead write an R script, which will contain a series of commands that you want to run in order. In RStudio, Go to File->New File->New R Script, or you can do CMD+SHIFT+N, to create a new R script. You'll see it pops up above your command prompt. Write a couple lines of R. For example, let's define two variables:
 
-```{r}
-x = 4
-y = x + 6
-```
+
 
 Now save your new script. First you have to choose a working directory, which you can do with "More->Set as Working Directory" in the file manager in RStudio. Then save your script, which you can do with CMD+S or with the floppy disk icon here. Let's save it as `script.R` in our working directory. Now we can run this script- that is, all our commands in the script all at once- by clicking "Source" at the top of the script. Notice that a command pops up in your interactive terminal, something like
 
-```{r, eval=FALSE}
-source('~/Desktop/RCourse/script.R')
-```
+
 
 That means it ran all the commands in your script in a row. You can see this by checking the values of `x` and `y`:
 
-```{r}
-x
-y
-```
 
-So even though you didn't see the commands in the interactive terminal, they did run when you hit Source.
+
+So even though you didn't see the commands in the interactive terminal, they did run when you hit Source. 
 
 Incidentally, there's a keyboard shortcut for sourcing a current file as well: you can do CMD+SHIFT+S.
 
 Now what if we want some output to our script besides just setting a few variables? Normally we'd be able to view the contents of a variable just by typing that variable by itself. For instance:
 
-```{r}
-y
-```
+
 
 However, try putting the line `y` by itself in your script, save, and source it. Notice there was no output. That's because when you run outside of the interactive terminal, values don't print unless you explicitly tell them to do so. You do that with the print function. Change your line in the file to `print(y)`, then save and source.
 
-```{r}
-print(y)
-```
+
 
 *Now* we can see the output in your interactive window. Remember that: when you're running inside a script, if you want to see an output, you have to actually print it.
 
 Importantly, the same is true of a ggplot2 plot. Let's create a basic ggplot:
 
-```{r}
-library(ggplot2)
-data(mtcars)
-ggplot(mtcars, aes(wt, mpg)) + geom_point()
-```
+
 
 As soon as we hit return on this line, we created a scatterplot. However, let's put the same lines of code into our script. Then we clear the current plot by hitting Clear All, and hit Source.
 
 Notice that no plot showed up. The reason is that when it's in a file, a ggplot, just like a regular variable, needs to be printed to show up. You do that with:
 
-```{r}
-print(ggplot(mtcars, aes(wt, mpg)) + geom_point())
-```
+
 
 Finally, there's a useful shortcut for running one line at a time in a script. Put your cursor on a particular line of code, then hit CMD+RETURN in Macs, or CONTROL+ENTER on Windows, you'll run just that line of code in your interactive terminal. This means you don't have to select a line and copy and paste it into your terminal. This is useful for if you want to run a single line of code in your script, but don't want to go through the time of rerunning the whole file.
 
@@ -97,9 +69,7 @@ Segment 2: Reading Data
 
 So far we've been working with built-in datasets in R. For example, remember that we can load the `mtcars` dataset by doing
 
-```{r}
-data(mtcars)
-```
+
 
 R comes with dozens of useful datasets like this, and they're great for learning and practicing. But of course, whatever data you're actually interested in, chances are it's probably not already built into R. So how can you read your own data into R?
 
@@ -111,31 +81,23 @@ Let's look at the contents of this CSV file a little more closely. This is calle
 
 You can read a CSV file into R easily with the `read.csv` function:
 
-```{r}
-salaries = read.csv("Salaries.csv")
-```
+
 
 This read in the CSV file as a data frame. You can see this by doing
 
-```{r, eval=FALSE}
-View(salaries)
-```
+
 
 This data is organized into rows: one row per player per year. You can see a column for the year, for the ID of the player, and for the salary in US dollars. You can also see the team that the player was playing on, and the league, either the American League (`AL`) or National League (`NL`) that the team plays in.
 
 I had you download the file just so we could look at it, but note that you don't actually have to download it at all. R can read a CSV file directly from the internet, if you give it the URL. Take that URL we had and put it into `read.csv` directly:
 
-```{r}
-salaries = read.csv("http://dgrtwo.github.io/pages/lahman/Salaries.csv")
-```
+
 
 This downloads the file, reads it in, and saves it into the same data.frame.
 
 Now, this was the best way to read this standard CSV file. But what if you didn't have a header row? Or what if your file were separated by spaces, or by tabs, instead of by commas? Take a look at the help page for `read.csv`:
 
-```{r, eval=FALSE}
-help(read.csv)
-```
+
 
 You can see here that there are multiple ways to use `read.csv` with different defaults and options. For example, if you didn't want to have a header, you could change the header option to `header=FALSE`. If you wanted the fields to be separated by spaces, rather than commas, you could add `sep=" "`. Don't do that in this case.
 
@@ -150,140 +112,97 @@ Segment 3: Introduction to data.table
 
 Now we have downloaded this data on baseball players' salaries, we're interested in filtering and manipulating it. The salary data is currently held in a data.frame, a data structure built into R. data.frame is powerful, but there's an even more powerful alternative in R that makes data manipulation fast, easy and intuitive. Like ggplot2, it's a third party package, which means it doesn't come built in, and we have to install it. So let's install the `data.table` package You can do that with:
 
-```{r, eval=FALSE}
-install.packages("data.table")
-```
+
 
 Now, before we learn to use data.table, let's take one last look at salaries the data.frame. If you type
 
-```{r, eval=FALSE}
-salaries
-```
+
 
 it will print thousands and thousands of lines until it decides to stops. Now, let's convert the data.frame into a data table. First you load the `data.table` package:
 
-```{r}
-library(data.table)
-```
+
 
 Then use the `as.data.table` function to replace `salaries` with a data.table version.
 
-```{r}
-salaries = as.data.table(salaries)
-```
+
 
 Now, let's print it again:
 
-```{r}
-salaries
-```
+
 
 Notice that it contains the same information, but only shows the first five rows, then ---, then the last five rows, which is generally a more convenient representation. This more compact way of printing a data.table is the first benefit of using the package.
 
 Now, a lot of things work just the same way as they do in a data.frame. You can still access a column with a dollar sign. For instance, let's say you want the `salary` column.
 
-```{r, eval=FALSE}
-salaries$salary
-```
+
 
 Or to get a single row of a data.table, you can do:
 
-```{r}
-salaries[1, ]
-```
+
 
 Or you can get a range of rows:
 
-```{r}
-salaries[1:5, ]
-```
+
 
 One thing that did work on data frames but doesn't work on data tables is extracting a column based on an index. In a data.frame, you could extract the first column by putting the index after the comma:
 
-```{r}
-salaries[, 1]
-```
+
 
 But that doesn't work in data.table. Instead, you can put the name of the column, *without quotes*, after the comma:
 
-```{r, eval=FALSE}
-salaries[, yearID]
-```
+
 
 This retrieves the entire vector of that year.
 
 You can also grab multiple columns (for example, just the year and the salary) using `list`:
 
-```{r}
-salaries[, list(yearID, salary)]
-```
+
 
 Now we've created a new data table with just the two columns `yearID` and `salary`.
 
 Now, let's say we want to filter the rows based on one column, which is a common step in data preprocessing. For example, let's say you want to get only the years after 2000. There is an easy way to do this in data.table. We put a condition before the comma:
 
-```{r}
-salaries[yearID > 2000, ]
-```
+
 
 Now we've created a subset of the data that contains only years 2001 and after. Similarly, if you wanted to get salaries from a specific year, 2010, you could do
 
-```{r}
-salaries[yearID == 2010, ]
-```
+
 
 There are two leagues in American Major League Baseball: the American League (`AL`), and the National League (`NL`). If we want to filter for just the American League, we can do:
 
-```{r}
-salaries[lgID == "AL", ]
-```
+
 
 Now I've selected just the American League teams.
 
 Finally, we can combine multiple filtering conditions using the *and* (`&`) or *or* (`|`) operators. For instance, we can filter for all the rows in the American League that were after 1990.
 
-```{r}
-salaries[lgID == "AL" & yearID >= 1990, ]
-```
+
 
 Similarly, we can combine conditions with *or* (`|`). For instance, say we wanted only years before 1990 or after 2010.
 
-```{r}
-salaries[lgID < 1990 & yearID > 2010, ]
-```
+
 
 We can also sort the data easily, using the order function in the area before the comma:
 
-```{r}
-salaries[order(salary), ]
-```
+
 
 Now you can see that the pairs of players and years are sorted by salary, with the lower salaries at the top. This gives us an easy way to see the highest and lowest salaries. In case you're wondering, NYA here is the team ID of the New York Yankees: called NYA instead of NYY for historical reasons. We could also sort by year:
 
-```{r}
-salaries[order(yearID), ]
-```
+
 
 What if we want to sort first by year, and *then* breaking ties with salary? We can do that by providing two arguments to the order function:
 
-```{r}
-salaries[order(yearID, salary), ]
-```
+
 
 Now it's organized with 1985 first, and 2013 last, but within each of those years it is organized by salary.
 
 Note that we can perform multiple operations all in a sequence, by saving the intermediate results. For instance, we can first perform a filtering operation and save it as `salaries.filtered`:
 
-```{r}
-salaries.filtered = salaries[lgID == "AL" & yearID >= 1990, ]
-```
+
 
 Then we can sort it by salary and save it into a new data table, which is now both filtered and sorted.
 
-```{r}
-salaries.filtered.sorted = salaries.filtered[order(salary), ]
-salaries.filtered.sorted
-```
+
 
 These operations let us easily explore the data and answer basic questions.
 
@@ -296,76 +215,52 @@ In our last segment we learned how to download a dataset on baseball player sala
 
 Let's look again at our salaries dataset.
 
-```{r}
-salaries
-```
+
 
 Right now we have 24 thousand rows, each with a combination of a year and a player. Now, we can perform some general summaries of this data. For example, we can extract the salary column using a dollar sign ($):
 
-```{r, eval=FALSE}
-salaries$salary
-```
+
 
 Then we can find the average salary of all players across all years with the mean function:
 
-```{r}
-mean(salaries$salary)
-```
+
 
 Similarly, we could find the highest salary across all years with `max`:
 
-```{r}
-max(salaries$salary)
-```
+
 
 or the median:
 
-```{r}
-median(salaries$salary)
-```
+
 
 We can also find the average salary in a given year by filtering the data before we extract the column. This code extracts the salaries only from the year 2000:
 
-```{r}
-salaries[yearID == 2000, ]$salary
-```
+
 
 We can then find the average salary in the year 2000:
 
-```{r}
-mean(salaries[yearID == 2000, ]$salary)
-```
+
 
 This gives us a good way to ask questions interactively about our data. But what if we want to look for a trend- for example, how baseball player salaries change over time? It would be a huge hassle to repeat this line of code for 1985, 1986, 1987 and so on, and them combine all of those. What we want is a way to perform this summary operation of averaging within each year, for every year in the dataset. It turns out the data.table package makes that easy:
 
 Let's create a new data.table called `summarized.year`, then we subset it using square brackets in a very particular way. Put nothing before the first comma. Now after the second comma, we say we want to take the mean of the salary column- but then we put another comma and `by="yearID"`, which means  we don't want to do it once for the whole dataset- we want to do it within each year. So we're computing the mean salary (`mean(salary)`), within each year (`by="yearID"`).
 
 
-```{r}
-summarized.year = salaries[, mean(salary), by="yearID"]
-```
+
 
 This message in red is a warning: it's basically complaining that baseball players are paid too much. But you can ignore it, it doesn't have any effect on our results. Let's look at what ended up in `summarized.year`:
 
-```{r}
-summarized.year
-```
+
 
 We now have two columns: one for year, which we were summarizing by, and one called V1. Every year has its own row, and this V1 was the result of this expression we put between the two commas.
 
 What if we wanted to give it a more useful name, like "Average"? We can do that by changing what we put in our summarizing expression, by placing the `list()` function between the commas.
 
-```{r}
-summarized.year = salaries[, list(Average=mean(salary)), by="yearID"]
-summarized.year
-```
+
 
 This means we want to create a column called average that contains the mean salary within each year. (Ignore the warning again). Now you can see that the column is called `Average`, which is more helpful. But our summary operation doesn't have to stop there. We can create two columns at the same time: one for the average, and one for the maximum:
 
-```{r}
-summarized.year = salaries[, list(Average=mean(salary), Maximum=max(salary)), by="yearID"]
-summarized.year
-```
+
 
 Now you can see that we've created two columns along with the summarizing year: one with average, one with maximum.
 
@@ -373,79 +268,53 @@ We could add other columns as well, showing, for instance, the minimum or standa
 
 You can group your summaries by any column in the data, not just the year. For example, you could summarize within each baseball league- those two leagues being the American League and the National League. Again we put a `list()` of the columns we want to create within the commas, but this time put `by="lgID"`.
 
-```{r}
-summarized.lg = salaries[, list(Average=mean(salary), Maximum=max(salary)), by="lgID"]
-summarized.lg
-```
+
 
 Now you can see there are only two rows: one for the American League, one for the National League, and we can see the average and maximum salaries within each.
 
 We've already summarized by year, and by league- we could also summarize by team. We would just change `by="lgID"` to `by="teamID"`.
 
-```{r}
-summarized.team = salaries[, list(Average=mean(salary), Maximum=max(salary)), by="teamID"]
-summarized.team
-```
+
 
 Now we can see one row for each team.
 
 Note that this output is itself a data.table, just like the input was. You can process it or sort it just like you could any other. For example, you could filter it to look only at a particular range of years. Here we look for years after 2000:
 
-```{r}
-summarized.year[yearID > 2000, ]
-```
+
 
 Here we get a smaller subset of that summary. Similarly you can sort the output, for instance to find the highest paid and lowest paid teams.
 
-```{r}
-summarized.team[order(Average), ]
-```
+
 
 Finally, we can group by more than one column in our analysis. Let's say we want to see the average salary within each year, separately for the two leagues: so we're summarizing by the league and year combination. To do this, we change the by argument to be a vector `c("yearID", "lgID")`.
 
-```{r}
-summarized.year.lg = salaries[, list(Average=mean(salary), Maximum=max(salary)), by=c("yearID", "lgID")]
-summarized.year.lg
-```
+
 
 Notice it has one row for each combination of a year and a league- for example, one for the year 1985 within AL (American League), and one for 1985 NL (National League), and has the average and maximum within each of these. You could go even farther and view the analysis within each team, within each year. Just change the `lgID` to `teamID`:
 
-```{r}
-summarized.year.team = salaries[, list(Average=mean(salary), Maximum=max(salary)), by=c("yearID", "teamID")]
-summarized.year.team
-```
+
 
 Now, any of these summaries could be used as the result of an analysis, for example as a table in a presentation or paper. But they also make visualizing trends much easier. For example, let's say we want to examine the trend of how salary changes over time. We could produce a plot of all the points in the original salaries dataset, all 24 thousand combinations of players and years. For that we'll use ggplot2, which we covered in a previous segment:
 
-```{r}
-library(ggplot2)
-```
+
 
 Perform this on our original dataset `salaries`, putting on the x-axis `yearID` and on the y-axis `salary`.
 
-```{r}
-ggplot(salaries, aes(yearID, salary)) + geom_point()
-```
+
 
 So in this graph we can see a positive trend in salary over time. However, all we can really see is the range of salaries: within this mass of points it's not possible to tell what the average is for each of these years. If we actually want to see how the average changed over time, we can instead plot the summarized data. We get this from `summarized.year`:
 
-```{r}
-summarized.year
-```
+
 
 We have the year in one column and the average salary in another. So use that `yearID` as our x-axis and `Average` as our y-axis. Usually when we have one trend we put just a line:
 
-```{r}
-ggplot(summarized.year, aes(yearID, Average)) + geom_line()
-```
+
 
 Now we can see the trend of the average over time. This comes directly from the summarized data, where we have the average per year.
 
 We can even go farther- since we have it summarized by year *and* league, we can plot `summarized.year.lg` instead. We still put `yearID` on the x-axis and `Average` on the y, but now we color based on the league ID (`lgID`):
 
-```{r}
-ggplot(summarized.year.lg, aes(yearID, Average, col=lgID)) + geom_line()
-```
+
 
 Now we can see two separate lines- one red for the American League, and one green for the National League.
 
@@ -458,9 +327,7 @@ Segment 5: Merging Data
 
 Let's take a closer look at the baseball player salary data that we've downloaded and imported into R. You can do that with
 
-```{r, eval=FALSE}
-View(salaries)
-```
+
 
 Notice that the players are not represented by their actual first and last names- they're represented by some kind of ID. This ID looks pretty unhelpful: why not just put their names in that column?
 
@@ -468,68 +335,47 @@ The first reason is that there are multiple players in history that have the sam
 
 So what do I mean by other datasets? Well, the salary data is just one table within the Lahman baseball dataset. Let's load in a different one, from a slightly different URL. Go back to the line where we read in the salary data, but change `Salary.csv` to `Master.csv`, and save it to a variable called `master`.
 
-```{r}
-master = read.csv("http://dgrtwo.github.io/pages/lahman/Master.csv")
-```
+
 
 Before we do anything else, let's turn this data frame into a data table just like we did with `salaries`:
 
-```{r}
-master = as.data.table(master)
-```
+
 
 Let's take a look at the table:
 
-```{r, eval=FALSE}
-View(master)
-```
+
 
 This is a master list of the baseball players based on their ID. Here in the first column you can see the playerIDs that appeared in the salaries data. But you can also see a lot of biographical information, like their birthday and birthplace, their weight and height, the date of their death, and most importantly, their full name. So now in one table (`salaries`) we just have the ID, and in another table (`master`) we have a way of getting from that name to their full biographical information. So, let's take the first name on this list: someone named David Aardsma. We could take this players ID, copy it, and extract just this player's salary:
 
-```{r}
-salaries[playerID == "aardsda01", ]
-```
+
 
 Based on their ID, we were able to extract the years of their salary. You can see that David Aardsma played in seven years, you can see it rose from 2004 to 2010, before dropping back down again. So this is a way we can get one player's name and team along with his salary each year. But it's very clumsy to have to do it individually for each player. Luckily there's a much easier way to connect these two datasets: we can merge them, using the `merge` function. Let's create a new merged dataset called `merged.salaries`.
 
-```{r}
-merged.salaries = merge(salaries, master, by="playerID")
-```
+
 
 The "by" argument defines what column we should use to merge them. In this case, that's what column is shared between them, which is `playerID`.
 
-```{r}
-merged.salaries
-```
+
 
 Notice that we can still see all the data from the `salaries` dataset- the player ID, year, team, league, and salary. But each player's salary in each year- but we've also combined it with their biographical information- like their birthday and place, and most notably their name. So we've combined these two tables based on this common column: we have them all in one place. If you wanted to look for trends in salary- for instance, a connection of salary to a player's height, weight, or birth country- you now have all the information in one data table.
 
 One note, having their first and last names as different columns is useful, but we'd like to combine them together into a new column, of first name-space-last name. One way we can create a new column in a data.table is with the `:=` operator:
 
-```{r}
-merged.salaries[, name:=paste(nameFirst, nameLast)]
-```
+
 
 This means assign a new column, `name`, and now we can give it a value based on other columns in the dataset. The `paste` function is a useful function in R for combining two vectors of strings to be separated by spaces. If we put `nameFirst` and `nameLast`, because we're within the data.table, that we want to combine those two names into a new name.
 
-```{r}
-merged.salaries
-```
+
 
 You can see that we've added a new column, `name`.
 
-Merging can sometimes be a bit more complicated. For example, let's bring in one more dataset, this one a history of each player's batting statistics for each year. To do that, take the earlier `read.csv` line, change `Master.csv` to `Batting.csv`, and save it into a variable called `batting`:
+Merging can sometimes be a bit more complicated. For example, let's bring in one more dataset, this one a history of each player's batting statistics for each year. To do that, take the earlier `read.csv` line, change `Master.csv` to `Batting.csv`, and save it into a variable called `batting`: 
 
-```{r}
-batting = read.csv("http://dgrtwo.github.io/pages/lahman/Batting.csv")
-```
+
 
 Then let's turn it into a data.table, just like we did for `master`:
 
-```{r}
-batting = as.data.table(batting)
-batting
-```
+
 
 This is the most complex dataset yet. Here, like the salary data, we have one row per player per year, and their team ID and league ID. But we also have many statistics summarizing how well he did at batting that year. For instance, G represents how many games the player played in, AB represents the number of times a player went up to bat (how many chances they had to get a hit), H represents the number of hits, and HR represents the number of home runs he scored (hitting the ball out of the park, which gets a run in just one hit).
 
@@ -537,26 +383,17 @@ Now, let's say we want to combine this data with the salary data- for example so
 
 The way we do that is with the `by` argument to `merged`. Instead of giving just the `playerID` to `by`, we give a vector of the four shared columns.
 
-```{r}
-merged.batting = merge(batting, salaries, by=c("playerID", "yearID", "teamID", "lgID"))
-merged.batting
-```
+
 
 Now it has all the information that was in the batting dataset, but it also added a column for salary. Another thing to note is that we don't have salary information on every player in every year: in particular, we've lost all information on players before 1985. There is a way we can fix this, by adding the `all.x` option to the `merge` function:
 
-```{r}
-merged.batting = merge(batting, salaries, by=c("playerID", "yearID", "teamID", "lgID"), all.x=TRUE)
-merged.batting
-```
+
 
 This means "keep everything in the first dataset we're merging," which is `batting` (`all.y` would mean "keep everything in the second dataset"). Notice now that now all rows have information in the `salary` column: some have NA, which means "missing value," or "not applicable." So notice that all the rows where we have salary data get to keep their value, while all the ones that don't get filled in by the missing value NA.
 
 Now we can take this merged dataset and merge it with our biographical data in the master list. Here that would be
 
-```{r}
-merged.all = merge(merged.batting, master, by="playerID")
-merged.all
-```
+
 
 Now we see we still have the same batting information, but we also have the biographical information from the master list- for example, each player's real name. We've created one mega-dataset covering all three kinds of information. The Lahman baseball dataset contains a lot more information, including player's fielding statistics, presence in the Hall of Fame, pitchers, managers, and so on, all sharing these same IDs. By merging these datasets in the right way, you can answer very complex and interesting questions.
 
@@ -567,99 +404,67 @@ Segment 6: Exploratory Data Analysis
 
 So let's wrap up by taking all these tools together on our mega-merged dataset. Just like any other dataset, we can filter and process this. For example, this dataset includes pitchers, who might never go up to bat in a whole season. That could end up skewing our analysis.
 
-```{r}
-head(merged.all)
-```
+
 
 An example would be David Aardsma, who in many years never even had a single At Bat (AB is 0). We can start by filtering out all the years in which someone has no At Bats.
 
-```{r}
-merged.all = merged.all[AB > 0, ]
-merged.all
-```
+
 
 Now we can see that all At Bat's are at least 1.
 
 Now, one thing baseball fans like looking for is career records. That means we want to summarize across all the years that a batter played, and find, for example, the total number of home runs each player hit. Recall that we learned to do that with "by". For example:
 
-```{r}
-summarized.batters = merged.all[, list(Total.HR=sum(HR)), by="playerID"]
-```
 
-Here we create one column, `Total.HR`, which we define as the sum of home runs for each player, and we tell it to perform these summaries on each player individually.
 
-```{r}
-summarized.batters
-```
+Here we create one column, `Total.HR`, which we define as the sum of home runs for each player, and we tell it to perform these summaries on each player individually. 
+
+
 
 Now we can see that we've created a new data.table that contains each player's ID and their total career home runs. But in the process, since the only thing we're summarizing by is the player ID, we lost track of their actual first and last names. There's a simple way around that. First, recall that we can create a new column that combines the players' first and last names using `paste` and `:=`, and let's try the same trick again, this time on `merged.all`:
 
-```{r, results=FALSE}
-merged.all[, name:=paste(nameFirst, nameLast)]
-```
+
 
 Now we've added to `merged.all` a `name` column:
 
-```{r}
-merged.all
-```
+
 
 Now when we perform this summary, let's do it not just on the player ID, but also on their name:
 
-```{r}
-summarized.batters = merged.all[, list(Total.HR=sum(HR)), by=c("playerID", "name")]
-summarized.batters
-```
+
 
 By summarizing based on these two columns, we can keep both their ID and their real name.
 
 Now, just like any data.table, we can sort it to find out who the top home-run hitters are. For this we use the `order` function:
 
-```{r}
-summarized.batters[order(Total.HR), ]
-```
+
 
 Baseball fans won't be surprised that at the top we can see Barry Bonds, Hank Aaron, Babe Ruth, and some other legendary baseball hitters. In the same way we can summarize by other statistics, like total number of hits or runs. For instance, here let's add `Total.R` for total number of runs, and `Total.H` for total number of hits.
 
-```{r}
-summarized.batters = merged.all[, list(Total.HR=sum(HR), Total.R=sum(R), Total.H=sum(H)), by=c("playerID", "name")]
-summarized.batters
-```
+
 
 Now we've saved all that career information into `summarized.batters`.
 
 The more a player gets hits in baseball, the more chance they have to actually score runs. That means it's not surprising that there's a correlation between them. We can take a look at that correlation through ggplot. We'll put total hits (`Total.H`) on the x-axis and total runs (`Total.R`) on the y-axis.
 
-```{r}
-ggplot(summarized.batters, aes(Total.H, Total.R)) + geom_point()
-```
+
 
 Here we can see a clear correlation between the number of hits a player gets and the number of runs.
 
 So far each of these summaries has been of one statistic: the total number of home runs, or the total number of hits. But some baseball statistics are calculated based on several of a player's statistics. For example, consider the batting average, which is the number of hits a player gets, divided by the number of times he goes up to bat.
 
-```{r}
-head(merged.all)
-```
+
 
 So in our batting dataset, for Hank Aaron in 1955, we can see that he had 189 hits out of 602 at-bats. We'd calculate his batting average as
 
-```{r}
-189 / 602
-```
+
 
 for that year. What if we wanted to compute each player's career batting average? It turns out that's easy with the summary operation. We add a column `BattingAverage` to the summary data.table, which we put as the sum of all hits divided by the sum of all at-bats.
 
-```{r}
-summarized.batters = merged.all[, list(Total.HR=sum(HR), Total.R=sum(R), Total.H=sum(H), BattingAverage=sum(H) / sum(AB)), by=c("playerID", "name")]
-summarized.batters
-```
+
 
 This kind of summary operation thus lets us generate any statistic we're interested in. We could then, for instance, put it into a histogram to find out its distribution:
 
-```{r}
-ggplot(summarized.batters, aes(BattingAverage)) + geom_histogram()
-```
+
 
 We can see that they center around about 25%, with a large number of people with close to 0 batting average, which would mostly be pitchers.
 

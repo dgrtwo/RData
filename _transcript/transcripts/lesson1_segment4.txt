@@ -1,0 +1,64 @@
+Segment 4: Matrix
+---------------
+
+Matrices are like two-dimensional vectors, organizing values into rows and columns. For example, each row may represent a patient, whereas each column contains biomedical characteristics. If you pick one row, you would get all information about the particular patient. If you examine one column, you would get one of many biomedical characteristics about all patients in the matrix.
+
+Whereas vectors in previous sections had only one row, indicated by `[1]`, a matrix may contain multiple rows.
+
+Before we create a matrix, let’s quickly look at how a sequence of numbers are generated using a colon. We can create a sequence 1 through 6
+
+To generate a more complicated series of numbers, we could use a function called `seq`, standing for "sequence". For example, to generate the sequence of numbers from 1 to 12, incremented by 4, we would do
+
+We can make a sequence of numbers into a matrix, by using a function `matrix`. For instance, we can create a matrix with three rows and two columns
+
+Let's create another matrix `mb`
+
+Note that a matrix cannot contain multiple data types. In our case, `ma` and `mb` exclusively contain numeric values.
+
+Sometimes we'd like to combine different matrices and vectors. `cbind` and `rbind` functions stand for column binding and row binding. It could be used to combine any combination of vectors and matrices, as long as their lengths and dimensions are comparable. Here, we can bind rows of `ma` with a new vector
+
+Or we can combine `ma` and `mb` into a new matrix
+
+See that the matrix `m` has columns of `ma` followed by columns of `mb`.
+
+Try to row-bind `ma` and `mb`. Because `ma` is a 3-by-2 matrix and `mb` is a 3-by-1 matrix, R returns an error stating that two matrices do not have the same number of columns.
+
+To extract one value, or a set of values, from a matrix, use square brackets with both row and column indices such as [index of row, index of column].
+If we would like to know the element in the first row and the third column
+
+We can also use a sequence of numbers generated with a colon operator within square brackets. Here I would like to know the values in the first row
+
+Leaving the "row" spot or the "column" spot empty will extract, respectively, an entire column or an entire row.
+
+We could also get multiple rows or columns. Here I can retrieve the first and second columns
+
+Importantly, you will get an error if you enter an index of row or column that is out of bounds.
+
+The matrix `m` does not have a fifth row, which leads to an error.
+
+Of course, if you have a large matrix or have recently loaded a matrix, you may want to ask R the number of rows or the number of columns for your matrix. `nrow` is a function that computes the number of rows of a matrix, `ncol` computes the number of columns.
+
+You can also use the function `dim`, short for dimensions, to return both the number of rows and the number of columns.
+
+Matrices being two-dimensional, we could flip the columns and the rows. Such operation is called transpose and is used often in statistics. Simply use the `t` function to transpose a matrix
+
+Compare it with the original matrix `m`
+
+We see that the first row has become the first column in the transposed matrix.
+
+Sometimes the diagonal elements, which are located at [1,1], [2,2], and so on, may contain significant information about the data. Therefore, R provides a quick way to extract those values, using the function `diag`.
+
+The `diag` function behaves differently based on an input. As we just saw, with a matrix, `diag` will return a vector of diagonal elements.
+
+For a single numeric value, it will create an identity matrix, which is a square matrix with 1s in the diagonal positions.
+
+For a vector, it will create a diagonal matrix whose diagonal elements are derived from an input vector. The square matrix then would have both the number of rows and columns matching the length of an input vector.
+
+Basic math functions from the beginning of this course can be readily applied to matrices. You can add, subtract, multiply, or divide each element in a matrix by a single numeric value.
+
+You can also perform matrix multiplication. Let's create a new matrix, `m2`, with 3 rows
+
+Now we can multiply `m` with `m2`
+
+Note that each element in `m3` is a dot product between a row in `m` and a column in `m2`.
+

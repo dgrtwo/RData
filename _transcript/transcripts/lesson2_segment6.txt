@@ -1,0 +1,65 @@
+Segment 6: Input- Getting Data into the Right Format
+-----------
+
+So far all of our analyses have started with a data frame: one row per observation, one column for each attribute. But let's say you have just one vector of numbers and you want to create a histogram, or you have two vectors and want to make a scatterplot. It may not be worth it to construct a data frame with those values just so you can graph it. To make your life easier, ggplot2 provides a simple way to plot one or two vectors, which is the `qplot` function.
+
+Let's generate some random numbers we want to plot. The rnorm function generates random values from a normal distribution, or "bell curve." So if we create a variable `x` with `rnorm`, saying how many random values we want, for example `1000`
+
+We have created a variable containing 1000 values. Here we can see
+
+Each of these values was generated from a normal distribution.
+
+Let's say we want to histogram those values. We can give them to the function `qplot`
+
+This creates a histogram without having to create a data frame or specify `geom_histogram`.
+
+This shortcut also lets us set options easily. For example, we can change the binwidth of the histogram by giving the binwidth argument to qplot
+
+We can also set the x and y axis labels easily. We can do that either by adding the `xlab` and `ylab` options like we did before
+
+Or we can add the `xlab` argument to the `qplot` function.
+
+Histograms aren't the only thing we can plot with qplot. Let's create a y variable so that we can construct a scatter plot comparing x to y. Let's make y also be a random normal distribution
+
+If we want to scatterplot x vs why, we can simply give them to `qplot`.
+
+Note that we can still add layers to this basic plot just like we could to a regular ggplot call. For example, we could add a smoothing curve with the `geom_smooth` layer
+
+This layer ends up on top of the scatterplot created by `qplot`.
+
+Now, so far we've been working with the built-in diamonds dataset. These plots were really easy because the data were given in the format of one observation per row- that is, one diamond per row- which we call "tall" format. But many datasets come in a "wide"" format: that means there is more than one observation- more than one point on your scatterplot- in each row. For example, let's look at the WorldPhones dataset, which comes built into R. Just like we did for diamonds, we use data to load it
+
+You can see it got added to our global environment. You can then view it using the `View` function.
+
+You can also get more information about WorldPhones using the `help` function
+
+This dataset shows the number of telephones, measured in thousands, in each continent in each of several years in the 1950s.
+
+Notice that each column is one continent, and each row is one year. Now, that sounds like a reasonable way to store your data. But imagine if we want to compare increases in phone usage between continents, with time on the x axis. That means each point on our plot is going to be one continent in one year. We don't have one observation per row: we have seven! That makes it very difficult to plot using ggplot2.
+
+Luckily, there is an easy way to turn this into tall format, called "melting" the data. To do this, we'll have to install another third party package, called reshape2. Recall that you can do this with
+
+just like we did with `ggplot2`. Now we load the reshape2 package, with
+
+Now we can melt our dataset: that is, turn it from this wide format- many observations per row- to a tall format- one observation per row. Let's assign the new, melted data to a variable called WorldPhones.m, where m is for melted. We assign this using the `melt` function on the WorldPhones data.
+
+Now let's view our new, melted data.
+
+Notice that there are now only three columns: Var1, Var2, and value. So Var1 is year, in Var2 we see each of the continents, and value is the number of phones. What happened was that every cell- every observation- every number of phones per year per continent- in the original data got its own row in this melted data. We can see that in the year 1951, in North America, there were 45 million, 939 thousand phones. You can see the same value in our original unmelted data. So none of the data changed, it just got "reshaped".
+
+To make the data a little more intuitive, you can change the column names. You might recall that we can do this as follows
+
+So now if we view `WorldPhones.m`, we can see our new column names.
+
+Now that we have our data in melted format, it is easy to create a plot with ggplot2. We go through our usual steps of a ggplot call, but this time we give it WorldPhones.m. We do
+
+on the x-axis we're going to put the Year, so we can see how things change over time. On the y-axis we want to put the number of Phones, which is the variable we're interested in graphing. And let's color each point based on the factor of Continent. Then we'll add the `geom_point` layer to make this into a scatterplot.
+
+Now we've worked with scatterplots before, but since this time what we're showing is a trend over time, it might be better to draw lines between the points in continent. This is easy: we can just change the layer to a `geom_line` layer.
+
+Now we have a plot of the number of phones in each continent by year. Incidentally, one might expect phone service to increase exponentially rather than linearly. Also, a lot of the values here are scrunched in the bottom of the axis. When that's the case, it's a good idea to put the y axis on a log scale. Recall that we can do that by adding `scale_y_log10()`.
+
+Now each of the phone trends looks linear, and we can see the lower values more clearly: for example, that Africa overtook Central America in the number of phones in the year 1956.
+
+Notice how easy this plot was to make once we had the data in the correct format: one row for every point- that's every combination of year and continent- on our graph. So if your data's not in that format when you're starting out, melt it.
+

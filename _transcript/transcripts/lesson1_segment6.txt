@@ -1,0 +1,26 @@
+Segment 6: Logical Vectors and Operators
+-------------
+
+Another type of variable is a logical value: `TRUE` or `FALSE`. We can create a logical vector or matrix, as well as using mathematical operations, such as inequalities, on numbers to dynamically generate logical variables.
+
+Using the function `c`, we can make a vector of logical values. Note that TRUE and FALSE are not wrapped by quotation marks.
+
+Note that the class of `y` is "logical"
+
+Note that `TRUE` and `FALSE`, being capitalized, are reserved and treated specially by R. Therefore, you can not and should not name your variable `TRUE` or `FALSE`.
+
+You can compare numeric values in a vector with any value you choose
+
+If you apply a logical operator to a matrix, it will work on each element. Here we ask which elements of `m` are greater than or equal to 5.
+
+However, what if you want "all automatic cars" from the `mtcars` dataset, or "all cars with mpg > 20"? We can first ask R which elements of `mtcars$mpg` is greater than 20
+
+This logical vector can be used to subset rows of the data frame. `TRUE` means "keep the row", `FALSE` means drop it. Place this before the comma in the square brackets
+
+Alternatively, and more concisely, we could also put the expression directly in front of the comma
+
+You can combine multiple conditions using `&` (and) or `|` (or), such as looking for automatic gearshift cars with `mpg` > 20. Here we provide two conditions: that the mpg is greater than 20, and that the gearshift is automatic
+
+Then we can look at the first few rows of `efficient.auto`
+
+We can confirm they have `mpg` greater than 20 and `am` equal to 0.

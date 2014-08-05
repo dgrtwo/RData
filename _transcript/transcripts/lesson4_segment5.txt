@@ -1,0 +1,47 @@
+Segment 5: Merging Data
+-------------
+
+Let's take a closer look at the baseball player salary data that we've downloaded and imported into R. You can do that with
+
+Notice that the players are not represented by their actual first and last names- they're represented by some kind of ID. This ID looks pretty unhelpful: why not just put their names in that column?
+
+The first reason is that there are multiple players in history that have the same name, and at that point if you used their names to identify them, it wouldn't be possible to tell them apart in the data. Meanwhile, these IDs are guaranteed to be unique per player. There are other advantages: for example, the player ID is shorter and therefore takes up less storage space- but the uniqueness is the most important. That ID can be used to connect this column to other datasets.
+
+So what do I mean by other datasets? Well, the salary data is just one table within the Lahman baseball dataset. Let's load in a different one, from a slightly different URL. Go back to the line where we read in the salary data, but change `Salary.csv` to `Master.csv`, and save it to a variable called `master`.
+
+Before we do anything else, let's turn this data frame into a data table just like we did with `salaries`
+
+Let's take a look at the table
+
+This is a master list of the baseball players based on their ID. Here in the first column you can see the playerIDs that appeared in the salaries data. But you can also see a lot of biographical information, like their birthday and birthplace, their weight and height, the date of their death, and most importantly, their full name. So now in one table (`salaries`) we just have the ID, and in another table (`master`) we have a way of getting from that name to their full biographical information. So, let's take the first name on this list: someone named David Aardsma. We could take this players ID, copy it, and extract just this player's salary
+
+Based on their ID, we were able to extract the years of their salary. You can see that David Aardsma played in seven years, you can see it rose from 2004 to 2010, before dropping back down again. So this is a way we can get one player's name and team along with his salary each year. But it's very clumsy to have to do it individually for each player. Luckily there's a much easier way to connect these two datasets: we can merge them, using the `merge` function. Let's create a new merged dataset called `merged.salaries`.
+
+The "by" argument defines what column we should use to merge them. In this case, that's what column is shared between them, which is `playerID`.
+
+Notice that we can still see all the data from the `salaries` dataset- the player ID, year, team, league, and salary. But each player's salary in each year- but we've also combined it with their biographical information- like their birthday and place, and most notably their name. So we've combined these two tables based on this common column: we have them all in one place. If you wanted to look for trends in salary- for instance, a connection of salary to a player's height, weight, or birth country- you now have all the information in one data table.
+
+One note, having their first and last names as different columns is useful, but we'd like to combine them together into a new column, of first name-space-last name. One way we can create a new column in a data.table is with the `:=` operator
+
+This means assign a new column, `name`, and now we can give it a value based on other columns in the dataset. The `paste` function is a useful function in R for combining two vectors of strings to be separated by spaces. If we put `nameFirst` and `nameLast`, because we're within the data.table, that we want to combine those two names into a new name.
+
+You can see that we've added a new column, `name`.
+
+Merging can sometimes be a bit more complicated. For example, let's bring in one more dataset, this one a history of each player's batting statistics for each year. To do that, take the earlier `read.csv` line, change `Master.csv` to `Batting.csv`, and save it into a variable called `batting`: 
+
+Then let's turn it into a data.table, just like we did for `master`
+
+This is the most complex dataset yet. Here, like the salary data, we have one row per player per year, and their team ID and league ID. But we also have many statistics summarizing how well he did at batting that year. For instance, G represents how many games the player played in, AB represents the number of times a player went up to bat (how many chances they had to get a hit), H represents the number of hits, and HR represents the number of home runs he scored (hitting the ball out of the park, which gets a run in just one hit).
+
+Now, let's say we want to combine this data with the salary data- for example so we can see how salary is correlated with performance. First, notice that the salary table and the batting table don't share only one column of player ID: they share four: playerID, teamID, leagueID and yearID. That's because we have multiple batting statistics and salary for each single player. This means we won't just be merging by player: we'll be merging them based on the combination of all four columns.
+
+The way we do that is with the `by` argument to `merged`. Instead of giving just the `playerID` to `by`, we give a vector of the four shared columns.
+
+Now it has all the information that was in the batting dataset, but it also added a column for salary. Another thing to note is that we don't have salary information on every player in every year: in particular, we've lost all information on players before 1985. There is a way we can fix this, by adding the `all.x` option to the `merge` function
+
+This means "keep everything in the first dataset we're merging," which is `batting` (`all.y` would mean "keep everything in the second dataset"). Notice now that now all rows have information in the `salary` column: some have NA, which means "missing value," or "not applicable." So notice that all the rows where we have salary data get to keep their value, while all the ones that don't get filled in by the missing value NA.
+
+Now we can take this merged dataset and merge it with our biographical data in the master list. Here that would be
+
+Now we see we still have the same batting information, but we also have the biographical information from the master list- for example, each player's real name. We've created one mega-dataset covering all three kinds of information. The Lahman baseball dataset contains a lot more information, including player's fielding statistics, presence in the Hall of Fame, pitchers, managers, and so on, all sharing these same IDs. By merging these datasets in the right way, you can answer very complex and interesting questions.
+

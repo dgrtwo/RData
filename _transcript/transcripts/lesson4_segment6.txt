@@ -1,0 +1,42 @@
+Segment 6: Exploratory Data Analysis
+-------------
+
+So let's wrap up by taking all these tools together on our mega-merged dataset. Just like any other dataset, we can filter and process this. For example, this dataset includes pitchers, who might never go up to bat in a whole season. That could end up skewing our analysis.
+
+An example would be David Aardsma, who in many years never even had a single At Bat (AB is 0). We can start by filtering out all the years in which someone has no At Bats.
+
+Now we can see that all At Bat's are at least 1.
+
+Now, one thing baseball fans like looking for is career records. That means we want to summarize across all the years that a batter played, and find, for example, the total number of home runs each player hit. Recall that we learned to do that with "by". For example
+
+Here we create one column, `Total.HR`, which we define as the sum of home runs for each player, and we tell it to perform these summaries on each player individually. 
+
+Now we can see that we've created a new data.table that contains each player's ID and their total career home runs. But in the process, since the only thing we're summarizing by is the player ID, we lost track of their actual first and last names. There's a simple way around that. First, recall that we can create a new column that combines the players' first and last names using `paste` and `:=`, and let's try the same trick again, this time on `merged.all`
+
+Now we've added to `merged.all` a `name` column
+
+Now when we perform this summary, let's do it not just on the player ID, but also on their name
+
+By summarizing based on these two columns, we can keep both their ID and their real name.
+
+Now, just like any data.table, we can sort it to find out who the top home-run hitters are. For this we use the `order` function
+
+Baseball fans won't be surprised that at the top we can see Barry Bonds, Hank Aaron, Babe Ruth, and some other legendary baseball hitters. In the same way we can summarize by other statistics, like total number of hits or runs. For instance, here let's add `Total.R` for total number of runs, and `Total.H` for total number of hits.
+
+Now we've saved all that career information into `summarized.batters`.
+
+The more a player gets hits in baseball, the more chance they have to actually score runs. That means it's not surprising that there's a correlation between them. We can take a look at that correlation through ggplot. We'll put total hits (`Total.H`) on the x-axis and total runs (`Total.R`) on the y-axis.
+
+Here we can see a clear correlation between the number of hits a player gets and the number of runs.
+
+So far each of these summaries has been of one statistic: the total number of home runs, or the total number of hits. But some baseball statistics are calculated based on several of a player's statistics. For example, consider the batting average, which is the number of hits a player gets, divided by the number of times he goes up to bat.
+
+So in our batting dataset, for Hank Aaron in 1955, we can see that he had 189 hits out of 602 at-bats. We'd calculate his batting average as
+
+for that year. What if we wanted to compute each player's career batting average? It turns out that's easy with the summary operation. We add a column `BattingAverage` to the summary data.table, which we put as the sum of all hits divided by the sum of all at-bats.
+
+This kind of summary operation thus lets us generate any statistic we're interested in. We could then, for instance, put it into a histogram to find out its distribution
+
+We can see that they center around about 25%, with a large number of people with close to 0 batting average, which would mostly be pitchers.
+
+In this way you're able to test hypotheses almost as fast as you can think of them. This loop of asking questions about your data and getting answers back is the core of exploratory data analysis.

@@ -1,0 +1,29 @@
+Segment 2: Correlation
+--------------
+
+A t-test examined whether a numeric variable differed between two categories. Another common statistical task is to test whether *two numeric* variables are related. For example, we might be interested in testing whether a car's weight affects fuel efficiency. Just like we constructed a boxplot before performing a two-sample test, we'll want to create a scatterplot before performing this test. In this case, we can do that with
+
+Immediately you can see a negative relationship: a higher weight means a higher miles per gallon and therefore a lower fuel efficiency in. This makes intuitive sense: a heavier car requires more fuel. But is it possible that this trend happened by chance? Maybe it just so happened that the cars we chose with heavier weights happened to have lower fuel efficiency, and vice versa, even though there was no underlying relationship.
+
+To test that, we need more than a graph: we need to perform a statistical test. We're comparing two vectors here: the column describing the miles-per-gallon fuel efficiency of each car, and the column describing the weight in pounds. Recall that we can access a single column of the data using a dollar sign
+
+The simplest way to test for a relationship between two variables is with a correlation test. This can be done with the `cor.test` function
+
+Just like the t-test, we produce a lot of information, so let's walk through it. Most notable is the p-value. This value reads as 1.294 times 10 to the power of negative ten- an extremely small number, smaller than one out of a billion. This is the probability that this data would appear to be this strongly correlated by chance alone. The smaller the p-value, the more significant the correlation, so here we can be very confident that a correlation exists.
+
+We can also find the estimate of the correlation coefficient. This value varies from -1 to 1, where 1 represents a perfectly linear positive relationship, and -1 represents a perfectly linear negative relationship. 0 would indicate that the two are not correlated. These values can be extracted individually from a correlation test just like they could be from a t-test, by using a dollar sign. For example, let's save it into a variable `ct`.
+
+Now `ct` contains the entire correlation test.
+
+We can extract the p-value
+
+Similarly, we can extract the estimate by doing `$estimate`
+
+And much like the t-test, we can get a confidence interval
+
+```
+ct$conf.int
+```
+
+You can see by hitting "tab" after the dollar sign all the values you can extract.
+

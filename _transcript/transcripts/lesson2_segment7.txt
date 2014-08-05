@@ -1,0 +1,25 @@
+Segment 7: Output: Saving Your Plots
+-------------
+
+So you just created a great ggplot, and now you want to save it to a file, so you can email it, or add it to your paper or poster, or just look at it later. You can do this with the ggsave function.
+
+First, let's create a scatterplot based on our diamonds data.
+
+Now instead of displaying it, let's run that line again, but save it to a variable, called p.
+
+Note that when that happened, the plot did not get recreated: it WAS built but never displayed. We've saved the entire plot into this `p` object. Now we can save that plot to a file, instead of displaying it in our window, by using ggsave
+
+What just happened is that we created a file called diamonds.png that saved the image. It doesn't have to be a PNG; it can also be a PDF
+
+or a JPEG
+
+You can read about the formats ggsave supports, and about the other options you can set like figure height and width, by doing `help` on `ggsave`
+    
+
+One useful shortcut is that if you just displayed a plot, like in a line like this
+
+Then ggsave will know to save *that* plot by default when you perform ggsave- you don't even have to tell it which plot you're saving.
+
+Just make sure you're saving the plot you mean to save.
+
+Within RStudio, there's one other choice for saving a plot: you can click on Export, and then "Save Plot As Image," and then select your width, height, filename, and so on.

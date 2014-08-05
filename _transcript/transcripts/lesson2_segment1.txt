@@ -1,0 +1,21 @@
+Segment 1: Introduction
+------------
+
+In data analysis more than anything, a picture really is worth a thousand words. When you start analyzing data in R, your first step shouldn't be to run a complex statistical test: first, you should visualize your data in a graph. This lets you understand the basic nature of the data, so that you know what tests you can perform, and where you should focus your analysis. I'm David Robinson, and in this lesson we'll introduce you to ggplot2, a powerful R package that produces data visualizations easily and intuitively. We will assume you are moderately familiar with basic concepts in R, including variables and functions, and with RStudio, the integrated development environment for programming in R.
+
+So, ggplot2 is a third party package: that means it's code that doesn't come built into the language. This means you have to install it.
+
+You can do that with one line of R code here in your interactive terminal, which is
+
+and hit return. Or you can go to the Tools->Install Packages menu, where here you type "ggplot2" and hit install.
+
+Each time you reopen R, you need to load the library using the `library` function before you use it. So here that's
+
+Now we're ready to use it. ggplot2 comes with some data available to use as a demonstration: particularly, the "diamonds" dataset, containing information about several attributes of 54000 diamonds. We can access it using the `data` function
+
+See that we've added "diamonds" to our global environment. Once we've loaded the diamonds dataset, we can view it using `View`
+
+Here we have a view of it kind of like a spreadsheet. Here we have the carat: that's the weight of the diamond; and the cut, color and clarity: each of these are measuring something about the quality of the diamond in various levels. And then we have other attributes including the price of the diamond. You can find out what each of these mean using the "help" function
+
+Here we get a description of the diamonds dataset, and the details about each of the columns.
+

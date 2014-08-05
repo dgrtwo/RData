@@ -1,0 +1,69 @@
+Segment 3: Vectors
+-----------
+
+As R is built for analyzing large data, we must learn how to handle a sequence of numbers or a matrix of numbers. Let’s first look at a sequence of numbers stored in a vector. Instead of storing a single numeric value, we can create a vector consisting of multiple numeric values by using a function `c()`.
+
+This function can also be used to combine two vectors, such as `v1` and `v2`, into a variable `v3`
+
+When we have a vector with more than one value, we can subset the vector using square brackets. Enter an index within square brackets following a variable to retrieve a single value corresponding to this index. Here we look at `v3`, and we only want to get the second element.
+
+Similarly, you may use a sequence of indices to retrieve a sequence of values corresponding to those indices. Here we look at the second and third elements of vector `v3`.
+
+Lastly, you can store the output of subsetting into another variable
+
+A lot of statistical programming in R relies on mathematical operations applied to a vector or a matrix. Basic calculator-like functions may apply to all elements in a given vector. We could add the numeric value 2 to a vector `v1`
+
+We could also take the trigonometric function `sin` and apply it to the vector `v1`
+
+Now, we have a vector which consists of multiple numeric values and math operations that work element-wise. If needed, we may apply an operation on a subset of a vector
+
+Note that an equivalent result can be obtained by firstly applying a desired math operation to a vector and retrieving a subset of the result
+
+You can also perform operations between two vectors. If two vectors are of the same length, corresponding elements will be used. We could multiply `v1` and `v2`
+
+See that the first element of v1
+
+and the first element of v2
+
+were multiplied, resulting in the first element of the output. The second element of v1 and the second element of v2 were multiplied, resulting in the second element of the output, and so on.
+
+A dot product, or an inner product, which is a sum of the products of corresponding elements in two vectors, can be computed by
+
+Dot products requires that two vectors must have a same length. Otherwise, you will get an error
+
+When in doubt, check the length of a vector. We can look at the length of `v1`, or of `v3`
+
+You may wonder what happens when you apply a math function to a character variable we made previously. Conveniently, R will prohibit you from using math operations on a character vector, since it simply does not make sense. For example, we created the character vector `chv2` earlier, and we get an error if we try adding a number to it.
+
+However, it may not be obvious whether a variable is numeric or not. You can verify the class of a variable using the function `class`.
+
+Some numeric values may be stored in a character vector. For example, patient numbers could be simply stored for an identification purpose and years may be used as ordinal categories. Whether to assign a number 42 versus a character “42” depends entirely on the context. For example, we could create a variable `v4`, and assign `"10"` and `"42"` as its contents
+
+Note that double quotation marks make it a character vector. And since R thinks `v4` is a character vector, an attempt to apply a math operation will give an error.
+
+If you would like to use numeric values in a character vector, we can tell R to treat `v4` as numbers.
+
+Now we can check the class of `v4`, which has changed to numeric, and we can perform numeric operations on it.
+
+Of course, this forcefully changes the class and therefore you should be careful in using this function.
+
+The function `summary` provides an easy way to get the feel of data. For a numeric vector, we get six descriptive statistics. For instance, `summary` of `v3`
+
+calculates the mean, median, minimum, max, and other summary statistics.
+
+Depending on the class, `summary` provides different outputs.
+
+R includes a number of built-in functions to compute various statistics. Many of these are only applicable to numeric values. For instance, we could get the mean or variance
+
+The quantile function provides the 0, 25th, 50th, 75th, and 100th quantile of the vector
+
+Other widely used functions include `sum`, `median`, `sd`, `max`, `min`, and others.
+
+Elements in a vector have names, which you can access using the function `names`
+
+`NULL` here implies that the elements in `v3` currently do not have names. We can assign names using `=`
+
+Now we can look at `v2` and see that the names are part of the output
+
+or we can simply extract the names by themselves
+

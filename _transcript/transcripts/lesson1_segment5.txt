@@ -1,0 +1,47 @@
+Segment 5: Lists and Data Frames
+-------------
+
+While matrices are extremely useful for processing and storing a large dataset, matrices have several limitations that may not suit our needs. For example, what do we do if we would like to put together columns of numeric values and of characters in the same structure? Matrices will force numeric values into characters because only one data type is allowed. Both lists and data frames are more flexible data structures and will allow different data types to be assigned to a single variable.
+
+In R, a list is a vector containing other objects which may be of different data types and of different lengths. Let’s combine multiple variables we have created into a single list. To do this we use a function called `list`, and give it items we have created before
+
+We could also assign names to objects within a list
+
+We can slice a list by its index
+
+This output is still a list containing the first member
+
+If you would like to extract the content, you need to use *two* sets of square brackets
+
+Alternatively, the content of a member in a list can be accessed by its name. We can learn the names of a list with the `names` function
+
+And can use a dollar sign ($) to extract one member of the list
+
+Data frames are lists with a set of restrictions. Most precisely, a data frame is a list of vectors which are conveniently arranged as columns. All vectors or columns in a data frame must have the same length. With statistical programming in mind, data frames mimic matrices when needed and appropriate. Most functions, such as `colnames`, `cbind`, and `dim`, used for a matrix are also applicable to data frames.
+
+R comes with built-in datasets that can be retrieved by name, using `data` function. In this class, we are going to utilize `mtcars`, a dataset built into R.
+
+`mtcars` contains statistics about 32 cars in 1974, including miles per gallon, weight, number of cylinders, and others. Each row is one car, and each column one of characteristics.
+
+You can see a help file about `mtcars` with
+
+RStudio provides a functionality to display the data in a spreadsheet, using the `View(function)`.
+
+However, you might not want to look at all the data points in a data frame. One of the most useful functions is `head`, which shows the first 6 rows of a data frame. Since the data may be very large, it is a good way to get an idea of its contents
+
+Just how we obtained summary statistics of a vector, we can apply `summary` function to a data frame
+
+See that each column is summarized independently, and for each column, we get the six summary statistics, such as `min`, `max`, `median`, and `mean`.
+
+As a data frame can be thought of as a list of vectors that have the same length, we can also access each column by their names.
+
+Note that this is equivalent to looking at the column names
+
+You can retrieve a specific column by name. For instance, we could look just at miles per gallon (`mpg`)
+
+Rather than using the dollar sign ($), we could also access the column like
+
+Alternatively, we can use the column index within square brackets to subset a column from a data frame. This is identical to how we subset a matrix. To get just the first column
+
+We can obtain multiple rows at once as well
+

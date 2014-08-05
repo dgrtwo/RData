@@ -1,0 +1,33 @@
+Segment 4: Histograms and Density Plots
+-------------
+
+We've seen a lot of ways to customize scatter plots. But scatter plots are just one kind of graph. Sometimes we want to look at just one dimension of our data and observe its distribution: for that, we'll use a histogram.
+
+All you need to do to make a histogram is to change your layer from geom_point() to geom_histogram(). For example, we do
+
+This creates a histogram. Notice that we've on the x-axis we've placed price. On the y-axis is the frequency within each bin. This is a visualization of the density of the distribution of price.
+
+You can change the width of each bin as an option to the geom_histogram layer. You can make them wider
+
+Or you can change it to be thinner
+
+Other than that, you can do most of the same things with a histogram that you could with a scatter plot. You can again facet histograms into multiple subplots using facet_wrap. For instance, take a plot and use `facet_wrap`, and let's divide it by `clarity`
+
+Notice that we've created 8 subplots, one for each level of clarity. Note that each subplot shares the same y axis, which might make it hard to interpret the frequencies: some subplots have far more points than others. So to free up the y axis so they can be different between the graphs, we add an argument to facet_wrap. In this case, we add `scale="free_y"`
+
+Notice that each of the subplots now has a different y-axis; some of them going up to 50, some up to 1000, depending on what is appropriate for that subplot.
+
+Let's say you want to add another attribute to this histogram to see its effect on the density: for example, to make a stacked histogram based on the clarity attribute. Try adding the "fill" aesthetic
+
+This creates a stacked histogram where each color represents the distribution of a different clarity attribute.
+
+You could set this to any other attribute as well, for example the cut
+
+Now you can see how the distribution is composed within each of those variables.
+
+Another way to view the distribution is as a density curve. You can do this by changing `geom_histogram` to `geom_density`. Remove the `fill` attribute.
+
+Notice it looks smoother than a histogram. If you want to divide this density curve up based on one of your attributes, you can use the `color` aesthetic instead of `fill`. For example, you can add `color=cut`.
+
+This provides a good way to compare multiple distributions.
+

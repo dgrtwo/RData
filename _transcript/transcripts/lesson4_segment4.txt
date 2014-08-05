@@ -1,0 +1,67 @@
+Segment 4: Summarizing Data Within Groups
+--------------
+
+In our last segment we learned how to download a dataset on baseball player salaries and turn it into a data table, and then to perform some basic organizations on it like filtering and sorting. Now we're going to learn about a more sophisticated and powerful way of processing the data, namely performing summary operations within groups. This is an important and omnipresent task in data analysis.
+
+Let's look again at our salaries dataset.
+
+Right now we have 24 thousand rows, each with a combination of a year and a player. Now, we can perform some general summaries of this data. For example, we can extract the salary column using a dollar sign ($)
+
+Then we can find the average salary of all players across all years with the mean function
+
+Similarly, we could find the highest salary across all years with `max`
+
+or the median
+
+We can also find the average salary in a given year by filtering the data before we extract the column. This code extracts the salaries only from the year 2000
+
+We can then find the average salary in the year 2000
+
+This gives us a good way to ask questions interactively about our data. But what if we want to look for a trend- for example, how baseball player salaries change over time? It would be a huge hassle to repeat this line of code for 1985, 1986, 1987 and so on, and them combine all of those. What we want is a way to perform this summary operation of averaging within each year, for every year in the dataset. It turns out the data.table package makes that easy
+
+Let's create a new data.table called `summarized.year`, then we subset it using square brackets in a very particular way. Put nothing before the first comma. Now after the second comma, we say we want to take the mean of the salary column- but then we put another comma and `by="yearID"`, which means  we don't want to do it once for the whole dataset- we want to do it within each year. So we're computing the mean salary (`mean(salary)`), within each year (`by="yearID"`).
+
+This message in red is a warning: it's basically complaining that baseball players are paid too much. But you can ignore it, it doesn't have any effect on our results. Let's look at what ended up in `summarized.year`
+
+We now have two columns: one for year, which we were summarizing by, and one called V1. Every year has its own row, and this V1 was the result of this expression we put between the two commas.
+
+What if we wanted to give it a more useful name, like "Average"? We can do that by changing what we put in our summarizing expression, by placing the `list()` function between the commas.
+
+This means we want to create a column called average that contains the mean salary within each year. (Ignore the warning again). Now you can see that the column is called `Average`, which is more helpful. But our summary operation doesn't have to stop there. We can create two columns at the same time: one for the average, and one for the maximum
+
+Now you can see that we've created two columns along with the summarizing year: one with average, one with maximum.
+
+We could add other columns as well, showing, for instance, the minimum or standard deviation or the salary within each year. Anything you put in this list will end up being a column.
+
+You can group your summaries by any column in the data, not just the year. For example, you could summarize within each baseball league- those two leagues being the American League and the National League. Again we put a `list()` of the columns we want to create within the commas, but this time put `by="lgID"`.
+
+Now you can see there are only two rows: one for the American League, one for the National League, and we can see the average and maximum salaries within each.
+
+We've already summarized by year, and by league- we could also summarize by team. We would just change `by="lgID"` to `by="teamID"`.
+
+Now we can see one row for each team.
+
+Note that this output is itself a data.table, just like the input was. You can process it or sort it just like you could any other. For example, you could filter it to look only at a particular range of years. Here we look for years after 2000
+
+Here we get a smaller subset of that summary. Similarly you can sort the output, for instance to find the highest paid and lowest paid teams.
+
+Finally, we can group by more than one column in our analysis. Let's say we want to see the average salary within each year, separately for the two leagues: so we're summarizing by the league and year combination. To do this, we change the by argument to be a vector `c("yearID", "lgID")`.
+
+Notice it has one row for each combination of a year and a league- for example, one for the year 1985 within AL (American League), and one for 1985 NL (National League), and has the average and maximum within each of these. You could go even farther and view the analysis within each team, within each year. Just change the `lgID` to `teamID`
+
+Now, any of these summaries could be used as the result of an analysis, for example as a table in a presentation or paper. But they also make visualizing trends much easier. For example, let's say we want to examine the trend of how salary changes over time. We could produce a plot of all the points in the original salaries dataset, all 24 thousand combinations of players and years. For that we'll use ggplot2, which we covered in a previous segment
+
+Perform this on our original dataset `salaries`, putting on the x-axis `yearID` and on the y-axis `salary`.
+
+So in this graph we can see a positive trend in salary over time. However, all we can really see is the range of salaries: within this mass of points it's not possible to tell what the average is for each of these years. If we actually want to see how the average changed over time, we can instead plot the summarized data. We get this from `summarized.year`
+
+We have the year in one column and the average salary in another. So use that `yearID` as our x-axis and `Average` as our y-axis. Usually when we have one trend we put just a line
+
+Now we can see the trend of the average over time. This comes directly from the summarized data, where we have the average per year.
+
+We can even go farther- since we have it summarized by year *and* league, we can plot `summarized.year.lg` instead. We still put `yearID` on the x-axis and `Average` on the y, but now we color based on the league ID (`lgID`)
+
+Now we can see two separate lines- one red for the American League, and one green for the National League.
+
+Notice that data.table and ggplot2 have a natural synergy: data table lets you summarize your data to the extent you need to visualize what you want with `ggplot2`. Together they work as two powerful tools for exploratory data analysis.
+

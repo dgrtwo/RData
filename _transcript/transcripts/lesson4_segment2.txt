@@ -1,0 +1,31 @@
+Segment 2: Reading Data
+--------------
+
+So far we've been working with built-in datasets in R. For example, remember that we can load the `mtcars` dataset by doing
+
+R comes with dozens of useful datasets like this, and they're great for learning and practicing. But of course, whatever data you're actually interested in, chances are it's probably not already built into R. So how can you read your own data into R?
+
+Let's start by downloading some data and reading it in. We're going to be working with a dataset about baseball: specifically the 2013 version of Sean Lahman's Baseball Archive. The statistical analysis of baseball is called sabermetrics, and it has a rich and fascinating history: this dataset can be used to explore lots of extraordinary trends. Don't worry if you're not a fan of baseball, or even if you know nothing about it: we're just using it as an example of data manipulation. I'll explain everything as we go along, and you'll have just as much fun as anyone.
+
+So the URL for this file is [http://dgrtwo.github.io/pages/lahman/Salaries.csv](http://dgrtwo.github.io/pages/lahman/Salaries.csv). Take this URL and put it into your favorite web browser. At this point you can see the comma separated values in the dataset. Let's save it to our computer, particularly putting it into your current working directory. Make sure it's saved as a CSV file. We should now have the Salaries.csv file in your file manager in RStudio.
+
+Let's look at the contents of this CSV file a little more closely. This is called CSV, or comma-separated value, format. It contains one header row, and then a series of lines made up of multiple fields separated by commas. This is one of the most common formats data is shared in. For instance, if you have an Excel spreadsheet, note that you can save it into CSV format.
+
+You can read a CSV file into R easily with the `read.csv` function
+
+This read in the CSV file as a data frame. You can see this by doing
+
+This data is organized into rows: one row per player per year. You can see a column for the year, for the ID of the player, and for the salary in US dollars. You can also see the team that the player was playing on, and the league, either the American League (`AL`) or National League (`NL`) that the team plays in.
+
+I had you download the file just so we could look at it, but note that you don't actually have to download it at all. R can read a CSV file directly from the internet, if you give it the URL. Take that URL we had and put it into `read.csv` directly
+
+This downloads the file, reads it in, and saves it into the same data.frame.
+
+Now, this was the best way to read this standard CSV file. But what if you didn't have a header row? Or what if your file were separated by spaces, or by tabs, instead of by commas? Take a look at the help page for `read.csv`
+
+You can see here that there are multiple ways to use `read.csv` with different defaults and options. For example, if you didn't want to have a header, you could change the header option to `header=FALSE`. If you wanted the fields to be separated by spaces, rather than commas, you could add `sep=" "`. Don't do that in this case.
+
+You can also see that R provides other functions such as `read.table` whose defaults are different (space separation with no header). So by choosing the right function, and the right set of specialized option, you can read almost any kind of row/column organized file.
+
+R can't read everything. But for the majority of cases, if your data was prepared responsibly and you set these simple options correctly, you can use the `read.csv` and `read.table` functions to import whatever data you need.
+

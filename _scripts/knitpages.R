@@ -5,7 +5,7 @@
 
 # run ./knitpages.R to update all knitr files that need to be updated.
 
-KnitPost <- function(input, outfile, base.url="/") {
+KnitPost <- function(input, outfile, base.url="/", include.code=TRUE) {
     # this function is a modified version of an example here:
     # http://jfisher-usgs.github.com/r/2012/07/03/knitr-jekyll/
     require(knitr);
@@ -14,7 +14,10 @@ KnitPost <- function(input, outfile, base.url="/") {
     opts_chunk$set(fig.path = fig.path)
     opts_chunk$set(fig.cap = "center")
     render_jekyll()
-    knit(input, outfile, envir = parent.frame())
+
+    env = new.env()
+    env$include.code = include.code
+    knit(input, outfile, envir = env)
 }
 
 setwd("_R")
@@ -29,5 +32,10 @@ for (infile in list.files(".", pattern="*.Rmd$")) {
     if (!file.exists(outfile) |
         file.info(infile)$mtime > file.info(outfile)$mtime) {
         KnitPost(infile, outfile, base.url="/RData/code/")
+        
+        # also knit a code-less version
+        transcript.outfile = paste0("../_transcript/raw/",
+                                sub(".Rmd$", ".md", basename(infile)))
+        KnitPost(infile, transcript.outfile, include.code=FALSE)
     }
 }

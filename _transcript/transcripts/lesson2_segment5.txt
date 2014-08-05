@@ -1,0 +1,19 @@
+Segment 5: Boxplots and Violin Plots
+-----------
+
+One common method in statistics for comparing multiple densities is to use a boxplot. A boxplot has two attributes: an x, which is usually a classification into categories, and y, the actual variable that you're comparing.
+
+In this case, let's say that you want to compare the distribution of the price within each color. You would do
+
+The boxplot provides some information in a compact form: you can see the median as a thick black line, the edges of the box show the 25th and 75th quantiles of the data respectively, and these points are outliers that lie far outside the expected range of the data. In this particular case, since there are a large number of outliers you might want to try putting the y-axis on a log scale. Recall that we do that by adding an option
+
+This is a better behaved boxplot that gets a better sense of how the distribution of price differs across multiple colors.
+
+One problem with the boxplot is that it doesn't show details of the distribution besides these quantiles. This works well when the data follows a Normal distribution, or a "bell curve," but it might not work well for stranger distributions. For example, the distribution might have not one but two frequency peaks, what we call "bimodality." However strange the distribution, a box plot will always look like a square. We can instead view the distribution as a density using what's called a "violin plot". To do that, all we do is change `geom_boxplot` to `geom_violin`.
+
+The width at each point in this violin plot represents the frequency of that price. So these bumps show the prices that are more common, and we can see that indeed within some colors there is bimodality- there are multiple points that are common- that a boxplot did not represent.
+
+Just like in scatter plots or histograms, if we want to see whether another variable is involved, we can use `facet_wrap` to divide our plot into multiple subplots. For example, we could divide this into subgroups based on clarity. To do that, we would do
+
+Now you can see that we've divided it into eight smaller violin plots showing the distribution within each of those levels of clarity.
+

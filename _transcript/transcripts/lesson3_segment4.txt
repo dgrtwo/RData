@@ -1,0 +1,25 @@
+Segment 4: Multiple Linear Regression
+-----------------
+
+We've learned to use a linear model to determine significance and make predictions. But what if you have more than one predictor variable? For instance, let's say you want to measure the effect of not just weight, but also the number of cylinders, and the volume, or displacement, of the car? We can get a sense of the trend by adding those two predictors to our visualization using color and size. Here we put the number of cylinders (cyl) as the color and the volume, or displacement (disp) as the size. 
+
+Already the effect of those three variables on the miles per gallon is kind of difficult to determine. It's true that cars with higher volume, or larger points, have a lower fuel efficiency- but they *also* have a higher weight. These two predictors might be redundant- or as statisticians say, confounded- for predicting the fuel efficiency. The same is true of the number of cylinders: more cylinders (or lighter blue) means both a higher weight and a lower gas mileage.
+
+What combination of predictors will best predict fuel efficiency? Which predictors increase our accuracy by a statistically significant amount? We might be able to guess at the some of the trends from the graph, but really we want to perform a statistical test to determine which predictors are significant, and to determine the ideal formula for prediction. We do this with a multiple linear regression, where we provide multiple terms in the right side of the linear regression formula.
+
+Now let's summarize this fit.
+
+Notice that the coefficient table now has four rows: one for the intercept and one for all three of our predictors. Each of these still contains the estimate of the coefficient, or slope, for that predictor. It also contains a p-values for each of the predictors independently. Notice that the p-values for weight and the number of cylinders are both significant. We can see the significance rating based on the number of stars, where ** means it's in between .001 and .01. But the p-value for displacement is not significant, This indicates that the volume of the engine is redundant with one or both of the other predictors, and provides no significant additional information.
+
+Just like we did before, we can extract this coefficient table using the `coef` function
+
+Once again, we can extract each of the coefficient estimates by getting the first column of this matrix.
+
+Here we see the four estimates: the marginal effect of increasing the weight, increasing the volume of the engine, or increasing the number of cylinders on the miles per gallon. We can also get the p-values, or the significance, of each in the fourth column.
+
+We can also predict the gas mileage of each car based on this model, by doing
+
+Or we can do it for a new car: all we have to do is give it the weight, displacement and number of cylinders of our hypothetical car.
+
+We can then predict the gas mileage of this car with
+

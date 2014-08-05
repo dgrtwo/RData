@@ -1,0 +1,27 @@
+Segment 3: Faceting and Additional Options
+-------------
+
+Another way that you can communicate information about an attribute in your data is to divide your plot up into multiple plots, one for each level, letting you view them separately. This is called "faceting", and ggplot makes it very easy with the "facet_wrap" function.
+
+To do that, we go to a plot like this, and add "facet_wrap(". Now here we put a tilde (~), and then the attribute we would like to divide the plots by, here "clarity."
+
+Now let's zoom in on this. You can see that now we've divided it into eight subplots, each of which has a different "clarity" value, and you can see how the trend differs between each of those subplots. We can still see that the color is representing the quality of the cut of the diamond.
+
+You can even divide your graph based on two different attributes, such as both color and clarity, using facet_grid. In this case that would be "facet_grid(", then you put "color ~ clarity", where the tilde (~) means "explained by."
+
+Now you can see that each column represents one of the clarity ratings, and each row represents one of the color ratings, and within the combination you can see only those that match that color and that clarity. Faceting like this gives another way to communicate the relationships within your data.
+
+There are many other ways to customize a plot. For starters, you might want to set a title, or set the x or y axis labels manually. You change these options by *adding* to the end of the line of code. To set the title, you would use the ggtitle function
+
+This adds a title to the top of your graph. If you'd like to change the x- or y- axis labels, you would add "xlab" for "x label", then your custom label
+
+You might also want to limit the range of the x or the y axes. You can do this with the xlim or ylim options, which are also added to the end of the line. In this case, say we only want to look at the weights from 0 to 2 carats. We would do
+
+Each of these options gets added on after the last one. Now we can see that the x-axis ranges only from 0 to 2. Similarly, if we wanted to show only the y-axis from 0 to 10000, we could put
+
+Another possibility is to put one of the axes on a log scale. You can do this with the scale_y_log10() function.
+
+Now you've put the y-axis on a log scale.
+
+There are many other available options and customizations: each gets added to the end of the plot just like these.
+

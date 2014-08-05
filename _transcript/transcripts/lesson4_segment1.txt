@@ -1,0 +1,37 @@
+Segment 1: R Scripts
+-----------
+
+In these lessons so far you've learned a lot about the statistical programming language R: you've learned how to set variables and work with data structures, to create informative visualizations using ggplot2, and how to perform rigorous statistical tests. But datasets from the real world aren't so simple: they might contain dozens of variables across tens of thousands of observations. You might need to filter them based on quality considerations, and they might be spread across multiple datasets, leaving you to combine them together yourself. I'm David Robinson, and in this lesson we're going to tie all your R skills together, by learning how to perform exploratory data analysis using the powerful data.table package. As an example, we'll be analyzing a dataset of historical baseball statistics, learning how to preprocess and filter it, how to combine multiple datasets together, and how to answer interesting questions interactively with your data.
+
+This lesson will assume basic familiarity with R, especially vectors and data frames, with RStudio, and with the ggplot2 package for visualization.
+
+One of the essential functions of computers is to take repetitive, dull tasks and automate them, so they can be easily be performed as many times as you need. Part of being a good programmer is sticking to this philosophy.
+
+So far we've been working in the interactive R terminal. This is useful for writing a line of code quickly and seeing the result.
+
+But most of your analyses will take multiple lines of code and they'll have to be run all in the same order, and it's impractical to have to type them all in sequence in an interactive window. So let's instead write an R script, which will contain a series of commands that you want to run in order. In RStudio, Go to File->New File->New R Script, or you can do CMD+SHIFT+N, to create a new R script. You'll see it pops up above your command prompt. Write a couple lines of R. For example, let's define two variables
+
+Now save your new script. First you have to choose a working directory, which you can do with "More->Set as Working Directory" in the file manager in RStudio. Then save your script, which you can do with CMD+S or with the floppy disk icon here. Let's save it as `script.R` in our working directory. Now we can run this script- that is, all our commands in the script all at once- by clicking "Source" at the top of the script. Notice that a command pops up in your interactive terminal, something like
+
+That means it ran all the commands in your script in a row. You can see this by checking the values of `x` and `y`
+
+So even though you didn't see the commands in the interactive terminal, they did run when you hit Source. 
+
+Incidentally, there's a keyboard shortcut for sourcing a current file as well: you can do CMD+SHIFT+S.
+
+Now what if we want some output to our script besides just setting a few variables? Normally we'd be able to view the contents of a variable just by typing that variable by itself. For instance
+
+However, try putting the line `y` by itself in your script, save, and source it. Notice there was no output. That's because when you run outside of the interactive terminal, values don't print unless you explicitly tell them to do so. You do that with the print function. Change your line in the file to `print(y)`, then save and source.
+
+*Now* we can see the output in your interactive window. Remember that: when you're running inside a script, if you want to see an output, you have to actually print it.
+
+Importantly, the same is true of a ggplot2 plot. Let's create a basic ggplot
+
+As soon as we hit return on this line, we created a scatterplot. However, let's put the same lines of code into our script. Then we clear the current plot by hitting Clear All, and hit Source.
+
+Notice that no plot showed up. The reason is that when it's in a file, a ggplot, just like a regular variable, needs to be printed to show up. You do that with
+
+Finally, there's a useful shortcut for running one line at a time in a script. Put your cursor on a particular line of code, then hit CMD+RETURN in Macs, or CONTROL+ENTER on Windows, you'll run just that line of code in your interactive terminal. This means you don't have to select a line and copy and paste it into your terminal. This is useful for if you want to run a single line of code in your script, but don't want to go through the time of rerunning the whole file.
+
+R scripts can be as long as you like: yours may end up being hundreds or even thousands of lines of code- and they're the only practical way to organize a complicated analysis productively.
+

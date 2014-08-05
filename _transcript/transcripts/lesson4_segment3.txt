@@ -1,0 +1,57 @@
+Segment 3: Introduction to data.table
+-------------
+
+Now we have downloaded this data on baseball players' salaries, we're interested in filtering and manipulating it. The salary data is currently held in a data.frame, a data structure built into R. data.frame is powerful, but there's an even more powerful alternative in R that makes data manipulation fast, easy and intuitive. Like ggplot2, it's a third party package, which means it doesn't come built in, and we have to install it. So let's install the `data.table` package You can do that with
+
+Now, before we learn to use data.table, let's take one last look at salaries the data.frame. If you type
+
+it will print thousands and thousands of lines until it decides to stops. Now, let's convert the data.frame into a data table. First you load the `data.table` package
+
+Then use the `as.data.table` function to replace `salaries` with a data.table version.
+
+Now, let's print it again
+
+Notice that it contains the same information, but only shows the first five rows, then ---, then the last five rows, which is generally a more convenient representation. This more compact way of printing a data.table is the first benefit of using the package.
+
+Now, a lot of things work just the same way as they do in a data.frame. You can still access a column with a dollar sign. For instance, let's say you want the `salary` column.
+
+Or to get a single row of a data.table, you can do
+
+Or you can get a range of rows
+
+One thing that did work on data frames but doesn't work on data tables is extracting a column based on an index. In a data.frame, you could extract the first column by putting the index after the comma
+
+But that doesn't work in data.table. Instead, you can put the name of the column, *without quotes*, after the comma
+
+This retrieves the entire vector of that year.
+
+You can also grab multiple columns (for example, just the year and the salary) using `list`
+
+Now we've created a new data table with just the two columns `yearID` and `salary`.
+
+Now, let's say we want to filter the rows based on one column, which is a common step in data preprocessing. For example, let's say you want to get only the years after 2000. There is an easy way to do this in data.table. We put a condition before the comma
+
+Now we've created a subset of the data that contains only years 2001 and after. Similarly, if you wanted to get salaries from a specific year, 2010, you could do
+
+There are two leagues in American Major League Baseball: the American League (`AL`), and the National League (`NL`). If we want to filter for just the American League, we can do
+
+Now I've selected just the American League teams.
+
+Finally, we can combine multiple filtering conditions using the *and* (`&`) or *or* (`|`) operators. For instance, we can filter for all the rows in the American League that were after 1990.
+
+Similarly, we can combine conditions with *or* (`|`). For instance, say we wanted only years before 1990 or after 2010.
+
+We can also sort the data easily, using the order function in the area before the comma
+
+Now you can see that the pairs of players and years are sorted by salary, with the lower salaries at the top. This gives us an easy way to see the highest and lowest salaries. In case you're wondering, NYA here is the team ID of the New York Yankees: called NYA instead of NYY for historical reasons. We could also sort by year
+
+What if we want to sort first by year, and *then* breaking ties with salary? We can do that by providing two arguments to the order function
+
+Now it's organized with 1985 first, and 2013 last, but within each of those years it is organized by salary.
+
+Note that we can perform multiple operations all in a sequence, by saving the intermediate results. For instance, we can first perform a filtering operation and save it as `salaries.filtered`
+
+Then we can sort it by salary and save it into a new data table, which is now both filtered and sorted.
+
+These operations let us easily explore the data and answer basic questions.
+

@@ -1,0 +1,55 @@
+Segment 2: Introduction to ggplot2
+------------
+
+Let's say that we as scientists are interested in understanding the relationship between those attributes. For example, how does weight, in carats, affect the price? Or how does the quality of the color, or of the diamond's clarity, affect the price? These kinds of questions, where we're looking for interesting relationships among attributes using the observations we have, are common, almost universal, across data analysis.
+
+One common visualization for determining the relationship between attributes is a scatter plot, where each diamond will be represented by one point. This is the point where as graphers, we have to make a few decisions. Let's talk about "aesthetics."
+
+An "aesthetic" is a dimension of a graph that we can perceive visually: the simplest example being the x and y axes. When we make a scatterplot, we choose one attribute to assign to the x axis, and one attribute to assign to the y axis.
+
+Other aesthetics we can use in a scatter plot are the color, size, and shape of the points in the graph: each of these aesthetics lets us communicate some dimension of the data, and understand complex relationships between them.
+
+As an example, let's use ggplot2 to create a scatterplot where we put carat, or weight, on the x axis and price, in dollars, on the y axis. So now we make a ggplot2 call. We start with
+
+Now, there are three parts to a ggplot2 graph. The first is the data we'll be graphing. In this case, we are plotting the diamonds data frame, so we type "diamonds". Second, we show the mapping of aesthetics to the attributes we'll be plotting. We type aes- meaning aesthetics- then open parentheses, and now our assignments: we say "x=carat", saying we want to put carat on the x-axis, then "y=price", saying what we want to put on the y-axis.
+
+Now that we've defined the structure of our graph, we are going to add a "layer" to it: that is, define what time of graph it is. In this case, we want to make a scatter plot: the name for that layer is geom_point. "geom" is a typical start for each of these layers. Now we've defined our graph, and hit return, and we see our scatter plot.
+
+See that we've placed "carat" on the x axis, and "price" on the y-axis. Every one of these points represents one row in our data frame: that is, one diamond. We've now communicated a relationship between those two attributes in the dataset: as weight increases, price increases.
+
+Now, this plot shows two aesthetics- weight and price- but there are many other attributes of the data we can communicate. For example, we might want to see how the quality of the cut, or the color, or the clarity, affects the price. Each of those variables is a factor: that means each value belongs to one of a finite number of categories. We can add this using another aesthetic, for example, the color of the points
+
+To add an aesthetic, we can hit the up arrow to get to our previous line, and then add into the aes call of the aesthetic, "color=clarity", using clarity, which is a measure of the clarity of each diamond, to color our points. We hit return
+
+Now every point is colored according to the quality of the clarity of each diamond. Notice that it created a legend on the right side. You can see that some of the lighter diamonds are more expensive if they have a high clarity rating, and conversely that some of the heavier diamonds aren't as expensive for having a low clarity rating. This is what leads to this rainbow pattern.
+
+If we would rather see how the quality of the color or cut of the diamond affects the price, we can change the aesthetic. Here in "aes" we change "clarity" to "color".
+
+Now every item in the color legend is one of the ratings of color. Or we can change it to "cut"
+
+This way we can explore the relationship of each of these variables and how it affects the carat/price relationship.
+
+Now, what if we want to see the effect of both color and cut? We can use a fourth aesthetic, such as the size of the points. So here we have color representing the clarity. Let's add another aesthetic- let's say "size=cut."
+
+Now the size of every point is determined by the cut even while the color is still determined by the clarity. Similarly, we could use the shape to represent the cut
+
+Now every shape represents a different cut of the diamond.
+
+Now, this scatter plot is one "layer", which means we can add additional layers besides the scatter plot using the plus sign. For example, what if we want to add a smoothing curve that shows the general trend of the data? That's a layer called geom_smooth.
+
+So let's take this plot, take out the color, and add a smoothing trend
+
+The gray area around the curve is a confidence interval, suggesting how much uncertainty there is in this smoothing curve. If we want to turn off the confidence interval, we can add an option to the geom_smooth later; specifically "se=FALSE", where "s.e." stands for "standard error."
+
+This gets rid of the gray area and now we can just see the smoothing curve.
+
+Similarly, if we would rather show a best fit straight line rather than a curve, we can change the "method" option in the geom_smooth layer. In this case it's method="lm", where "lm" stands for "Linear model".
+
+There we fit a best fit line to the relationship between carat and price with this geom_smooth layer.
+
+If you used a color aesthetic, ggplot will create one smoothing curve for each color. For example, if we add "color=clarity"
+
+Now we see it actually fits one curve for each of these colors. This is a useful way to compare and contrast multiple trends. Note that you can show this smoothing curve layer *without* showing your scatter plot layer, simply by removing the geom_point() layer
+
+This might be a bit clearer: we can see just the fit curves without seeing the actual points.
+

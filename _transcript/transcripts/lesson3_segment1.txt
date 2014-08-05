@@ -1,0 +1,41 @@
+Segment 1: Comparing Two Samples
+--------------
+
+One essential statistical method is to test for a difference between two samples, or groups. For example, one might see whether a group of patients who were given a medical treatment had better outcomes than a control group. In our examples in this lesson, we're going to be analyzing a question of fuel efficiency as it relates to some aspects of automobile design and performance. We'll work with a dataset built into R, called `mtcars`, that comes from a 1974 issue of Motor Trends magazine. Recall that you can load a built-in dataset into R with the line
+
+This loads the data into your environment. You can visualize it with the `View` function
+
+You can find out more about this variable with the `help` function
+
+Notice that each line of mtcars represents one model of car, which we can see in the rownames. Each column is then one attribute of that car, such as the miles per gallon (or fuel efficiency), the number of cylinders, the displacement (or volume) of the car's engine in cubic inches, whether the car has an automatic or manual transmission, and so on. Recall that we can access one of these columns using the dollar sign: for example
+
+extracts the vector of miles per gallon. Let's say we're interested in testing the hypothesis that cars with an automatic transmission use more fuel than cars with a manual transmission. Whether cars have an automatic or manual transmission is found in the `am` column
+
+We can see from the help page that 0 represents an automatic transmission and 1 means a manual transmission.
+
+Before we perform a statistical test, it's always a good idea to create a graphical visualization. Recall that a boxplot compares the distributions of multiple groups, and so is well suited for this task. To do this, first we load the ggplot2 package
+
+Then we can create a boxplot with the following line.
+
+As with any ggplot2 call, we start with `ggplot()`, then the data we'll be plotting (`mtcars`). Then a mapping of the aesthetics (in this case, transmission on the x-axis and miles per gallon on the y-axis. Why do we need to turn `am` into a factor: because ggplot2 prefers the x-axis of a boxplot to be a factor- that is, a variable that can take one of a finite number of categories as its values- rather than a numeric variable like 0 or 1. Then we put the type of graph, which in this case is `geom_boxplot`.
+
+We can form a clear hypothesis from this visualization: it appears that automatic cars have a lower miles per gallon, and therefore a lower fuel efficiency, than manual cars do. But it is possible that this apparent pattern happened by random chance- that is, that we just happened to pick a group of automatic cars with low efficiency and a group of manual cars with higher efficiency. So to check whether that's the case, we have to use a statistical test.
+
+To compare two samples to see if they have different means, or averages, statisticians traditionally use a Student's T-test. This can be performed in R with the `t.test` function
+
+First we give it the formula: `mpg ~ am`. In R, a tilde (~) represents "explained by"- so this means "miles per gallon explained by automatic transmission." Secondly we give it the data we're plotting, which is `mtcars`. So this is saying "Does the miles per gallon depend on whether it's an automatic or manual transmission in the mtcars dataset."
+
+We get a lot of information from the t-test. Most notably, we get a p-value: this shows the probability that that this apparent difference between the two groups could appear by chance. This is a low p-value, so we can be fairly confident that there is an actual difference between the groups. We can also see a 95% confidence interval. This interval describes how much lower the miles per gallon is in manual cars than it is in automatic cars. We can be confident that the true difference is between 3.2 and 11.3. These other values: such as the T test statistic and the number of degrees of freedom used in the test, have relevance in the actual mathematical formulation of the test. If you have experience in statistics, those values are worth investigating further.
+
+Now you're able to see these results manually. But what if you want to extract them in R into its own variable, for instance so that you could graph or report them later? Well, first save the entire t-test into a variable. Recall that in R you can do this by putting `tt =` at the start of the line
+
+This assigns the result of the t-test to the variable `tt`. So now `tt` contains the result of the t-test.
+
+We can also extract single values out using the dollar sign.
+
+Similarly we can extract the confidence interval.
+
+Notice that the confidence interval contains both the lower bound and the upper bound, but also the confidence level- in this case, describing it as a 95% confidence interval. You can extract just the lower bound or the upper bound just like any vector in R.
+
+Note that if you type `tt$` then tab, you can find out a list of all the values you can extract from the t-test object.
+

@@ -1,0 +1,25 @@
+Segment 1: Fundamentals
+------------
+
+Hi, my name is Neo Christopher Chung and I am a Ph.D. candidate at Princeton University. Today, I will help you understand the basics of statistical programming in R. R is the de facto standard language for data analysis and development of statistical software. Please make sure that you have already installed R and RStudio on your computer. It will be very important for you to follow each step in R and to make sure you have gotten the correct results.
+
+After opening RStudio, it is essential to set up your working environment. Mainly, we would like to set up the working directory and to remove all objects in the current R session, so we can start fresh. The working directory is a default location on your computer that R is pointing at. If you want to save or load a file, you need to know what the current working directory is.
+
+You can either look right above the console in RStudio, or type in
+
+To organize different R projects and to have a special directory for this R lesson, I created a directory called ``Rlesson`` on my Desktop. Setting the working directory could be done via graphical user interface (in RStudio) or command line interface
+
+If you do not change your working directory, later on you may ended up with a cluttered desktop, lost files, or worse.
+
+We would like know if there are any object in the current R session. In RStudio, we can click on the `Environment` tab to see this list, or simply type
+
+We see that there are three objects, namely test1, test2, and test3. Note that you may see a different list (or an empty list) if there is no object in your current R session.
+
+You may want to delete an object to clear up the working environment. Let's first delete `test1`
+
+If you want to delete every object currently available, you can use `ls()`
+
+Let's make sure all objects have been removed
+
+The `character(0)` means you do not have any objects in the current R session.
+

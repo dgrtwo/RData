@@ -1,0 +1,41 @@
+Segment 3: Linear Regression
+-----------------
+
+Earlier we discussed testing for a correlation, which is a good way to see if a relationship exists between two continuous variables, x and y. In our example, we were able to test whether the fuel efficiency of a car was related to its weight. But what if you want to turn this relationship into a prediction: for instance, what would be the fuel efficiency of a 4500 pound car? 
+
+We can do this by fitting a linear model, or linear regression, which is done in R with the `lm` function. Let's save linear model to a variable we call `fit`.
+
+Here we put the formula we're testing, which is miles per gallon explained by weight (recall that the tilde (~) means "explained by").
+
+Now we can look at the details of this fit with the summary function
+
+This output contains a lot of information, even more than the t-test or correlation test did. Let's look at a few parts of it. Briefly, it first shows the call that's the way that the function was called; miles per gallon explained by weight using the mtcars data. This next part summarizes the residuals: that's how much the model got each of those predictions wrong- how different the predictions were from the actual results. This table, the most interesting part, is the coefficients- this shows the actual predictors and the significance of each.
+
+First, we have our estimate of the y-intercept: that's the hypothetical miles per gallon of a car that weighed 0 in our linear model. Then we can see the effect of the weight variable on miles per gallon. One value we're interested in is the Estimate, which estimates the slope. We also see the effect of the weight, also called the coefficient or the slope of the weight. This shows that there's a negative relationship, where increasing the weight decreases the miles per gallon. In particular, it shows that increasing the weight by 1000 pounds decreases the efficiency by 5.3 miles per gallon. This second column is called the standard error: we won't examine it today, but in short, it represents the amount of uncertainty in our estimate of the slope. The third column is called the test statistic, a mathematically relevant value that was used to compute the last column, which is the p-value, describing whether this relationship could be due to chance alone. You might notice that the p-value for weight, 1.29*10^-10, is exactly the same as it was for our earlier correlation test- that's because we're testing the same trend.
+
+We can extract this matrix of coefficients using the `coef` function
+
+From that we get a matrix. If we want to extract out just the estimates- just the y-intercept and the slope(the coefficient of weight)- we want to get just the first column of the matrix. To do that, we can save it to a matrix
+
+Then we get the first column
+
+If we wanted to get the p-values, we would extract the fourth column
+
+One advantage of a linear model is that it can be used not only for statistical testing, but also for prediction. This model predicts a gas mileage for each of our existing cars, using the `predict` function.
+
+But these predictions aren't that useful to us, as we already have the actual gas mileage of each. What if we wanted to predict the gas mileage of a car that has a weight of, say, 4500 pounds? We could do this by adding together the intercept term and the coefficient estimate times the weight. So if we first see the summary of the fit
+
+We can then add together the intercept term (37.2851) and the weight coefficient (-5.3445) times our new weight, which is 4.5 thousands of pounds
+
+This predicts a fuel efficiency of 13.2 miles per gallon. This is what a linear model actually means: this is a linear combination of the intercept and the slope.
+
+There is a shortcut for producing this value from the fit, using the predict function. First we create a data frame containing the predictors we wish to use. In this case, imagine we had a new car that weighed 4500 pounds
+
+Now that we have this data frame, we can do
+
+This calculates the same estimate, 13.235, predicting this car's miles per gallon using this fit.
+
+Finally, note that we can show a linear model on our plot using a method built into ggplot2, geom_smooth. We tell it that the method to use is "lm", a linear model, the same one we've been learning.
+
+Now we get a linear trend on our ggplot. The grey area shown is the uncertainty in the fit: it's a 95% confidence interval of where the true trend line *could* be. It's worth noting that this is not a perfect linear fit: we can see that values both at the low end and the high end have a tendency to be higher than we would predict. Dealing with those issues is beyond the scope of this lesson.
+

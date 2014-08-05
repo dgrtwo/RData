@@ -2,3 +2,10 @@ _site
 .DS_Store
 *cache
 _R/diamonds*
+.Rproj.user
+.RData
+.Rhistory
+*.Rproj
+_R/*.md
+_R/*.html
+_R/lesson*

@@ -1,0 +1,25 @@
+Segment 2: Variables
+------------
+
+The most basic and crucial element of R would be a variable, which could be assigned a single number, a vector, a matrix, a data frame, and others. Technically speaking, variables can be thought of as containers which refer to any type of objects, such as data structures.
+
+Let's first assign numbers or characters to variables. We can simply assign a single number, such as 42, to a variable
+
+This gives the variable `my.number` a value of 42. You can show the value of my.number with a print command
+
+Note that variable names consist of letters, digits, periods and underscores (_), and cannot start with a digit. Do not use other special characters or space in a variable name.
+
+Not all values you could want to store in R are numeric. You could store a string of characters using either single or double quotation marks.
+
+We can print one of these variables
+
+Primitively, R could be used as a scientific calculator. For example, we can add two numbers
+
+and we could assign the result of the calculation to a variable
+
+A math operation could be done using two numeric variables. For instance, we can create another variable `y`
+
+R has many built-in mathematical and statistical functions that are intuitively named and easy to use. You can use exponentiation
+
+or calculate a natural logarithmic value by using a function `log()`
+

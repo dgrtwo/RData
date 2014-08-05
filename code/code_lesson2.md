@@ -5,12 +5,27 @@ layout: default
 Lesson 2: Visualizing Data Using ggplot2
 ============
 
+
+
 <a name="segment1"></a>
 
 Segment 1: Introduction
 ------------
 
+In data analysis more than anything, a picture really is worth a thousand words. When you start analyzing data in R, your first step shouldn't be to run a complex statistical test: first, you should visualize your data in a graph. This lets you understand the basic nature of the data, so that you know what tests you can perform, and where you should focus your analysis. I'm David Robinson, and in this lesson we'll introduce you to ggplot2, a powerful R package that produces data visualizations easily and intuitively. We will assume you are moderately familiar with basic concepts in R, including variables and functions, and with RStudio, the integrated development environment for programming in R.
 
+So, ggplot2 is a third party package: that means it's code that doesn't come built into the language. This means you have to install it.
+
+You can do that with one line of R code here in your interactive terminal, which is:
+
+
+{% highlight r %}
+install.packages("ggplot2")
+{% endhighlight %}
+
+and hit return. Or you can go to the Tools->Install Packages menu, where here you type "ggplot2" and hit install.
+
+Each time you reopen R, you need to load the library using the `library` function before you use it. So here that's:
 
 
 {% highlight r %}
@@ -23,79 +38,117 @@ library("ggplot2")
 ## Loading required package: methods
 {% endhighlight %}
 
+Now we're ready to use it. ggplot2 comes with some data available to use as a demonstration: particularly, the "diamonds" dataset, containing information about several attributes of 54000 diamonds. We can access it using the `data` function:
 
 
 {% highlight r %}
-
 data("diamonds")
-
-head(diamonds)
 {% endhighlight %}
 
+See that we've added "diamonds" to our global environment. Once we've loaded the diamonds dataset, we can view it using `View`:
 
 
-{% highlight text %}
-##   carat       cut color clarity depth table price    x    y    z
-## 1  0.23     Ideal     E     SI2  61.5    55   326 3.95 3.98 2.43
-## 2  0.21   Premium     E     SI1  59.8    61   326 3.89 3.84 2.31
-## 3  0.23      Good     E     VS1  56.9    65   327 4.05 4.07 2.31
-## 4  0.29   Premium     I     VS2  62.4    58   334 4.20 4.23 2.63
-## 5  0.31      Good     J     SI2  63.3    58   335 4.34 4.35 2.75
-## 6  0.24 Very Good     J    VVS2  62.8    57   336 3.94 3.96 2.48
+{% highlight r %}
+View(diamonds)
 {% endhighlight %}
 
+Here we have a view of it kind of like a spreadsheet. Here we have the carat: that's the weight of the diamond; and the cut, color and clarity: each of these are measuring something about the quality of the diamond in various levels. And then we have other attributes including the price of the diamond. You can find out what each of these mean using the "help" function:
+
+
+{% highlight r %}
+help(diamonds)
+{% endhighlight %}
+
+Here we get a description of the diamonds dataset, and the details about each of the columns.
 
 <a name="segment2"></a>
 
-Segment 2: Scatter Plots
+Segment 2: Introduction to ggplot2
 ------------
 
+Let's say that we as scientists are interested in understanding the relationship between those attributes. For example, how does weight, in carats, affect the price? Or how does the quality of the color, or of the diamond's clarity, affect the price? These kinds of questions, where we're looking for interesting relationships among attributes using the observations we have, are common, almost universal, across data analysis.
+
+One common visualization for determining the relationship between attributes is a scatter plot, where each diamond will be represented by one point. This is the point where as graphers, we have to make a few decisions. Let's talk about "aesthetics."
+
+An "aesthetic" is a dimension of a graph that we can perceive visually: the simplest example being the x and y axes. When we make a scatterplot, we choose one attribute to assign to the x axis, and one attribute to assign to the y axis.
+
+Other aesthetics we can use in a scatter plot are the color, size, and shape of the points in the graph: each of these aesthetics lets us communicate some dimension of the data, and understand complex relationships between them.
+
+As an example, let's use ggplot2 to create a scatterplot where we put carat, or weight, on the x axis and price, in dollars, on the y axis. So now we make a ggplot2 call. We start with:
+
 
 {% highlight r %}
-ggplot(diamonds, aes(x = carat, y = price)) + geom_point()
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_21.png) 
+![center](/RData/code/lesson2/figures/segment_2a.png) 
+
+Now, there are three parts to a ggplot2 graph. The first is the data we'll be graphing. In this case, we are plotting the diamonds data frame, so we type "diamonds". Second, we show the mapping of aesthetics to the attributes we'll be plotting. We type aes- meaning aesthetics- then open parentheses, and now our assignments: we say "x=carat", saying we want to put carat on the x-axis, then "y=price", saying what we want to put on the y-axis.
+
+Now that we've defined the structure of our graph, we are going to add a "layer" to it: that is, define what time of graph it is. In this case, we want to make a scatter plot: the name for that layer is geom_point. "geom" is a typical start for each of these layers. Now we've defined our graph, and hit return, and we see our scatter plot.
+
+See that we've placed "carat" on the x axis, and "price" on the y-axis. Every one of these points represents one row in our data frame: that is, one diamond. We've now communicated a relationship between those two attributes in the dataset: as weight increases, price increases.
+
+Now, this plot shows two aesthetics- weight and price- but there are many other attributes of the data we can communicate. For example, we might want to see how the quality of the cut, or the color, or the clarity, affects the price. Each of those variables is a factor: that means each value belongs to one of a finite number of categories. We can add this using another aesthetic, for example, the color of the points:
+
+To add an aesthetic, we can hit the up arrow to get to our previous line, and then add into the aes call of the aesthetic, "color=clarity", using clarity, which is a measure of the clarity of each diamond, to color our points. We hit return:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price, color = clarity)) + geom_point()
+ggplot(diamonds, aes(x=carat, y=price, color=clarity)) + geom_point()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_22.png) 
+![center](/RData/code/lesson2/figures/segment_2b.png) 
+
+Now every point is colored according to the quality of the clarity of each diamond. Notice that it created a legend on the right side. You can see that some of the lighter diamonds are more expensive if they have a high clarity rating, and conversely that some of the heavier diamonds aren't as expensive for having a low clarity rating. This is what leads to this rainbow pattern.
+
+If we would rather see how the quality of the color or cut of the diamond affects the price, we can change the aesthetic. Here in "aes" we change "clarity" to "color".
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price, color = color)) + geom_point()
+ggplot(diamonds, aes(x=carat, y=price, color=color)) + geom_point()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_23.png) 
+![center](/RData/code/lesson2/figures/segment_2c.png) 
+
+Now every item in the color legend is one of the ratings of color. Or we can change it to "cut":
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price, color = cut)) + geom_point()
+ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_24.png) 
+![center](/RData/code/lesson2/figures/segment_2d.png) 
+
+This way we can explore the relationship of each of these variables and how it affects the carat/price relationship.
+
+Now, what if we want to see the effect of both color and cut? We can use a fourth aesthetic, such as the size of the points. So here we have color representing the clarity. Let's add another aesthetic- let's say "size=cut."
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price, color = clarity, size = cut)) + geom_point()
+ggplot(diamonds, aes(x=carat, y=price, color=clarity, size=cut)) + geom_point()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_25.png) 
+![center](/RData/code/lesson2/figures/segment 2e.png) 
+
+Now the size of every point is determined by the cut even while the color is still determined by the clarity. Similarly, we could use the shape to represent the cut:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price, color = clarity, shape = cut)) + 
-    geom_point()
+ggplot(diamonds, aes(x=carat, y=price, color=clarity, shape=cut)) + geom_point()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_26.png) 
+![center](/RData/code/lesson2/figures/segment 2f.png) 
+
+Now every shape represents a different cut of the diamond.
+
+Now, this scatter plot is one "layer", which means we can add additional layers besides the scatter plot using the plus sign. For example, what if we want to add a smoothing curve that shows the general trend of the data? That's a layer called geom_smooth.
+
+So let's take this plot, take out the color, and add a smoothing trend:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price)) + geom_point() + geom_smooth()
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + geom_smooth()
 {% endhighlight %}
 
 
@@ -104,11 +157,13 @@ ggplot(diamonds, aes(x = carat, y = price)) + geom_point() + geom_smooth()
 ## geom_smooth: method="auto" and size of largest group is >=1000, so using gam with formula: y ~ s(x, bs = "cs"). Use 'method = x' to change the smoothing method.
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_27.png) 
+![center](/RData/code/lesson2/figures/segment 2g.png) 
+
+The gray area around the curve is a confidence interval, suggesting how much uncertainty there is in this smoothing curve. If we want to turn off the confidence interval, we can add an option to the geom_smooth later; specifically "se=FALSE", where "s.e." stands for "standard error."
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price)) + geom_point() + geom_smooth(se = FALSE)
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + geom_smooth(se=FALSE)
 {% endhighlight %}
 
 
@@ -117,20 +172,26 @@ ggplot(diamonds, aes(x = carat, y = price)) + geom_point() + geom_smooth(se = FA
 ## geom_smooth: method="auto" and size of largest group is >=1000, so using gam with formula: y ~ s(x, bs = "cs"). Use 'method = x' to change the smoothing method.
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_28.png) 
+![center](/RData/code/lesson2/figures/segment 2h.png) 
+
+This gets rid of the gray area and now we can just see the smoothing curve.
+
+Similarly, if we would rather show a best fit straight line rather than a curve, we can change the "method" option in the geom_smooth layer. In this case it's method="lm", where "lm" stands for "Linear model".
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price)) + geom_point() + geom_smooth(se = FALSE, 
-    method = "lm")
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + geom_smooth(se=FALSE, method="lm")
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_29.png) 
+![center](/RData/code/lesson2/figures/segment 2i.png) 
+
+There we fit a best fit line to the relationship between carat and price with this geom_smooth layer.
+
+If you used a color aesthetic, ggplot will create one smoothing curve for each color. For example, if we add "color=clarity":
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price, color = clarity)) + geom_point() + 
-    geom_smooth(se = FALSE)
+ggplot(diamonds, aes(x=carat, y=price, color=clarity)) + geom_point() + geom_smooth(se=FALSE)
 {% endhighlight %}
 
 
@@ -139,11 +200,13 @@ ggplot(diamonds, aes(x = carat, y = price, color = clarity)) + geom_point() +
 ## geom_smooth: method="auto" and size of largest group is >=1000, so using gam with formula: y ~ s(x, bs = "cs"). Use 'method = x' to change the smoothing method.
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_210.png) 
+![center](/RData/code/lesson2/figures/segment 2j.png) 
+
+Now we see it actually fits one curve for each of these colors. This is a useful way to compare and contrast multiple trends. Note that you can show this smoothing curve layer *without* showing your scatter plot layer, simply by removing the geom_point() layer:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price, color = clarity)) + geom_smooth(se = FALSE)
+ggplot(diamonds, aes(x=carat, y=price, color=clarity)) + geom_smooth(se=FALSE)
 {% endhighlight %}
 
 
@@ -152,55 +215,62 @@ ggplot(diamonds, aes(x = carat, y = price, color = clarity)) + geom_smooth(se = 
 ## geom_smooth: method="auto" and size of largest group is >=1000, so using gam with formula: y ~ s(x, bs = "cs"). Use 'method = x' to change the smoothing method.
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_211.png) 
+![center](/RData/code/lesson2/figures/segment 2k.png) 
+
+This might be a bit clearer: we can see just the fit curves without seeing the actual points.
 
 <a name="segment3"></a>
 
 Segment 3: Faceting and Additional Options
 -------------
 
+Another way that you can communicate information about an attribute in your data is to divide your plot up into multiple plots, one for each level, letting you view them separately. This is called "faceting", and ggplot makes it very easy with the "facet_wrap" function.
+
+To do that, we go to a plot like this, and add "facet_wrap(". Now here we put a tilde (~), and then the attribute we would like to divide the plots by, here "clarity."
+
 
 {% highlight r %}
-ggplot(diamonds, aes(x = carat, y = price, color = cut)) + geom_point() + facet_wrap(~clarity)
+ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + facet_wrap(~ clarity)
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_31.png) 
+![center](/RData/code/lesson2/figures/segment_3a.png) 
+
+Now let's zoom in on this. You can see that now we've divided it into eight subplots, each of which has a different "clarity" value, and you can see how the trend differs between each of those subplots. We can still see that the color is representing the quality of the cut of the diamond.
+
+You can even divide your graph based on two different attributes, such as both color and clarity, using facet_grid. In this case that would be "facet_grid(", then you put "color ~ clarity", where the tilde (~) means "explained by."
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price, color = cut)) + geom_point() + facet_grid(color ~ 
-    clarity)
+ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + facet_grid(color ~ clarity)
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_32.png) 
+![center](/RData/code/lesson2/figures/segment_3b.png) 
+
+Now you can see that each column represents one of the clarity ratings, and each row represents one of the color ratings, and within the combination you can see only those that match that color and that clarity. Faceting like this gives another way to communicate the relationships within your data.
+
+There are many other ways to customize a plot. For starters, you might want to set a title, or set the x or y axis labels manually. You change these options by *adding* to the end of the line of code. To set the title, you would use the ggtitle function:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price)) + geom_point() + ggtitle("My scatter plot")
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + ggtitle("My scatter plot")
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_33.png) 
+![center](/RData/code/lesson2/figures/segment_3c.png) 
+
+This adds a title to the top of your graph. If you'd like to change the x- or y- axis labels, you would add "xlab" for "x label", then your custom label:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price)) + geom_point() + ggtitle("My scatter plot") + 
-    xlab("Weight (carats)")
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + ggtitle("My scatter plot") + xlab("Weight (carats)")
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_34.png) 
+![center](/RData/code/lesson2/figures/segment_3d.png) 
+
+You might also want to limit the range of the x or the y axes. You can do this with the xlim or ylim options, which are also added to the end of the line. In this case, say we only want to look at the weights from 0 to 2 carats. We would do:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price)) + geom_point() + ggtitle("My scatter plot") + 
-    xlab("Weight (carats)")
-{% endhighlight %}
-
-![center](/RData/code/../figs/code_lesson2/segment_35.png) 
-
-{% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price)) + geom_point() + ggtitle("My scatter plot") + 
-    xlab("Weight (carats)") + xlim(0, 2)
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + ggtitle("My scatter plot") + xlab("Weight (carats)") + xlim(0, 2)
 {% endhighlight %}
 
 
@@ -209,25 +279,54 @@ ggplot(diamonds, aes(x = carat, y = price)) + geom_point() + ggtitle("My scatter
 ## Warning: Removed 1889 rows containing missing values (geom_point).
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_36.png) 
+![center](/RData/code/lesson2/figures/segment_3e.png) 
+
+Each of these options gets added on after the last one. Now we can see that the x-axis ranges only from 0 to 2. Similarly, if we wanted to show only the y-axis from 0 to 10000, we could put
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = carat, y = price)) + geom_point() + ggtitle("My scatter plot") + 
-    xlab("Weight (carats)") + scale_y_log10()
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + ggtitle("My scatter plot") + xlab("Weight (carats)") + ylim(0, 10000)
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_37.png) 
 
+
+{% highlight text %}
+## Warning: Removed 5222 rows containing missing values (geom_point).
+{% endhighlight %}
+
+![center](/RData/code/lesson2/figures/segment_3f.png) 
+
+Another possibility is to put one of the axes on a log scale. You can do this with the scale_y_log10() function.
+
+
+{% highlight r %}
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point() + ggtitle("My scatter plot") + xlab("Weight (carats)") + ylim(0, 10000)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Warning: Removed 5222 rows containing missing values (geom_point).
+{% endhighlight %}
+
+![center](/RData/code/lesson2/figures/segment_3g.png) 
+
+Now you've put the y-axis on a log scale.
+
+There are many other available options and customizations: each gets added to the end of the plot just like these.
 
 <a name="segment4"></a>
 
 Segment 4: Histograms and Density Plots
 -------------
 
+We've seen a lot of ways to customize scatter plots. But scatter plots are just one kind of graph. Sometimes we want to look at just one dimension of our data and observe its distribution: for that, we'll use a histogram.
+
+All you need to do to make a histogram is to change your layer from geom_point() to geom_histogram(). For example, we do
+
 
 {% highlight r %}
-ggplot(diamonds, aes(x = price)) + geom_histogram()
+ggplot(diamonds, aes(x=price)) + geom_histogram()
 {% endhighlight %}
 
 
@@ -236,40 +335,53 @@ ggplot(diamonds, aes(x = price)) + geom_histogram()
 ## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_41.png) 
+![center](/RData/code/lesson2/figures/segment_4a.png) 
+
+This creates a histogram. Notice that we've on the x-axis we've placed price. On the y-axis is the frequency within each bin. This is a visualization of the density of the distribution of price.
+
+You can change the width of each bin as an option to the geom_histogram layer. You can make them wider:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = price)) + geom_histogram(binwidth = 2000)
+ggplot(diamonds, aes(x=price)) + geom_histogram(binwidth=2000)
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_42.png) 
+![center](/RData/code/lesson2/figures/segment_4b.png) 
+
+Or you can change it to be thinner:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = price)) + geom_histogram(binwidth = 200)
+ggplot(diamonds, aes(x=price)) + geom_histogram(binwidth=200)
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_43.png) 
+![center](/RData/code/lesson2/figures/segment_4c.png) 
+
+Other than that, you can do most of the same things with a histogram that you could with a scatter plot. You can again facet histograms into multiple subplots using facet_wrap. For instance, take a plot and use `facet_wrap`, and let's divide it by `clarity`:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = price)) + geom_histogram(binwidth = 200) + facet_wrap(~clarity)
+ggplot(diamonds, aes(x=price)) + geom_histogram(binwidth=200) + facet_wrap(~ clarity)
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_44.png) 
+![center](/RData/code/lesson2/figures/segment_4d.png) 
+
+Notice that we've created 8 subplots, one for each level of clarity. Note that each subplot shares the same y axis, which might make it hard to interpret the frequencies: some subplots have far more points than others. So to free up the y axis so they can be different between the graphs, we add an argument to facet_wrap. In this case, we add `scale="free_y"`:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = price)) + geom_histogram(binwidth = 200) + facet_wrap(~clarity, 
-    scale = "free_y")
+ggplot(diamonds, aes(x=price)) + geom_histogram(binwidth=200) + facet_wrap(~ clarity, scale="free_y")
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_45.png) 
+![center](/RData/code/lesson2/figures/segment_4e.png) 
+
+Notice that each of the subplots now has a different y-axis; some of them going up to 50, some up to 1000, depending on what is appropriate for that subplot.
+
+Let's say you want to add another attribute to this histogram to see its effect on the density: for example, to make a stacked histogram based on the clarity attribute. Try adding the "fill" aesthetic:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = price, fill = clarity)) + geom_histogram()
+ggplot(diamonds, aes(x=price, fill=clarity)) + geom_histogram()
 {% endhighlight %}
 
 
@@ -278,11 +390,15 @@ ggplot(diamonds, aes(x = price, fill = clarity)) + geom_histogram()
 ## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_46.png) 
+![center](/RData/code/lesson2/figures/segment_4f.png) 
+
+This creates a stacked histogram where each color represents the distribution of a different clarity attribute.
+
+You could set this to any other attribute as well, for example the cut:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = price, fill = cut)) + geom_histogram()
+ggplot(diamonds, aes(x=price, fill=cut)) + geom_histogram()
 {% endhighlight %}
 
 
@@ -291,243 +407,278 @@ ggplot(diamonds, aes(x = price, fill = cut)) + geom_histogram()
 ## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_47.png) 
+![center](/RData/code/lesson2/figures/segment_4g.png) 
+
+Now you can see how the distribution is composed within each of those variables.
+
+Another way to view the distribution is as a density curve. You can do this by changing `geom_histogram` to `geom_density`. Remove the `fill` attribute.
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = price)) + geom_density()
+ggplot(diamonds, aes(x=price)) + geom_density()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_48.png) 
+![center](/RData/code/lesson2/figures/segment_4h.png) 
+
+Notice it looks smoother than a histogram. If you want to divide this density curve up based on one of your attributes, you can use the `color` aesthetic instead of `fill`. For example, you can add `color=cut`.
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = price, color = cut)) + geom_density()
+ggplot(diamonds, aes(x=price, color=cut)) + geom_density()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_49.png) 
+![center](/RData/code/lesson2/figures/segment_4i.png) 
+
+This provides a good way to compare multiple distributions.
 
 <a name="segment5"></a>
 
 Segment 5: Boxplots and Violin Plots
 -----------
 
+One common method in statistics for comparing multiple densities is to use a boxplot. A boxplot has two attributes: an x, which is usually a classification into categories, and y, the actual variable that you're comparing.
+
+In this case, let's say that you want to compare the distribution of the price within each color. You would do:
+
 
 {% highlight r %}
-ggplot(diamonds, aes(x = color, y = price)) + geom_boxplot()
+ggplot(diamonds, aes(x=color, y=price)) + geom_boxplot()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_51.png) 
+![center](/RData/code/lesson2/figures/segment_5a.png) 
+
+The boxplot provides some information in a compact form: you can see the median as a thick black line, the edges of the box show the 25th and 75th quantiles of the data respectively, and these points are outliers that lie far outside the expected range of the data. In this particular case, since there are a large number of outliers you might want to try putting the y-axis on a log scale. Recall that we do that by adding an option:
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = color, y = price)) + geom_boxplot() + scale_y_log10()
+ggplot(diamonds, aes(x=color, y=price)) + geom_boxplot() + scale_y_log10()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_52.png) 
+![center](/RData/code/lesson2/figures/segment_5b.png) 
+
+This is a better behaved boxplot that gets a better sense of how the distribution of price differs across multiple colors.
+
+One problem with the boxplot is that it doesn't show details of the distribution besides these quantiles. This works well when the data follows a Normal distribution, or a "bell curve," but it might not work well for stranger distributions. For example, the distribution might have not one but two frequency peaks, what we call "bimodality." However strange the distribution, a box plot will always look like a square. We can instead view the distribution as a density using what's called a "violin plot". To do that, all we do is change `geom_boxplot` to `geom_violin`.
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = color, y = price)) + geom_violin() + scale_y_log10()
+ggplot(diamonds, aes(x=color, y=price)) + geom_violin() + scale_y_log10()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_53.png) 
+![center](/RData/code/lesson2/figures/segment_5c.png) 
+
+The width at each point in this violin plot represents the frequency of that price. So these bumps show the prices that are more common, and we can see that indeed within some colors there is bimodality- there are multiple points that are common- that a boxplot did not represent.
+
+Just like in scatter plots or histograms, if we want to see whether another variable is involved, we can use `facet_wrap` to divide our plot into multiple subplots. For example, we could divide this into subgroups based on clarity. To do that, we would do
+
 
 {% highlight r %}
-
-ggplot(diamonds, aes(x = color, y = price)) + geom_violin() + scale_y_log10() + 
-    facet_wrap(~clarity)
+ggplot(diamonds, aes(x=color, y=price)) + geom_violin() + scale_y_log10() + facet_wrap(~ clarity)
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_54.png) 
+![center](/RData/code/lesson2/figures/segment_5d.png) 
+
+Now you can see that we've divided it into eight smaller violin plots showing the distribution within each of those levels of clarity.
 
 <a name="segment6"></a>
 
-Segment 6: Input: Getting Data into the Right Format
+Segment 6: Input- Getting Data into the Right Format
 -----------
+
+So far all of our analyses have started with a data frame: one row per observation, one column for each attribute. But let's say you have just one vector of numbers and you want to create a histogram, or you have two vectors and want to make a scatterplot. It may not be worth it to construct a data frame with those values just so you can graph it. To make your life easier, ggplot2 provides a simple way to plot one or two vectors, which is the `qplot` function.
+
+Let's generate some random numbers we want to plot. The rnorm function generates random values from a normal distribution, or "bell curve." So if we create a variable `x` with `rnorm`, saying how many random values we want, for example `1000`:
 
 
 {% highlight r %}
 x = rnorm(1000)
+{% endhighlight %}
+
+We have created a variable containing 1000 values. Here we can see:
+
+
+{% highlight r %}
 x
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##    [1] -7.673e-01  1.172e+00  6.142e-01  1.032e+00  5.774e-01 -9.300e-02
-##    [7] -8.576e-01 -8.127e-01  3.621e-01  2.489e-01  4.275e-01 -9.555e-01
-##   [13]  5.077e-01 -7.031e-01  6.151e-01 -7.495e-02 -1.546e+00 -4.522e-01
-##   [19]  7.483e-02  7.502e-01  2.900e-01 -9.064e-02 -8.348e-01 -1.154e+00
-##   [25]  3.206e-01 -1.290e+00  1.167e-01  8.236e-01  6.217e-01  4.299e-01
-##   [31] -2.558e-01  6.166e-01  1.665e+00 -1.391e+00 -1.267e+00  8.655e-01
-##   [37] -7.582e-01  6.748e-01 -2.734e-01 -3.875e-01  8.947e-01 -5.603e-01
-##   [43] -9.159e-01 -8.237e-01 -1.267e+00  9.513e-01 -1.914e+00 -1.217e-01
-##   [49] -9.968e-01  1.667e-01 -1.488e+00  8.083e-01 -1.168e+00 -2.362e-01
-##   [55] -4.467e-01 -5.175e-01  8.193e-02 -7.065e-01  1.164e+00 -2.010e+00
-##   [61] -1.038e+00 -2.514e+00 -1.242e+00 -1.769e+00 -3.028e-02  1.293e+00
-##   [67] -8.951e-01 -5.411e-01  7.597e-01 -3.056e-01 -1.560e+00  2.334e-01
-##   [73] -8.224e-01 -2.120e+00  8.038e-01  6.885e-01 -1.072e+00  1.497e+00
-##   [79] -3.883e-02 -9.559e-01  3.990e-01  4.200e-01  3.933e-01  8.873e-01
-##   [85]  2.475e-01 -5.561e-01  6.325e-01  1.230e+00 -5.141e-01 -1.558e+00
-##   [91] -2.383e-01  1.619e-01  6.658e-01 -6.733e-02  8.565e-02 -9.429e-01
-##   [97] -3.864e-01  5.243e-01 -1.141e-01  4.207e-01 -6.180e-01 -1.829e+00
-##  [103]  1.364e+00 -5.067e-01 -1.666e+00  2.141e-02 -4.236e-01 -2.350e+00
-##  [109]  1.839e-01  2.524e-01  1.421e+00  1.052e+00 -2.115e-01 -1.164e+00
-##  [115] -2.881e-01 -4.646e-01 -1.406e+00  5.612e-01 -1.489e+00  1.880e+00
-##  [121] -4.289e-01  1.765e+00 -6.563e-01 -9.956e-01 -3.484e-01  4.394e-01
-##  [127]  2.125e+00  1.202e+00 -1.235e+00  1.180e+00 -3.439e-01  1.093e+00
-##  [133] -1.413e+00 -1.333e+00  1.117e+00  1.325e+00  2.263e-06 -6.261e-01
-##  [139] -2.994e-01 -1.104e+00  6.884e-01  3.432e-01 -1.497e+00 -1.244e+00
-##  [145]  1.454e-01  2.748e-01 -6.255e-01  7.986e-01  1.596e+00  1.337e+00
-##  [151]  1.339e+00  1.268e+00 -5.684e-01  1.261e+00 -5.173e-01  1.796e-01
-##  [157] -1.404e-02  6.211e-01 -1.012e+00  1.165e+00 -1.559e+00  1.168e+00
-##  [163] -9.416e-01 -1.034e+00 -7.969e-01  1.157e+00  9.717e-01 -2.167e+00
-##  [169] -1.883e-01  1.267e+00 -5.732e-01 -2.332e-01  1.188e+00  5.758e-01
-##  [175] -1.130e-01  8.849e-01 -2.240e+00  3.983e-01  4.506e-01 -2.414e-01
-##  [181]  3.219e-01  1.270e-01  2.290e-01  4.791e-01  9.058e-01 -1.719e+00
-##  [187] -4.448e-01 -7.465e-01 -7.491e-01  1.410e-01  2.648e-01 -1.480e+00
-##  [193] -1.570e+00  4.447e-01 -4.967e-01  1.755e-01 -1.903e+00  3.284e-01
-##  [199]  8.140e-01 -3.203e-01 -4.988e-02 -5.159e-01 -2.545e-01 -1.216e+00
-##  [205] -2.225e+00  2.677e+00 -7.772e-01 -3.102e+00 -1.439e+00  1.239e+00
-##  [211] -1.240e+00  2.333e+00  1.529e+00 -5.247e-01  1.398e+00  3.378e-01
-##  [217] -1.878e+00  6.545e-01 -1.022e-01 -1.628e+00 -1.986e-02 -4.255e-01
-##  [223]  5.007e-01 -5.100e-01 -4.152e-01 -6.862e-01  6.438e-01  2.492e+00
-##  [229] -9.409e-01  8.918e-01 -1.961e+00 -9.564e-01  3.253e-02  8.862e-02
-##  [235] -2.077e-01  7.937e-01 -2.315e+00 -1.170e+00  1.032e-02 -3.066e-01
-##  [241] -1.740e+00 -1.501e-02  3.361e-01  8.457e-01  8.911e-02 -2.715e-01
-##  [247] -1.109e-01 -9.746e-01 -3.138e-01  7.255e-01 -6.146e-01  1.408e+00
-##  [253]  6.338e-02 -2.660e-01  1.425e+00  9.482e-01 -5.258e-02 -2.640e+00
-##  [259]  1.066e-01  1.667e+00  9.272e-01 -5.272e-01  4.247e-01 -1.159e-01
-##  [265]  9.715e-01 -6.385e-01  1.668e-01 -2.264e-01  6.066e-01  7.243e-02
-##  [271] -4.219e-01 -8.002e-01 -5.208e-01  1.288e+00 -4.409e-01  1.097e+00
-##  [277] -2.377e-01 -1.630e+00 -8.338e-01 -4.089e-01  2.707e-01  4.657e-01
-##  [283] -1.534e+00 -5.807e-01  1.465e+00 -2.160e+00  6.022e-01  5.214e-01
-##  [289]  1.666e+00  5.781e-01 -8.807e-02 -1.004e+00 -3.032e-01 -8.800e-01
-##  [295]  2.928e-01 -1.064e+00 -3.861e-01 -1.753e+00 -4.143e-01 -1.627e+00
-##  [301]  1.020e+00 -9.387e-01 -2.659e-01 -2.424e-02  1.339e+00 -3.788e-01
-##  [307]  1.566e+00  4.727e-01 -9.232e-01  3.206e-01  2.427e+00  1.163e-01
-##  [313]  5.956e-01 -2.221e-01 -3.682e-01  1.942e-01  1.550e+00  5.125e-01
-##  [319]  3.483e-01  1.089e+00 -2.721e+00  7.640e-01 -5.130e-01 -2.354e-02
-##  [325] -1.076e+00 -6.147e-01  1.953e+00 -1.184e+00 -1.635e+00  2.098e+00
-##  [331]  1.464e+00 -1.283e+00  2.763e-01  1.075e-02  7.092e-01 -1.021e+00
-##  [337] -5.211e-01  5.553e-01 -4.072e-02  4.293e-01  8.677e-01  2.198e-01
-##  [343] -6.545e-01 -9.324e-01 -1.863e+00 -2.525e-01 -1.688e+00  7.246e-01
-##  [349]  1.377e+00  1.474e+00  1.175e+00  2.242e-01 -5.443e-01 -1.455e+00
-##  [355] -8.637e-01 -4.170e-01 -4.852e-01  1.660e-01  6.801e-03 -4.885e-01
-##  [361] -2.230e+00 -2.147e+00 -1.406e+00  4.167e-01  2.382e+00  8.398e-01
-##  [367] -4.438e-01  3.101e-01 -4.598e-01 -3.116e-01 -3.828e-01 -9.013e-01
-##  [373]  1.665e-01  9.120e-01  9.465e-02  2.977e-01 -4.727e-01 -1.037e+00
-##  [379] -1.254e+00 -3.543e-01 -2.027e-01  8.959e-01 -1.763e+00  1.559e+00
-##  [385] -1.519e-01 -1.551e+00 -1.022e+00 -6.580e-01  8.763e-01 -1.423e+00
-##  [391] -4.702e-01 -2.328e+00  6.541e-01 -1.998e+00 -1.459e+00 -1.197e+00
-##  [397] -5.926e-01 -7.711e-01  9.208e-01  1.747e+00 -1.623e+00  2.785e-01
-##  [403]  7.215e-01  1.005e+00 -1.789e+00 -1.427e+00 -4.507e-01  8.398e-01
-##  [409]  1.096e+00 -3.461e-01  7.564e-01  1.151e+00  3.808e-02 -1.613e+00
-##  [415] -9.962e-02 -1.184e+00  2.222e+00  3.892e-02  1.452e+00 -5.027e-01
-##  [421] -7.807e-01 -1.044e+00  1.705e-01  1.081e+00  1.755e+00  4.465e-01
-##  [427] -9.458e-01  4.453e-01  1.399e+00 -1.293e+00  1.617e-01 -9.206e-02
-##  [433] -6.318e-01 -2.553e-01  1.008e+00  8.557e-01 -3.252e-01 -1.518e+00
-##  [439]  1.772e-02 -7.187e-01  4.832e-01 -4.947e-01 -4.119e-01  1.141e+00
-##  [445] -6.945e-01 -5.661e-01 -9.634e-01  7.229e-01 -2.035e+00  2.525e-02
-##  [451] -2.260e+00 -2.353e-01  7.003e-01 -6.678e-01  7.186e-01  3.271e+00
-##  [457] -5.796e-01  8.807e-01  1.237e+00 -1.543e+00  6.485e-01  7.233e-01
-##  [463]  1.732e-01 -3.504e-01 -9.842e-01  9.748e-01  4.298e-01 -2.446e+00
-##  [469] -4.245e-02  9.184e-01  3.176e-01  6.529e-01 -7.064e-01  1.883e-01
-##  [475]  1.059e-01  1.788e+00  3.827e-01  1.097e+00 -1.133e-01  3.021e-02
-##  [481] -4.478e-01 -1.799e+00 -6.319e-01  9.260e-01  1.702e-01 -1.582e+00
-##  [487] -1.184e+00  5.992e-01  9.673e-01  6.909e-01  1.985e+00 -7.903e-01
-##  [493] -1.497e+00 -1.773e-01  9.859e-01  1.833e-01  9.229e-01  3.668e-01
-##  [499] -1.413e-01 -5.039e-01 -1.177e-01  5.783e-01 -1.233e+00 -8.451e-01
-##  [505]  9.594e-01 -4.477e-02  8.260e-02 -1.867e-01  9.935e-02 -2.483e+00
-##  [511] -2.313e-02 -2.151e+00 -1.098e+00 -8.475e-01  1.856e+00  1.032e+00
-##  [517] -5.513e-01  2.436e-01 -1.078e+00 -4.938e-01  2.863e-01 -1.087e+00
-##  [523]  1.192e+00 -4.270e-01 -1.240e+00  5.629e-01  1.592e+00 -6.161e-01
-##  [529]  1.490e+00  4.378e-01 -6.947e-01  9.164e-01 -2.043e+00  8.355e-01
-##  [535]  3.341e-01 -4.756e-01 -1.482e+00  6.328e-01 -7.751e-01  7.643e-02
-##  [541] -3.999e-01  1.648e-01 -9.254e-03 -3.109e-01  4.336e-01  3.184e-01
-##  [547] -1.103e+00 -1.173e+00 -1.216e+00  1.272e+00 -8.024e-01 -5.209e-01
-##  [553] -1.810e-01 -8.348e-01 -9.825e-01  1.477e+00 -6.509e-01  1.854e+00
-##  [559]  3.707e-02  4.890e-01 -8.972e-01  1.929e+00 -1.711e-01 -2.505e-01
-##  [565]  1.714e+00  2.541e-01  1.329e+00 -1.192e+00  1.458e-01  4.255e-01
-##  [571]  1.059e-01 -1.422e+00 -1.188e+00 -5.482e-01  4.496e-01 -3.159e-02
-##  [577]  1.757e+00  9.948e-01  1.715e+00  7.775e-01 -1.821e+00 -1.048e+00
-##  [583]  1.042e+00 -7.846e-01  1.192e-01 -5.568e-02 -6.784e-02  4.106e-01
-##  [589] -6.265e-01 -5.705e-01  1.121e+00 -1.407e+00 -2.252e-01 -8.427e-01
-##  [595]  1.712e+00 -8.418e-01 -1.661e-01 -8.693e-01 -1.019e+00  7.276e-01
-##  [601] -1.230e+00  2.958e-01 -6.504e-01 -7.573e-01  2.811e-01 -5.573e-01
-##  [607]  5.096e-01  2.440e+00  1.891e-01 -1.339e-01  1.787e-02  1.018e-01
-##  [613] -3.046e-01 -2.599e-01  4.053e-01 -1.467e+00 -1.005e+00  1.603e+00
-##  [619]  1.038e+00  7.983e-02 -9.050e-01 -1.464e+00 -1.819e+00 -1.499e+00
-##  [625]  1.079e+00  2.307e-01 -2.735e-01 -1.666e+00  7.726e-01 -1.078e+00
-##  [631] -1.086e+00  1.022e+00  1.066e+00 -1.724e+00  1.375e+00 -8.794e-01
-##  [637]  3.992e-01  1.611e+00  5.093e-01 -8.512e-01  8.347e-01 -1.074e+00
-##  [643]  4.563e-01 -6.913e-01  1.988e-01 -5.702e-02  1.502e-02 -1.695e+00
-##  [649]  1.909e-01 -1.745e+00  4.910e-01  1.012e+00 -1.361e-01 -2.914e-02
-##  [655] -1.135e+00 -5.436e-01  1.514e+00 -9.221e-01  2.664e-01 -1.085e+00
-##  [661] -9.465e-01  6.115e-01 -1.181e+00 -6.549e-02  7.848e-01  1.402e+00
-##  [667]  6.537e-01  1.234e+00 -6.172e-02 -7.002e-01  5.071e-01  1.666e-01
-##  [673] -5.302e-01 -7.260e-01  1.360e+00  1.793e-01  1.079e+00 -4.353e-01
-##  [679] -1.023e+00 -1.392e+00 -6.131e-01 -2.558e-02  6.745e-01  4.465e-02
-##  [685]  3.797e-01 -1.340e+00 -2.823e-01 -6.814e-02  2.272e+00  9.155e-01
-##  [691]  6.490e-01  5.481e-04 -6.911e-01 -1.336e-01  1.047e-01  1.849e-01
-##  [697] -1.192e-01 -2.044e+00 -1.183e+00  7.309e-01 -1.874e+00  5.916e-01
-##  [703]  6.787e-01 -3.340e-01  4.173e-01 -2.634e-01 -2.043e-01  1.385e+00
-##  [709] -1.522e+00 -3.819e-01 -6.205e-01  3.831e-01  6.032e-01  1.142e+00
-##  [715]  1.122e+00  1.466e+00 -2.989e-01  8.526e-01 -2.711e-01  1.011e+00
-##  [721] -2.231e-01 -8.944e-01 -6.953e-01 -1.227e+00  1.170e+00 -1.875e+00
-##  [727] -1.007e-01 -1.269e-02  1.083e+00 -5.407e-01  4.267e-01 -1.440e+00
-##  [733]  1.315e+00  1.302e+00 -4.643e-01  5.568e-01 -2.050e+00 -1.079e+00
-##  [739]  7.234e-01  8.621e-02 -2.709e+00  1.908e-02  1.639e-01  1.660e+00
-##  [745] -1.238e-01  1.546e+00  7.775e-01  1.051e+00 -8.437e-01  4.797e-01
-##  [751]  5.384e-01  2.953e-01 -1.869e+00 -3.716e-01  1.360e+00  3.966e-01
-##  [757]  6.466e-01  1.070e+00 -2.124e-01  8.894e-01 -1.887e-01 -1.588e+00
-##  [763] -1.573e-01  7.903e-01  1.118e+00 -8.546e-01  3.108e-02 -1.612e-01
-##  [769]  2.483e-01  9.258e-01  2.515e-02 -1.799e+00 -8.677e-01  8.552e-01
-##  [775] -1.576e-02 -8.346e-01 -4.221e-01  9.160e-02 -2.863e-01  3.797e-01
-##  [781] -8.337e-01 -3.224e-01  5.686e-02 -4.273e-01 -7.892e-01 -1.784e-02
-##  [787]  1.593e-01  2.413e-01 -8.465e-01  7.947e-01  8.069e-02  1.376e+00
-##  [793] -5.552e-01 -1.086e+00 -5.170e-02  1.100e+00 -6.607e-01  7.249e-01
-##  [799] -2.896e-01  4.652e-01 -5.807e-01  5.142e-01  3.435e-01 -4.471e-01
-##  [805]  3.113e-01  1.343e+00  7.303e-01  9.086e-01 -1.303e+00  1.982e-01
-##  [811] -2.675e+00  2.134e-01  1.648e+00 -2.209e-01 -7.743e-01 -2.183e-01
-##  [817]  1.580e-01 -1.204e+00 -5.523e-01 -1.672e+00  1.338e+00 -2.384e-01
-##  [823]  2.723e-01 -1.312e+00 -1.123e+00 -1.614e-01  3.176e-01  3.190e-01
-##  [829]  9.872e-02 -4.935e-01 -2.862e-01  1.152e-01  8.781e-01 -1.057e+00
-##  [835] -2.795e-01 -6.424e-01  1.454e+00  3.777e-01  1.109e+00  1.519e+00
-##  [841]  3.726e-01 -8.490e-01  2.921e-01  1.017e+00 -3.499e-01  8.635e-01
-##  [847]  6.384e-01 -9.609e-02 -6.097e-01 -2.177e-01  9.311e-01 -2.656e-01
-##  [853] -2.791e-01 -6.738e-01  9.661e-01  1.413e+00  6.177e-01 -2.962e-01
-##  [859] -5.873e-01 -1.051e+00  4.457e-02 -3.343e-01 -2.038e+00 -1.614e+00
-##  [865]  5.899e-01 -8.830e-01  1.372e+00 -4.645e-01  3.279e-01 -1.079e+00
-##  [871]  7.753e-01 -1.283e+00  3.995e-01 -1.718e+00 -4.648e-01 -3.323e-01
-##  [877] -5.607e-01  2.082e+00  7.123e-01 -1.208e-01  6.656e-01 -8.723e-01
-##  [883] -4.966e-01 -9.763e-01 -1.192e+00 -5.070e-01 -7.090e-01 -1.052e+00
-##  [889]  6.029e-01 -1.676e+00 -4.006e-01  3.018e-01  2.183e+00 -4.145e-01
-##  [895]  3.860e-01  7.558e-01 -6.920e-01 -1.016e-01  9.134e-01 -1.199e+00
-##  [901]  5.717e-01  1.576e+00 -7.446e-01  1.445e+00  1.273e+00  1.314e+00
-##  [907]  1.479e-01  1.001e-01 -4.836e-01 -3.114e-01  1.258e+00 -9.903e-01
-##  [913]  2.391e+00 -3.236e-01  6.364e-01  9.207e-01  9.238e-03  1.570e+00
-##  [919] -7.545e-01 -9.736e-03  5.795e-02 -1.605e+00 -2.810e+00 -1.675e+00
-##  [925]  4.113e-01 -1.450e+00 -4.188e-01 -1.096e+00  9.323e-01  5.764e-01
-##  [931]  1.105e+00 -3.004e-01 -9.953e-01  4.491e-01  6.731e-01 -9.843e-02
-##  [937] -8.163e-01  1.318e+00 -7.760e-02 -7.520e-01 -2.604e-01  5.614e-01
-##  [943] -5.695e-01 -9.986e-01  2.421e-01  1.094e+00 -7.750e-01  1.299e+00
-##  [949] -2.240e+00 -5.785e-01 -1.124e+00 -7.298e-01 -1.771e+00  1.215e+00
-##  [955] -1.215e+00  9.748e-01  1.384e+00  5.810e-01  1.836e-01  1.718e-01
-##  [961] -1.278e-01  7.155e-01 -8.693e-01  1.372e+00  2.484e-01  1.270e+00
-##  [967] -2.235e-01 -1.570e+00 -8.332e-01 -8.832e-01  1.357e+00 -2.329e-03
-##  [973]  5.368e-01 -1.464e+00 -1.296e+00  2.326e+00 -1.916e+00 -2.020e+00
-##  [979] -9.286e-01  1.900e-01 -2.442e-02  3.452e-03 -2.881e-01  8.914e-01
-##  [985]  1.332e+00  5.278e-01 -8.015e-01 -9.896e-01 -2.526e-01 -6.514e-01
-##  [991] -5.722e-02 -1.035e+00  5.660e-01 -2.229e+00  3.495e-02  2.062e+00
-##  [997]  2.701e-01 -1.109e+00 -6.510e-01  1.809e-01
+##    [1] -0.7959696 -1.5781027  0.0773569  0.5741992  0.4241290 -0.0308448
+##    [7]  0.0019698 -1.4836228 -0.1936896 -1.8217849  0.1308407  0.3536961
+##   [13] -1.1248386 -1.2835912 -0.5197232  1.6342223 -0.3623886 -0.3167862
+##   [19] -0.5354058 -0.4174116  1.4643429 -0.3483456  0.1367558  0.4226802
+##   [25]  0.1545329  0.3926258  0.3430607 -0.6780351  0.9364956 -1.6722821
+##   [31] -2.0394362 -0.8239917  1.4688713 -0.6387756  0.4652744 -1.0144235
+##   [37] -0.4304354 -1.0845220 -0.8550870 -0.2891349  0.7620406  0.6593881
+##   [43] -0.5593859  0.8817869 -1.2114166  0.3655444 -0.4974011 -0.2844669
+##   [49]  0.3477334 -1.3246290  0.9449256  2.2602721 -0.4652058  2.0223930
+##   [55] -0.9741220 -2.0036181 -0.3321661  2.4028739 -0.2841932 -0.0028120
+##   [61]  0.3484321  0.6093935  0.9812512  1.5278250  0.9703586 -1.4168706
+##   [67] -2.2008279 -0.3125171  0.2685887  1.1383113 -0.5726550 -1.6779272
+##   [73] -0.2342121 -0.8076935 -0.6867322  0.4363610  0.5239006 -1.7578964
+##   [79] -1.7582496 -0.4021688  1.5032641 -1.5379724  1.0002962  1.7021732
+##   [85]  1.0097385  1.3581171  1.3564881 -0.8898941 -1.0528272  0.2099831
+##   [91] -0.7866511  1.8270255  1.3862985  2.5968134  0.1562721 -0.0105200
+##   [97] -2.5604857  0.5452795  0.8878745  1.4361878  0.5299330  0.6133065
+##  [103]  0.6556744  1.6100314 -2.8660154 -0.4482302 -0.4485881 -0.3289870
+##  [109] -0.4056053 -0.8801217 -0.4670084  1.0707935 -0.1916639 -0.9894449
+##  [115]  1.2976009 -0.6689716 -1.1498471  0.9013003  1.2594086 -0.5267253
+##  [121] -0.7213677  2.0553964 -1.0668172  0.7419988  0.5643351  0.8105255
+##  [127]  0.4955311 -0.1611881 -0.3468598  0.4456445  0.4996216  0.1541034
+##  [133] -0.8135348 -1.1708218  0.5175897  1.2293175 -1.1036401 -0.8107780
+##  [139]  0.7322602 -0.0425832  1.5670989  0.7884926  0.1615738  0.0690910
+##  [145] -0.1736764 -0.9658104  0.1161025 -0.2902115  0.5733875 -0.3000646
+##  [151] -0.2953446  0.2291009 -0.6757646 -0.7610283  0.4809699 -0.0851359
+##  [157]  1.8103378 -0.4748433  0.4845448  0.1551554 -0.2789510  1.2946662
+##  [163]  0.7789801 -0.5669838 -0.7042507  2.4072074  1.0882675  0.2658584
+##  [169] -0.0366035  0.2333007 -0.9085864 -1.5507462 -0.6458023  1.6233180
+##  [175] -1.6731588 -1.6736690 -0.0784647 -1.1972694  0.1615443  0.9015466
+##  [181] -0.9306812  0.3557063 -0.7210208  1.8941173 -1.6399701 -0.0581072
+##  [187]  0.0009342 -0.2339161  0.5449176  0.3880994 -0.0035344  0.4930497
+##  [193] -0.9248505  0.1321949 -0.9643252  0.4392572  0.2239731  0.8912434
+##  [199]  0.6960063 -0.5287149  0.4760224 -0.1868170  1.1477952  0.0922831
+##  [205]  1.4314905  1.1670866 -1.8605910 -0.1650971  1.2155777 -1.1035837
+##  [211]  0.5442406 -1.8791965  2.0770247  0.2317476 -1.1622901  0.5095880
+##  [217]  1.3104410  1.5752885  0.9728386  0.1185939  1.6036004  0.3793261
+##  [223]  0.3672832 -0.5355303 -1.3160212  1.5385731  0.3306754 -0.8205976
+##  [229]  0.5302628  0.1953363 -0.6371132 -0.8073217  0.4631549 -0.1710797
+##  [235]  0.0157574 -1.5128082 -0.5827663 -0.2838363 -2.2164454 -0.0584162
+##  [241]  0.0154599  0.5636060  0.7941731  1.4969582 -0.4106554 -1.2172106
+##  [247]  1.4939839 -0.9814031  1.9500624 -0.4161861 -0.5189286  0.2385414
+##  [253] -0.2658256  0.0580943 -0.2871514  1.6945038 -0.1983610  0.1449367
+##  [259]  0.4629220 -0.2632544 -0.0170717  1.0597111 -0.7171665  0.7649328
+##  [265] -0.1305133 -1.9046690 -0.9639378 -1.3189566 -1.2195106 -0.4598309
+##  [271] -1.4567044 -0.9192561 -1.2229143 -0.6928483  0.5026728  1.4802040
+##  [277]  1.3074409 -0.3906403  1.2289658 -0.7081951  0.1729308  0.7297977
+##  [283] -0.3372331  0.4573929 -0.7033719 -0.5212837  0.1627424 -0.4580351
+##  [289]  1.1752984 -0.5175327  0.7430194 -0.0701175 -0.8066119  0.0770441
+##  [295]  0.3106499  1.1108179 -0.2478867  0.7381671 -1.6349591 -0.2670197
+##  [301] -0.0697006  0.4186534 -1.6591740 -2.0412920 -0.5534740 -1.3857845
+##  [307]  1.4382271 -0.4213972 -1.5665922  0.1997553  0.9536411 -1.3198176
+##  [313]  0.0051833  0.4950181 -0.0227172  0.0651840  0.1827238 -0.5890935
+##  [319]  0.4766168  0.1651913  0.9607531 -1.9976346  0.3648324 -1.2649263
+##  [325] -0.2539187  1.3877908  0.0258309 -1.0172024 -0.5698280  2.4066689
+##  [331] -1.7565462 -0.1381034 -0.6789023  0.3048554 -1.2854784 -3.4561399
+##  [337] -1.2557576 -0.3614945  0.3173806 -0.5280646  1.2384646 -0.5578981
+##  [343] -0.9888988 -0.4898498  1.2245865 -0.3967616 -0.0960928  0.2344128
+##  [349] -0.9406002 -1.1490017  0.4714183  0.1638662  0.6161755 -0.5448228
+##  [355] -1.1038452  1.4281864 -1.1168529  1.1382163  0.6806825 -0.4606020
+##  [361]  1.8179969  0.3939587  0.1697833  0.9236168 -0.2499475 -1.3494251
+##  [367]  0.7023061 -0.0101574  0.3761681 -1.6850077 -0.2518556  0.7607298
+##  [373] -0.7786369  1.9814064 -0.4056633  0.5164120  0.5019247 -0.2691312
+##  [379] -1.9122820  1.3438623  0.6644667 -1.3027011  1.4019832 -0.5955636
+##  [385]  0.4057616 -0.0996711  1.0713066 -0.3639151  0.4417273 -1.5672654
+##  [391] -0.7355268  0.5490882  0.8364842  0.5333652  1.0067147  1.2662324
+##  [397]  1.8209087  0.2685291  0.3272133  1.4113609 -1.7016117  0.7101363
+##  [403]  0.0764861 -0.1240923 -0.0475662  0.0729718 -0.6540267  0.6924168
+##  [409]  0.4023190  0.6935248 -1.0229800  0.5254000  0.2762314  0.6254588
+##  [415] -0.8814278 -1.4878836  2.0528547  0.4835311 -0.7149752  0.1605815
+##  [421] -1.3318942 -0.7619222  1.3389150 -1.4911029 -1.0635662  0.2410386
+##  [427] -0.7394026 -0.5787024  0.7588994 -0.5621596  0.2243590 -0.3530418
+##  [433]  0.9982618  0.3651078 -0.2662563  0.2091071  1.0458849  0.8061993
+##  [439] -1.1343919 -1.6731618  0.9596076 -2.3474382  1.1655948  1.8605481
+##  [445]  0.2371966  1.9318505 -0.7585905  1.0484409 -0.1756034  1.5656422
+##  [451]  1.0700829 -0.3152995 -0.5021952  1.2212882 -1.6458220 -0.0756803
+##  [457]  0.5527260 -0.2192107 -0.6182502 -1.3995478 -0.1366260 -0.6844818
+##  [463]  0.6792151 -0.1824573 -1.0601737  0.2073563 -0.5464228 -0.3911327
+##  [469]  0.0599890  0.0864043 -0.4542024 -0.9127650  0.3149915  0.1194921
+##  [475] -0.0119400 -1.2604168  0.6499639  0.5269140  1.1469915 -0.2502982
+##  [481]  0.1720555  0.2275240  0.1102851 -1.2199585 -0.8247373 -0.4516681
+##  [487] -1.0116354 -0.5182339  1.0081597 -0.3823185  0.1312324  0.1601619
+##  [493]  1.3132113  0.3709994  0.0994834 -0.3741564  0.9341911 -0.1251261
+##  [499] -0.5864120 -0.1011348  1.2710626  0.3561442 -0.4502933 -0.5446722
+##  [505]  0.0817528  0.9991236  0.9723431  0.5996503  0.7532817  0.4514813
+##  [511]  0.9269643 -2.3839179 -0.0015413  0.9405023  0.8177168 -0.1436319
+##  [517]  1.2169901  0.5984728  0.6933118  0.2356280  0.0071713 -0.8833332
+##  [523]  1.6640609  0.6331902 -0.9175146 -0.0755754 -0.3016752 -0.2963791
+##  [529]  1.2066106  0.1207884 -1.9386344  0.2030906 -0.2453188 -0.7381502
+##  [535] -0.5985358 -2.2609837  0.5789543 -0.4465293 -0.1529817  0.2851158
+##  [541]  0.3361356 -0.3139253 -1.0726641 -0.9920186 -0.5298825 -0.4467652
+##  [547]  1.0429467  1.2719007  0.0641635  0.4334872 -0.3920964  0.5622662
+##  [553] -1.1581628 -1.0088331  0.9101525  0.2804658 -1.8797857  1.0430460
+##  [559] -0.1085009  0.6840760  1.9289173  1.7821432 -0.9078835  1.8637786
+##  [565]  0.7937357  0.2232815 -0.0436762 -1.9408911 -0.8822978 -1.0313850
+##  [571]  2.6009822 -1.0688087 -1.2772096 -0.5757484  1.4396158 -0.6482138
+##  [577] -1.2603033 -1.1055559  0.2632248  0.1739259  1.9750507 -1.5913846
+##  [583] -0.9289474  0.6858719 -2.5010881 -0.2182136 -0.0632617 -1.3124499
+##  [589] -1.3844668  0.3769476 -0.1909042 -1.2368659  1.2389751 -0.9196813
+##  [595] -1.6357869 -0.8947227 -2.5924789  0.9285055 -0.6408357  0.1137773
+##  [601] -1.7858566 -1.4970594  1.1418125  0.7482900  0.4923332 -0.0521817
+##  [607] -1.4982573 -0.3961875  0.3749247 -0.9768471 -0.4183443 -0.6469223
+##  [613]  0.4048045  1.1039160 -1.8708913  0.8961362  0.4605882  0.1240127
+##  [619] -0.3613662  0.7661748  1.3317553 -0.0802866  0.3571114  0.6077125
+##  [625]  0.5438402  0.2321132 -0.9564967 -1.2855578 -0.2560647 -1.5479697
+##  [631] -0.8186957  1.7856338 -2.0446786 -1.6818063 -0.7249508  0.7634781
+##  [637] -0.7777191  1.3372142  0.5445573 -2.8633809 -0.0947172 -1.9362567
+##  [643] -1.0742445  0.0859539  1.2691950 -2.4208150 -0.6154097 -0.3776206
+##  [649]  2.4977093 -0.7138744 -1.0313338 -0.8506096  1.7158942  0.0514725
+##  [655]  0.2825389 -2.3177690  0.4286867 -0.5635598 -0.8214304  0.5944007
+##  [661]  0.7520281 -0.8083618 -0.4207512  0.7577409  0.5794520 -1.9013283
+##  [667]  2.2157084 -1.9713692 -0.2094732 -0.1578188 -1.4611580 -0.4499962
+##  [673]  0.4810249  1.2226222  1.4305586  0.1461979  1.7451837 -1.6168864
+##  [679] -0.0821023  0.4250598  0.6808770 -0.0615436 -1.2437122 -0.6646736
+##  [685] -0.5256406 -0.3921907  1.1538069  0.9462768 -0.5083542  0.8629368
+##  [691]  0.9677885 -0.9966305 -0.7090351  0.4327263  0.7052198  0.9687270
+##  [697] -1.1142635 -0.2116047  0.9761222 -0.8871873 -0.9351028 -0.8805307
+##  [703]  1.0735520  0.1832443  1.4514285 -1.7979825  0.4984923 -0.2948293
+##  [709] -0.7545790  1.2397852  0.7497205 -1.0738702  0.7156939 -0.3687188
+##  [715] -1.2972443  1.1758758  0.7077582  1.3228423  0.5050577 -0.8111382
+##  [721] -1.1394155 -0.9255640 -0.2976690  0.0932202  1.5529407  0.2158833
+##  [727]  0.0630541 -0.3104202  1.3645663  1.6987160  0.5372674 -0.4690046
+##  [733] -0.6186480  0.0930111  2.1452773 -3.0474625  0.9936195 -0.2813650
+##  [739]  0.6266195  0.4222955 -0.8727745 -0.7708401 -0.2275086  0.2552709
+##  [745]  1.5016438  0.9009767 -1.5317976  1.5350996 -1.8685429  0.3407366
+##  [751] -1.4741355  0.0972189 -0.2900540 -0.3085321  0.1686151  0.2644461
+##  [757]  1.3819852  0.2264180 -0.1274267 -0.0309100  0.6776867  0.8747074
+##  [763] -1.3088647 -0.7136597  1.6943141 -0.1601561 -0.4444478 -1.6772519
+##  [769] -0.6347682  2.0797751  1.9094730  0.7224333  0.2250256 -0.3648466
+##  [775] -0.7850596  1.6737621  0.0553754 -1.2916920 -1.2885634 -1.4859141
+##  [781]  0.2095971  0.6555120 -0.2833232  1.1776222  0.3465987 -0.8394890
+##  [787] -0.6423873 -1.1708297  0.4751014 -2.0843548 -1.2889121  0.2150840
+##  [793]  1.6857093  0.2585215  0.9257383 -1.2918755  0.8577682  0.4591877
+##  [799] -1.5904097 -0.0226334  0.2971865  2.1206966 -0.0372117  0.6024643
+##  [805]  0.9600513  1.6267097 -0.8341628 -0.4759493  0.0722821 -0.7641559
+##  [811] -0.7608000 -0.0507294  0.3722444 -0.0629532  0.0845653  0.6134444
+##  [817] -0.5275465  1.7846734  0.3946040 -1.5852374  1.8657393  0.3780863
+##  [823] -0.4287512  0.3171629 -1.0713242  0.5000237  0.3798040  0.6804081
+##  [829]  0.4312137 -0.6972537  0.9568730  1.1444938  1.1451046  0.5104907
+##  [835] -1.3494255 -0.6075723 -0.4011800 -1.1891128  0.8104861 -0.7485158
+##  [841] -0.3845334  0.9119230 -1.5185417 -0.3001786 -0.4165641 -0.4705531
+##  [847] -1.1204902 -1.6882171  1.3028017 -0.1395134  0.1097571 -1.0477069
+##  [853]  0.5403735 -2.0040482 -0.8760552 -0.0512592 -1.0248825  0.5270786
+##  [859]  0.2074175 -0.2918015 -0.9602403 -0.2914667  0.6517496 -0.1685919
+##  [865]  0.7358465 -0.3916408 -1.2745749 -1.1618241 -1.9048893  0.0048323
+##  [871]  0.5378039 -1.3327357 -2.2125845 -0.2430774 -0.6872183  0.4163604
+##  [877]  0.9133725  0.4894407  0.7707523  0.0331379  0.7568571 -0.2803711
+##  [883] -1.2257037  1.4051833 -1.0006694 -0.0683342 -1.2624433  2.4176588
+##  [889]  0.5827521  0.1717654  0.4281814 -0.3366657  0.0342182  1.3135897
+##  [895]  0.9689126  0.0403641 -0.2233126  0.4696852  0.6397890 -0.8080816
+##  [901] -0.1627909 -0.1592106 -0.3370667 -1.0658286  1.3636601 -0.0056849
+##  [907]  0.8147852  1.0329586 -0.6213366 -1.0852029  0.2764135  0.4241839
+##  [913]  0.8129962  2.9733043 -0.4763169 -0.3247213  0.2417909  0.8503745
+##  [919]  0.1469487  1.6000540  0.0942319  0.0203613  0.9217261  0.7923837
+##  [925] -2.8549554 -0.5101153 -2.6928276 -0.4644623 -1.1882081 -0.3526219
+##  [931] -2.1588853  0.7940608 -0.2221722 -0.9688465 -1.4149667 -2.2838381
+##  [937] -0.9802587 -1.5807696  0.7256216  1.4987596 -1.3368146 -0.5270321
+##  [943]  0.7746961 -1.3754252 -1.0470384  0.1498009 -0.8302360 -1.0261066
+##  [949] -0.9339966 -0.6136165 -0.5960490  0.1326510  0.7728312  0.7027687
+##  [955] -0.0106936  0.1859549  0.7134753 -0.7566696  0.2084880 -0.7736654
+##  [961] -0.0430100 -0.9991800 -0.4787656  0.0308086  0.6167382  0.8045252
+##  [967] -1.1814552 -1.4003856  2.4060265 -0.7530418 -1.1388702  0.4050619
+##  [973]  0.6646614 -1.0152346  0.4205101 -1.5459098 -0.7519205 -0.8506437
+##  [979] -0.2349367 -2.3214679 -1.2035366 -1.0084677  0.4935949 -1.0577813
+##  [985] -0.6475429  0.8315596  0.7958631 -0.0974068  1.1911219 -1.1734990
+##  [991]  0.3312814  0.8046973  0.3026710 -1.8783915 -0.6662570 -0.0349693
+##  [997] -2.4678798  0.6427397 -0.0224606  0.0759496
 {% endhighlight %}
 
+Each of these values was generated from a normal distribution.
+
+Let's say we want to histogram those values. We can give them to the function `qplot`:
 
 
 {% highlight r %}
-
 qplot(x)
 {% endhighlight %}
 
@@ -537,40 +688,57 @@ qplot(x)
 ## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_61.png) 
+![center](/RData/code/lesson2/figures/segment_6c.png) 
+
+This creates a histogram without having to create a data frame or specify `geom_histogram`.
+
+This shortcut also lets us set options easily. For example, we can change the binwidth of the histogram by giving the binwidth argument to qplot:
+
 
 {% highlight r %}
-
-qplot(x, binwidth = 1)
+qplot(x, binwidth=1)
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_62.png) 
+![center](/RData/code/lesson2/figures/segment_6d.png) 
+
+We can also set the x and y axis labels easily. We can do that either by adding the `xlab` and `ylab` options like we did before:
+
 
 {% highlight r %}
-
-qplot(x, binwidth = 1) + xlab("Random Variable")
+qplot(x, binwidth=1) + xlab("Random Variable")
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_63.png) 
+![center](/RData/code/lesson2/figures/segment_6e.png) 
+
+Or we can add the `xlab` argument to the `qplot` function.
+
 
 {% highlight r %}
-
-qplot(x, binwidth = 1, xlab = "Random Variable")
+qplot(x, binwidth=1, xlab="Random Variable")
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_64.png) 
+![center](/RData/code/lesson2/figures/segment_6e2.png) 
+
+Histograms aren't the only thing we can plot with qplot. Let's create a y variable so that we can construct a scatter plot comparing x to y. Let's make y also be a random normal distribution:
+
 
 {% highlight r %}
-
 y = rnorm(1000)
+{% endhighlight %}
 
+If we want to scatterplot x vs why, we can simply give them to `qplot`.
+
+
+{% highlight r %}
 qplot(x, y)
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_65.png) 
+![center](/RData/code/lesson2/figures/segment_6g.png) 
+
+Note that we can still add layers to this basic plot just like we could to a regular ggplot call. For example, we could add a smoothing curve with the `geom_smooth` layer:
+
 
 {% highlight r %}
-
 qplot(x, y) + geom_smooth()
 {% endhighlight %}
 
@@ -580,35 +748,60 @@ qplot(x, y) + geom_smooth()
 ## geom_smooth: method="auto" and size of largest group is >=1000, so using gam with formula: y ~ s(x, bs = "cs"). Use 'method = x' to change the smoothing method.
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_66.png) 
+![center](/RData/code/lesson2/figures/segment_6g2.png) 
+
+This layer ends up on top of the scatterplot created by `qplot`.
+
+Now, so far we've been working with the built-in diamonds dataset. These plots were really easy because the data were given in the format of one observation per row- that is, one diamond per row- which we call "tall" format. But many datasets come in a "wide"" format: that means there is more than one observation- more than one point on your scatterplot- in each row. For example, let's look at the WorldPhones dataset, which comes built into R. Just like we did for diamonds, we use data to load it:
+
 
 {% highlight r %}
-
 data("WorldPhones")
-head(WorldPhones)
 {% endhighlight %}
 
-
-
-{% highlight text %}
-##      N.Amer Europe Asia S.Amer Oceania Africa Mid.Amer
-## 1951  45939  21574 2876   1815    1646     89      555
-## 1956  60423  29990 4708   2568    2366   1411      733
-## 1957  64721  32510 5230   2695    2526   1546      773
-## 1958  68484  35218 6662   2845    2691   1663      836
-## 1959  71799  37598 6856   3000    2868   1769      911
-## 1960  76036  40341 8220   3145    3054   1905     1008
-{% endhighlight %}
-
+You can see it got added to our global environment. You can then view it using the `View` function.
 
 
 {% highlight r %}
-# help(WorldPhones)
+View(WorldPhones)
+{% endhighlight %}
 
+You can also get more information about WorldPhones using the `help` function:
+
+
+{% highlight r %}
+help(WorldPhones)
+{% endhighlight %}
+
+This dataset shows the number of telephones, measured in thousands, in each continent in each of several years in the 1950s.
+
+Notice that each column is one continent, and each row is one year. Now, that sounds like a reasonable way to store your data. But imagine if we want to compare increases in phone usage between continents, with time on the x axis. That means each point on our plot is going to be one continent in one year. We don't have one observation per row: we have seven! That makes it very difficult to plot using ggplot2.
+
+Luckily, there is an easy way to turn this into tall format, called "melting" the data. To do this, we'll have to install another third party package, called reshape2. Recall that you can do this with
+
+
+{% highlight r %}
+install.packages("reshape2")
+{% endhighlight %}
+
+just like we did with `ggplot2`. Now we load the reshape2 package, with
+
+
+{% highlight r %}
 library(reshape2)
+{% endhighlight %}
 
+Now we can melt our dataset: that is, turn it from this wide format- many observations per row- to a tall format- one observation per row. Let's assign the new, melted data to a variable called WorldPhones.m, where m is for melted. We assign this using the `melt` function on the WorldPhones data.
+
+
+{% highlight r %}
 WorldPhones.m = melt(WorldPhones)
+{% endhighlight %}
 
+Now let's view our new, melted data.
+
+
+{% highlight r %}
 head(WorldPhones.m)
 {% endhighlight %}
 
@@ -624,12 +817,19 @@ head(WorldPhones.m)
 ## 6 1960 N.Amer 76036
 {% endhighlight %}
 
+Notice that there are now only three columns: Var1, Var2, and value. So Var1 is year, in Var2 we see each of the continents, and value is the number of phones. What happened was that every cell- every observation- every number of phones per year per continent- in the original data got its own row in this melted data. We can see that in the year 1951, in North America, there were 45 million, 939 thousand phones. You can see the same value in our original unmelted data. So none of the data changed, it just got "reshaped".
+
+To make the data a little more intuitive, you can change the column names. You might recall that we can do this as follows:
 
 
 {% highlight r %}
-
 colnames(WorldPhones.m) = c("Year", "Continent", "Phones")
+{% endhighlight %}
 
+So now if we view `WorldPhones.m`, we can see our new column names.
+
+
+{% highlight r %}
 head(WorldPhones.m)
 {% endhighlight %}
 
@@ -645,47 +845,67 @@ head(WorldPhones.m)
 ## 6 1960    N.Amer  76036
 {% endhighlight %}
 
+Now that we have our data in melted format, it is easy to create a plot with ggplot2. We go through our usual steps of a ggplot call, but this time we give it WorldPhones.m. We do:
 
 
 {% highlight r %}
-
-ggplot(WorldPhones.m, aes(x = Year, y = Phones, color = Continent)) + geom_point()
+ggplot(WorldPhones.m, aes(x=Year, y=Phones, color=Continent)) + geom_point()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_67.png) 
+![center](/RData/code/lesson2/figures/segment_6p.png) 
+
+on the x-axis we're going to put the Year, so we can see how things change over time. On the y-axis we want to put the number of Phones, which is the variable we're interested in graphing. And let's color each point based on the factor of Continent. Then we'll add the `geom_point` layer to make this into a scatterplot.
+
+Now we've worked with scatterplots before, but since this time what we're showing is a trend over time, it might be better to draw lines between the points in continent. This is easy: we can just change the layer to a `geom_line` layer.
+
 
 {% highlight r %}
-
-ggplot(WorldPhones.m, aes(x = Year, y = Phones, color = Continent)) + geom_line()
+ggplot(WorldPhones.m, aes(x=Year, y=Phones, color=Continent)) + geom_line()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_68.png) 
+![center](/RData/code/lesson2/figures/segment_6q.png) 
+
+Now we have a plot of the number of phones in each continent by year. Incidentally, one might expect phone service to increase exponentially rather than linearly. Also, a lot of the values here are scrunched in the bottom of the axis. When that's the case, it's a good idea to put the y axis on a log scale. Recall that we can do that by adding `scale_y_log10()`.
+
 
 {% highlight r %}
-
-ggplot(WorldPhones.m, aes(x = Year, y = Phones, color = Continent)) + geom_line() + 
-    scale_y_log10()
+ggplot(WorldPhones.m, aes(x=Year, y=Phones, color=Continent)) + geom_line() + scale_y_log10()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_69.png) 
+![center](/RData/code/lesson2/figures/segment_6r.png) 
+
+Now each of the phone trends looks linear, and we can see the lower values more clearly: for example, that Africa overtook Central America in the number of phones in the year 1956.
+
+Notice how easy this plot was to make once we had the data in the correct format: one row for every point- that's every combination of year and continent- on our graph. So if your data's not in that format when you're starting out, melt it.
 
 <a name="segment7"></a>
 
 Segment 7: Output: Saving Your Plots
 -------------
 
+So you just created a great ggplot, and now you want to save it to a file, so you can email it, or add it to your paper or poster, or just look at it later. You can do this with the ggsave function.
+
+First, let's create a scatterplot based on our diamonds data.
+
 
 {% highlight r %}
-ggplot(diamonds, aes(x = carat, y = price)) + geom_point()
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point()
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_71.png) 
+![center](/RData/code/lesson2/figures/segment_7a.png) 
+
+Now instead of displaying it, let's run that line again, but save it to a variable, called p.
+
 
 {% highlight r %}
+p = ggplot(diamonds, aes(x=carat, y=price)) + geom_point()
+{% endhighlight %}
 
-p = ggplot(diamonds, aes(x = carat, y = price)) + geom_point()
+Note that when that happened, the plot did not get recreated: it WAS built but never displayed. We've saved the entire plot into this `p` object. Now we can save that plot to a file, instead of displaying it in our window, by using ggsave:
 
-ggsave(filename = "diamonds.png", p)
+
+{% highlight r %}
+ggsave(filename="diamonds.png", p)
 {% endhighlight %}
 
 
@@ -694,11 +914,11 @@ ggsave(filename = "diamonds.png", p)
 ## Saving 7 x 7 in image
 {% endhighlight %}
 
+What just happened is that we created a file called diamonds.png that saved the image. It doesn't have to be a PNG; it can also be a PDF:
 
 
 {% highlight r %}
-
-ggsave(filename = "diamonds.pdf", p)
+ggsave(filename="diamonds.pdf", p)
 {% endhighlight %}
 
 
@@ -707,11 +927,11 @@ ggsave(filename = "diamonds.pdf", p)
 ## Saving 7 x 7 in image
 {% endhighlight %}
 
+or a JPEG:
 
 
 {% highlight r %}
-
-ggsave(filename = "diamonds.jpeg", p)
+ggsave(filename="diamonds.jpeg", p)
 {% endhighlight %}
 
 
@@ -720,19 +940,26 @@ ggsave(filename = "diamonds.jpeg", p)
 ## Saving 7 x 7 in image
 {% endhighlight %}
 
-
+You can read about the formats ggsave supports, and about the other options you can set like figure height and width, by doing `help` on `ggsave`:
+    
 
 {% highlight r %}
-
-# help(ggsave)
-
-ggplot(diamonds, aes(x = carat, y = price)) + geom_point()
+help(ggsave)
 {% endhighlight %}
 
-![center](/RData/code/../figs/code_lesson2/segment_72.png) 
+One useful shortcut is that if you just displayed a plot, like in a line like this:
+
 
 {% highlight r %}
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point()
+{% endhighlight %}
 
+![center](/RData/code/lesson2/figures/segment_7g.png) 
+
+Then ggsave will know to save *that* plot by default when you perform ggsave- you don't even have to tell it which plot you're saving.
+
+
+{% highlight r %}
 ggsave("diamonds.png")
 {% endhighlight %}
 
@@ -742,3 +969,6 @@ ggsave("diamonds.png")
 ## Saving 7 x 7 in image
 {% endhighlight %}
 
+Just make sure you're saving the plot you mean to save.
+
+Within RStudio, there's one other choice for saving a plot: you can click on Export, and then "Save Plot As Image," and then select your width, height, filename, and so on.
