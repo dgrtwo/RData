@@ -18,7 +18,7 @@ To start this course, you'll need to
 How To Take This Course
 ------------
 
-This course is divided into four lessons, each of which are divided into 4-8 segments. We combine a few types of material:
+This course is divided into four lessons, each of which is divided into 4-8 segments. We combine a few types of material:
 
 * **Videos**: Each segment is associated with a 3-8 minute video tutorial. As you watch the video you should have RStudio open, and follow along with every line of code yourself!
 * **Quizzes**: Each segment includes a brief, self-evaluation quiz performed interactively in R, using [Swirl](http://swirlstats.com/). See [here](../quizzes/) to learn how to install the lessons and take the quizzes.
