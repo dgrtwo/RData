@@ -27,9 +27,13 @@ a tutorial that goes far beyond the discussion of data.table in [Lesson 4](../le
 
 ### Expert
 
+* [Tidy Data](http://www.jstatsoft.org/v59/i10/): An excellent paper that lays out an essential guide to shaping your data to make manipulation, analysis and visualization easy
+
 * [The R Inferno](http://www.burns-stat.com/pages/Tutor/R_inferno.pdf): an amusing guide to some of R's more surprising traps.
 
 * [10 R Packages I Wish I Knew About Earlier](http://blog.yhathq.com/posts/10-R-packages-I-wish-I-knew-about-earlier.html)
+
+* [R Packages](http://r-pkgs.had.co.nz/) A tutorial to writing and publishing your own R packages
 
 * [knitr](http://yihui.name/knitr/): An R package for producing reproducible reports that integrate R with LaTeX or markdown.
 
