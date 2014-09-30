@@ -9,14 +9,12 @@ KnitPost <- function(input, outfile, base.url="/", include.code=TRUE) {
     # this function is a modified version of an example here:
     # http://jfisher-usgs.github.com/r/2012/07/03/knitr-jekyll/
     require(knitr);
-    opts_knit$set(base.url = base.url)
-    fig.path <- paste0("../figs/", sub(".Rmd$", "", basename(input)), "/")
-    opts_chunk$set(fig.path = fig.path)
-    opts_chunk$set(fig.cap = "center")
     render_jekyll()
 
     env = new.env()
     env$include.code = include.code
+    env$fig.path = paste0("../../figs/", sub(".Rmd$", "", basename(input)), "/")
+    env$base.url = base.url
     knit(input, outfile, envir = env)
 }
 
@@ -31,7 +29,7 @@ for (infile in list.files(".", pattern="*.Rmd$")) {
     # knit only if the input file is the last one modified
     if (!file.exists(outfile) |
         file.info(infile)$mtime > file.info(outfile)$mtime) {
-        KnitPost(infile, outfile, base.url="/RData/code/")
+        KnitPost(infile, outfile, base.url="/RData/")
         
         # also knit a code-less version
         transcript.outfile = paste0("../_transcript/raw/",

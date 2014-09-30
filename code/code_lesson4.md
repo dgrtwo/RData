@@ -71,7 +71,7 @@ y
 ## [1] 10
 {% endhighlight %}
 
-So even though you didn't see the commands in the interactive terminal, they did run when you hit Source. 
+So even though you didn't see the commands in the interactive terminal, they did run when you hit Source.
 
 Incidentally, there's a keyboard shortcut for sourcing a current file as well: you can do CMD+SHIFT+S.
 
@@ -112,7 +112,7 @@ data(mtcars)
 ggplot(mtcars, aes(wt, mpg)) + geom_point()
 {% endhighlight %}
 
-![center](/RData/code/lesson4/figures/unnamed-chunk-7.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-7.png) 
 
 As soon as we hit return on this line, we created a scatterplot. However, let's put the same lines of code into our script. Then we clear the current plot by hitting Clear All, and hit Source.
 
@@ -123,7 +123,7 @@ Notice that no plot showed up. The reason is that when it's in a file, a ggplot,
 print(ggplot(mtcars, aes(wt, mpg)) + geom_point())
 {% endhighlight %}
 
-![center](/RData/code/lesson4/figures/unnamed-chunk-8.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-8.png) 
 
 Finally, there's a useful shortcut for running one line at a time in a script. Put your cursor on a particular line of code, then hit CMD+RETURN in Macs, or CONTROL+ENTER on Windows, you'll run just that line of code in your interactive terminal. This means you don't have to select a line and copy and paste it into your terminal. This is useful for if you want to run a single line of code in your script, but don't want to go through the time of rerunning the whole file.
 
@@ -1203,7 +1203,7 @@ Perform this on our original dataset `salaries`, putting on the x-axis `yearID` 
 ggplot(salaries, aes(yearID, salary)) + geom_point()
 {% endhighlight %}
 
-![center](/RData/code/lesson4/figures/unnamed-chunk-53.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-53.png) 
 
 So in this graph we can see a positive trend in salary over time. However, all we can really see is the range of salaries: within this mass of points it's not possible to tell what the average is for each of these years. If we actually want to see how the average changed over time, we can instead plot the summarized data. We get this from `summarized.year`:
 
@@ -1255,7 +1255,7 @@ We have the year in one column and the average salary in another. So use that `y
 ggplot(summarized.year, aes(yearID, Average)) + geom_line()
 {% endhighlight %}
 
-![center](/RData/code/lesson4/figures/unnamed-chunk-55.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-55.png) 
 
 Now we can see the trend of the average over time. This comes directly from the summarized data, where we have the average per year.
 
@@ -1266,7 +1266,7 @@ We can even go farther- since we have it summarized by year *and* league, we can
 ggplot(summarized.year.lg, aes(yearID, Average, col=lgID)) + geom_line()
 {% endhighlight %}
 
-![center](/RData/code/lesson4/figures/unnamed-chunk-56.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-56.png) 
 
 Now we can see two separate lines- one red for the American League, and one green for the National League.
 
@@ -1544,7 +1544,7 @@ merged.salaries
 
 You can see that we've added a new column, `name`.
 
-Merging can sometimes be a bit more complicated. For example, let's bring in one more dataset, this one a history of each player's batting statistics for each year. To do that, take the earlier `read.csv` line, change `Master.csv` to `Batting.csv`, and save it into a variable called `batting`: 
+Merging can sometimes be a bit more complicated. For example, let's bring in one more dataset, this one a history of each player's batting statistics for each year. To do that, take the earlier `read.csv` line, change `Master.csv` to `Batting.csv`, and save it into a variable called `batting`:
 
 
 {% highlight r %}
@@ -1908,7 +1908,7 @@ Now, one thing baseball fans like looking for is career records. That means we w
 summarized.batters = merged.all[, list(Total.HR=sum(HR)), by="playerID"]
 {% endhighlight %}
 
-Here we create one column, `Total.HR`, which we define as the sum of home runs for each player, and we tell it to perform these summaries on each player individually. 
+Here we create one column, `Total.HR`, which we define as the sum of home runs for each player, and we tell it to perform these summaries on each player individually.
 
 
 {% highlight r %}
@@ -2185,7 +2185,7 @@ The more a player gets hits in baseball, the more chance they have to actually s
 ggplot(summarized.batters, aes(Total.H, Total.R)) + geom_point()
 {% endhighlight %}
 
-![center](/RData/code/lesson4/figures/unnamed-chunk-80.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-80.png) 
 
 Here we can see a clear correlation between the number of hits a player gets and the number of runs.
 
@@ -2294,7 +2294,7 @@ ggplot(summarized.batters, aes(BattingAverage)) + geom_histogram()
 ## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
 {% endhighlight %}
 
-![center](/RData/code/lesson4/figures/unnamed-chunk-84.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-84.png) 
 
 We can see that they center around about 25%, with a large number of people with close to 0 batting average, which would mostly be pitchers.
 

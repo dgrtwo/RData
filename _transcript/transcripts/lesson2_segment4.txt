@@ -3,11 +3,11 @@ Segment 4: Histograms and Density Plots
 
 We've seen a lot of ways to customize scatter plots. But scatter plots are just one kind of graph. Sometimes we want to look at just one dimension of our data and observe its distribution: for that, we'll use a histogram.
 
-All you need to do to make a histogram is to change your layer from geom_point() to geom_histogram(). For example, we do
+All you need to do to make a histogram is to change your layer from `geom_point()` to `geom_histogram()`. For example, we do
 
 This creates a histogram. Notice that we've on the x-axis we've placed price. On the y-axis is the frequency within each bin. This is a visualization of the density of the distribution of price.
 
-You can change the width of each bin as an option to the geom_histogram layer. You can make them wider
+You can change the width of each bin as an option to the `geom_histogram` layer. You can make them wider
 
 Or you can change it to be thinner
 

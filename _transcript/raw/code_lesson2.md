@@ -59,7 +59,7 @@ As an example, let's use ggplot2 to create a scatterplot where we put carat, or 
 
 Now, there are three parts to a ggplot2 graph. The first is the data we'll be graphing. In this case, we are plotting the diamonds data frame, so we type "diamonds". Second, we show the mapping of aesthetics to the attributes we'll be plotting. We type aes- meaning aesthetics- then open parentheses, and now our assignments: we say "x=carat", saying we want to put carat on the x-axis, then "y=price", saying what we want to put on the y-axis.
 
-Now that we've defined the structure of our graph, we are going to add a "layer" to it: that is, define what time of graph it is. In this case, we want to make a scatter plot: the name for that layer is geom_point. "geom" is a typical start for each of these layers. Now we've defined our graph, and hit return, and we see our scatter plot.
+Now that we've defined the structure of our graph, we are going to add a "layer" to it: that is, define what time of graph it is. In this case, we want to make a scatter plot: the name for that layer is `geom_point`. "geom" is a typical start for each of these layers. Now we've defined our graph, and hit return, and we see our scatter plot.
 
 See that we've placed "carat" on the x axis, and "price" on the y-axis. Every one of these points represents one row in our data frame: that is, one diamond. We've now communicated a relationship between those two attributes in the dataset: as weight increases, price increases.
 
@@ -91,29 +91,29 @@ Now the size of every point is determined by the cut even while the color is sti
 
 Now every shape represents a different cut of the diamond.
 
-Now, this scatter plot is one "layer", which means we can add additional layers besides the scatter plot using the plus sign. For example, what if we want to add a smoothing curve that shows the general trend of the data? That's a layer called geom_smooth.
+Now, this scatter plot is one "layer", which means we can add additional layers besides the scatter plot using the plus sign. For example, what if we want to add a smoothing curve that shows the general trend of the data? That's a layer called `geom_smooth`.
 
 So let's take this plot, take out the color, and add a smoothing trend:
 
 
 
-The gray area around the curve is a confidence interval, suggesting how much uncertainty there is in this smoothing curve. If we want to turn off the confidence interval, we can add an option to the geom_smooth later; specifically "se=FALSE", where "s.e." stands for "standard error."
+The gray area around the curve is a confidence interval, suggesting how much uncertainty there is in this smoothing curve. If we want to turn off the confidence interval, we can add an option to the `geom_smooth` later; specifically "se=FALSE", where "s.e." stands for "standard error."
 
 
 
 This gets rid of the gray area and now we can just see the smoothing curve.
 
-Similarly, if we would rather show a best fit straight line rather than a curve, we can change the "method" option in the geom_smooth layer. In this case it's method="lm", where "lm" stands for "Linear model".
+Similarly, if we would rather show a best fit straight line rather than a curve, we can change the "method" option in the `geom_smooth` layer. In this case it's method="lm", where "lm" stands for "Linear model".
 
 
 
-There we fit a best fit line to the relationship between carat and price with this geom_smooth layer.
+There we fit a best fit line to the relationship between carat and price with this `geom_smooth` layer.
 
 If you used a color aesthetic, ggplot will create one smoothing curve for each color. For example, if we add "color=clarity":
 
 
 
-Now we see it actually fits one curve for each of these colors. This is a useful way to compare and contrast multiple trends. Note that you can show this smoothing curve layer *without* showing your scatter plot layer, simply by removing the geom_point() layer:
+Now we see it actually fits one curve for each of these colors. This is a useful way to compare and contrast multiple trends. Note that you can show this smoothing curve layer *without* showing your scatter plot layer, simply by removing the `geom_point()` layer:
 
 
 
@@ -154,7 +154,7 @@ Each of these options gets added on after the last one. Now we can see that the 
 
 
 
-Another possibility is to put one of the axes on a log scale. You can do this with the scale_y_log10() function.
+Another possibility is to put one of the axes on a log scale. You can do this with the `scale_y_log10()` function.
 
 
 
@@ -169,13 +169,13 @@ Segment 4: Histograms and Density Plots
 
 We've seen a lot of ways to customize scatter plots. But scatter plots are just one kind of graph. Sometimes we want to look at just one dimension of our data and observe its distribution: for that, we'll use a histogram.
 
-All you need to do to make a histogram is to change your layer from geom_point() to geom_histogram(). For example, we do
+All you need to do to make a histogram is to change your layer from `geom_point()` to `geom_histogram()`. For example, we do
 
 
 
 This creates a histogram. Notice that we've on the x-axis we've placed price. On the y-axis is the frequency within each bin. This is a visualization of the density of the distribution of price.
 
-You can change the width of each bin as an option to the geom_histogram layer. You can make them wider:
+You can change the width of each bin as an option to the `geom_histogram` layer. You can make them wider:
 
 
 
@@ -381,7 +381,7 @@ or a JPEG:
 
 
 You can read about the formats ggsave supports, and about the other options you can set like figure height and width, by doing `help` on `ggsave`:
-    
+
 
 
 One useful shortcut is that if you just displayed a plot, like in a line like this:

@@ -14,7 +14,6 @@ What just happened is that we created a file called diamonds.png that saved the 
 or a JPEG
 
 You can read about the formats ggsave supports, and about the other options you can set like figure height and width, by doing `help` on `ggsave`
-    
 
 One useful shortcut is that if you just displayed a plot, like in a line like this
 

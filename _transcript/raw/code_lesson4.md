@@ -34,7 +34,7 @@ That means it ran all the commands in your script in a row. You can see this by 
 
 
 
-So even though you didn't see the commands in the interactive terminal, they did run when you hit Source. 
+So even though you didn't see the commands in the interactive terminal, they did run when you hit Source.
 
 Incidentally, there's a keyboard shortcut for sourcing a current file as well: you can do CMD+SHIFT+S.
 
@@ -369,7 +369,7 @@ This means assign a new column, `name`, and now we can give it a value based on 
 
 You can see that we've added a new column, `name`.
 
-Merging can sometimes be a bit more complicated. For example, let's bring in one more dataset, this one a history of each player's batting statistics for each year. To do that, take the earlier `read.csv` line, change `Master.csv` to `Batting.csv`, and save it into a variable called `batting`: 
+Merging can sometimes be a bit more complicated. For example, let's bring in one more dataset, this one a history of each player's batting statistics for each year. To do that, take the earlier `read.csv` line, change `Master.csv` to `Batting.csv`, and save it into a variable called `batting`:
 
 
 
@@ -416,7 +416,7 @@ Now, one thing baseball fans like looking for is career records. That means we w
 
 
 
-Here we create one column, `Total.HR`, which we define as the sum of home runs for each player, and we tell it to perform these summaries on each player individually. 
+Here we create one column, `Total.HR`, which we define as the sum of home runs for each player, and we tell it to perform these summaries on each player individually.
 
 
 

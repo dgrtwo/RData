@@ -1,7 +1,7 @@
 Segment 4: Multiple Linear Regression
 -----------------
 
-We've learned to use a linear model to determine significance and make predictions. But what if you have more than one predictor variable? For instance, let's say you want to measure the effect of not just weight, but also the number of cylinders, and the volume, or displacement, of the car? We can get a sense of the trend by adding those two predictors to our visualization using color and size. Here we put the number of cylinders (cyl) as the color and the volume, or displacement (disp) as the size. 
+We've learned to use a linear model to determine significance and make predictions. But what if you have more than one predictor variable? For instance, let's say you want to measure the effect of not just weight, but also the number of cylinders, and the volume, or displacement, of the car? We can get a sense of the trend by adding those two predictors to our visualization using color and size. Here we put the number of cylinders (cyl) as the color and the volume, or displacement (disp) as the size.
 
 Already the effect of those three variables on the miles per gallon is kind of difficult to determine. It's true that cars with higher volume, or larger points, have a lower fuel efficiency- but they *also* have a higher weight. These two predictors might be redundant- or as statisticians say, confounded- for predicting the fuel efficiency. The same is true of the number of cylinders: more cylinders (or lighter blue) means both a higher weight and a lower gas mileage.
 

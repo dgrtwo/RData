@@ -1,7 +1,7 @@
 Segment 3: Linear Regression
 -----------------
 
-Earlier we discussed testing for a correlation, which is a good way to see if a relationship exists between two continuous variables, x and y. In our example, we were able to test whether the fuel efficiency of a car was related to its weight. But what if you want to turn this relationship into a prediction: for instance, what would be the fuel efficiency of a 4500 pound car? 
+Earlier we discussed testing for a correlation, which is a good way to see if a relationship exists between two continuous variables, x and y. In our example, we were able to test whether the fuel efficiency of a car was related to its weight. But what if you want to turn this relationship into a prediction: for instance, what would be the fuel efficiency of a 4500 pound car?
 
 We can do this by fitting a linear model, or linear regression, which is done in R with the `lm` function. Let's save linear model to a variable we call `fit`.
 

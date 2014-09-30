@@ -15,7 +15,7 @@ Now save your new script. First you have to choose a working directory, which yo
 
 That means it ran all the commands in your script in a row. You can see this by checking the values of `x` and `y`
 
-So even though you didn't see the commands in the interactive terminal, they did run when you hit Source. 
+So even though you didn't see the commands in the interactive terminal, they did run when you hit Source.
 
 Incidentally, there's a keyboard shortcut for sourcing a current file as well: you can do CMD+SHIFT+S.
 

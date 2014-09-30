@@ -44,7 +44,7 @@ ls()
 
 
 {% highlight text %}
-## [1] "test1" "test2" "test3"
+## [1] "base.url" "fig.path" "test1"    "test2"    "test3"
 {% endhighlight %}
 
 We see that there are three objects, namely test1, test2, and test3. Note that you may see a different list (or an empty list) if there is no object in your current R session.

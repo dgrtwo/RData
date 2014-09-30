@@ -9,7 +9,7 @@ Now we can see that all At Bat's are at least 1.
 
 Now, one thing baseball fans like looking for is career records. That means we want to summarize across all the years that a batter played, and find, for example, the total number of home runs each player hit. Recall that we learned to do that with "by". For example
 
-Here we create one column, `Total.HR`, which we define as the sum of home runs for each player, and we tell it to perform these summaries on each player individually. 
+Here we create one column, `Total.HR`, which we define as the sum of home runs for each player, and we tell it to perform these summaries on each player individually.
 
 Now we can see that we've created a new data.table that contains each player's ID and their total career home runs. But in the process, since the only thing we're summarizing by is the player ID, we lost track of their actual first and last names. There's a simple way around that. First, recall that we can create a new column that combines the players' first and last names using `paste` and `:=`, and let's try the same trick again, this time on `merged.all`
 

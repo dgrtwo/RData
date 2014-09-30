@@ -9,6 +9,8 @@ Lesson 4: Exploratory Data Analysis With data.table
 library(knitr)
 opts_chunk$set(cache=TRUE, cache.path="lesson4/cache/", fig.path="lesson4/figures/")
 
+opts_chunk$set(base.url = base.url, fig.path = fig.path, fig.cap = "center")
+
 if (!include.code) {
     opts_chunk$set(cache=FALSE, eval=FALSE, echo=FALSE)
 }

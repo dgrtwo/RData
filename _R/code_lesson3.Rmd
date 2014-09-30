@@ -9,6 +9,8 @@ Lesson 3: Statistical Testing and Prediction
 library(knitr)
 opts_chunk$set(cache=TRUE, cache.path="lesson3/cache/", fig.path="lesson3/figures/")
 
+opts_chunk$set(base.url = base.url, fig.path = fig.path, fig.cap = "center")
+
 if (!include.code) {
     opts_chunk$set(cache=FALSE, eval=FALSE, echo=FALSE)
 }

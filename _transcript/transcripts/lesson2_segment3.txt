@@ -19,7 +19,7 @@ You might also want to limit the range of the x or the y axes. You can do this w
 
 Each of these options gets added on after the last one. Now we can see that the x-axis ranges only from 0 to 2. Similarly, if we wanted to show only the y-axis from 0 to 10000, we could put
 
-Another possibility is to put one of the axes on a log scale. You can do this with the scale_y_log10() function.
+Another possibility is to put one of the axes on a log scale. You can do this with the `scale_y_log10()` function.
 
 Now you've put the y-axis on a log scale.
 

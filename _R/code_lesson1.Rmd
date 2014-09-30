@@ -9,6 +9,8 @@ Lesson 1: Variables and Data Structures
 library(knitr)
 opts_chunk$set(cache=TRUE, cache.path="lesson1/cache/", fig.path="lesson1/figures/")
 
+opts_chunk$set(base.url = base.url, fig.path = fig.path, fig.cap = "center")
+
 if (!include.code) {
     opts_chunk$set(cache=FALSE, eval=FALSE, echo=FALSE)
 }

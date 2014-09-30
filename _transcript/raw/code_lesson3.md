@@ -9,12 +9,12 @@ Lesson 3: Statistical Testing and Prediction
 
 <a name="segment1"></a>
 
+Segment 1: Comparing Two Samples
+--------------
+
 The phrase "lying with statistics" is a popular term for the manipulation and misrepresentation of data. But this association of the term statistics with dishonesty is unfortunate, because the science of statistics is in fact designed precisely to *keep you* from lying. More specifically, the framework of statistical hypothesis testing is designed to prevent you from making erroneous conclusions based on random chance, or noise. I'm David Robinson, and today we're going to be introducing statistical testing and prediction in R.
 
 We'll assume that you are familiar with some of the basics of R, including variables, matrices, data frames, and functions, and we'll be using the ggplot2 package, which was discussed in a previous lesson, to make visualizations of our data. Finally, some very basic familiarity with statistics, including understanding the concept of a hypothesis test, a p-value, and a confidence interval, will be useful for appreciating the tests we explore. Something we won't be going over is the mathematical formulas or justifications behind any of these statistical tests. These can easily be found in a statistics class or textbook if you're interested in learning more about them, or even doing them by hand. Instead, we'll focus on how these tests can be implemented in R. These are far from the only methods R offers: once you understand how to apply these basic methods, it's easy to explore others.
-
-Segment 1: Comparing Two Samples
---------------
 
 One essential statistical method is to test for a difference between two samples, or groups. For example, one might see whether a group of patients who were given a medical treatment had better outcomes than a control group. In our examples in this lesson, we're going to be analyzing a question of fuel efficiency as it relates to some aspects of automobile design and performance. We'll work with a dataset built into R, called `mtcars`, that comes from a 1974 issue of Motor Trends magazine. Recall that you can load a built-in dataset into R with the line
 
@@ -133,7 +133,7 @@ You can see by hitting "tab" after the dollar sign all the values you can extrac
 Segment 3: Linear Regression
 -----------------
 
-Earlier we discussed testing for a correlation, which is a good way to see if a relationship exists between two continuous variables, x and y. In our example, we were able to test whether the fuel efficiency of a car was related to its weight. But what if you want to turn this relationship into a prediction: for instance, what would be the fuel efficiency of a 4500 pound car? 
+Earlier we discussed testing for a correlation, which is a good way to see if a relationship exists between two continuous variables, x and y. In our example, we were able to test whether the fuel efficiency of a car was related to its weight. But what if you want to turn this relationship into a prediction: for instance, what would be the fuel efficiency of a 4500 pound car?
 
 We can do this by fitting a linear model, or linear regression, which is done in R with the `lm` function. Let's save linear model to a variable we call `fit`.
 
@@ -200,7 +200,7 @@ Now we get a linear trend on our ggplot. The grey area shown is the uncertainty 
 Segment 4: Multiple Linear Regression
 -----------------
 
-We've learned to use a linear model to determine significance and make predictions. But what if you have more than one predictor variable? For instance, let's say you want to measure the effect of not just weight, but also the number of cylinders, and the volume, or displacement, of the car? We can get a sense of the trend by adding those two predictors to our visualization using color and size. Here we put the number of cylinders (cyl) as the color and the volume, or displacement (disp) as the size. 
+We've learned to use a linear model to determine significance and make predictions. But what if you have more than one predictor variable? For instance, let's say you want to measure the effect of not just weight, but also the number of cylinders, and the volume, or displacement, of the car? We can get a sense of the trend by adding those two predictors to our visualization using color and size. Here we put the number of cylinders (cyl) as the color and the volume, or displacement (disp) as the size.
 
 
 
