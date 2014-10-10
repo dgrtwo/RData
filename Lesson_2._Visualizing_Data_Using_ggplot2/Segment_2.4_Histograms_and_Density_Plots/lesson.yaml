@@ -1,6 +1,7 @@
 - {Author: David Robinson, Class: Data Analysis and Visualization Using R, Course: Lesson
     2. Visualizing Data Using ggplot2, Lesson: Segment 2.4 Histograms and Density
-    Plots, Organization: Princeton University, Type: Standard, Version: 1.0}
+    Plots, Organization: Princeton University, Partner: princeton, Type: Coursera,
+  Version: 1.0}
 - {Class: video, Output: 'Would you like to re-watch the video for this segment?',
   VideoLink: 'http://youtu.be/p6SxhZmF9MY'}
 - {Class: video, Output: 'Would you like to view the transcript of the code used in
