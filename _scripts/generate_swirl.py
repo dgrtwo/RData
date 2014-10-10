@@ -21,11 +21,16 @@ QUIZ_FILE = os.path.join(DATA_DIR, "quizzes.yml")
 
 UNIVERSAL_FILES = [os.path.join("_swirl", "customTests.R")]
 
+# replacements to make this a Coursera course
+EXTRA_META = {"Type": "Coursera", "Partner": "princeton"}
+
 with open(OUTLINE_FILE) as outline_inf, open(QUIZ_FILE) as quiz_inf:
     lessons = yaml.load(outline_inf)
     quizzes = yaml.load(quiz_inf)
 
     meta = quizzes["meta"]
+    meta.update(EXTRA_META)
+
     for lesson_number, lesson in enumerate(lessons):
         lesson_number += 1
 
