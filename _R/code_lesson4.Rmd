@@ -251,7 +251,7 @@ salaries[lgID == "AL" & yearID >= 1990, ]
 Similarly, we can combine conditions with *or* (`|`). For instance, say we wanted only years before 1990 or after 2010.
 
 ```{r}
-salaries[lgID < 1990 & yearID > 2010, ]
+salaries[yearID < 1990 & yearID > 2010, ]
 ```
 
 We can also sort the data easily, using the order function in the area before the comma:

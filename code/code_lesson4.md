@@ -108,11 +108,22 @@ Importantly, the same is true of a ggplot2 plot. Let's create a basic ggplot:
 
 {% highlight r %}
 library(ggplot2)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Loading required package: methods
+{% endhighlight %}
+
+
+
+{% highlight r %}
 data(mtcars)
 ggplot(mtcars, aes(wt, mpg)) + geom_point()
 {% endhighlight %}
 
-![center](../../figs/code_lesson4/unnamed-chunk-7.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-7-1.png) 
 
 As soon as we hit return on this line, we created a scatterplot. However, let's put the same lines of code into our script. Then we clear the current plot by hitting Clear All, and hit Source.
 
@@ -123,7 +134,7 @@ Notice that no plot showed up. The reason is that when it's in a file, a ggplot,
 print(ggplot(mtcars, aes(wt, mpg)) + geom_point())
 {% endhighlight %}
 
-![center](../../figs/code_lesson4/unnamed-chunk-8.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-8-1.png) 
 
 Finally, there's a useful shortcut for running one line at a time in a script. Put your cursor on a particular line of code, then hit CMD+RETURN in Macs, or CONTROL+ENTER on Windows, you'll run just that line of code in your interactive terminal. This means you don't have to select a line and copy and paste it into your terminal. This is useful for if you want to run a single line of code in your script, but don't want to go through the time of rerunning the whole file.
 
@@ -435,13 +446,7 @@ Similarly, we can combine conditions with *or* (`|`). For instance, say we wante
 
 
 {% highlight r %}
-salaries[lgID < 1990 & yearID > 2010, ]
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning: < not meaningful for factors
+salaries[yearID < 1990 & yearID > 2010, ]
 {% endhighlight %}
 
 
@@ -793,8 +798,9 @@ summarized.year = salaries[, mean(salary), by="yearID"]
 
 
 {% highlight text %}
-## Warning: Group 21 summed to more than type 'integer' can hold so the
-## result has been coerced to 'numeric' automatically, for convenience.
+## Warning in gmean(salary): Group 21 summed to more than type 'integer'
+## can hold so the result has been coerced to 'numeric' automatically, for
+## convenience.
 {% endhighlight %}
 
 This message in red is a warning: it's basically complaining that baseball players are paid too much. But you can ignore it, it doesn't have any effect on our results. Let's look at what ended up in `summarized.year`:
@@ -807,37 +813,37 @@ summarized.year
 
 
 {% highlight text %}
-##     yearID      V1
-##  1:   1985  476299
-##  2:   1986  417147
-##  3:   1987  434729
-##  4:   1988  453171
-##  5:   1989  506323
-##  6:   1990  511974
-##  7:   1991  894961
-##  8:   1992 1047521
-##  9:   1993  976967
-## 10:   1994 1049589
-## 11:   1995  964979
-## 12:   1996 1027909
-## 13:   1997 1218687
-## 14:   1998 1280845
-## 15:   1999 1485317
-## 16:   2000 1992985
-## 17:   2001 2279841
-## 18:   2002 2392527
-## 19:   2003 2573473
-## 20:   2004 2491776
-## 21:   2005 2633831
-## 22:   2006 2834521
-## 23:   2007 2941436
-## 24:   2008 3136517
-## 25:   2009 3277647
-## 26:   2010 3278747
-## 27:   2011 3318838
-## 28:   2012 3458421
-## 29:   2013 3723344
-##     yearID      V1
+##     yearID        V1
+##  1:   1985  476299.4
+##  2:   1986  417147.0
+##  3:   1987  434729.5
+##  4:   1988  453171.1
+##  5:   1989  506323.1
+##  6:   1990  511973.7
+##  7:   1991  894961.2
+##  8:   1992 1047520.6
+##  9:   1993  976966.6
+## 10:   1994 1049588.6
+## 11:   1995  964979.1
+## 12:   1996 1027909.3
+## 13:   1997 1218687.4
+## 14:   1998 1280844.6
+## 15:   1999 1485316.8
+## 16:   2000 1992984.6
+## 17:   2001 2279841.1
+## 18:   2002 2392526.6
+## 19:   2003 2573472.9
+## 20:   2004 2491776.1
+## 21:   2005 2633830.8
+## 22:   2006 2834520.9
+## 23:   2007 2941435.9
+## 24:   2008 3136517.1
+## 25:   2009 3277647.0
+## 26:   2010 3278746.8
+## 27:   2011 3318838.2
+## 28:   2012 3458421.2
+## 29:   2013 3723344.4
+##     yearID        V1
 {% endhighlight %}
 
 We now have two columns: one for year, which we were summarizing by, and one called V1. Every year has its own row, and this V1 was the result of this expression we put between the two commas.
@@ -852,8 +858,9 @@ summarized.year = salaries[, list(Average=mean(salary)), by="yearID"]
 
 
 {% highlight text %}
-## Warning: Group 21 summed to more than type 'integer' can hold so the
-## result has been coerced to 'numeric' automatically, for convenience.
+## Warning in gmean(salary): Group 21 summed to more than type 'integer'
+## can hold so the result has been coerced to 'numeric' automatically, for
+## convenience.
 {% endhighlight %}
 
 
@@ -865,37 +872,37 @@ summarized.year
 
 
 {% highlight text %}
-##     yearID Average
-##  1:   1985  476299
-##  2:   1986  417147
-##  3:   1987  434729
-##  4:   1988  453171
-##  5:   1989  506323
-##  6:   1990  511974
-##  7:   1991  894961
-##  8:   1992 1047521
-##  9:   1993  976967
-## 10:   1994 1049589
-## 11:   1995  964979
-## 12:   1996 1027909
-## 13:   1997 1218687
-## 14:   1998 1280845
-## 15:   1999 1485317
-## 16:   2000 1992985
-## 17:   2001 2279841
-## 18:   2002 2392527
-## 19:   2003 2573473
-## 20:   2004 2491776
-## 21:   2005 2633831
-## 22:   2006 2834521
-## 23:   2007 2941436
-## 24:   2008 3136517
-## 25:   2009 3277647
-## 26:   2010 3278747
-## 27:   2011 3318838
-## 28:   2012 3458421
-## 29:   2013 3723344
-##     yearID Average
+##     yearID   Average
+##  1:   1985  476299.4
+##  2:   1986  417147.0
+##  3:   1987  434729.5
+##  4:   1988  453171.1
+##  5:   1989  506323.1
+##  6:   1990  511973.7
+##  7:   1991  894961.2
+##  8:   1992 1047520.6
+##  9:   1993  976966.6
+## 10:   1994 1049588.6
+## 11:   1995  964979.1
+## 12:   1996 1027909.3
+## 13:   1997 1218687.4
+## 14:   1998 1280844.6
+## 15:   1999 1485316.8
+## 16:   2000 1992984.6
+## 17:   2001 2279841.1
+## 18:   2002 2392526.6
+## 19:   2003 2573472.9
+## 20:   2004 2491776.1
+## 21:   2005 2633830.8
+## 22:   2006 2834520.9
+## 23:   2007 2941435.9
+## 24:   2008 3136517.1
+## 25:   2009 3277647.0
+## 26:   2010 3278746.8
+## 27:   2011 3318838.2
+## 28:   2012 3458421.2
+## 29:   2013 3723344.4
+##     yearID   Average
 {% endhighlight %}
 
 This means we want to create a column called average that contains the mean salary within each year. (Ignore the warning again). Now you can see that the column is called `Average`, which is more helpful. But our summary operation doesn't have to stop there. We can create two columns at the same time: one for the average, and one for the maximum:
@@ -903,43 +910,56 @@ This means we want to create a column called average that contains the mean sala
 
 {% highlight r %}
 summarized.year = salaries[, list(Average=mean(salary), Maximum=max(salary)), by="yearID"]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Warning in gmean(salary): Group 21 summed to more than type 'integer'
+## can hold so the result has been coerced to 'numeric' automatically, for
+## convenience.
+{% endhighlight %}
+
+
+
+{% highlight r %}
 summarized.year
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##     yearID Average  Maximum
-##  1:   1985  476299  2130300
-##  2:   1986  417147  2800000
-##  3:   1987  434729  2127333
-##  4:   1988  453171  2340000
-##  5:   1989  506323  2766667
-##  6:   1990  511974  3200000
-##  7:   1991  894961  3800000
-##  8:   1992 1047521  6100000
-##  9:   1993  976967  6200000
-## 10:   1994 1049589  6300000
-## 11:   1995  964979  9237500
-## 12:   1996 1027909  9237500
-## 13:   1997 1218687 10000000
-## 14:   1998 1280845 14936667
-## 15:   1999 1485317 11949794
-## 16:   2000 1992985 15714286
-## 17:   2001 2279841 22000000
-## 18:   2002 2392527 22000000
-## 19:   2003 2573473 22000000
-## 20:   2004 2491776 22500000
-## 21:   2005 2633831 26000000
-## 22:   2006 2834521 21680727
-## 23:   2007 2941436 23428571
-## 24:   2008 3136517 28000000
-## 25:   2009 3277647 33000000
-## 26:   2010 3278747 33000000
-## 27:   2011 3318838 32000000
-## 28:   2012 3458421 30000000
-## 29:   2013 3723344 29000000
-##     yearID Average  Maximum
+##     yearID   Average  Maximum
+##  1:   1985  476299.4  2130300
+##  2:   1986  417147.0  2800000
+##  3:   1987  434729.5  2127333
+##  4:   1988  453171.1  2340000
+##  5:   1989  506323.1  2766667
+##  6:   1990  511973.7  3200000
+##  7:   1991  894961.2  3800000
+##  8:   1992 1047520.6  6100000
+##  9:   1993  976966.6  6200000
+## 10:   1994 1049588.6  6300000
+## 11:   1995  964979.1  9237500
+## 12:   1996 1027909.3  9237500
+## 13:   1997 1218687.4 10000000
+## 14:   1998 1280844.6 14936667
+## 15:   1999 1485316.8 11949794
+## 16:   2000 1992984.6 15714286
+## 17:   2001 2279841.1 22000000
+## 18:   2002 2392526.6 22000000
+## 19:   2003 2573472.9 22000000
+## 20:   2004 2491776.1 22500000
+## 21:   2005 2633830.8 26000000
+## 22:   2006 2834520.9 21680727
+## 23:   2007 2941435.9 23428571
+## 24:   2008 3136517.1 28000000
+## 25:   2009 3277647.0 33000000
+## 26:   2010 3278746.8 33000000
+## 27:   2011 3318838.2 32000000
+## 28:   2012 3458421.2 30000000
+## 29:   2013 3723344.4 29000000
+##     yearID   Average  Maximum
 {% endhighlight %}
 
 Now you can see that we've created two columns along with the summarizing year: one with average, one with maximum.
@@ -951,6 +971,19 @@ You can group your summaries by any column in the data, not just the year. For e
 
 {% highlight r %}
 summarized.lg = salaries[, list(Average=mean(salary), Maximum=max(salary)), by="lgID"]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Warning in gmean(salary): Group 1 summed to more than type 'integer'
+## can hold so the result has been coerced to 'numeric' automatically, for
+## convenience.
+{% endhighlight %}
+
+
+
+{% highlight r %}
 summarized.lg
 {% endhighlight %}
 
@@ -969,49 +1002,62 @@ We've already summarized by year, and by league- we could also summarize by team
 
 {% highlight r %}
 summarized.team = salaries[, list(Average=mean(salary), Maximum=max(salary)), by="teamID"]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Warning in gmean(salary): Group 2 summed to more than type 'integer'
+## can hold so the result has been coerced to 'numeric' automatically, for
+## convenience.
+{% endhighlight %}
+
+
+
+{% highlight r %}
 summarized.team
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##     teamID Average  Maximum
-##  1:    BAL 1785712 17000000
-##  2:    BOS 2692114 22500000
-##  3:    CAL  739073  5375000
-##  4:    CHA 1992654 17000000
-##  5:    CLE 1525795 15000000
-##  6:    DET 1980835 23000000
-##  7:    KCA 1299026 13000000
-##  8:    MIN 1525032 23000000
-##  9:    ML4  613244  5875000
-## 10:    NYA 3608860 33000000
-## 11:    OAK 1303095 13500000
-## 12:    SEA 1932289 20557143
-## 13:    TEX 1874652 22000000
-## 14:    TOR 1768711 19700000
-## 15:    ATL 2130475 16061802
-## 16:    CHN 2185519 19000000
-## 17:    CIN 1568035 18910655
-## 18:    HOU 1705561 19369019
-## 19:    LAN 2346983 23854494
-## 20:    MON  707459 11500000
-## 21:    NYN 2317350 23145011
-## 22:    PHI 2092231 25000000
-## 23:    PIT 1077990 16500000
-## 24:    SDN 1317960 15505142
-## 25:    SFN 2044199 22250000
-## 26:    SLN 1928833 16333327
-## 27:    COL 1945628 20275000
-## 28:    FLO 1147986 14936667
-## 29:    ANA 1895109 13166667
-## 30:    TBA 1528400 10125000
-## 31:    ARI 2428196 16000000
-## 32:    MIL 2095009 15500000
-## 33:    LAA 4151107 26187500
-## 34:    WAS 2243755 16571429
-## 35:    MIA 2974116 19000000
-##     teamID Average  Maximum
+##     teamID   Average  Maximum
+##  1:    BAL 1785712.3 17000000
+##  2:    BOS 2692113.9 22500000
+##  3:    CAL  739073.2  5375000
+##  4:    CHA 1992653.5 17000000
+##  5:    CLE 1525795.0 15000000
+##  6:    DET 1980835.0 23000000
+##  7:    KCA 1299025.8 13000000
+##  8:    MIN 1525031.7 23000000
+##  9:    ML4  613243.6  5875000
+## 10:    NYA 3608860.1 33000000
+## 11:    OAK 1303094.8 13500000
+## 12:    SEA 1932288.9 20557143
+## 13:    TEX 1874651.6 22000000
+## 14:    TOR 1768711.0 19700000
+## 15:    ATL 2130474.7 16061802
+## 16:    CHN 2185518.7 19000000
+## 17:    CIN 1568035.3 18910655
+## 18:    HOU 1705561.3 19369019
+## 19:    LAN 2346982.7 23854494
+## 20:    MON  707458.9 11500000
+## 21:    NYN 2317350.0 23145011
+## 22:    PHI 2092230.9 25000000
+## 23:    PIT 1077989.7 16500000
+## 24:    SDN 1317959.6 15505142
+## 25:    SFN 2044198.7 22250000
+## 26:    SLN 1928832.6 16333327
+## 27:    COL 1945628.5 20275000
+## 28:    FLO 1147986.4 14936667
+## 29:    ANA 1895109.2 13166667
+## 30:    TBA 1528399.5 10125000
+## 31:    ARI 2428195.9 16000000
+## 32:    MIL 2095009.0 15500000
+## 33:    LAA 4151107.2 26187500
+## 34:    WAS 2243755.2 16571429
+## 35:    MIA 2974115.7 19000000
+##     teamID   Average  Maximum
 {% endhighlight %}
 
 Now we can see one row for each team.
@@ -1052,43 +1098,43 @@ summarized.team[order(Average), ]
 
 
 {% highlight text %}
-##     teamID Average  Maximum
-##  1:    ML4  613244  5875000
-##  2:    MON  707459 11500000
-##  3:    CAL  739073  5375000
-##  4:    PIT 1077990 16500000
-##  5:    FLO 1147986 14936667
-##  6:    KCA 1299026 13000000
-##  7:    OAK 1303095 13500000
-##  8:    SDN 1317960 15505142
-##  9:    MIN 1525032 23000000
-## 10:    CLE 1525795 15000000
-## 11:    TBA 1528400 10125000
-## 12:    CIN 1568035 18910655
-## 13:    HOU 1705561 19369019
-## 14:    TOR 1768711 19700000
-## 15:    BAL 1785712 17000000
-## 16:    TEX 1874652 22000000
-## 17:    ANA 1895109 13166667
-## 18:    SLN 1928833 16333327
-## 19:    SEA 1932289 20557143
-## 20:    COL 1945628 20275000
-## 21:    DET 1980835 23000000
-## 22:    CHA 1992654 17000000
-## 23:    SFN 2044199 22250000
-## 24:    PHI 2092231 25000000
-## 25:    MIL 2095009 15500000
-## 26:    ATL 2130475 16061802
-## 27:    CHN 2185519 19000000
-## 28:    WAS 2243755 16571429
-## 29:    NYN 2317350 23145011
-## 30:    LAN 2346983 23854494
-## 31:    ARI 2428196 16000000
-## 32:    BOS 2692114 22500000
-## 33:    MIA 2974116 19000000
-## 34:    NYA 3608860 33000000
-## 35:    LAA 4151107 26187500
-##     teamID Average  Maximum
+##     teamID   Average  Maximum
+##  1:    ML4  613243.6  5875000
+##  2:    MON  707458.9 11500000
+##  3:    CAL  739073.2  5375000
+##  4:    PIT 1077989.7 16500000
+##  5:    FLO 1147986.4 14936667
+##  6:    KCA 1299025.8 13000000
+##  7:    OAK 1303094.8 13500000
+##  8:    SDN 1317959.6 15505142
+##  9:    MIN 1525031.7 23000000
+## 10:    CLE 1525795.0 15000000
+## 11:    TBA 1528399.5 10125000
+## 12:    CIN 1568035.3 18910655
+## 13:    HOU 1705561.3 19369019
+## 14:    TOR 1768711.0 19700000
+## 15:    BAL 1785712.3 17000000
+## 16:    TEX 1874651.6 22000000
+## 17:    ANA 1895109.2 13166667
+## 18:    SLN 1928832.6 16333327
+## 19:    SEA 1932288.9 20557143
+## 20:    COL 1945628.5 20275000
+## 21:    DET 1980835.0 23000000
+## 22:    CHA 1992653.5 17000000
+## 23:    SFN 2044198.7 22250000
+## 24:    PHI 2092230.9 25000000
+## 25:    MIL 2095009.0 15500000
+## 26:    ATL 2130474.7 16061802
+## 27:    CHN 2185518.7 19000000
+## 28:    WAS 2243755.2 16571429
+## 29:    NYN 2317350.0 23145011
+## 30:    LAN 2346982.7 23854494
+## 31:    ARI 2428195.9 16000000
+## 32:    BOS 2692113.9 22500000
+## 33:    MIA 2974115.7 19000000
+## 34:    NYA 3608860.1 33000000
+## 35:    LAA 4151107.2 26187500
+##     teamID   Average  Maximum
 {% endhighlight %}
 
 Finally, we can group by more than one column in our analysis. Let's say we want to see the average salary within each year, separately for the two leagues: so we're summarizing by the league and year combination. To do this, we change the by argument to be a vector `c("yearID", "lgID")`.
@@ -1102,66 +1148,66 @@ summarized.year.lg
 
 
 {% highlight text %}
-##     yearID lgID Average  Maximum
-##  1:   1985   AL  455597  1795704
-##  2:   1985   NL  500249  2130300
-##  3:   1986   AL  402338  1984423
-##  4:   1986   NL  433925  2800000
-##  5:   1987   AL  441847  2110000
-##  6:   1987   NL  427858  2127333
-##  7:   1988   AL  453901  2305000
-##  8:   1988   NL  452374  2340000
-##  9:   1989   AL  502052  2766666
-## 10:   1989   NL  511116  2766667
-## 11:   1990   AL  500416  3200000
-## 12:   1990   NL  525914  2513703
-## 13:   1991   AL  908127  3791667
-## 14:   1991   NL  879588  3800000
-## 15:   1992   AL 1017651  5300000
-## 16:   1992   NL 1085609  6100000
-## 17:   1993   AL 1028576  5550000
-## 18:   1993   NL  923883  6200000
-## 19:   1994   AL 1130703  5550000
-## 20:   1994   NL  971003  6300000
-## 21:   1995   AL 1039865  9237500
-## 22:   1995   NL  890699  8166666
-## 23:   1996   AL 1055235  9237500
-## 24:   1996   NL 1000407  8416667
-## 25:   1997   AL 1267830 10000000
-## 26:   1997   NL 1169651  8666667
-## 27:   1998   AL 1364397 10000000
-## 28:   1998   NL 1207658 14936667
-## 29:   1999   AL 1503986 11949794
-## 30:   1999   NL 1468881 10714286
-## 31:   2000   AL 2004402 12868670
-## 32:   2000   NL 1983097 15714286
-## 33:   2001   AL 2333184 22000000
-## 34:   2001   NL 2232801 15714286
-## 35:   2002   AL 2449016 22000000
-## 36:   2002   NL 2342579 15714286
-## 37:   2003   AL 2524940 22000000
-## 38:   2003   NL 2614933 17166667
-## 39:   2004   AL 2517280 22500000
-## 40:   2004   NL 2469003 18000000
-## 41:   2005   AL 2681581 26000000
-## 42:   2005   NL 2590987 22000000
-## 43:   2006   AL 3088942 21680727
-## 44:   2006   NL 2616446 19369019
-## 45:   2007   AL 3304391 23428571
-## 46:   2007   NL 2623749 16600000
-## 47:   2008   AL 3449574 28000000
-## 48:   2008   NL 2870790 18622809
-## 49:   2009   AL 3380833 33000000
-## 50:   2009   NL 3184369 23854494
-## 51:   2010   AL 3431360 33000000
-## 52:   2010   NL 3142161 20144707
-## 53:   2011   AL 3505557 32000000
-## 54:   2011   NL 3156655 21644707
-## 55:   2012   AL 3662264 30000000
-## 56:   2012   NL 3277278 23145011
-## 57:   2013   AL 3757664 29000000
-## 58:   2013   NL 3688940 25000000
-##     yearID lgID Average  Maximum
+##     yearID lgID   Average  Maximum
+##  1:   1985   AL  455597.0  1795704
+##  2:   1985   NL  500249.3  2130300
+##  3:   1986   AL  402337.9  1984423
+##  4:   1986   NL  433925.1  2800000
+##  5:   1987   AL  441846.6  2110000
+##  6:   1987   NL  427857.8  2127333
+##  7:   1988   AL  453901.2  2305000
+##  8:   1988   NL  452374.2  2340000
+##  9:   1989   AL  502052.4  2766666
+## 10:   1989   NL  511116.5  2766667
+## 11:   1990   AL  500415.8  3200000
+## 12:   1990   NL  525913.7  2513703
+## 13:   1991   AL  908126.7  3791667
+## 14:   1991   NL  879587.5  3800000
+## 15:   1992   AL 1017651.1  5300000
+## 16:   1992   NL 1085608.6  6100000
+## 17:   1993   AL 1028575.6  5550000
+## 18:   1993   NL  923883.0  6200000
+## 19:   1994   AL 1130703.1  5550000
+## 20:   1994   NL  971003.2  6300000
+## 21:   1995   AL 1039864.5  9237500
+## 22:   1995   NL  890698.7  8166666
+## 23:   1996   AL 1055235.2  9237500
+## 24:   1996   NL 1000406.7  8416667
+## 25:   1997   AL 1267829.6 10000000
+## 26:   1997   NL 1169651.4  8666667
+## 27:   1998   AL 1364396.6 10000000
+## 28:   1998   NL 1207658.0 14936667
+## 29:   1999   AL 1503986.4 11949794
+## 30:   1999   NL 1468880.6 10714286
+## 31:   2000   AL 2004401.7 12868670
+## 32:   2000   NL 1983096.5 15714286
+## 33:   2001   AL 2333183.9 22000000
+## 34:   2001   NL 2232801.3 15714286
+## 35:   2002   AL 2449016.0 22000000
+## 36:   2002   NL 2342579.4 15714286
+## 37:   2003   AL 2524939.6 22000000
+## 38:   2003   NL 2614933.1 17166667
+## 39:   2004   AL 2517280.2 22500000
+## 40:   2004   NL 2469002.5 18000000
+## 41:   2005   AL 2681580.8 26000000
+## 42:   2005   NL 2590986.6 22000000
+## 43:   2006   AL 3088942.0 21680727
+## 44:   2006   NL 2616445.7 19369019
+## 45:   2007   AL 3304390.9 23428571
+## 46:   2007   NL 2623749.2 16600000
+## 47:   2008   AL 3449574.3 28000000
+## 48:   2008   NL 2870790.4 18622809
+## 49:   2009   AL 3380833.1 33000000
+## 50:   2009   NL 3184368.7 23854494
+## 51:   2010   AL 3431360.4 33000000
+## 52:   2010   NL 3142161.2 20144707
+## 53:   2011   AL 3505557.0 32000000
+## 54:   2011   NL 3156654.9 21644707
+## 55:   2012   AL 3662264.1 30000000
+## 56:   2012   NL 3277278.0 23145011
+## 57:   2013   AL 3757664.2 29000000
+## 58:   2013   NL 3688940.2 25000000
+##     yearID lgID   Average  Maximum
 {% endhighlight %}
 
 Notice it has one row for each combination of a year and a league- for example, one for the year 1985 within AL (American League), and one for 1985 NL (National League), and has the average and maximum within each of these. You could go even farther and view the analysis within each team, within each year. Just change the `lgID` to `teamID`:
@@ -1175,18 +1221,18 @@ summarized.year.team
 
 
 {% highlight text %}
-##      yearID teamID Average  Maximum
-##   1:   1985    BAL  525487  1472819
-##   2:   1985    BOS  435902  1075000
-##   3:   1985    CAL  515282  1100000
-##   4:   1985    CHA  468866  1242333
-##   5:   1985    CLE  327583  1100000
-##  ---                               
-## 824:   2013    PIT 2752214 16500000
-## 825:   2013    SDN 2342339  9500000
-## 826:   2013    SFN 5006440 22250000
-## 827:   2013    SLN 3295004 16272110
-## 828:   2013    WAS 4548131 16571429
+##      yearID teamID   Average  Maximum
+##   1:   1985    BAL  525486.9  1472819
+##   2:   1985    BOS  435902.4  1075000
+##   3:   1985    CAL  515281.9  1100000
+##   4:   1985    CHA  468865.6  1242333
+##   5:   1985    CLE  327583.3  1100000
+##  ---                                 
+## 824:   2013    PIT 2752214.3 16500000
+## 825:   2013    SDN 2342339.3  9500000
+## 826:   2013    SFN 5006440.5 22250000
+## 827:   2013    SLN 3295003.9 16272110
+## 828:   2013    WAS 4548130.8 16571429
 {% endhighlight %}
 
 Now, any of these summaries could be used as the result of an analysis, for example as a table in a presentation or paper. But they also make visualizing trends much easier. For example, let's say we want to examine the trend of how salary changes over time. We could produce a plot of all the points in the original salaries dataset, all 24 thousand combinations of players and years. For that we'll use ggplot2, which we covered in a previous segment:
@@ -1203,7 +1249,7 @@ Perform this on our original dataset `salaries`, putting on the x-axis `yearID` 
 ggplot(salaries, aes(yearID, salary)) + geom_point()
 {% endhighlight %}
 
-![center](../../figs/code_lesson4/unnamed-chunk-53.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-53-1.png) 
 
 So in this graph we can see a positive trend in salary over time. However, all we can really see is the range of salaries: within this mass of points it's not possible to tell what the average is for each of these years. If we actually want to see how the average changed over time, we can instead plot the summarized data. We get this from `summarized.year`:
 
@@ -1215,37 +1261,37 @@ summarized.year
 
 
 {% highlight text %}
-##     yearID Average  Maximum
-##  1:   1985  476299  2130300
-##  2:   1986  417147  2800000
-##  3:   1987  434729  2127333
-##  4:   1988  453171  2340000
-##  5:   1989  506323  2766667
-##  6:   1990  511974  3200000
-##  7:   1991  894961  3800000
-##  8:   1992 1047521  6100000
-##  9:   1993  976967  6200000
-## 10:   1994 1049589  6300000
-## 11:   1995  964979  9237500
-## 12:   1996 1027909  9237500
-## 13:   1997 1218687 10000000
-## 14:   1998 1280845 14936667
-## 15:   1999 1485317 11949794
-## 16:   2000 1992985 15714286
-## 17:   2001 2279841 22000000
-## 18:   2002 2392527 22000000
-## 19:   2003 2573473 22000000
-## 20:   2004 2491776 22500000
-## 21:   2005 2633831 26000000
-## 22:   2006 2834521 21680727
-## 23:   2007 2941436 23428571
-## 24:   2008 3136517 28000000
-## 25:   2009 3277647 33000000
-## 26:   2010 3278747 33000000
-## 27:   2011 3318838 32000000
-## 28:   2012 3458421 30000000
-## 29:   2013 3723344 29000000
-##     yearID Average  Maximum
+##     yearID   Average  Maximum
+##  1:   1985  476299.4  2130300
+##  2:   1986  417147.0  2800000
+##  3:   1987  434729.5  2127333
+##  4:   1988  453171.1  2340000
+##  5:   1989  506323.1  2766667
+##  6:   1990  511973.7  3200000
+##  7:   1991  894961.2  3800000
+##  8:   1992 1047520.6  6100000
+##  9:   1993  976966.6  6200000
+## 10:   1994 1049588.6  6300000
+## 11:   1995  964979.1  9237500
+## 12:   1996 1027909.3  9237500
+## 13:   1997 1218687.4 10000000
+## 14:   1998 1280844.6 14936667
+## 15:   1999 1485316.8 11949794
+## 16:   2000 1992984.6 15714286
+## 17:   2001 2279841.1 22000000
+## 18:   2002 2392526.6 22000000
+## 19:   2003 2573472.9 22000000
+## 20:   2004 2491776.1 22500000
+## 21:   2005 2633830.8 26000000
+## 22:   2006 2834520.9 21680727
+## 23:   2007 2941435.9 23428571
+## 24:   2008 3136517.1 28000000
+## 25:   2009 3277647.0 33000000
+## 26:   2010 3278746.8 33000000
+## 27:   2011 3318838.2 32000000
+## 28:   2012 3458421.2 30000000
+## 29:   2013 3723344.4 29000000
+##     yearID   Average  Maximum
 {% endhighlight %}
 
 We have the year in one column and the average salary in another. So use that `yearID` as our x-axis and `Average` as our y-axis. Usually when we have one trend we put just a line:
@@ -1255,7 +1301,7 @@ We have the year in one column and the average salary in another. So use that `y
 ggplot(summarized.year, aes(yearID, Average)) + geom_line()
 {% endhighlight %}
 
-![center](../../figs/code_lesson4/unnamed-chunk-55.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-55-1.png) 
 
 Now we can see the trend of the average over time. This comes directly from the summarized data, where we have the average per year.
 
@@ -1266,7 +1312,7 @@ We can even go farther- since we have it summarized by year *and* league, we can
 ggplot(summarized.year.lg, aes(yearID, Average, col=lgID)) + geom_line()
 {% endhighlight %}
 
-![center](../../figs/code_lesson4/unnamed-chunk-56.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-56-1.png) 
 
 Now we can see two separate lines- one red for the American League, and one green for the National League.
 
@@ -1603,18 +1649,18 @@ merged.batting
 
 
 {% highlight text %}
-##         playerID yearID teamID lgID stint   G G_batting  AB  R   H X2B X3B
-##     1: aardsda01   2004    SFN   NL     1  11        11   0  0   0   0   0
-##     2: aardsda01   2007    CHA   AL     1  25         2   0  0   0   0   0
-##     3: aardsda01   2008    BOS   AL     1  47         5   1  0   0   0   0
-##     4: aardsda01   2009    SEA   AL     1  73         3   0  0   0   0   0
-##     5: aardsda01   2010    SEA   AL     1  53         4   0  0   0   0   0
+##        yearID teamID lgID  playerID stint   G G_batting  AB  R   H X2B X3B
+##     1:   2004    SFN   NL aardsda01     1  11        11   0  0   0   0   0
+##     2:   2007    CHA   AL aardsda01     1  25         2   0  0   0   0   0
+##     3:   2008    BOS   AL aardsda01     1  47         5   1  0   0   0   0
+##     4:   2009    SEA   AL aardsda01     1  73         3   0  0   0   0   0
+##     5:   2010    SEA   AL aardsda01     1  53         4   0  0   0   0   0
 ##    ---                                                                    
-## 22867: zumayjo01   2009    DET   AL     1  29         3   0  0   0   0   0
-## 22868: zumayjo01   2010    DET   AL     1  31         4   0  0   0   0   0
-## 22869: zupcibo01   1991    BOS   AL     1  18        18  25  3   4   0   0
-## 22870: zupcibo01   1992    BOS   AL     1 124       124 392 46 108  19   1
-## 22871: zupcibo01   1993    BOS   AL     1 141       141 286 40  69  24   2
+## 22867:   2009    DET   AL zumayjo01     1  29         3   0  0   0   0   0
+## 22868:   2010    DET   AL zumayjo01     1  31         4   0  0   0   0   0
+## 22869:   1991    BOS   AL zupcibo01     1  18        18  25  3   4   0   0
+## 22870:   1992    BOS   AL zupcibo01     1 124       124 392 46 108  19   1
+## 22871:   1993    BOS   AL zupcibo01     1 141       141 286 40  69  24   2
 ##        HR RBI SB CS BB SO IBB HBP SH SF GIDP G_old  salary
 ##     1:  0   0  0  0  0  0   0   0  0  0    0    11  300000
 ##     2:  0   0  0  0  0  0   0   0  0  0    0     2  387500
@@ -1640,18 +1686,18 @@ merged.batting
 
 
 {% highlight text %}
-##         playerID yearID teamID lgID stint   G G_batting  AB  R   H X2B X3B
-##     1: aardsda01   2004    SFN   NL     1  11        11   0  0   0   0   0
-##     2: aardsda01   2006    CHN   NL     1  45        43   2  0   0   0   0
-##     3: aardsda01   2007    CHA   AL     1  25         2   0  0   0   0   0
-##     4: aardsda01   2008    BOS   AL     1  47         5   1  0   0   0   0
-##     5: aardsda01   2009    SEA   AL     1  73         3   0  0   0   0   0
+##        yearID teamID lgID  playerID stint   G G_batting  AB  R   H X2B X3B
+##     1:   2004    SFN   NL aardsda01     1  11        11   0  0   0   0   0
+##     2:   2006    CHN   NL aardsda01     1  45        43   2  0   0   0   0
+##     3:   2007    CHA   AL aardsda01     1  25         2   0  0   0   0   0
+##     4:   2008    BOS   AL aardsda01     1  47         5   1  0   0   0   0
+##     5:   2009    SEA   AL aardsda01     1  73         3   0  0   0   0   0
 ##    ---                                                                    
-## 97885: zuverge01   1959    BAL   AL     1   6         6   0  0   0   0   0
-## 97886: zwilldu01   1910    CHA   AL     1  27        27  87  7  16   5   0
-## 97887: zwilldu01   1914    CHF   FL     1 154       154 592 91 185  38   8
-## 97888: zwilldu01   1915    CHF   FL     1 150       150 548 65 157  32   7
-## 97889: zwilldu01   1916    CHN   NL     1  35        35  53  4   6   1   0
+## 97885:   1959    BAL   AL zuverge01     1   6         6   0  0   0   0   0
+## 97886:   1910    CHA   AL zwilldu01     1  27        27  87  7  16   5   0
+## 97887:   1914    CHF   FL zwilldu01     1 154       154 592 91 185  38   8
+## 97888:   1915    CHF   FL zwilldu01     1 150       150 548 65 157  32   7
+## 97889:   1916    CHN   NL zwilldu01     1  35        35  53  4   6   1   0
 ##        HR RBI SB CS BB SO IBB HBP SH SF GIDP G_old salary
 ##     1:  0   0  0  0  0  0   0   0  0  0    0    11 300000
 ##     2:  0   0  0  0  0  0   0   0  1  0    0    45     NA
@@ -2185,7 +2231,7 @@ The more a player gets hits in baseball, the more chance they have to actually s
 ggplot(summarized.batters, aes(Total.H, Total.R)) + geom_point()
 {% endhighlight %}
 
-![center](../../figs/code_lesson4/unnamed-chunk-80.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-80-1.png) 
 
 Here we can see a clear correlation between the number of hits a player gets and the number of runs.
 
@@ -2253,7 +2299,7 @@ So in our batting dataset, for Hank Aaron in 1955, we can see that he had 189 hi
 
 
 {% highlight text %}
-## [1] 0.314
+## [1] 0.3139535
 {% endhighlight %}
 
 for that year. What if we wanted to compute each player's career batting average? It turns out that's easy with the summary operation. We add a column `BattingAverage` to the summary data.table, which we put as the sum of all hits divided by the sum of all at-bats.
@@ -2268,17 +2314,17 @@ summarized.batters
 
 {% highlight text %}
 ##         playerID            name Total.HR Total.R Total.H BattingAverage
-##     1: aardsda01   David Aardsma        0       0       0        0.00000
-##     2: aaronha01      Hank Aaron      755    2174    3771        0.30500
-##     3: aaronto01    Tommie Aaron       13     102     216        0.22881
-##     4:  aasedo01        Don Aase        0       0       0        0.00000
-##     5:  abadan01       Andy Abad        0       1       2        0.09524
+##     1: aardsda01   David Aardsma        0       0       0      0.0000000
+##     2: aaronha01      Hank Aaron      755    2174    3771      0.3049984
+##     3: aaronto01    Tommie Aaron       13     102     216      0.2288136
+##     4:  aasedo01        Don Aase        0       0       0      0.0000000
+##     5:  abadan01       Andy Abad        0       1       2      0.0952381
 ##    ---                                                                  
-## 16336: zupcibo01      Bob Zupcic        7      99     199        0.25031
-## 16337:  zupofr01      Frank Zupo        0       3       3        0.16667
-## 16338: zuvelpa01    Paul Zuvella        2      41     109        0.22200
-## 16339: zuverge01 George Zuverink        0       4      21        0.14789
-## 16340: zwilldu01  Dutch Zwilling       30     167     364        0.28437
+## 16336: zupcibo01      Bob Zupcic        7      99     199      0.2503145
+## 16337:  zupofr01      Frank Zupo        0       3       3      0.1666667
+## 16338: zuvelpa01    Paul Zuvella        2      41     109      0.2219959
+## 16339: zuverge01 George Zuverink        0       4      21      0.1478873
+## 16340: zwilldu01  Dutch Zwilling       30     167     364      0.2843750
 {% endhighlight %}
 
 This kind of summary operation thus lets us generate any statistic we're interested in. We could then, for instance, put it into a histogram to find out its distribution:
@@ -2294,7 +2340,7 @@ ggplot(summarized.batters, aes(BattingAverage)) + geom_histogram()
 ## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
 {% endhighlight %}
 
-![center](../../figs/code_lesson4/unnamed-chunk-84.png) 
+![center](../../figs/code_lesson4/unnamed-chunk-84-1.png) 
 
 We can see that they center around about 25%, with a large number of people with close to 0 batting average, which would mostly be pitchers.
 
