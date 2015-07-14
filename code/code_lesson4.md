@@ -446,13 +446,24 @@ Similarly, we can combine conditions with *or* (`|`). For instance, say we wante
 
 
 {% highlight r %}
-salaries[yearID < 1990 & yearID > 2010, ]
+salaries[yearID < 1990 | yearID > 2010, ]
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## Empty data.table (0 rows) of 5 cols: yearID,teamID,lgID,playerID,salary
+##       yearID teamID lgID  playerID  salary
+##    1:   1985    BAL   AL murraed02 1472819
+##    2:   1985    BAL   AL  lynnfr01 1090000
+##    3:   1985    BAL   AL ripkeca01  800000
+##    4:   1985    BAL   AL  lacyle01  725000
+##    5:   1985    BAL   AL flanami01  641667
+##   ---                                     
+## 5787:   2013    WAS   NL matthry01  504500
+## 5788:   2013    WAS   NL lombast02  501250
+## 5789:   2013    WAS   NL ramoswi01  501250
+## 5790:   2013    WAS   NL rodrihe03  501000
+## 5791:   2013    WAS   NL moorety01  493000
 {% endhighlight %}
 
 We can also sort the data easily, using the order function in the area before the comma:
