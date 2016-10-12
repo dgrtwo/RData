@@ -6,6 +6,8 @@ title: Resources
 Here are some resources from outside of this course that will probably be useful
 in learning R.
 
+I'm also creating an online course on exploratory data analysis together with [DataCamp](https://www.datacamp.com), an interactive platform to [learn R](https://www.datacamp.com/courses/free-introduction-to-r) and data science.
+
 ### Basic Tutorials
 
 * [Try R](https://www.codeschool.com/courses/try-r): an free interactive in-browser tutorial
